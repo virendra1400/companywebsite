@@ -1,0 +1,23 @@
+{
+  "nav": {
+    "products": "Produits",
+    "certifications": "Certifications",
+    "manufacturing": "Fabrication",
+    "contact": "Contact"
+  },
+  "switcher": {
+    "ariaLabel": "Changer de langue (actuelle : {current})"
+  },
+  "hero": {
+    "headline": "Exportations agroalimentaires indiennes premium, reconnues sur les marchés mondiaux",
+    "subhead": "De nos installations certifiées à votre port — approvisionnement fiable, conformité internationale et partenariat durable pour les importateurs du monde entier.",
+    "cta": "Demander un devis"
+  },
+  "sample": {
+    "count": "La confiance de plus de {count} acheteurs internationaux"
+  },
+  "fallbackNotice": {
+    "heading": "Cette page n'est pas encore disponible en français",
+    "body": "Nous affichons la version anglaise ci-dessous pendant que notre équipe de traduction termine le français."
+  }
+}
