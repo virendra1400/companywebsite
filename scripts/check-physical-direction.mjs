@@ -29,11 +29,14 @@ function* walk(dir) {
 const hits = [];
 for (const file of walk(ROOT)) {
   if (file.endsWith("check-physical-direction.mjs")) continue;
-  const lines = readFileSync(file, "utf8").split("\n");
-  lines.forEach((line, i) => {
-    if (line.trimStart().startsWith("//") || line.trimStart().startsWith("*")) return;
+  // Strip block comments (whole file) then line comments per line, so
+  // documentation mentioning banned class names does not false-positive.
+  const src = readFileSync(file, "utf8").replace(/\/\*[\s\S]*?\*\//g, "");
+  src.split("\n").forEach((raw, i) => {
+    const line = raw.replace(/\/\/.*$/, "");
+    if (!line.trim()) return;
     for (const re of BANNED) {
-      if (re.test(line)) { hits.push(`${file}:${i + 1}  ${line.trim()}`); break; }
+      if (re.test(line)) { hits.push(`${file}:${i + 1}  ${raw.trim()}`); break; }
     }
   });
 }

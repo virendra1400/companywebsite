@@ -1,0 +1,23 @@
+{
+  "nav": {
+    "products": "Products",
+    "certifications": "Certifications",
+    "manufacturing": "Manufacturing",
+    "contact": "Contact"
+  },
+  "switcher": {
+    "ariaLabel": "Change language (current: {current})"
+  },
+  "hero": {
+    "headline": "Premium Indian Agro Exports, Trusted Across Global Markets",
+    "subhead": "From certified facilities to your port — reliable supply, international compliance, and long-term partnership for importers worldwide.",
+    "cta": "Request a Quote"
+  },
+  "sample": {
+    "count": "Trusted by {count}+ international buyers"
+  },
+  "fallbackNotice": {
+    "heading": "This page isn't available in English yet",
+    "body": "We're showing the English version below while our translation team finishes the translation."
+  }
+}
