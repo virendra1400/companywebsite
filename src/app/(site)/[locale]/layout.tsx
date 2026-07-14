@@ -4,6 +4,8 @@ import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { IBM_Plex_Sans, IBM_Plex_Sans_Arabic } from "next/font/google";
 import { routing, RTL_LOCALES } from "@/i18n/routing";
+import { GlobalHeader } from "@/components/chrome/GlobalHeader";
+import { GlobalFooter } from "@/components/chrome/GlobalFooter";
 import "../../globals.css";
 
 // Per-script fonts — only the needed subset ships per locale (FOUND-03 / UI-SPEC).
@@ -41,8 +43,12 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} dir={dir} className={fontVar}>
-      <body className="min-h-dvh bg-background text-foreground antialiased">
-        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+      <body className="flex min-h-dvh flex-col bg-background text-foreground antialiased">
+        <NextIntlClientProvider>
+          <GlobalHeader />
+          <div className="flex-1">{children}</div>
+          <GlobalFooter />
+        </NextIntlClientProvider>
       </body>
     </html>
   );
