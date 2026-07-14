@@ -2,6 +2,7 @@
   "name": "nextapp",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -12,11 +13,16 @@
     "lint:rtl": "node scripts/check-physical-direction.mjs"
   },
   "dependencies": {
+    "@payloadcms/db-sqlite": "^3.86.0",
+    "@payloadcms/next": "^3.86.0",
+    "@payloadcms/richtext-lexical": "^3.86.0",
     "clsx": "^2.1.1",
     "next": "16.2.10",
     "next-intl": "^4.13.2",
+    "payload": "^3.86.0",
     "react": "19.2.4",
     "react-dom": "19.2.4",
+    "sharp": "^0.35.3",
     "tailwind-merge": "^3.6.0"
   },
   "devDependencies": {
