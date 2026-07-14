@@ -43,8 +43,11 @@
   --font-weight-regular: 400;
   --font-weight-semibold: 600;
 
-  /* Fonts — per-script, set as CSS vars by the locale layout via next/font */
-  --font-sans: var(--font-plex-sans), var(--font-plex-sans-arabic), system-ui, sans-serif;
+  /* Fonts — the locale layout sets exactly ONE of these vars (per-script
+     subsetting). Nested fallback keeps font-family valid when the other is
+     undefined: latin locales resolve --font-plex-sans, ar resolves the Arabic. */
+  --font-sans: var(--font-plex-sans, var(--font-plex-sans-arabic, system-ui)),
+    system-ui, sans-serif;
 
   /* Container */
   --breakpoint-xl: 1280px;
