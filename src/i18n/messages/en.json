@@ -8,6 +8,10 @@
   "switcher": {
     "ariaLabel": "Change language (current: {current})"
   },
+  "mobileNav": {
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
   "hero": {
     "headline": "Premium Indian Agro Exports, Trusted Across Global Markets",
     "subhead": "From certified facilities to your port — reliable supply, international compliance, and long-term partnership for importers worldwide.",
