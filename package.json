@@ -10,16 +10,20 @@
     "lint": "eslint",
     "test": "vitest run",
     "test:e2e": "playwright test",
-    "lint:rtl": "node scripts/check-physical-direction.mjs"
+    "lint:rtl": "node scripts/check-physical-direction.mjs",
+    "db:seed": "tsx scripts/seed-home.ts"
   },
   "dependencies": {
     "@payloadcms/db-sqlite": "^3.86.0",
     "@payloadcms/next": "^3.86.0",
     "@payloadcms/richtext-lexical": "^3.86.0",
+    "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "lucide-react": "^1.24.0",
     "next": "16.2.10",
     "next-intl": "^4.13.2",
     "payload": "^3.86.0",
+    "radix-ui": "^1.6.2",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "sharp": "^0.35.3",
@@ -34,6 +38,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.10",
     "tailwindcss": "~4.3.2",
+    "tsx": "^4.22.4",
     "typescript": "^5",
     "vitest": "^4.1.10"
   }

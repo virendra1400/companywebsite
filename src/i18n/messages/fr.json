@@ -8,6 +8,10 @@
   "switcher": {
     "ariaLabel": "Changer de langue (actuelle : {current})"
   },
+  "mobileNav": {
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu"
+  },
   "hero": {
     "headline": "Exportations agroalimentaires indiennes premium, reconnues sur les marchés mondiaux",
     "subhead": "De nos installations certifiées à votre port — approvisionnement fiable, conformité internationale et partenariat durable pour les importateurs du monde entier.",
