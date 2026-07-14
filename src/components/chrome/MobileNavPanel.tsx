@@ -39,12 +39,18 @@ export function MobileNavPanel() {
           size="icon"
           aria-label={open ? tMobile("closeMenu") : tMobile("openMenu")}
           aria-expanded={open}
+          data-testid="mobile-nav-trigger"
           className="size-11 lg:hidden"
         >
           <Menu className="size-5" aria-hidden="true" />
         </Button>
       </SheetTrigger>
-      <SheetContent side={side} className="flex flex-col gap-lg p-lg">
+      <SheetContent
+        side={side}
+        data-testid="mobile-nav-panel"
+        data-side={side}
+        className="flex flex-col gap-lg p-lg"
+      >
         <SheetHeader className="p-0">
           <SheetTitle className="text-heading">
             <span dir="ltr">Star Agrevolution</span>

@@ -39,6 +39,7 @@ export function LanguageSwitcher({ onDark = false }: { onDark?: boolean }) {
           type="button"
           variant="ghost"
           aria-label={t("ariaLabel", { current: LOCALE_LABELS[locale] })}
+          data-testid="language-switcher-trigger"
           className={cn(
             "h-11 min-w-11 gap-xs px-sm text-label sm:px-md",
             onDark
@@ -54,6 +55,7 @@ export function LanguageSwitcher({ onDark = false }: { onDark?: boolean }) {
         {routing.locales.map((code) => (
           <DropdownMenuItem
             key={code}
+            data-testid={`language-switcher-item-${code}`}
             onSelect={() => router.replace(pathname, { locale: code })}
             className={code === locale ? "font-semibold text-primary-700" : undefined}
           >
