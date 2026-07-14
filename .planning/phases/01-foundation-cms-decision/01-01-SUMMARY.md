@@ -146,6 +146,10 @@ completed: 2026-07-14
 - Plan 03 (chrome) can `npx shadcn add button dropdown-menu sheet` against the existing `components.json`, and consume `usePathname`/`useRouter` from `src/i18n/navigation.ts` for the LanguageSwitcher.
 - No blockers.
 
+## Self-Check: PASSED
+
+All 19 created/modified files present on disk; all 6 commits (26cb7b9, 311518a, a099ce0, 4008019, 7773c70, 93458ed) exist in git; SUMMARY.md tracked (force-added, .planning gitignored).
+
 ---
 *Phase: 01-foundation-cms-decision*
 *Completed: 2026-07-14*
