@@ -1,10 +1,11 @@
 import { getPayload } from "payload";
 import config from "@payload-config";
+import type { Locale } from "@/i18n/routing";
 
 // FOUND-06/D-06: detect whether the active locale has real (non-fallback)
 // content so the page can show the English-plus-notice fallback rather than
 // silently serving English with no signal. RESEARCH Pattern 3.
-export async function getHomeContent(locale: string) {
+export async function getHomeContent(locale: Locale) {
   const payload = await getPayload({ config });
 
   // Display query: fallback ON — always returns usable content.

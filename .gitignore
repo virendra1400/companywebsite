@@ -53,6 +53,7 @@ next-env.d.ts
 /payload.db
 /payload.db-*
 /media/
+tests/int/.test.db*
 
 # scratch dir for this worktree's npm cache (C: drive was full at exec time)
 /.tmp-build/
