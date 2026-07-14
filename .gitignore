@@ -32,6 +32,7 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
 
 # vercel
 .vercel
@@ -49,3 +50,12 @@ next-env.d.ts
 /playwright/.cache/
 .claude/settings.local.json
 .claude/worktrees/
+
+# Payload local dev (LOCAL_DEV_DB_OVERRIDE — see 01-02-SUMMARY.md)
+/payload.db
+/payload.db-*
+/media/
+tests/int/.test.db*
+
+# scratch dir for npm cache (C: drive was full at exec time)
+/.tmp-build/
