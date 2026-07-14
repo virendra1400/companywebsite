@@ -1,26 +1,65 @@
 @import "tailwindcss";
 
+/*
+  Phase 1 design tokens — source: 01-UI-SPEC.md.
+  RTL is handled by CSS logical properties + the `rtl:` variant (Tailwind v4 native);
+  NEVER use physical-direction utilities (ml-/mr-/text-left/text-right/left-/right-).
+*/
+
+@theme {
+  /* Color ramp (UI-SPEC) */
+  --color-primary-900: #0F2E22;
+  --color-primary-700: #1B5E45;
+  --color-primary-500: #3D8266;
+  --color-primary-100: #E3EEE8;
+  --color-accent-800: #8A6612;
+  --color-accent-600: #C9A227;
+  --color-accent-100: #F7EFDD;
+  --color-neutral-900: #1A1F1C;
+  --color-neutral-600: #5B655F;
+  --color-neutral-300: #D7DBD8;
+  --color-neutral-100: #F5F6F4;
+
+  /* Spacing scale (multiples of 4) */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+  --spacing-3xl: 64px;
+
+  /* Typography — exactly 4 sizes, 2 weights (400/600) */
+  --text-label: 14px;
+  --text-label--line-height: 1.4;
+  --text-body: 16px;
+  --text-body--line-height: 1.5;
+  --text-heading: 28px;
+  --text-heading--line-height: 1.2;
+  --text-heading--font-weight: 600;
+  --text-display: 40px;
+  --text-display--line-height: 1.15;
+  --text-display--font-weight: 600;
+  --font-weight-regular: 400;
+  --font-weight-semibold: 600;
+
+  /* Fonts — per-script, set as CSS vars by the locale layout via next/font */
+  --font-sans: var(--font-plex-sans), var(--font-plex-sans-arabic), system-ui, sans-serif;
+
+  /* Container */
+  --breakpoint-xl: 1280px;
+}
+
+/* shadcn base variables (neutral preset) overridden with UI-SPEC tokens */
 :root {
   --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --foreground: var(--color-neutral-900);
+  --primary: var(--color-primary-700);
+  --primary-foreground: #ffffff;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
 }
