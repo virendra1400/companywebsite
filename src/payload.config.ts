@@ -1,5 +1,7 @@
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { sqliteAdapter } from "@payloadcms/db-sqlite";
+import { postgresAdapter } from "@payloadcms/db-postgres";
+import { vercelBlobStorage } from "@payloadcms/storage-vercel-blob";
 import { buildConfig } from "payload";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -11,6 +13,38 @@ import { Home } from "@/globals/Home";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
+
+// Env-driven adapter selection (Wave 4 deploy-ready):
+// - DATABASE_URL set  -> Postgres (prod, EU region per D-04)
+// - else              -> SQLite file (local dev, no infra)
+// Uses @payloadcms/db-postgres directly, never the deprecated Vercel wrapper
+// (RESEARCH Pitfall 4). Postgres wins when both env vars exist.
+const usePostgres = Boolean(process.env.DATABASE_URL);
+const db = usePostgres
+  ? postgresAdapter({
+      pool: { connectionString: process.env.DATABASE_URL as string },
+      // ponytail: force schema auto-sync on connect (Payload disables push in
+      // production by default). Acceptable for this small single-writer CMS —
+      // first deploy creates tables with no migration ceremony. If the catalog
+      // schema grows / multiple instances write concurrently, switch to
+      // committed `payload migrate` files + a `migrate && next build` step.
+      push: true,
+    })
+  : sqliteAdapter({
+      client: { url: process.env.DATABASE_URI ?? "file:./payload.db" },
+    });
+
+// - BLOB_READ_WRITE_TOKEN set -> Vercel Blob (prod media, serverless-safe)
+// - else                      -> Payload local-disk upload default (dev)
+// Vercel's filesystem is ephemeral, so prod media MUST go to Blob, not disk.
+const storagePlugins = process.env.BLOB_READ_WRITE_TOKEN
+  ? [
+      vercelBlobStorage({
+        collections: { media: true },
+        token: process.env.BLOB_READ_WRITE_TOKEN as string,
+      }),
+    ]
+  : [];
 
 export default buildConfig({
   // Vendored (payload) route group generates the admin panel — this only
@@ -25,18 +59,7 @@ export default buildConfig({
   typescript: {
     outputFile: path.resolve(dirname, "../payload-types.ts"),
   },
-  // ponytail: SQLite for local dev — no Docker/local Postgres in this
-  // environment (LOCAL_DEV_DB_OVERRIDE deviation, see 01-02-SUMMARY.md).
-  // Prod swap (Wave 4): replace this whole `db` block with
-  //   import { postgresAdapter } from "@payloadcms/db-postgres";
-  //   db: postgresAdapter({ pool: { connectionString: process.env.DATABASE_URL } })
-  // per RESEARCH Pitfall 4 — use @payloadcms/db-postgres directly, never the
-  // deprecated Vercel-specific Postgres wrapper package.
-  db: sqliteAdapter({
-    client: {
-      url: process.env.DATABASE_URI ?? "file:./payload.db",
-    },
-  }),
+  db,
   // CMS-02/FOUND-02/06: field-level localized:true per field (Home global),
   // English defaultLocale + fallback:true. `rtl` only affects admin-panel
   // input alignment, not the public site's dir attribute (RESEARCH Pitfall 1).
@@ -50,10 +73,7 @@ export default buildConfig({
     defaultLocale: "en",
     fallback: true,
   },
-  // ponytail: media stored on local disk in dev (Payload's upload default —
-  // no storage plugin needed). Prod swap (Wave 4): add
-  //   import { s3Storage } from "@payloadcms/storage-s3";
-  // to the `plugins` array below, backed by an EU bucket (D-04), and install
-  // @payloadcms/storage-s3.
+  // Vercel Blob in prod (BLOB_READ_WRITE_TOKEN set), local disk in dev.
+  plugins: storagePlugins,
   sharp,
 });
