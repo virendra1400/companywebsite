@@ -19,6 +19,7 @@ A first-time international buyer who has never heard of the company leaves the s
 <!-- Hypotheses until shipped and validated. -->
 
 - [ ] Modern, premium, international corporate design (not a typical local-business look)
+- [ ] Fully responsive / mobile-first across phone, tablet, desktop — including RTL on mobile (many GCC/Africa buyers are mobile-first)
 - [ ] Multi-language site: English (source), Arabic (RTL), French, Russian — all managed per-locale
 - [ ] Scalable product catalog: categories + product detail pages, add products without a rebuild
 - [ ] Headless CMS with localization so non-technical staff manage products/content/translations
@@ -45,6 +46,9 @@ A first-time international buyer who has never heard of the company leaves the s
 - **Target markets:** Middle East (GCC), Europe, North America, Africa, Southeast Asia (+ CIS/Central Asia via Russian).
 - **Audience:** international importers, wholesalers, distributors, retailers, supermarkets, food-processing companies, institutional buyers seeking reliable long-term India suppliers.
 - **Positioning:** trusted manufacturing + export partner — premium quality, competitive pricing, reliable supply, timely delivery, international compliance, sustainable sourcing, long-term relationships.
+- **Own domain / existing site:** https://staragrevolution.com/ — the client's current site and target domain. New site replaces/upgrades it; review for existing products/branding/content to migrate.
+- **Inspiration reference:** https://www.piyushfarms.com/ — minimum bar ("at least this"). Floor, not ceiling; target is to meet or exceed its polish/structure with a world-class B2B export experience.
+- **Company name:** likely "Star Agrevolution" (per domain) — confirm exact legal/brand name.
 - **Content readiness:** almost nothing yet (logo/assets/product data/certs/photos being gathered). Build structure first; slot real assets later via CMS.
 - **Advisory stance:** Claude acts as senior UX designer, branding consultant, and full-stack architect — challenge weak ideas, apply modern B2B export-site best practices, benchmark against leading international agro-export companies.
 
