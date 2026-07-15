@@ -314,6 +314,16 @@ export interface Page {
             blockName?: string | null;
             blockType: 'exportMap';
           }
+        | {
+            intro?: string | null;
+            address: string;
+            whatsapp: string;
+            email: string;
+            phone: string;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'contactBlock';
+          }
       )[]
     | null;
   updatedAt: string;
@@ -609,6 +619,17 @@ export interface PagesSelect<T extends boolean = true> {
                     label?: T;
                     id?: T;
                   };
+              id?: T;
+              blockName?: T;
+            };
+        contactBlock?:
+          | T
+          | {
+              intro?: T;
+              address?: T;
+              whatsapp?: T;
+              email?: T;
+              phone?: T;
               id?: T;
               blockName?: T;
             };
