@@ -1,0 +1,3 @@
+# Binary asset — must not be mangled by core.autocrlf line-ending
+# conversion (the PDF's internal xref byte offsets depend on exact bytes).
+*.pdf -text binary

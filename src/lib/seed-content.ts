@@ -35,8 +35,20 @@ function ctaBand(heading: string) {
   };
 }
 
+// TRUST-01/02: no cert data lives on the block — it queries the
+// Certifications collection at render time (see CertStripBlock.tsx).
+function certStrip(variant: "strip" | "grid", sectionTitle?: string) {
+  return { blockType: "certStrip" as const, variant, sectionTitle };
+}
+
 export const PAGES_EN_SEED = [
-  { slug: "home", title: "Home", layout: [homeHero, ctaBand("Ready to Source With Confidence?")] },
+  {
+    slug: "home",
+    title: "Home",
+    // CertStrip is the homepage trust opening beat, right after Hero
+    // (UI-SPEC focal rule) — compact logo-only teaser, no name/PDF.
+    layout: [homeHero, certStrip("strip"), ctaBand("Ready to Source With Confidence?")],
+  },
   {
     slug: "about",
     title: "About",
@@ -56,6 +68,7 @@ export const PAGES_EN_SEED = [
         "Certified for Global Trust",
         "Every certification we hold is backed by a downloadable document — verify our compliance before you commit.",
       ),
+      certStrip("grid", "Our Certifications"),
       ctaBand("Have a Compliance Question?"),
     ],
   },
