@@ -59,6 +59,26 @@
   --foreground: var(--color-neutral-900);
   --primary: var(--color-primary-700);
   --primary-foreground: #ffffff;
+  --destructive: #B91C1C;
+  --destructive-foreground: #ffffff;
+  --border: var(--color-neutral-300);
+  --input: var(--color-neutral-300);
+  --ring: var(--color-accent-600);
+  --muted: var(--color-neutral-100);
+  --muted-foreground: var(--color-neutral-600);
+  --card: #ffffff;
+  --card-foreground: var(--color-neutral-900);
+  --popover: #ffffff;
+  --popover-foreground: var(--color-neutral-900);
+  --secondary: var(--color-neutral-100);
+  --secondary-foreground: var(--color-neutral-900);
+  /* shadcn generic --accent is the hover-background slot on outline/ghost
+     buttons and menu items, NOT the brand gold accent ramp. Map it to
+     neutral-100 so gold never floods hover states — brand gold
+     (accent-600/accent-800) stays reserved for the explicitly-designed
+     Halal badge / PDF-icon / divider uses only. */
+  --accent: var(--color-neutral-100);
+  --accent-foreground: var(--color-neutral-900);
 }
 
 body {
