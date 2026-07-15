@@ -23,5 +23,12 @@
   "fallbackNotice": {
     "heading": "Эта страница ещё не доступна на русском языке",
     "body": "Ниже показана английская версия, пока наша команда переводчиков завершает перевод на русский."
+  },
+  "certs": {
+    "halalBadge": "Halal Certified",
+    "downloadPdf": "Download PDF",
+    "pdfUnavailable": "Certificate available on request",
+    "comingSoonHeading": "Certifications coming soon.",
+    "comingSoonBody": "We're finalizing documentation for our quality certifications — contact us directly for current compliance status."
   }
 }
