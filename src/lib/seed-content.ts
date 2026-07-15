@@ -113,6 +113,23 @@ function documentCard(title: string, description?: string) {
   return { blockType: "documentCard" as const, title, description };
 }
 
+// UI-SPEC §9 — realistic placeholder contact details. WhatsApp reuses the
+// existing all-zeros placeholder number (matches WHATSAPP_CTA's wa.me link
+// above — same pending-real-number caveat, not a new placeholder pattern).
+// Address is a clearly placeholder company address (Pitfall 5/9: no
+// fabricated registration/IEC numbers anywhere in this block).
+function contactBlock() {
+  return {
+    blockType: "contactBlock" as const,
+    intro:
+      "Reach out directly, or send an inquiry below — our export team responds to every message within one business day.",
+    address: "Plot 14, MIDC Industrial Area, Nashik, Maharashtra 422010, India",
+    whatsapp: "910000000000",
+    email: "sales@staragrevolution.com",
+    phone: "+91 00000 00000",
+  };
+}
+
 // Minimal hand-authored Lexical editor-state JSON (root > paragraph > text) —
 // the exact shape @payloadcms/richtext-lexical's JSX converter renders
 // (ParagraphJSXConverter/TextJSXConverter). One paragraph node per string
@@ -328,14 +345,13 @@ export const PAGES_EN_SEED = [
   {
     slug: "contact",
     title: "Contact",
-    // No CTABand per UI-SPEC — this page is the destination. ContactBlock
-    // (the real form) lands in Plan 06; this thin stub guarantees the slug
-    // has a doc to prerender in the meantime.
+    // No CTABand per UI-SPEC — this page is the destination.
     layout: [
       compactHero(
         "Let's Start a Conversation",
         "Our export team responds to every inquiry within one business day.",
       ),
+      contactBlock(),
     ],
   },
 ];

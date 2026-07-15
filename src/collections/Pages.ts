@@ -10,6 +10,7 @@ import {
   DocumentCard,
   MediaGallery,
   ExportMap,
+  ContactBlock,
 } from "@/blocks";
 
 // RESEARCH D-02 resolution / Pattern 1: replaces the Phase 1 Home global.
@@ -47,6 +48,7 @@ export const Pages: CollectionConfig = {
         DocumentCard,
         MediaGallery,
         ExportMap,
+        ContactBlock,
       ],
     },
   ],
