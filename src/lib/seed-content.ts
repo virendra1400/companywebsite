@@ -19,8 +19,6 @@ const homeHero = {
   secondaryCta: WHATSAPP_CTA,
 };
 
-// ExportMap is inserted by a later Phase 2 plan (02-06) — do not
-// pre-scaffold its seed shape now (YAGNI).
 function compactHero(headline: string, subhead: string) {
   return { blockType: "hero" as const, variant: "compact" as const, headline, subhead };
 }
@@ -52,6 +50,42 @@ function featureGrid(variant: "icon" | "photo", items: FeatureGridItem[], sectio
 
 function statsBand(stats: { value: string; label: string }[], sectionTitle?: string) {
   return { blockType: "statsBand" as const, sectionTitle, stats };
+}
+
+// TRUST-04 — realistic served-country set (GCC + Europe + a few others),
+// every code present in src/lib/country-names.ts and drawn as a tile in
+// src/lib/world-map-svg.ts. D-06: static SVG, no map library.
+const SERVED_COUNTRY_CODES = [
+  "AE",
+  "SA",
+  "QA",
+  "KW",
+  "BH",
+  "OM",
+  "DE",
+  "FR",
+  "GB",
+  "NL",
+  "IT",
+  "ES",
+  "US",
+  "EG",
+  "ZA",
+  "SG",
+];
+
+function exportMap(
+  variant: "compact" | "full",
+  stats: { value: string; label: string }[],
+  sectionTitle?: string,
+) {
+  return {
+    blockType: "exportMap" as const,
+    sectionTitle,
+    variant,
+    highlightedCountryCodes: SERVED_COUNTRY_CODES,
+    stats,
+  };
 }
 
 type MediaGalleryItem = { caption: string };
@@ -149,6 +183,9 @@ export const PAGES_EN_SEED = [
         { value: "40+", label: "Countries Served" },
         { value: "500+", label: "Container Shipments" },
       ]),
+      exportMap("compact", [
+        { value: `${SERVED_COUNTRY_CODES.length}+`, label: "Countries We Currently Export To" },
+      ]),
       ctaBand("Ready to Source With Confidence?"),
     ],
   },
@@ -221,10 +258,24 @@ export const PAGES_EN_SEED = [
   {
     slug: "export",
     title: "Export Track Record",
+    // UI-SPEC Page Composition "Export Track Record" row: Hero(compact) ->
+    // StatsBand(years/volume/incoterms) -> ExportMap(full, own stats + chip
+    // list) -> CTABand. T-02-15: realistic-SHAPED figures, never presented
+    // as an audited fact.
     layout: [
       compactHero(
         "A Track Record Buyers Can Verify",
         "Real countries, real shipment volumes, real incoterms — not a vague export claim.",
+      ),
+      statsBand([
+        { value: "15+", label: "Years Exporting" },
+        { value: "500+", label: "Container Shipments" },
+        { value: "FOB / CIF / CFR", label: "Incoterms Handled" },
+      ]),
+      exportMap(
+        "full",
+        [{ value: `${SERVED_COUNTRY_CODES.length}+`, label: "Countries Served" }],
+        "Where We Export",
       ),
       ctaBand("Ready to Discuss Your Order Volume?"),
     ],

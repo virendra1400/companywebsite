@@ -1,0 +1,30 @@
+// Same self-authored/license-safe schematic shapes as public/maps/world.svg
+// (see that file's README for the license note) — duplicated here as a
+// plain string constant rather than read via fs at request time, since
+// public/ assets aren't guaranteed to be on the server filesystem in a
+// serverless deploy (Vercel). Each `<rect id="ISO_CODE" ... fill="...">` is
+// swapped to primary-500 by ExportMapBlock.tsx for served countries; the
+// default fill below is neutral-300 (see src/app/globals.css).
+export const WORLD_MAP_SVG = `<svg viewBox="0 0 1000 500" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+<rect id="US" x="90" y="110" width="110" height="70" rx="6" fill="#D7DBD8"/>
+<rect id="BR" x="190" y="280" width="70" height="90" rx="6" fill="#D7DBD8"/>
+<rect id="GB" x="430" y="75" width="30" height="22" rx="4" fill="#D7DBD8"/>
+<rect id="FR" x="440" y="105" width="35" height="30" rx="4" fill="#D7DBD8"/>
+<rect id="DE" x="478" y="85" width="32" height="25" rx="4" fill="#D7DBD8"/>
+<rect id="NL" x="460" y="72" width="22" height="16" rx="4" fill="#D7DBD8"/>
+<rect id="IT" x="478" y="118" width="24" height="35" rx="4" fill="#D7DBD8"/>
+<rect id="ES" x="405" y="128" width="40" height="28" rx="4" fill="#D7DBD8"/>
+<rect id="SA" x="555" y="165" width="65" height="45" rx="6" fill="#D7DBD8"/>
+<rect id="KW" x="570" y="148" width="16" height="12" rx="3" fill="#D7DBD8"/>
+<rect id="BH" x="590" y="168" width="10" height="9" rx="2" fill="#D7DBD8"/>
+<rect id="QA" x="600" y="160" width="14" height="16" rx="3" fill="#D7DBD8"/>
+<rect id="AE" x="612" y="175" width="28" height="20" rx="4" fill="#D7DBD8"/>
+<rect id="OM" x="628" y="190" width="32" height="24" rx="4" fill="#D7DBD8"/>
+<rect id="EG" x="505" y="165" width="42" height="32" rx="4" fill="#D7DBD8"/>
+<rect id="ZA" x="515" y="335" width="55" height="45" rx="4" fill="#D7DBD8"/>
+<rect id="RU" x="555" y="35" width="260" height="45" rx="6" fill="#D7DBD8"/>
+<rect id="CN" x="700" y="125" width="90" height="58" rx="6" fill="#D7DBD8"/>
+<rect id="JP" x="830" y="135" width="24" height="34" rx="4" fill="#D7DBD8"/>
+<rect id="SG" x="728" y="245" width="14" height="11" rx="2" fill="#D7DBD8"/>
+<rect id="AU" x="800" y="315" width="90" height="70" rx="6" fill="#D7DBD8"/>
+</svg>`;

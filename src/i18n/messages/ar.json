@@ -33,6 +33,7 @@
   },
   "blocks": {
     "emptyState": "This section is being updated — check back shortly.",
-    "watchVideo": "Watch video"
+    "watchVideo": "Watch video",
+    "exportMapAriaLabel": "World map highlighting {count} countries Star Agrevolution exports to"
   }
 }
