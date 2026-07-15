@@ -23,6 +23,63 @@ const { PAGES_EN_SEED } = await import("../src/lib/seed-content");
 
 const payload = await getPayload({ config });
 
+// Idempotent by alt text — safe to call every seed run without duplicating
+// Media docs, whether or not the doc referencing it already exists. Defined
+// early: MediaGallery's `image` field is required (UI-SPEC §6), so unlike
+// FeatureGrid's optional `photo` (patched in AFTER page creation, see
+// attachLeadershipPhotos below), facility photos must be uploaded and
+// injected into PAGES_EN_SEED BEFORE the page is created.
+async function upsertMediaByAlt(alt: string, filePath: string) {
+  const existing = await payload.find({
+    collection: "media",
+    where: { alt: { equals: alt } },
+    limit: 1,
+    overrideAccess: true,
+  });
+  if (existing.docs[0]) return existing.docs[0];
+  return payload.create({
+    collection: "media",
+    data: { alt },
+    filePath,
+    overrideAccess: true,
+  });
+}
+
+// --- Manufacturing facility placeholder photos (TRUST-03) -----------------
+// Self-authored generic labeled placeholders (T-02-11: accept, no
+// confidential facility imagery) — see scripts/seed-assets/README.md. Keys
+// match the MediaGallery item `caption` strings authored in seed-content.ts's
+// manufacturing page layout.
+const FACILITY_PHOTOS: Record<string, string> = {
+  "Processing Floor": "scripts/seed-assets/facility-processing-floor.svg",
+  "Quality Control Lab": "scripts/seed-assets/facility-quality-lab.svg",
+  "Cold Storage": "scripts/seed-assets/facility-cold-storage.svg",
+  "Packing & Dispatch": "scripts/seed-assets/facility-packing-line.svg",
+};
+
+// Mutates the 'manufacturing' entry's mediaGallery block in PAGES_EN_SEED
+// in place, uploading (idempotently) a Media doc per caption and attaching
+// its id — runs BEFORE the create loop below so the required `image` field
+// is always populated at creation time. Re-running is safe: upsertMediaByAlt
+// never duplicates, and this always re-injects the same ids.
+async function injectFacilityPhotos() {
+  const manufacturingPage = PAGES_EN_SEED.find((p) => p.slug === "manufacturing");
+  const galleryBlock = manufacturingPage?.layout.find(
+    (b): b is Extract<(typeof manufacturingPage.layout)[number], { blockType: "mediaGallery" }> =>
+      b.blockType === "mediaGallery",
+  );
+  if (!galleryBlock) return;
+
+  for (const item of galleryBlock.items) {
+    const assetPath = FACILITY_PHOTOS[item.caption];
+    if (!assetPath) continue;
+    const media = await upsertMediaByAlt(`${item.caption} placeholder photo`, assetPath);
+    item.image = media.id;
+  }
+}
+
+await injectFacilityPhotos();
+
 for (const seedPage of PAGES_EN_SEED) {
   const existing = await payload.find({
     collection: "pages",
@@ -80,24 +137,6 @@ const CERTIFICATIONS_EN_SEED = [
     displayOrder: 3,
   },
 ];
-
-// Idempotent by alt text — safe to call every seed run without duplicating
-// Media docs, whether or not the certification referencing it already exists.
-async function upsertMediaByAlt(alt: string, filePath: string) {
-  const existing = await payload.find({
-    collection: "media",
-    where: { alt: { equals: alt } },
-    limit: 1,
-    overrideAccess: true,
-  });
-  if (existing.docs[0]) return existing.docs[0];
-  return payload.create({
-    collection: "media",
-    data: { alt },
-    filePath,
-    overrideAccess: true,
-  });
-}
 
 // --- Company/Compliance leadership placeholder photos (TRUST-05) ---------
 // Self-authored generic initials-in-circle avatars (T-02-09: no real people

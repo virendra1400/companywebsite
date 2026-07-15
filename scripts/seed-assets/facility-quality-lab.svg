@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#E9EEF0"/>
+  <rect x="6" y="6" width="788" height="588" fill="none" stroke="#0F2E22" stroke-width="4"/>
+  <text x="400" y="290" font-family="Arial, sans-serif" font-size="32" font-weight="700" text-anchor="middle" fill="#0F2E22">QUALITY CONTROL LAB</text>
+  <text x="400" y="330" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#666666">placeholder photo — generated asset</text>
+</svg>
