@@ -54,6 +54,23 @@ function statsBand(stats: { value: string; label: string }[], sectionTitle?: str
   return { blockType: "statsBand" as const, sectionTitle, stats };
 }
 
+type MediaGalleryItem = { caption: string };
+
+// UI-SPEC §6 MediaGallery's `image` field is `required: true` (an editor
+// can't save a gallery item with no photo) — so unlike FeatureGrid's
+// optional `photo`, the seed array's items need a concrete `image` id at the
+// TYPE level too. `0` is a placeholder id (never a real Media id, which
+// Payload always assigns >= 1) that scripts/seed-pages.ts's
+// injectFacilityPhotos() ALWAYS overwrites with a real uploaded Media id,
+// keyed by `caption`, before any `payload.create()` call runs.
+function mediaGallery(items: MediaGalleryItem[], sectionTitle?: string) {
+  return {
+    blockType: "mediaGallery" as const,
+    sectionTitle,
+    items: items.map((item) => ({ ...item, image: 0 })),
+  };
+}
+
 // UI-SPEC Company/Compliance — company-profile document card. `file` is
 // intentionally left unset: no real profile PDF exists yet, so CertCard (via
 // DocumentCardBlock) renders its honest PDF-absent "available on request"
@@ -165,11 +182,39 @@ export const PAGES_EN_SEED = [
   {
     slug: "manufacturing",
     title: "Manufacturing",
+    // UI-SPEC Page Composition "Manufacturing/process" row: Hero(compact) ->
+    // RichText(process overview) -> MediaGallery(facility photos) ->
+    // StatsBand(capacity/QC/cold-chain) -> CTABand. MediaGallery item
+    // captions below match FACILITY_PHOTOS keys in scripts/seed-pages.ts,
+    // which attaches placeholder photos post-seed (same pattern as
+    // attachLeadershipPhotos).
     layout: [
       compactHero(
         "Inside Our Processing Facilities",
         "From intake to cold-chain dispatch, every stage is documented and quality-controlled.",
       ),
+      richText(
+        "Every shipment begins on our own processing floor, where incoming produce is graded, cleaned, and sorted before moving into product-specific processing lines under documented standard operating procedures.",
+        "Our quality control lab tests samples at multiple checkpoints — intake, mid-process, and pre-dispatch — so defects are caught before a batch ever reaches packing, not after a buyer receives it.",
+        "Temperature-controlled cold storage protects perishable batches between processing and dispatch, and every pallet is documented and traceable back to its intake batch for full chain-of-custody visibility.",
+      ),
+      mediaGallery(
+        [
+          { caption: "Processing Floor" },
+          { caption: "Quality Control Lab" },
+          { caption: "Cold Storage" },
+          { caption: "Packing & Dispatch" },
+        ],
+        "Inside Our Facilities",
+      ),
+      // T-02-12 mitigation: realistic-SHAPED capacity/QC/cold-chain figures,
+      // not presented as audited — same non-fabricated-figure precedent as
+      // the homepage StatsBand.
+      statsBand([
+        { value: "500+", label: "Metric Tons Monthly Capacity" },
+        { value: "3", label: "In-House QC Checkpoints" },
+        { value: "24/7", label: "Cold-Chain Monitoring" },
+      ]),
       ctaBand("Want a Facility Walkthrough?"),
     ],
   },

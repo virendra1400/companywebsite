@@ -285,6 +285,20 @@ export interface Page {
             blockName?: string | null;
             blockType: 'documentCard';
           }
+        | {
+            sectionTitle?: string | null;
+            items?:
+              | {
+                  image: number | Media;
+                  caption?: string | null;
+                  videoUrl?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'mediaGallery';
+          }
       )[]
     | null;
   updatedAt: string;
@@ -549,6 +563,21 @@ export interface PagesSelect<T extends boolean = true> {
               title?: T;
               description?: T;
               file?: T;
+              id?: T;
+              blockName?: T;
+            };
+        mediaGallery?:
+          | T
+          | {
+              sectionTitle?: T;
+              items?:
+                | T
+                | {
+                    image?: T;
+                    caption?: T;
+                    videoUrl?: T;
+                    id?: T;
+                  };
               id?: T;
               blockName?: T;
             };

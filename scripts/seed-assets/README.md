@@ -16,6 +16,11 @@ real certification-body logos, marks, or documents.
   `FeatureGrid` (photo variant). They are **not** photos of real people — role initials only
   (MD/QC/EO), no named individuals. Replace with real leadership photography (with consent)
   when the company provides it.
+- `facility-processing-floor.svg`, `facility-quality-lab.svg`, `facility-cold-storage.svg`,
+  `facility-packing-line.svg` — plain generic labeled 4:3 rectangles (matching the Manufacturing
+  page's `MediaGallery` block, T-02-11: accept, no confidential facility imagery). They are
+  **not** real facility photography. Replace with real, licensed facility photos when the
+  company provides them.
 
 **Do not replace these with scraped/downloaded real certification-body logos or documents.**
 When the company's real certifications and signed PDFs become available, replace both the
