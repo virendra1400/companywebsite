@@ -240,6 +240,14 @@ export interface Page {
             blockName?: string | null;
             blockType: 'ctaBand';
           }
+        | {
+            variant: 'strip' | 'grid';
+            sectionTitle?: string | null;
+            intro?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'certStrip';
+          }
       )[]
     | null;
   updatedAt: string;
@@ -455,6 +463,15 @@ export interface PagesSelect<T extends boolean = true> {
                     label?: T;
                     href?: T;
                   };
+              id?: T;
+              blockName?: T;
+            };
+        certStrip?:
+          | T
+          | {
+              variant?: T;
+              sectionTitle?: T;
+              intro?: T;
               id?: T;
               blockName?: T;
             };

@@ -1,7 +1,7 @@
 import { getPayload } from "payload";
 import config from "@payload-config";
 import type { Locale } from "@/i18n/routing";
-import type { Page } from "../../payload-types";
+import type { Page, Certification } from "../../payload-types";
 
 // FOUND-06/D-06: detect whether the active locale has real (non-fallback)
 // content so the page can show the English-plus-notice fallback rather than
@@ -38,4 +38,23 @@ export async function getPageContent(
   const isTranslated = locale === "en" || Boolean(nativeCheck.docs[0]?.title);
 
   return { page, isTranslated };
+}
+
+// TRUST-01/02: CertStripBlock's data source. Mirrors getPageContent's
+// getPayload/overrideAccess:true pattern. Sorted by editor-controlled
+// displayOrder, then stably re-ordered so halal:true certs render first
+// (TRUST-02 elevated placement) without needing a second DB round-trip.
+export async function getCertifications(locale: Locale): Promise<Certification[]> {
+  const payload = await getPayload({ config });
+
+  const result = await payload.find({
+    collection: "certifications",
+    sort: "displayOrder",
+    locale,
+    fallbackLocale: locale === "en" ? undefined : "en",
+    overrideAccess: true,
+    limit: 100,
+  });
+
+  return [...result.docs].sort((a, b) => Number(b.halal) - Number(a.halal));
 }

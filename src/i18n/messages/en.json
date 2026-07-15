@@ -23,5 +23,12 @@
   "fallbackNotice": {
     "heading": "This page isn't available in English yet",
     "body": "We're showing the English version below while our translation team finishes the translation."
+  },
+  "certs": {
+    "halalBadge": "Halal Certified",
+    "downloadPdf": "Download PDF",
+    "pdfUnavailable": "Certificate available on request",
+    "comingSoonHeading": "Certifications coming soon.",
+    "comingSoonBody": "We're finalizing documentation for our quality certifications — contact us directly for current compliance status."
   }
 }
