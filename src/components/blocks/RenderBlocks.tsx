@@ -8,6 +8,7 @@ import { FeatureGridBlock } from "./FeatureGridBlock";
 import { StatsBandBlock } from "./StatsBandBlock";
 import { DocumentCardBlock } from "./DocumentCardBlock";
 import { MediaGalleryBlock } from "./MediaGalleryBlock";
+import { ExportMapBlock } from "./ExportMapBlock";
 
 type LayoutBlock = NonNullable<Page["layout"]>[number];
 
@@ -27,6 +28,7 @@ const BLOCK_MAP: Record<string, ComponentType<{ block: any; index: number }>> = 
   statsBand: StatsBandBlock,
   documentCard: DocumentCardBlock,
   mediaGallery: MediaGalleryBlock,
+  exportMap: ExportMapBlock,
 };
 
 // UI-SPEC "Section rhythm rule": two consecutive blocks never share the same

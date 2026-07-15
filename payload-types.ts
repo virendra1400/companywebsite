@@ -299,6 +299,21 @@ export interface Page {
             blockName?: string | null;
             blockType: 'mediaGallery';
           }
+        | {
+            sectionTitle?: string | null;
+            variant: 'compact' | 'full';
+            highlightedCountryCodes?: string[] | null;
+            stats?:
+              | {
+                  value: string;
+                  label: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'exportMap';
+          }
       )[]
     | null;
   updatedAt: string;
@@ -576,6 +591,22 @@ export interface PagesSelect<T extends boolean = true> {
                     image?: T;
                     caption?: T;
                     videoUrl?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        exportMap?:
+          | T
+          | {
+              sectionTitle?: T;
+              variant?: T;
+              highlightedCountryCodes?: T;
+              stats?:
+                | T
+                | {
+                    value?: T;
+                    label?: T;
                     id?: T;
                   };
               id?: T;
