@@ -1,8 +1,12 @@
 {
   "nav": {
+    "home": "Home",
+    "about": "About",
     "products": "المنتجات",
     "certifications": "الشهادات",
     "manufacturing": "التصنيع",
+    "export": "Export",
+    "company": "Company",
     "contact": "اتصل بنا"
   },
   "switcher": {

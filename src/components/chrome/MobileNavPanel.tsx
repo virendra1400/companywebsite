@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Menu } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { RTL_LOCALES } from "@/i18n/routing";
 import { Button } from "@/components/ui/button";
 import { LanguageSwitcher } from "@/components/chrome/LanguageSwitcher";
@@ -20,7 +21,26 @@ import {
 // left/right, so direction is derived here from the active locale rather
 // than a hardcoded value, satisfying the logical-edge requirement at the
 // call site. aria-label/aria-expanded reflect open state via chrome strings.
-const NAV_KEYS = ["products", "certifications", "manufacturing", "contact"] as const;
+// D-08 nav set wired to real /<slug> routes; `products` excluded (Phase 3).
+const NAV_KEYS = [
+  "home",
+  "about",
+  "certifications",
+  "manufacturing",
+  "export",
+  "company",
+  "contact",
+] as const;
+
+const NAV_HREFS: Record<(typeof NAV_KEYS)[number], string> = {
+  home: "/",
+  about: "/about",
+  certifications: "/certifications",
+  manufacturing: "/manufacturing",
+  export: "/export",
+  company: "/company",
+  contact: "/contact",
+};
 
 export function MobileNavPanel() {
   const [open, setOpen] = useState(false);
@@ -58,14 +78,14 @@ export function MobileNavPanel() {
         </SheetHeader>
         <nav className="flex flex-col gap-md" aria-label="Primary">
           {NAV_KEYS.map((key) => (
-            <a
+            <Link
               key={key}
-              href="#"
+              href={NAV_HREFS[key]}
               className="text-label text-neutral-900"
               onClick={() => setOpen(false)}
             >
               {t(key)}
-            </a>
+            </Link>
           ))}
         </nav>
         <LanguageSwitcher />

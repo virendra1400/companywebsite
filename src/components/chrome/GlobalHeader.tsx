@@ -5,10 +5,30 @@ import { LanguageSwitcher } from "@/components/chrome/LanguageSwitcher";
 import { MobileNavPanel } from "@/components/chrome/MobileNavPanel";
 
 // UI-SPEC Component Inventory — GlobalHeader: 72px desktop / 64px mobile,
-// logical flex row (wordmark inline-start -> nav placeholders (>=lg) ->
-// switcher -> CTA inline-end). Auto-reverses in RTL via dir + logical flex,
-// no manual mirroring code.
-const NAV_KEYS = ["products", "certifications", "manufacturing", "contact"] as const;
+// logical flex row (wordmark inline-start -> nav (>=lg) -> switcher -> CTA
+// inline-end). Auto-reverses in RTL via dir + logical flex, no manual
+// mirroring code.
+// D-08: full nav set, wired to real /<slug> routes (home is "/"). `products`
+// is deliberately excluded — catalog is Phase 3 (T-02-18: no dead route).
+const NAV_KEYS = [
+  "home",
+  "about",
+  "certifications",
+  "manufacturing",
+  "export",
+  "company",
+  "contact",
+] as const;
+
+const NAV_HREFS: Record<(typeof NAV_KEYS)[number], string> = {
+  home: "/",
+  about: "/about",
+  certifications: "/certifications",
+  manufacturing: "/manufacturing",
+  export: "/export",
+  company: "/company",
+  contact: "/contact",
+};
 
 export async function GlobalHeader() {
   const t = await getTranslations("nav");
@@ -26,13 +46,13 @@ export async function GlobalHeader() {
 
         <nav className="hidden items-center gap-lg lg:flex" aria-label="Primary">
           {NAV_KEYS.map((key) => (
-            <a
+            <Link
               key={key}
-              href="#"
+              href={NAV_HREFS[key]}
               className="text-label text-neutral-900 underline-offset-4 hover:text-primary-700 hover:underline decoration-accent-600"
             >
               {t(key)}
-            </a>
+            </Link>
           ))}
         </nav>
 

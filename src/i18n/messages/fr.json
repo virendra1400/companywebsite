@@ -1,8 +1,12 @@
 {
   "nav": {
+    "home": "Home",
+    "about": "About",
     "products": "Produits",
     "certifications": "Certifications",
     "manufacturing": "Fabrication",
+    "export": "Export",
+    "company": "Company",
     "contact": "Contact"
   },
   "switcher": {

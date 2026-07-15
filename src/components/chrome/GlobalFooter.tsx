@@ -3,10 +3,28 @@ import { Link } from "@/i18n/navigation";
 import { LanguageSwitcher } from "@/components/chrome/LanguageSwitcher";
 
 // UI-SPEC Component Inventory — GlobalFooter: primary-900 surface, white/
-// neutral-100 text, gold hover-underline links. Phase 1 content: wordmark
-// repeat, placeholder link stubs (anchor #, real pages ship Phase 2),
-// switcher repeat, copyright. Single column mobile -> logical row desktop.
-const NAV_KEYS = ["products", "certifications", "manufacturing", "contact"] as const;
+// neutral-100 text, gold hover-underline links. Wordmark repeat, D-08 nav
+// wired to real /<slug> routes, switcher repeat, copyright. Single column
+// mobile -> logical row desktop. `products` excluded (Phase 3 catalog).
+const NAV_KEYS = [
+  "home",
+  "about",
+  "certifications",
+  "manufacturing",
+  "export",
+  "company",
+  "contact",
+] as const;
+
+const NAV_HREFS: Record<(typeof NAV_KEYS)[number], string> = {
+  home: "/",
+  about: "/about",
+  certifications: "/certifications",
+  manufacturing: "/manufacturing",
+  export: "/export",
+  company: "/company",
+  contact: "/contact",
+};
 
 export async function GlobalFooter() {
   const t = await getTranslations("nav");
@@ -26,13 +44,13 @@ export async function GlobalFooter() {
           aria-label="Footer"
         >
           {NAV_KEYS.map((key) => (
-            <a
+            <Link
               key={key}
-              href="#"
+              href={NAV_HREFS[key]}
               className="text-neutral-100 underline-offset-4 hover:text-accent-600 hover:underline"
             >
               {t(key)}
-            </a>
+            </Link>
           ))}
         </nav>
 
