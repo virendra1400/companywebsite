@@ -66,7 +66,8 @@ A first-time international buyer who has never heard of the company leaves the s
 |----------|-----------|---------|
 | Corporate lead-gen site, not e-commerce | Buyers transact offline (inquiry → quote → contract); trust-building is the goal | — Pending |
 | Conversion = RFQ/inquiry forms + WhatsApp | Covers formal RFQ buyers and quick-chat buyers; forms qualify leads, WhatsApp lowers friction | — Pending |
-| Headless CMS with localization | Multi-language + non-technical editors + scaling catalog make hardcoding untenable; exact tool chosen in research | — Pending |
+| Headless CMS with localization | Multi-language + non-technical editors + scaling catalog make hardcoding untenable; exact tool chosen in research | ✓ Good — Payload |
+| CMS = Payload; Arabic admin glyph rendering verified on live deploy (D-02 spike) | Spike on Vercel/Neon showed Arabic renders/shapes correctly in admin fields (RTL, joined glyphs); no Sanity fallback needed | ✓ Good |
 | Launch 4 languages: EN/AR(RTL)/FR/RU | GCC, Africa/Europe, and CIS/Central Asia coverage; English as source locale | — Pending |
 | Professional human translation, no AI pipeline | Machine-translated B2B copy destroys credibility; avoid over-engineering a translation system | — Pending |
 | SEO + insights/blog treated as table stakes | Importers discover suppliers via organic search ("bulk [product] supplier India") | — Pending |
