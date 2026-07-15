@@ -43,6 +43,12 @@ const storagePlugins = process.env.BLOB_READ_WRITE_TOKEN
       vercelBlobStorage({
         collections: { media: true },
         token: process.env.BLOB_READ_WRITE_TOKEN as string,
+        // ponytail: unique suffix per upload so the build-seed's re-upload
+        // (migrate:fresh wipes the DB each deploy but Blob persists) never hits
+        // "blob already exists". Placeholder-era pairing with migrate:fresh;
+        // both go away once committed migrations + a persistent DB replace the
+        // wipe-and-reseed bring-up (see phase deferred-items DEPLOY CEILING).
+        addRandomSuffix: true,
       }),
     ]
   : [];
