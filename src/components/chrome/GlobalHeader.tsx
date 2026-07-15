@@ -8,11 +8,12 @@ import { MobileNavPanel } from "@/components/chrome/MobileNavPanel";
 // logical flex row (wordmark inline-start -> nav (>=lg) -> switcher -> CTA
 // inline-end). Auto-reverses in RTL via dir + logical flex, no manual
 // mirroring code.
-// D-08: full nav set, wired to real /<slug> routes (home is "/"). `products`
-// is deliberately excluded — catalog is Phase 3 (T-02-18: no dead route).
+// D-08: full nav set, wired to real /<slug> routes (home is "/"). D-06:
+// `products` now resolves to the real Phase 3 catalog route.
 const NAV_KEYS = [
   "home",
   "about",
+  "products",
   "certifications",
   "manufacturing",
   "export",
@@ -23,6 +24,7 @@ const NAV_KEYS = [
 const NAV_HREFS: Record<(typeof NAV_KEYS)[number], string> = {
   home: "/",
   about: "/about",
+  products: "/products",
   certifications: "/certifications",
   manufacturing: "/manufacturing",
   export: "/export",
