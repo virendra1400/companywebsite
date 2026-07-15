@@ -9,3 +9,4 @@ export { CertStrip } from "./CertStrip";
 export { FeatureGrid } from "./FeatureGrid";
 export { StatsBand } from "./StatsBand";
 export { DocumentCard } from "./DocumentCard";
+export { MediaGallery } from "./MediaGallery";
