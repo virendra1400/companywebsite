@@ -44,7 +44,7 @@ export async function GlobalHeader() {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-lg lg:flex" aria-label="Primary">
+        <nav className="hidden items-center gap-lg xl:flex" aria-label="Primary">
           {NAV_KEYS.map((key) => (
             <Link
               key={key}

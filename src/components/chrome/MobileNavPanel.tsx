@@ -60,7 +60,7 @@ export function MobileNavPanel() {
           aria-label={open ? tMobile("closeMenu") : tMobile("openMenu")}
           aria-expanded={open}
           data-testid="mobile-nav-trigger"
-          className="size-11 lg:hidden"
+          className="size-11 xl:hidden"
         >
           <Menu className="size-5" aria-hidden="true" />
         </Button>
