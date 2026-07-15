@@ -9,7 +9,8 @@ import sharp from "sharp";
 
 import { Users } from "@/collections/Users";
 import { Media } from "@/collections/Media";
-import { Home } from "@/globals/Home";
+import { Pages } from "@/collections/Pages";
+import { Certifications } from "@/collections/Certifications";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -52,8 +53,7 @@ export default buildConfig({
   admin: {
     user: Users.slug,
   },
-  collections: [Users, Media],
-  globals: [Home],
+  collections: [Users, Media, Pages, Certifications],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET ?? "",
   typescript: {
