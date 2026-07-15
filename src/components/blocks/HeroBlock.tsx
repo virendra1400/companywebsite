@@ -51,9 +51,9 @@ export async function HeroBlock({ block }: { block: HeroData; index: number }) {
         {block.eyebrow ? (
           <p className="text-label tracking-wide text-primary-100">{block.eyebrow}</p>
         ) : null}
-        <h1 className="max-w-2xl text-display font-semibold text-white">{block.headline}</h1>
+        <h1 className="max-w-[42rem] text-display font-semibold text-white">{block.headline}</h1>
         {block.subhead ? (
-          <p className="max-w-xl text-body text-primary-100">{block.subhead}</p>
+          <p className="max-w-[36rem] text-body text-primary-100">{block.subhead}</p>
         ) : null}
         <div className="flex flex-col items-start gap-sm sm:flex-row sm:items-center">
           <Button asChild className="hover:bg-primary-500 focus-visible:ring-accent-600">

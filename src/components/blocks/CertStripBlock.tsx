@@ -29,7 +29,7 @@ export async function CertStripBlock({ block, index }: { block: CertStripData; i
           <h2 className="mb-lg text-heading font-semibold">{block.sectionTitle}</h2>
         ) : null}
         {block.intro ? (
-          <p className="mb-lg max-w-2xl text-body text-neutral-600">{block.intro}</p>
+          <p className="mb-lg max-w-[42rem] text-body text-neutral-600">{block.intro}</p>
         ) : null}
 
         {certs.length === 0 ? (
