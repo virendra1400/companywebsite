@@ -4,6 +4,9 @@ import { HeroBlock } from "./HeroBlock";
 import { RichTextBlock } from "./RichTextBlock";
 import { CTABandBlock } from "./CTABandBlock";
 import { CertStripBlock } from "./CertStripBlock";
+import { FeatureGridBlock } from "./FeatureGridBlock";
+import { StatsBandBlock } from "./StatsBandBlock";
+import { DocumentCardBlock } from "./DocumentCardBlock";
 
 type LayoutBlock = NonNullable<Page["layout"]>[number];
 
@@ -12,13 +15,16 @@ type LayoutBlock = NonNullable<Page["layout"]>[number];
 // heterogeneous discriminated union can't stay statically precise per-variant
 // without excess ceremony; each block component narrows `block` to its own
 // shape internally via `Extract<LayoutBlock, { blockType: '...' }>`.
-// Reserve: append later blocks here (FeatureGrid, StatsBand, ...) as later
-// plans add them.
+// Reserve: append later blocks here (MediaGallery, ExportMap, ContactBlock)
+// as later plans add them.
 const BLOCK_MAP: Record<string, ComponentType<{ block: any; index: number }>> = {
   hero: HeroBlock,
   richText: RichTextBlock,
   ctaBand: CTABandBlock,
   certStrip: CertStripBlock,
+  featureGrid: FeatureGridBlock,
+  statsBand: StatsBandBlock,
+  documentCard: DocumentCardBlock,
 };
 
 // UI-SPEC "Section rhythm rule": two consecutive blocks never share the same

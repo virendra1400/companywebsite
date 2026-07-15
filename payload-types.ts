@@ -248,6 +248,43 @@ export interface Page {
             blockName?: string | null;
             blockType: 'certStrip';
           }
+        | {
+            sectionTitle?: string | null;
+            variant: 'icon' | 'photo';
+            items?:
+              | {
+                  icon?: string | null;
+                  photo?: (number | null) | Media;
+                  title: string;
+                  body: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'featureGrid';
+          }
+        | {
+            sectionTitle?: string | null;
+            stats?:
+              | {
+                  value: string;
+                  label: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'statsBand';
+          }
+        | {
+            title: string;
+            description?: string | null;
+            file?: (number | null) | Media;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'documentCard';
+          }
       )[]
     | null;
   updatedAt: string;
@@ -472,6 +509,46 @@ export interface PagesSelect<T extends boolean = true> {
               variant?: T;
               sectionTitle?: T;
               intro?: T;
+              id?: T;
+              blockName?: T;
+            };
+        featureGrid?:
+          | T
+          | {
+              sectionTitle?: T;
+              variant?: T;
+              items?:
+                | T
+                | {
+                    icon?: T;
+                    photo?: T;
+                    title?: T;
+                    body?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        statsBand?:
+          | T
+          | {
+              sectionTitle?: T;
+              stats?:
+                | T
+                | {
+                    value?: T;
+                    label?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        documentCard?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              file?: T;
               id?: T;
               blockName?: T;
             };

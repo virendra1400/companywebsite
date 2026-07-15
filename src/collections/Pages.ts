@@ -1,6 +1,6 @@
 import type { CollectionConfig } from "payload";
 import { revalidatePage } from "@/hooks/revalidatePage";
-import { Hero, RichText, CTABand, CertStrip } from "@/blocks";
+import { Hero, RichText, CTABand, CertStrip, FeatureGrid, StatsBand, DocumentCard } from "@/blocks";
 
 // RESEARCH D-02 resolution / Pattern 1: replaces the Phase 1 Home global.
 // One collection, slug-routed, hosts every marketing page (home + 6 interior
@@ -27,7 +27,7 @@ export const Pages: CollectionConfig = {
       // (RESEARCH Pattern 2) — do NOT re-set localized inside block fields.
       localized: true,
       minRows: 1,
-      blocks: [Hero, RichText, CTABand, CertStrip],
+      blocks: [Hero, RichText, CTABand, CertStrip, FeatureGrid, StatsBand, DocumentCard],
     },
   ],
   hooks: { afterChange: [revalidatePage] },

@@ -30,5 +30,8 @@
     "pdfUnavailable": "Certificate available on request",
     "comingSoonHeading": "Certifications coming soon.",
     "comingSoonBody": "We're finalizing documentation for our quality certifications — contact us directly for current compliance status."
+  },
+  "blocks": {
+    "emptyState": "This section is being updated — check back shortly."
   }
 }
