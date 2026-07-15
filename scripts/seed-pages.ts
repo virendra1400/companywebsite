@@ -99,6 +99,75 @@ async function upsertMediaByAlt(alt: string, filePath: string) {
   });
 }
 
+// --- Company/Compliance leadership placeholder photos (TRUST-05) ---------
+// Self-authored generic initials-in-circle avatars (T-02-09: no real people
+// photos) — see scripts/seed-assets/README.md. Keys match the FeatureGrid
+// item `title` strings authored in seed-content.ts's company page layout.
+const LEADERSHIP_AVATARS: Record<string, string> = {
+  "Managing Director": "scripts/seed-assets/avatar-managing-director.svg",
+  "Head of Quality & Compliance": "scripts/seed-assets/avatar-quality-compliance.svg",
+  "Export Operations Manager": "scripts/seed-assets/avatar-export-operations.svg",
+};
+
+// Idempotent: re-reads the already-seeded 'company' page and only fills in
+// items whose `photo` is still unset, so re-running this script never
+// re-uploads or re-links Media. No-ops entirely if the page doesn't exist
+// yet (a fresh Pages doc, not this script's concern to create twice).
+async function attachLeadershipPhotos() {
+  const existing = await payload.find({
+    collection: "pages",
+    where: { slug: { equals: "company" } },
+    locale: "en",
+    fallbackLocale: false,
+    overrideAccess: true,
+    limit: 1,
+  });
+  const companyDoc = existing.docs[0];
+  if (!companyDoc) return;
+
+  let changed = false;
+  const layout = [];
+  for (const block of companyDoc.layout ?? []) {
+    if (block.blockType !== "featureGrid" || block.variant !== "photo") {
+      layout.push(block);
+      continue;
+    }
+    const items = [];
+    for (const item of block.items ?? []) {
+      if (item.photo) {
+        items.push(item); // already linked — idempotent
+        continue;
+      }
+      const assetPath = item.title ? LEADERSHIP_AVATARS[item.title] : undefined;
+      if (!assetPath) {
+        items.push(item);
+        continue;
+      }
+      const media = await upsertMediaByAlt(`${item.title} placeholder photo`, assetPath);
+      items.push({ ...item, photo: media.id });
+      changed = true;
+    }
+    layout.push({ ...block, items });
+  }
+
+  if (!changed) {
+    console.log("Company leadership photos already attached — skipping.");
+    return;
+  }
+
+  await payload.update({
+    collection: "pages",
+    id: companyDoc.id,
+    locale: "en",
+    data: { layout },
+    overrideAccess: true,
+    context: { disableRevalidate: true },
+  });
+  console.log("Attached leadership placeholder photos to the 'company' page.");
+}
+
+await attachLeadershipPhotos();
+
 let sharedPdfId: number | null = null;
 
 for (const cert of CERTIFICATIONS_EN_SEED) {
