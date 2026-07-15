@@ -58,9 +58,18 @@ export async function ExportMapBlock({ block, index }: { block: ExportMapData; i
     <div
       role="img"
       aria-label={ariaLabel}
-      className={isCompact ? "mx-auto max-w-[480px]" : "mx-auto max-w-[900px]"}
+      // w-full + a fixed 2:1 aspect (matches the SVG's 1000x500 viewBox)
+      // gives this div a definite, non-zero box in every parent layout
+      // context (block, CSS grid item, flex item) — a bare inline <svg>
+      // with no width/height otherwise resolves to a 0x0 box inside a
+      // shrink-to-fit grid item.
+      className={
+        isCompact
+          ? "mx-auto aspect-[2/1] w-full max-w-[480px]"
+          : "mx-auto aspect-[2/1] w-full max-w-[900px]"
+      }
     >
-      <div aria-hidden="true" dangerouslySetInnerHTML={{ __html: svgMarkup }} />
+      <div aria-hidden="true" className="h-full w-full" dangerouslySetInnerHTML={{ __html: svgMarkup }} />
     </div>
   );
 

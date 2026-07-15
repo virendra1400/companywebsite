@@ -5,7 +5,7 @@
 // serverless deploy (Vercel). Each `<rect id="ISO_CODE" ... fill="...">` is
 // swapped to primary-500 by ExportMapBlock.tsx for served countries; the
 // default fill below is neutral-300 (see src/app/globals.css).
-export const WORLD_MAP_SVG = `<svg viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg">
+export const WORLD_MAP_SVG = `<svg viewBox="0 0 1000 500" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
 <rect id="US" x="90" y="110" width="110" height="70" rx="6" fill="#D7DBD8"/>
 <rect id="BR" x="190" y="280" width="70" height="90" rx="6" fill="#D7DBD8"/>
 <rect id="GB" x="430" y="75" width="30" height="22" rx="4" fill="#D7DBD8"/>
