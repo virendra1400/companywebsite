@@ -23,7 +23,13 @@ export async function DocumentCardBlock({
 
   return (
     <section className={`${sectionBg(index)} px-md py-2xl md:px-lg md:py-3xl xl:px-xl`}>
-      <div className="mx-auto max-w-sm">
+      {/* Bracket value, NOT the named max-w-sm utility: this project's custom
+          --spacing-sm theme token (8px) collides with Tailwind v4's named
+          max-w-{size} scale, silently shrinking it to 8px — see
+          deferred-items.md for the pre-existing project-wide instance of
+          this collision (Hero/CTABand's max-w-2xl/max-w-xl), out of this
+          plan's scope to fix broadly. */}
+      <div className="mx-auto max-w-[384px]">
         <CertCard
           name={block.title}
           subtitle={block.description ?? undefined}
