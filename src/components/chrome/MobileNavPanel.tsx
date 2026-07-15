@@ -21,10 +21,12 @@ import {
 // left/right, so direction is derived here from the active locale rather
 // than a hardcoded value, satisfying the logical-edge requirement at the
 // call site. aria-label/aria-expanded reflect open state via chrome strings.
-// D-08 nav set wired to real /<slug> routes; `products` excluded (Phase 3).
+// D-08 nav set wired to real /<slug> routes; D-06: `products` now resolves
+// to the real Phase 3 catalog route.
 const NAV_KEYS = [
   "home",
   "about",
+  "products",
   "certifications",
   "manufacturing",
   "export",
@@ -35,6 +37,7 @@ const NAV_KEYS = [
 const NAV_HREFS: Record<(typeof NAV_KEYS)[number], string> = {
   home: "/",
   about: "/about",
+  products: "/products",
   certifications: "/certifications",
   manufacturing: "/manufacturing",
   export: "/export",

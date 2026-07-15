@@ -5,10 +5,11 @@ import { LanguageSwitcher } from "@/components/chrome/LanguageSwitcher";
 // UI-SPEC Component Inventory — GlobalFooter: primary-900 surface, white/
 // neutral-100 text, gold hover-underline links. Wordmark repeat, D-08 nav
 // wired to real /<slug> routes, switcher repeat, copyright. Single column
-// mobile -> logical row desktop. `products` excluded (Phase 3 catalog).
+// mobile -> logical row desktop. D-06: `products` now wired to /products.
 const NAV_KEYS = [
   "home",
   "about",
+  "products",
   "certifications",
   "manufacturing",
   "export",
@@ -19,6 +20,7 @@ const NAV_KEYS = [
 const NAV_HREFS: Record<(typeof NAV_KEYS)[number], string> = {
   home: "/",
   about: "/about",
+  products: "/products",
   certifications: "/certifications",
   manufacturing: "/manufacturing",
   export: "/export",
