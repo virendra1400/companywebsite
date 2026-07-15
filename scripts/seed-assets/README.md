@@ -11,6 +11,11 @@ real certification-body logos, marks, or documents.
 - `sample-certificate.pdf` — a minimal, single-page generated PDF containing only the text
   "SAMPLE CERTIFICATE - PLACEHOLDER DOCUMENT". It contains no real certificate number,
   registration number, IEC number, signature, or named client.
+- `avatar-managing-director.svg`, `avatar-quality-compliance.svg`, `avatar-export-operations.svg`
+  — plain generic initials-in-circle placeholders for the Company/Compliance page's leadership
+  `FeatureGrid` (photo variant). They are **not** photos of real people — role initials only
+  (MD/QC/EO), no named individuals. Replace with real leadership photography (with consent)
+  when the company provides it.
 
 **Do not replace these with scraped/downloaded real certification-body logos or documents.**
 When the company's real certifications and signed PDFs become available, replace both the
