@@ -49,5 +49,15 @@
     "whatsappLabel": "Message us on WhatsApp",
     "whatsappAria": "Message Star Agrevolution on WhatsApp",
     "successMessage": "Thanks — inquiries aren't wired up on this preview yet. Email sales@staragrevolution.com or use WhatsApp above and we'll respond directly."
+  },
+  "products": {
+    "heading": "Our Products",
+    "catalogEmptyHeading": "Our catalog is being prepared.",
+    "catalogEmptyBody": "Check back shortly, or contact us directly about specific products.",
+    "rfqCta": "Request a Quote for This Product",
+    "breadcrumbRoot": "Products",
+    "galleryThumbAria": "View image {n} of {total}",
+    "notFoundHeading": "Product not found.",
+    "notFoundBody": "This product may have been removed or is no longer available."
   }
 }

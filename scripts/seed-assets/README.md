@@ -1,8 +1,8 @@
 # Seed Assets — Placeholder Only
 
 The files in this directory are **self-authored, generated placeholder assets** used only to
-seed local development / preview data for the Certifications collection. They are **not**
-real certification-body logos, marks, or documents.
+seed local development / preview data for the Certifications and Products collections. They
+are **not** real certification-body logos, product photography, marks, or documents.
 
 - `logo-iso-22000.svg`, `logo-food-safety.svg`, `logo-halal.svg` — plain generic labeled boxes
   (rectangle + sans-serif text), generated for this project. They do **not** reproduce the
@@ -20,6 +20,11 @@ real certification-body logos, marks, or documents.
   `facility-packing-line.svg` — plain generic labeled 4:3 rectangles (matching the Manufacturing
   page's `MediaGallery` block, T-02-11: accept, no confidential facility imagery). They are
   **not** real facility photography. Replace with real, licensed facility photos when the
+  company provides them.
+- `product-basmati-rice.svg`, `product-turmeric.svg`, `product-lentils.svg` — plain generic
+  labeled 4:3 color-block placeholders (rectangle + product-name text, no fabricated grade,
+  origin, or brand marks) used by `scripts/seed-products.ts` (Phase 3, CAT-04). They are
+  **not** real product photography. Replace with real, licensed product photos when the
   company provides them.
 
 **Do not replace these with scraped/downloaded real certification-body logos or documents.**
