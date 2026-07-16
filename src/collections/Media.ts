@@ -36,13 +36,11 @@ export const Media: CollectionConfig = {
       "text/xml",
       "application/pdf",
     ],
-    imageSizes: [
-      {
-        name: "thumbnail",
-        width: 400,
-        position: "centre",
-      },
-    ],
+    // No imageSizes: the site serves original media (next/image unoptimized),
+    // so runtime sharp resizing added nothing but a failure point on Vercel's
+    // serverless function (admin uploads errored with "error while uploading
+    // files"). Originals only — resizing can return via a build-time/CDN path
+    // in Phase 6 if needed.
   },
   fields: [
     {

@@ -1,6 +1,7 @@
 import * as migration_20260716_120723_init from './20260716_120723_init';
 import * as migration_20260716_130814_site_settings from './20260716_130814_site_settings';
 import * as migration_20260716_135113_contact_settings from './20260716_135113_contact_settings';
+import * as migration_20260716_143757_media_no_sizes from './20260716_143757_media_no_sizes';
 
 export const migrations = [
   {
@@ -16,6 +17,11 @@ export const migrations = [
   {
     up: migration_20260716_135113_contact_settings.up,
     down: migration_20260716_135113_contact_settings.down,
-    name: '20260716_135113_contact_settings'
+    name: '20260716_135113_contact_settings',
+  },
+  {
+    up: migration_20260716_143757_media_no_sizes.up,
+    down: migration_20260716_143757_media_no_sizes.down,
+    name: '20260716_143757_media_no_sizes'
   },
 ];
