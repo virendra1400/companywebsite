@@ -1,4 +1,5 @@
 import type { GlobalConfig } from "payload";
+import { revalidateSiteSettings } from "@/hooks/revalidateSiteSettings";
 
 // Site-wide brand settings, editable in /admin (no code change / redeploy).
 // siteName drives the header/footer/mobile wordmark + footer copyright.
@@ -11,6 +12,9 @@ export const SiteSettings: GlobalConfig = {
   },
   admin: {
     group: "Settings",
+  },
+  hooks: {
+    afterChange: [revalidateSiteSettings],
   },
   fields: [
     {
