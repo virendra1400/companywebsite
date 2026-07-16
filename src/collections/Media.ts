@@ -21,10 +21,6 @@ export const Media: CollectionConfig = {
     delete: ({ req: { user } }) => Boolean(user),
   },
   upload: {
-    // Serve files directly from the storage origin (Blob CDN / disk) bypassing
-    // Payload's access-controlled file route — public assets, faster, and
-    // avoids the auth-gated-media 403 entirely.
-    disablePayloadAccessControl: true,
     // Local disk storage (dev default — no storage adapter needed). Prod
     // swaps to @payloadcms/storage-s3 (see payload.config.ts comment); this
     // staticDir is irrelevant once s3Storage is added (bytes go to the bucket).
