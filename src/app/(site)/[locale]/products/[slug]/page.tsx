@@ -16,6 +16,10 @@ import { getProduct } from "@/lib/payload-fetch";
 import type { Locale } from "@/i18n/routing";
 import type { Media, Category, Certification } from "../../../../../../payload-types";
 
+// ISR: CMS edits (Pages/Products/SiteSettings) appear within 60s without a redeploy.
+// Complements the on-demand revalidate hooks (instant when they fire).
+export const revalidate = 60;
+
 const REQUEST_QUOTE_CTA = { label: "Request a Quote", href: "/contact" };
 const WHATSAPP_CTA = { label: "Chat on WhatsApp", href: "https://wa.me/910000000000" };
 

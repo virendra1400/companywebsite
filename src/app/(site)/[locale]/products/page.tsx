@@ -8,6 +8,10 @@ import { ProductCard } from "@/components/products/ProductCard";
 import { getProductsByCategory } from "@/lib/payload-fetch";
 import type { Locale } from "@/i18n/routing";
 
+// ISR: CMS edits (Pages/Products/SiteSettings) appear within 60s without a redeploy.
+// Complements the on-demand revalidate hooks (instant when they fire).
+export const revalidate = 60;
+
 // CAT-01/CAT-04 — CatalogIndex (RESEARCH Pitfall 2: a NEW sibling `products`
 // folder, never a special case inside `[slug]/page.tsx`; Next resolves
 // static-over-dynamic automatically). Composition per UI-SPEC §CatalogIndex:
