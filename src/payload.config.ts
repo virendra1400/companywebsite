@@ -13,6 +13,7 @@ import { Pages } from "@/collections/Pages";
 import { Certifications } from "@/collections/Certifications";
 import { Categories } from "@/collections/Categories";
 import { Products } from "@/collections/Products";
+import { SiteSettings } from "@/globals/SiteSettings";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -62,6 +63,7 @@ export default buildConfig({
     user: Users.slug,
   },
   collections: [Users, Media, Pages, Certifications, Categories, Products],
+  globals: [SiteSettings],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET ?? "",
   typescript: {

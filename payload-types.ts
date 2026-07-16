@@ -96,8 +96,12 @@ export interface Config {
   };
   fallbackLocale:
     ('false' | 'none' | 'null') | false | null | ('en' | 'ar' | 'fr' | 'ru') | ('en' | 'ar' | 'fr' | 'ru')[];
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    'site-settings': SiteSetting;
+  };
+  globalsSelect: {
+    'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
+  };
   locale: 'en' | 'ar' | 'fr' | 'ru';
   widgets: {
     collections: CollectionsWidget;
@@ -805,6 +809,34 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-settings".
+ */
+export interface SiteSetting {
+  id: number;
+  /**
+   * Company/brand name shown in the header, footer, and copyright across the whole site. Also used as the logo's alt text.
+   */
+  siteName: string;
+  /**
+   * Optional brand logo. When set, it replaces the text wordmark in the header, footer, and mobile menu. Leave empty to show the site name as text. Recommended: transparent PNG/SVG, ~40px tall.
+   */
+  logo?: (number | null) | Media;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-settings_select".
+ */
+export interface SiteSettingsSelect<T extends boolean = true> {
+  siteName?: T;
+  logo?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

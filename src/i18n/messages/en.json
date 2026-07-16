@@ -38,7 +38,7 @@
   "blocks": {
     "emptyState": "This section is being updated — check back shortly.",
     "watchVideo": "Watch video",
-    "exportMapAriaLabel": "World map highlighting {count} countries Star Agrevolution exports to"
+    "exportMapAriaLabel": "World map highlighting {count} countries we export to"
   },
   "contact": {
     "nameLabel": "Full Name",
@@ -47,7 +47,7 @@
     "messageLabel": "Message",
     "submit": "Send Inquiry",
     "whatsappLabel": "Message us on WhatsApp",
-    "whatsappAria": "Message Star Agrevolution on WhatsApp",
+    "whatsappAria": "Message us on WhatsApp",
     "successMessage": "Thanks — inquiries aren't wired up on this preview yet. Email sales@staragrevolution.com or use WhatsApp above and we'll respond directly."
   },
   "products": {

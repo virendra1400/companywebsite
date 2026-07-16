@@ -3,6 +3,24 @@ import config from "@payload-config";
 import type { Locale } from "@/i18n/routing";
 import type { Page, Certification, Category, Product } from "../../payload-types";
 
+// Site-wide brand (name + optional logo) from the SiteSettings global
+// (CMS-editable). Not localized — brand is one value. Media relation guard per
+// RESEARCH Pitfall 3 (relation may be an id or a populated object).
+export async function getSiteBrand(): Promise<{
+  siteName: string;
+  logoUrl: string | null;
+}> {
+  const payload = await getPayload({ config });
+  const settings = await payload.findGlobal({
+    slug: "site-settings",
+    overrideAccess: true,
+  });
+  const logo = settings?.logo;
+  const logoUrl =
+    logo && typeof logo === "object" && "url" in logo ? (logo.url ?? null) : null;
+  return { siteName: settings?.siteName || "Star Agrevolution", logoUrl };
+}
+
 // FOUND-06/D-06: detect whether the active locale has real (non-fallback)
 // content so the page can show the English-plus-notice fallback rather than
 // silently serving English with no signal. RESEARCH Pattern 4 — generalizes

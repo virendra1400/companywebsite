@@ -6,6 +6,7 @@ import { IBM_Plex_Sans, IBM_Plex_Sans_Arabic } from "next/font/google";
 import { routing, RTL_LOCALES } from "@/i18n/routing";
 import { GlobalHeader } from "@/components/chrome/GlobalHeader";
 import { GlobalFooter } from "@/components/chrome/GlobalFooter";
+import { getSiteBrand } from "@/lib/payload-fetch";
 import "../../globals.css";
 
 // Per-script fonts — only the needed subset ships per locale (FOUND-03 / UI-SPEC).
@@ -40,14 +41,15 @@ export default async function LocaleLayout({
 
   const dir = RTL_LOCALES.has(locale) ? "rtl" : "ltr";
   const fontVar = locale === "ar" ? plexSansArabic.variable : plexSans.variable;
+  const { siteName, logoUrl } = await getSiteBrand();
 
   return (
     <html lang={locale} dir={dir} className={fontVar}>
       <body className="flex min-h-dvh flex-col bg-background text-foreground antialiased">
         <NextIntlClientProvider>
-          <GlobalHeader />
+          <GlobalHeader siteName={siteName} logoUrl={logoUrl} />
           <div className="flex-1">{children}</div>
-          <GlobalFooter />
+          <GlobalFooter siteName={siteName} logoUrl={logoUrl} />
         </NextIntlClientProvider>
       </body>
     </html>

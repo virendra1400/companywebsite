@@ -3,6 +3,7 @@ import { Link } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
 import { LanguageSwitcher } from "@/components/chrome/LanguageSwitcher";
 import { MobileNavPanel } from "@/components/chrome/MobileNavPanel";
+import { BrandMark } from "@/components/chrome/BrandMark";
 
 // UI-SPEC Component Inventory — GlobalHeader: 72px desktop / 64px mobile,
 // logical flex row (wordmark inline-start -> nav (>=lg) -> switcher -> CTA
@@ -32,7 +33,13 @@ const NAV_HREFS: Record<(typeof NAV_KEYS)[number], string> = {
   contact: "/contact",
 };
 
-export async function GlobalHeader() {
+export async function GlobalHeader({
+  siteName,
+  logoUrl,
+}: {
+  siteName: string;
+  logoUrl: string | null;
+}) {
   const t = await getTranslations("nav");
   const tHero = await getTranslations("hero");
 
@@ -40,10 +47,8 @@ export async function GlobalHeader() {
     <header className="sticky top-0 z-40 flex h-16 items-center border-b border-neutral-300 bg-white px-md lg:h-[72px] lg:px-xl">
       <div className="mx-auto flex w-full max-w-[1280px] items-center justify-between gap-lg">
         <Link href="/" className="shrink-0">
-          {/* Brand wordmark: RTL contract — never mirrors/reorders, even in ar. */}
-          <span dir="ltr" className="text-heading font-semibold text-primary-700">
-            Star Agrevolution
-          </span>
+          {/* Brand: CMS logo if set, else text wordmark. RTL contract — never mirrors. */}
+          <BrandMark siteName={siteName} logoUrl={logoUrl} variant="light" />
         </Link>
 
         <nav className="hidden items-center gap-lg xl:flex" aria-label="Primary">
@@ -67,7 +72,7 @@ export async function GlobalHeader() {
           >
             <a href="mailto:sales@staragrevolution.com">{tHero("cta")}</a>
           </Button>
-          <MobileNavPanel />
+          <MobileNavPanel siteName={siteName} logoUrl={logoUrl} />
         </div>
       </div>
     </header>

@@ -7,6 +7,7 @@ import { Link } from "@/i18n/navigation";
 import { RTL_LOCALES } from "@/i18n/routing";
 import { Button } from "@/components/ui/button";
 import { LanguageSwitcher } from "@/components/chrome/LanguageSwitcher";
+import { BrandMark } from "@/components/chrome/BrandMark";
 import {
   Sheet,
   SheetContent,
@@ -45,7 +46,13 @@ const NAV_HREFS: Record<(typeof NAV_KEYS)[number], string> = {
   contact: "/contact",
 };
 
-export function MobileNavPanel() {
+export function MobileNavPanel({
+  siteName,
+  logoUrl,
+}: {
+  siteName: string;
+  logoUrl: string | null;
+}) {
   const [open, setOpen] = useState(false);
   const locale = useLocale();
   const t = useTranslations("nav");
@@ -76,7 +83,7 @@ export function MobileNavPanel() {
       >
         <SheetHeader className="p-0">
           <SheetTitle className="text-heading">
-            <span dir="ltr">Star Agrevolution</span>
+            <BrandMark siteName={siteName} logoUrl={logoUrl} variant="light" />
           </SheetTitle>
         </SheetHeader>
         <nav className="flex flex-col gap-md" aria-label="Primary">

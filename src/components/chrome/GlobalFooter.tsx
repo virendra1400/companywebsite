@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { LanguageSwitcher } from "@/components/chrome/LanguageSwitcher";
+import { BrandMark } from "@/components/chrome/BrandMark";
 
 // UI-SPEC Component Inventory — GlobalFooter: primary-900 surface, white/
 // neutral-100 text, gold hover-underline links. Wordmark repeat, D-08 nav
@@ -28,7 +29,13 @@ const NAV_HREFS: Record<(typeof NAV_KEYS)[number], string> = {
   contact: "/contact",
 };
 
-export async function GlobalFooter() {
+export async function GlobalFooter({
+  siteName,
+  logoUrl,
+}: {
+  siteName: string;
+  logoUrl: string | null;
+}) {
   const t = await getTranslations("nav");
   const year = new Date().getFullYear();
 
@@ -36,9 +43,7 @@ export async function GlobalFooter() {
     <footer className="bg-primary-900 px-md py-2xl text-neutral-100 md:px-lg xl:px-xl">
       <div className="mx-auto flex w-full max-w-[1280px] flex-col gap-lg lg:flex-row lg:items-start lg:justify-between">
         <Link href="/" className="shrink-0">
-          <span dir="ltr" className="text-heading font-semibold text-white">
-            Star Agrevolution
-          </span>
+          <BrandMark siteName={siteName} logoUrl={logoUrl} variant="dark" />
         </Link>
 
         <nav
@@ -60,7 +65,7 @@ export async function GlobalFooter() {
       </div>
 
       <p className="mx-auto mt-xl w-full max-w-[1280px] text-label text-neutral-300">
-        {`© ${year} Star Agrevolution. All rights reserved.`}
+        {`© ${year} ${siteName}. All rights reserved.`}
       </p>
     </footer>
   );
