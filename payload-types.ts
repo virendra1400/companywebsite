@@ -325,9 +325,6 @@ export interface Page {
         | {
             intro?: string | null;
             address: string;
-            whatsapp: string;
-            email: string;
-            phone: string;
             id?: string | null;
             blockName?: string | null;
             blockType: 'contactBlock';
@@ -702,9 +699,6 @@ export interface PagesSelect<T extends boolean = true> {
           | {
               intro?: T;
               address?: T;
-              whatsapp?: T;
-              email?: T;
-              phone?: T;
               id?: T;
               blockName?: T;
             };
@@ -824,6 +818,23 @@ export interface SiteSetting {
    * Optional brand logo. When set, it replaces the text wordmark in the header, footer, and mobile menu. Leave empty to show the site name as text. Recommended: transparent PNG/SVG, ~40px tall.
    */
   logo?: (number | null) | Media;
+  /**
+   * Single source for contact details used site-wide — header/hero CTAs, product pages, and the Contact page all read from here.
+   */
+  contact: {
+    /**
+     * Inquiry email (mailto: links across the site).
+     */
+    email: string;
+    /**
+     * Phone number (tel: link).
+     */
+    phone: string;
+    /**
+     * WhatsApp number in E.164 digits, no '+' (e.g. 919876543210). Powers every 'Chat on WhatsApp' link.
+     */
+    whatsapp: string;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -834,6 +845,13 @@ export interface SiteSetting {
 export interface SiteSettingsSelect<T extends boolean = true> {
   siteName?: T;
   logo?: T;
+  contact?:
+    | T
+    | {
+        email?: T;
+        phone?: T;
+        whatsapp?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

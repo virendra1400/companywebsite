@@ -12,7 +12,7 @@ import { CTABandBlock } from "@/components/blocks/CTABandBlock";
 import { ProductGallery } from "@/components/products/ProductGallery";
 import { SpecTable } from "@/components/products/SpecTable";
 import { LocaleFallbackNotice } from "@/components/chrome/LocaleFallbackNotice";
-import { getProduct } from "@/lib/payload-fetch";
+import { getProduct, getSiteBrand } from "@/lib/payload-fetch";
 import type { Locale } from "@/i18n/routing";
 import type { Media, Category, Certification } from "../../../../../../payload-types";
 
@@ -21,7 +21,6 @@ import type { Media, Category, Certification } from "../../../../../../payload-t
 export const revalidate = 60;
 
 const REQUEST_QUOTE_CTA = { label: "Request a Quote", href: "/contact" };
-const WHATSAPP_CTA = { label: "Chat on WhatsApp", href: "https://wa.me/910000000000" };
 
 // CAT-03/RESEARCH Pitfall 1: query Payload for published product slugs — NOT
 // a hardcoded list (contrast [locale]/[slug]/page.tsx's INTERIOR_SLUGS, which
@@ -52,6 +51,7 @@ export default async function ProductDetailPage({
   const tCerts = await getTranslations("certs");
 
   const { product, isTranslated } = await getProduct(slug, locale as Locale);
+  const { waHref } = await getSiteBrand();
   if (!product) notFound();
 
   const category = typeof product.category === "object" ? (product.category as Category) : null;
@@ -168,7 +168,7 @@ export default async function ProductDetailPage({
           blockType: "ctaBand",
           heading: "Ready to Source With Confidence?",
           primaryCta: REQUEST_QUOTE_CTA,
-          secondaryCta: WHATSAPP_CTA,
+          secondaryCta: { label: "Chat on WhatsApp", href: waHref },
         }}
         index={0}
       />

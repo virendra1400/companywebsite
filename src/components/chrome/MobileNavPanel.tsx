@@ -100,7 +100,7 @@ export function MobileNavPanel({
         </nav>
         <LanguageSwitcher />
         <Button asChild className="hover:bg-primary-500 focus-visible:ring-accent-600">
-          <a href="mailto:sales@staragrevolution.com">{tHero("cta")}</a>
+          <Link href="/contact">{tHero("cta")}</Link>
         </Button>
       </SheetContent>
     </Sheet>

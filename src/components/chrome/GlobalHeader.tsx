@@ -70,7 +70,7 @@ export async function GlobalHeader({
             size="sm"
             className="hidden hover:bg-primary-500 focus-visible:ring-accent-600 sm:inline-flex"
           >
-            <a href="mailto:sales@staragrevolution.com">{tHero("cta")}</a>
+            <Link href="/contact">{tHero("cta")}</Link>
           </Button>
           <MobileNavPanel siteName={siteName} logoUrl={logoUrl} />
         </div>

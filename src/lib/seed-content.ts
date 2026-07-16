@@ -119,14 +119,13 @@ function documentCard(title: string, description?: string) {
 // Address is a clearly placeholder company address (Pitfall 5/9: no
 // fabricated registration/IEC numbers anywhere in this block).
 function contactBlock() {
+  // email/phone/WhatsApp now come from the SiteSettings global (single source);
+  // this block only carries intro + address.
   return {
     blockType: "contactBlock" as const,
     intro:
       "Reach out directly, or send an inquiry below — our export team responds to every message within one business day.",
     address: "Plot 14, MIDC Industrial Area, Nashik, Maharashtra 422010, India",
-    whatsapp: "910000000000",
-    email: "sales@staragrevolution.com",
-    phone: "+91 00000 00000",
   };
 }
 

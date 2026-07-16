@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import { MapPin, Phone, Mail } from "lucide-react";
 import { ContactForm } from "./ContactForm";
 import { sectionBg } from "./RenderBlocks";
+import { getSiteBrand } from "@/lib/payload-fetch";
 import type { Page } from "../../../payload-types";
 
 type ContactBlockData = Extract<NonNullable<Page["layout"]>[number], { blockType: "contactBlock" }>;
@@ -23,7 +24,8 @@ function WhatsAppIcon({ className }: { className?: string }) {
 // grid handles LTR/RTL swap automatically, no manual reordering needed).
 export async function ContactBlockView({ block, index }: { block: ContactBlockData; index: number }) {
   const t = await getTranslations("contact");
-  const waHref = `https://wa.me/${block.whatsapp}?text=${encodeURIComponent(
+  const { email, phone, whatsapp } = await getSiteBrand();
+  const waHref = `https://wa.me/${whatsapp}?text=${encodeURIComponent(
     "Hi, I'd like to enquire about your products.",
   )}`;
 
@@ -47,22 +49,22 @@ export async function ContactBlockView({ block, index }: { block: ContactBlockDa
           >
             <WhatsAppIcon className="size-4 shrink-0" />
             <span>
-              {t("whatsappLabel")} ({block.whatsapp})
+              {t("whatsappLabel")} ({whatsapp})
             </span>
           </a>
           <a
-            href={`mailto:${block.email}`}
+            href={`mailto:${email}`}
             className="flex items-center gap-xs text-body hover:text-primary-700"
           >
             <Mail aria-hidden="true" className="size-4 shrink-0" />
-            <span>{block.email}</span>
+            <span>{email}</span>
           </a>
           <a
-            href={`tel:${block.phone}`}
+            href={`tel:${phone}`}
             className="flex items-center gap-xs text-body hover:text-primary-700"
           >
             <Phone aria-hidden="true" className="size-4 shrink-0" />
-            <span>{block.phone}</span>
+            <span>{phone}</span>
           </a>
         </div>
         <ContactForm />

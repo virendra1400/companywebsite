@@ -1,14 +1,20 @@
+import { cache } from "react";
 import { getPayload } from "payload";
 import config from "@payload-config";
 import type { Locale } from "@/i18n/routing";
 import type { Page, Certification, Category, Product } from "../../payload-types";
 
-// Site-wide brand (name + optional logo) from the SiteSettings global
-// (CMS-editable). Not localized — brand is one value. Media relation guard per
-// RESEARCH Pitfall 3 (relation may be an id or a populated object).
-export async function getSiteBrand(): Promise<{
+// Site-wide brand + contact from the SiteSettings global (CMS-editable, single
+// source for name/logo/email/phone/whatsapp). Not localized. Media relation
+// guard per RESEARCH Pitfall 3. Wrapped in React cache() so the many callers
+// (chrome, hero, CTA band, product pages, contact block) share ONE query/request.
+export const getSiteBrand = cache(async function getSiteBrand(): Promise<{
   siteName: string;
   logoUrl: string | null;
+  email: string;
+  phone: string;
+  whatsapp: string;
+  waHref: string;
 }> {
   const payload = await getPayload({ config });
   const settings = await payload.findGlobal({
@@ -18,8 +24,17 @@ export async function getSiteBrand(): Promise<{
   const logo = settings?.logo;
   const logoUrl =
     logo && typeof logo === "object" && "url" in logo ? (logo.url ?? null) : null;
-  return { siteName: settings?.siteName || "Star Agrevolution", logoUrl };
-}
+  const contact = settings?.contact ?? {};
+  const whatsapp = contact.whatsapp || "910000000000";
+  return {
+    siteName: settings?.siteName || "Star Agrevolution",
+    logoUrl,
+    email: contact.email || "sales@example.com",
+    phone: contact.phone || "+91 00000 00000",
+    whatsapp,
+    waHref: `https://wa.me/${whatsapp}`,
+  };
+});
 
 // FOUND-06/D-06: detect whether the active locale has real (non-fallback)
 // content so the page can show the English-plus-notice fallback rather than

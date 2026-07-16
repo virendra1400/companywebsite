@@ -5,7 +5,7 @@ import { HeroBlock } from "@/components/blocks/HeroBlock";
 import { CTABandBlock } from "@/components/blocks/CTABandBlock";
 import { sectionBg } from "@/components/blocks/RenderBlocks";
 import { ProductCard } from "@/components/products/ProductCard";
-import { getProductsByCategory } from "@/lib/payload-fetch";
+import { getProductsByCategory, getSiteBrand } from "@/lib/payload-fetch";
 import type { Locale } from "@/i18n/routing";
 
 // ISR: CMS edits (Pages/Products/SiteSettings) appear within 60s without a redeploy.
@@ -21,7 +21,6 @@ export const revalidate = 60;
 // used by every other page's ctaBand (src/lib/seed-content.ts), reused
 // verbatim rather than inventing new placeholder contact copy.
 const REQUEST_QUOTE_CTA = { label: "Request a Quote", href: "/contact" };
-const WHATSAPP_CTA = { label: "Chat on WhatsApp", href: "https://wa.me/910000000000" };
 
 export default async function ProductsPage({
   params,
@@ -34,6 +33,7 @@ export default async function ProductsPage({
   const t = await getTranslations("products");
   const tBlocks = await getTranslations("blocks");
   const grouped = await getProductsByCategory(locale as Locale);
+  const { waHref } = await getSiteBrand();
 
   // Pre-seed state: zero categories at all. Whole-catalog empty state, still
   // wrapped in a data-testid="hero" region so nav-links.spec's "every nav
@@ -111,7 +111,7 @@ export default async function ProductsPage({
           blockType: "ctaBand",
           heading: "Ready to Source These Products?",
           primaryCta: REQUEST_QUOTE_CTA,
-          secondaryCta: WHATSAPP_CTA,
+          secondaryCta: { label: "Chat on WhatsApp", href: waHref },
         }}
         index={grouped.length}
       />

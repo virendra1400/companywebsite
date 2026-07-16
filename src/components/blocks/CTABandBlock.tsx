@@ -15,7 +15,7 @@ export function CTABandBlock({ block }: { block: CTABandData; index: number }) {
         <div className="flex flex-col items-center gap-sm sm:flex-row">
           {block.primaryCta?.label ? (
             <Button asChild className="hover:bg-primary-500 focus-visible:ring-accent-600">
-              <a href={block.primaryCta.href || "mailto:sales@staragrevolution.com"}>
+              <a href={block.primaryCta.href || "/contact"}>
                 {block.primaryCta.label}
               </a>
             </Button>

@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { getFormatter, getTranslations } from "next-intl/server";
 import { Button } from "@/components/ui/button";
+import { Link } from "@/i18n/navigation";
+import { getSiteBrand } from "@/lib/payload-fetch";
 import type { Page, Media } from "../../../payload-types";
 
 type HeroData = Extract<NonNullable<Page["layout"]>[number], { blockType: "hero" }>;
@@ -15,6 +17,7 @@ export async function HeroBlock({ block }: { block: HeroData; index: number }) {
   const t = await getTranslations("hero");
   const tSample = await getTranslations("sample");
   const format = await getFormatter();
+  const { waHref } = await getSiteBrand();
   const isFull = block.variant === "full";
   // FOUND-03: force Western (latn) digits — Intl defaults `ar` to Arabic-Indic.
   const buyers = format.number(60, "latn");
@@ -57,9 +60,11 @@ export async function HeroBlock({ block }: { block: HeroData; index: number }) {
         ) : null}
         <div className="flex flex-col items-start gap-sm sm:flex-row sm:items-center">
           <Button asChild className="hover:bg-primary-500 focus-visible:ring-accent-600">
-            <a href={block.primaryCta?.href || "mailto:sales@staragrevolution.com"}>
-              {block.primaryCta?.label || t("cta")}
-            </a>
+            {block.primaryCta?.href ? (
+              <a href={block.primaryCta.href}>{block.primaryCta?.label || t("cta")}</a>
+            ) : (
+              <Link href="/contact">{block.primaryCta?.label || t("cta")}</Link>
+            )}
           </Button>
           {block.secondaryCta?.label ? (
             <Button
@@ -67,7 +72,10 @@ export async function HeroBlock({ block }: { block: HeroData; index: number }) {
               variant="outline"
               className="border-white text-white hover:bg-white/10 focus-visible:ring-accent-600"
             >
-              <a href={block.secondaryCta.href || "#"}>{block.secondaryCta.label}</a>
+              {/* WhatsApp CTA — number from SiteSettings (single source), ignores stale seeded href */}
+              <a href={waHref} target="_blank" rel="noopener noreferrer">
+                {block.secondaryCta.label}
+              </a>
             </Button>
           ) : null}
         </div>

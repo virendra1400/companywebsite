@@ -37,5 +37,40 @@ export const SiteSettings: GlobalConfig = {
           "Optional brand logo. When set, it replaces the text wordmark in the header, footer, and mobile menu. Leave empty to show the site name as text. Recommended: transparent PNG/SVG, ~40px tall.",
       },
     },
+    {
+      type: "group",
+      name: "contact",
+      label: "Contact channels",
+      admin: {
+        description:
+          "Single source for contact details used site-wide — header/hero CTAs, product pages, and the Contact page all read from here.",
+      },
+      fields: [
+        {
+          name: "email",
+          type: "text",
+          required: true,
+          defaultValue: "sales@example.com",
+          admin: { description: "Inquiry email (mailto: links across the site)." },
+        },
+        {
+          name: "phone",
+          type: "text",
+          required: true,
+          defaultValue: "+91 00000 00000",
+          admin: { description: "Phone number (tel: link)." },
+        },
+        {
+          name: "whatsapp",
+          type: "text",
+          required: true,
+          defaultValue: "910000000000",
+          admin: {
+            description:
+              "WhatsApp number in E.164 digits, no '+' (e.g. 919876543210). Powers every 'Chat on WhatsApp' link.",
+          },
+        },
+      ],
+    },
   ],
 };
