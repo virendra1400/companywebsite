@@ -10,12 +10,21 @@ export const Media: CollectionConfig = {
   // media URLs via the Local API / rendered <img src>, not this collection's
   // read endpoint directly.
   access: {
-    read: ({ req: { user } }) => Boolean(user),
+    // PUBLIC read: media (logos, product/facility photos, cert PDFs) are public
+    // marketing assets rendered in <img>/download links to anonymous visitors.
+    // The cloud-storage plugin serves files through Payload's access-controlled
+    // route, so an admin-only read 403s the public site (broken images). Write
+    // stays admin-only.
+    read: () => true,
     create: ({ req: { user } }) => Boolean(user),
     update: ({ req: { user } }) => Boolean(user),
     delete: ({ req: { user } }) => Boolean(user),
   },
   upload: {
+    // Serve files directly from the storage origin (Blob CDN / disk) bypassing
+    // Payload's access-controlled file route — public assets, faster, and
+    // avoids the auth-gated-media 403 entirely.
+    disablePayloadAccessControl: true,
     // Local disk storage (dev default — no storage adapter needed). Prod
     // swaps to @payloadcms/storage-s3 (see payload.config.ts comment); this
     // staticDir is irrelevant once s3Storage is added (bytes go to the bucket).
