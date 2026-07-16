@@ -7,18 +7,19 @@ const withNextIntl = createNextIntlPlugin();
 
 const nextConfig: NextConfig = {
   images: {
-    // Allow next/image to load media from Vercel Blob (prod). Host is dynamic
-    // per store, so allow the public blob domain. Local dev serves media
-    // same-origin from disk (no pattern needed).
+    // ponytail: bypass the Next image optimizer — serve media originals
+    // directly from Vercel Blob's CDN. The optimizer failed on remote SVG
+    // cert/product/avatar logos (broken <img>, alt-text showing) even with
+    // dangerouslyAllowSVG; unoptimized sidesteps the SVG-optimizer failure and
+    // any remote-host allowlist mismatch. Media is small placeholder art + CMS
+    // uploads; Blob is CDN-backed. Phase 6 (PERF): re-enable optimizer for
+    // RASTER media once real photography lands, keep SVG logos unoptimized.
+    unoptimized: true,
     remotePatterns: [
       { protocol: "https", hostname: "*.public.blob.vercel-storage.com" },
     ],
-    // Cert logos / uploads are often SVG; next/image blocks SVG by default.
-    // CMS-uploaded by trusted staff; Next's sandbox CSP + attachment
-    // disposition neutralize embedded script. Revisit if untrusted users ever
-    // gain upload access.
     dangerouslyAllowSVG: true,
-    contentDispositionType: "attachment",
+    contentDispositionType: "inline",
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
 };
