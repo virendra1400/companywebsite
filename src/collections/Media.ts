@@ -25,9 +25,17 @@ export const Media: CollectionConfig = {
     // swaps to @payloadcms/storage-s3 (see payload.config.ts comment); this
     // staticDir is irrelevant once s3Storage is added (bytes go to the bucket).
     staticDir: "media",
-    // T-01-06 mitigation: restrict to image + PDF only — nothing broader
-    // (blocks executable-disguised-as-image tampering).
-    mimeTypes: ["image/*", "application/pdf"],
+    // T-01-06 mitigation: images + PDF only. SVGs are sniffed inconsistently
+    // (image/svg+xml OR application/xml OR text/xml depending on the file), so
+    // allow those XML MIMEs explicitly — logos are commonly SVG. Admin-only
+    // upload (trusted staff); SVGs render in <img>, not inline-executed.
+    mimeTypes: [
+      "image/*",
+      "image/svg+xml",
+      "application/xml",
+      "text/xml",
+      "application/pdf",
+    ],
     imageSizes: [
       {
         name: "thumbnail",
