@@ -1,0 +1,44 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gsd-sdk query *)",
+      "Bash(echo \"EXIT:$?\")",
+      "Bash(cat ~/.gsd/defaults.json 2>/dev/null || echo \"NO_DEFAULTS\")",
+      "Read(//c/Users/vpatil/.gsd/**)",
+      "WebFetch(domain:www.piyushfarms.com)",
+      "WebFetch(domain:staragrevolution.com)",
+      "Bash(cat > *)",
+      "Bash(python3 -c \"print\\('ok'\\)\")",
+      "Bash(python3 -c ' *)",
+      "Bash(python -)",
+      "Bash(node -)",
+      "Bash(mkdir -p .planning/phases/01-foundation-cms-decision .planning/research)",
+      "Bash(cp -n /d/PW/.planning/config.json .planning/config.json)",
+      "Bash(cp -n /d/PW/.planning/REQUIREMENTS.md .planning/REQUIREMENTS.md)",
+      "Bash(cp -n /d/PW/.planning/ROADMAP.md .planning/ROADMAP.md)",
+      "Bash(cp -n /d/PW/.planning/STATE.md .planning/STATE.md)",
+      "Bash(cp -n /d/PW/CLAUDE.md ./CLAUDE.md)",
+      "Bash(mkdir -p .claude/skills)",
+      "Bash(cp -rn /d/PW/.claude/skills/* .claude/skills/)",
+      "Bash(npm --version)",
+      "Bash(npx --yes create-next-app@latest --help)",
+      "Bash(npx --yes create-next-app@latest . --typescript --tailwind --app --src-dir --import-alias \"@/*\" --eslint --disable-git --use-npm --yes)",
+      "Bash(mkdir -p 'C:\\\\Users\\\\vpatil\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\d--PW\\\\080c4065-0906-4ac9-8305-f67057689caf\\\\scratchpad/nextapp')",
+      "Bash(node -e \"const p=require\\('./package.json'\\); console.log\\(JSON.stringify\\(p.dependencies\\)\\); console.log\\(JSON.stringify\\(p.devDependencies\\)\\)\")",
+      "Bash(rm -f CLAUDE.md AGENTS.md)",
+      "Bash(cp -r .gitignore .next AGENTS.md README.md eslint.config.mjs next-env.d.ts next.config.ts node_modules package-lock.json package.json postcss.config.mjs public src tsconfig.json 'D:\\\\PW\\\\.claude\\\\worktrees\\\\agent-a159f5c9328b48265/')",
+      "Bash(npm install *)",
+      "Bash(npx playwright *)",
+      "Bash(echo \"EXIT=$?\")",
+      "Skill(update-config)",
+      "Skill(update-config:*)",
+      "Bash(node -e \"JSON.parse\\(require\\('fs'\\).readFileSync\\('.claude/settings.local.json','utf8'\\)\\); console.log\\('valid JSON'\\)\")",
+      "Bash(git rm *)",
+      "Bash([ -f \"$OUT\" ])",
+      "Bash(rm -rf .next)"
+    ],
+    "additionalDirectories": [
+      "\\tmp"
+    ]
+  }
+}

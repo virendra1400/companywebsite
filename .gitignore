@@ -60,3 +60,8 @@ tests/int/.test.db*
 # scratch dir for npm cache (C: drive was full at exec time)
 /.tmp-build/
 .env.vercel
+
+# machine-specific / regenerable (added for cross-machine move)
+/graphify-out/
+/gate*.db
+.claude/settings.local.json
