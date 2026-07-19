@@ -41,8 +41,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# GSD planning docs (commit_docs=false)
-.planning/
+# GSD planning docs — now COMMITTED (personal repo, full project incl. planning history)
 
 # test artifacts
 /test-results/
