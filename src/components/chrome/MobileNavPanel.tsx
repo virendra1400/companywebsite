@@ -8,6 +8,7 @@ import { RTL_LOCALES } from "@/i18n/routing";
 import { Button } from "@/components/ui/button";
 import { LanguageSwitcher } from "@/components/chrome/LanguageSwitcher";
 import { BrandMark } from "@/components/chrome/BrandMark";
+import { WhatsAppCta } from "@/components/chrome/WhatsAppCta";
 import {
   Sheet,
   SheetContent,
@@ -49,15 +50,18 @@ const NAV_HREFS: Record<(typeof NAV_KEYS)[number], string> = {
 export function MobileNavPanel({
   siteName,
   logoUrl,
+  waHref,
 }: {
   siteName: string;
   logoUrl: string | null;
+  waHref: string;
 }) {
   const [open, setOpen] = useState(false);
   const locale = useLocale();
   const t = useTranslations("nav");
   const tMobile = useTranslations("mobileNav");
   const tHero = useTranslations("hero");
+  const tContact = useTranslations("contact");
   const side = RTL_LOCALES.has(locale) ? "left" : "right";
 
   return (
@@ -99,6 +103,13 @@ export function MobileNavPanel({
           ))}
         </nav>
         <LanguageSwitcher />
+        <WhatsAppCta
+          href={waHref}
+          label={tContact("whatsappLabel")}
+          ariaLabel={tContact("whatsappAria")}
+          onNavigate={() => setOpen(false)}
+          className="w-full"
+        />
         <Button asChild className="hover:bg-primary-500 focus-visible:ring-accent-600">
           <Link href="/contact">{tHero("cta")}</Link>
         </Button>

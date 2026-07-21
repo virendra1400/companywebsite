@@ -23,11 +23,13 @@ for (const path of PATHS) {
     // link's accessible name (aria-label takes precedence over visible text
     // for accessible-name computation, per UI-SPEC §9's explicit requirement
     // for BOTH to be present).
-    const waLink = page.getByRole("link", { name: /message star agrevolution on whatsapp/i });
+    // Scoped to <main> — GlobalHeader also renders a "Chat on WhatsApp" CTA
+    // (D-05, LEAD-06) site-wide, so an unscoped locator would match both.
+    const waLink = page.getByRole("main").getByRole("link", { name: /chat on whatsapp/i });
     await expect(waLink).toBeVisible();
     const waHref = await waLink.getAttribute("href");
     expect(waHref).toMatch(/^https:\/\/wa\.me\//);
-    await expect(waLink.getByText(/message us on whatsapp/i)).toBeVisible();
+    await expect(waLink.getByText(/chat on whatsapp/i)).toBeVisible();
 
     // Email (mailto) and phone (tel) links, each with a visible value.
     const emailLink = page.locator('a[href^="mailto:"]');

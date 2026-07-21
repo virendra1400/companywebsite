@@ -46,8 +46,8 @@
     "countryLabel": "Country",
     "messageLabel": "Message",
     "submit": "Send Inquiry",
-    "whatsappLabel": "Message us on WhatsApp",
-    "whatsappAria": "Message us on WhatsApp",
+    "whatsappLabel": "Chat on WhatsApp",
+    "whatsappAria": "Chat on WhatsApp",
     "successMessage": "Thanks — inquiries aren't wired up on this preview yet. Email us or use WhatsApp above and we'll respond directly."
   },
   "products": {

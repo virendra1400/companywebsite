@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { LanguageSwitcher } from "@/components/chrome/LanguageSwitcher";
 import { MobileNavPanel } from "@/components/chrome/MobileNavPanel";
 import { BrandMark } from "@/components/chrome/BrandMark";
+import { WhatsAppCta } from "@/components/chrome/WhatsAppCta";
+import { getSiteBrand } from "@/lib/payload-fetch";
 
 // UI-SPEC Component Inventory — GlobalHeader: 72px desktop / 64px mobile,
 // logical flex row (wordmark inline-start -> nav (>=lg) -> switcher -> CTA
@@ -42,6 +44,8 @@ export async function GlobalHeader({
 }) {
   const t = await getTranslations("nav");
   const tHero = await getTranslations("hero");
+  const tContact = await getTranslations("contact");
+  const { waHref } = await getSiteBrand();
 
   return (
     <header className="sticky top-0 z-40 flex h-16 items-center border-b border-neutral-300 bg-white px-md lg:h-[72px] lg:px-xl">
@@ -65,6 +69,12 @@ export async function GlobalHeader({
 
         <div className="flex items-center gap-sm">
           <LanguageSwitcher />
+          <WhatsAppCta
+            iconOnly
+            href={waHref}
+            ariaLabel={tContact("whatsappAria")}
+            className="hidden size-11 border-primary-700 text-primary-700 hover:bg-primary-100 focus-visible:ring-accent-600 sm:inline-flex"
+          />
           <Button
             asChild
             size="sm"
@@ -72,7 +82,7 @@ export async function GlobalHeader({
           >
             <Link href="/contact">{tHero("cta")}</Link>
           </Button>
-          <MobileNavPanel siteName={siteName} logoUrl={logoUrl} />
+          <MobileNavPanel siteName={siteName} logoUrl={logoUrl} waHref={waHref} />
         </div>
       </div>
     </header>
