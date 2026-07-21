@@ -97,10 +97,10 @@ Plans:
   4. Visitor can tap a WhatsApp click-to-chat CTA (`wa.me`) from anywhere on the site and open a pre-filled chat.
   5. Both RFQ/inquiry submissions and WhatsApp clicks appear as distinct, named conversion events in analytics.
 
-**Plans**: 1/5 plans executed
+**Plans**: 2/5 plans executed
 
 - [x] 04-01-PLAN.md
-- [ ] 04-02-PLAN.md
+- [x] 04-02-PLAN.md
 - [ ] 04-03-PLAN.md
 - [ ] 04-04-PLAN.md
 - [ ] 04-05-PLAN.md
@@ -149,6 +149,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | 1. Foundation & CMS Decision | 4/4 | Complete   | 2026-07-20 |
 | 2. Core Marketing Pages & Trust Surfaces | 8/8 | Complete   | 2026-07-15 |
 | 3. Product Catalog | 3/3 | Complete   | 2026-07-15 |
-| 4. Lead Conversion — RFQ/Inquiry/WhatsApp/Analytics | 1/5 | In Progress|  |
+| 4. Lead Conversion — RFQ/Inquiry/WhatsApp/Analytics | 2/5 | In Progress|  |
 | 5. SEO Infrastructure & Insights/Blog | 0/TBD | Not started | - |
 | 6. Performance & Cross-Locale RTL QA Hardening | 0/TBD | Not started | - |
