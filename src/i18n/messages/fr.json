@@ -44,11 +44,16 @@
     "nameLabel": "Full Name",
     "companyLabel": "Company",
     "countryLabel": "Country",
+    "emailLabel": "Email",
+    "phoneLabel": "Phone",
     "messageLabel": "Message",
     "submit": "Send Inquiry",
+    "loadingSubmit": "Sending...",
+    "errorBanner": "Something went wrong sending your message. Please try again in a moment, or reach us directly via WhatsApp or email.",
+    "rateLimitBanner": "You're submitting a bit too quickly. Please wait a moment and try again.",
     "whatsappLabel": "Chat on WhatsApp",
     "whatsappAria": "Chat on WhatsApp",
-    "successMessage": "Thanks — inquiries aren't wired up on this preview yet. Email us or use WhatsApp above and we'll respond directly."
+    "successMessage": "Thank you. We've received your inquiry and our export team will respond within one business day. You can also reach us on WhatsApp or by email in the meantime."
   },
   "products": {
     "heading": "Our Products",
