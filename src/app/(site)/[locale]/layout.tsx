@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { IBM_Plex_Sans, IBM_Plex_Sans_Arabic } from "next/font/google";
+import Script from "next/script";
 import { routing, RTL_LOCALES } from "@/i18n/routing";
 import { GlobalHeader } from "@/components/chrome/GlobalHeader";
 import { GlobalFooter } from "@/components/chrome/GlobalFooter";
@@ -42,10 +43,21 @@ export default async function LocaleLayout({
   const dir = RTL_LOCALES.has(locale) ? "rtl" : "ltr";
   const fontVar = locale === "ar" ? plexSansArabic.variable : plexSans.variable;
   const { siteName, logoUrl } = await getSiteBrand();
+  // ANALY-01: Plausible chosen (checkpoint decision, 04-05) — cookieless, no
+  // consent banner needed. Guarded so dev/CI render without the env var.
+  const plausibleDomain = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
 
   return (
     <html lang={locale} dir={dir} className={fontVar}>
       <body className="flex min-h-dvh flex-col bg-background text-foreground antialiased">
+        {plausibleDomain ? (
+          <Script
+            defer
+            data-domain={plausibleDomain}
+            src="https://plausible.io/js/script.js"
+            strategy="afterInteractive"
+          />
+        ) : null}
         <NextIntlClientProvider>
           <GlobalHeader siteName={siteName} logoUrl={logoUrl} />
           <div className="flex-1">{children}</div>

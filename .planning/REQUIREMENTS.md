@@ -73,7 +73,7 @@ Requirement ID format: `[CATEGORY]-[NUMBER]`. All v1 items are hypotheses until 
 
 ### Analytics (ANALY)
 
-- [ ] **ANALY-01**: Web analytics installed (GA4/GTM or equivalent) tracking traffic and key conversion events
+- [x] **ANALY-01**: Web analytics installed (GA4/GTM or equivalent) tracking traffic and key conversion events
 
 ### Performance & QA (PERF)
 
@@ -138,7 +138,7 @@ Requirement ID format: `[CATEGORY]-[NUMBER]`. All v1 items are hypotheses until 
 | LEAD-05 | Phase 4 | Complete |
 | LEAD-06 | Phase 4 | Pending |
 | LEAD-07 | Phase 4 | Complete |
-| ANALY-01 | Phase 4 | Pending |
+| ANALY-01 | Phase 4 | Complete |
 | SEO-01 | Phase 5 | Pending |
 | SEO-02 | Phase 5 | Pending |
 | SEO-03 | Phase 5 | Pending |
