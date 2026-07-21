@@ -10,7 +10,7 @@ Six phases carry the site from a locale-and-CMS-correct foundation to a fully la
 - Integer phases (1, 2, 3): Planned milestone work
 - Decimal phases (2.1, 2.2): Urgent insertions (marked with INSERTED)
 
-- [ ] **Phase 1: Foundation & CMS Decision** - Locale/RTL architecture live in 4 locales; CMS + localization pattern chosen via spike and running with a validated content model
+- [x] **Phase 1: Foundation & CMS Decision** - Locale/RTL architecture live in 4 locales; CMS + localization pattern chosen via spike and running with a validated content model (completed 2026-07-20, retroactive closure — see 01-04-SUMMARY.md)
 - [x] **Phase 2: Core Marketing Pages & Trust Surfaces** - Homepage, About, Contact, Certifications, Manufacturing, Export Track Record, Company pages live in English, CMS-driven (completed 2026-07-15)
 - [x] **Phase 3: Product Catalog** - Category browsing and product detail pages, scalable via CMS without rebuilds (completed 2026-07-15)
 - [ ] **Phase 4: Lead Conversion — RFQ, Inquiry, WhatsApp, Analytics** - Visitors convert via forms/WhatsApp with spam defense, deliverable email, and tracked conversion events
@@ -35,7 +35,7 @@ Plans:
 - [x] 01-01-PLAN.md — Scaffold + next-intl locale routing + RTL layout shell + test harness (Walking Skeleton foundation)
 - [x] 01-02-PLAN.md — Payload CMS backend: EU Postgres, EU S3 media, localization + fallback, admin auth/RBAC, schema push
 - [x] 01-03-PLAN.md — Premium chrome (header/footer/switcher/mobile nav/fallback notice) + wire home page to CMS content
-- [ ] 01-04-PLAN.md — Deploy to Vercel EU preview + D-02 Arabic admin glyph-rendering spike (go/no-go)
+- [x] 01-04-PLAN.md — Deploy to Vercel EU preview + D-02 Arabic admin glyph-rendering spike (go/no-go) — retroactive closure, D-02 risk-accepted not live-verified
 **UI hint**: yes
 
 ### Phase 2: Core Marketing Pages & Trust Surfaces
@@ -116,7 +116,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation & CMS Decision | 3/4 | In Progress|  |
+| 1. Foundation & CMS Decision | 4/4 | Complete   | 2026-07-20 |
 | 2. Core Marketing Pages & Trust Surfaces | 8/8 | Complete   | 2026-07-15 |
 | 3. Product Catalog | 3/3 | Complete   | 2026-07-15 |
 | 4. Lead Conversion — RFQ/Inquiry/WhatsApp/Analytics | 0/TBD | Not started | - |
