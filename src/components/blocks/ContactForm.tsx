@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
+import { useSearchParams } from "next/navigation";
 import { Loader2 } from "lucide-react";
 import { Turnstile } from "@marsidev/react-turnstile";
 import { contactSchema, type ContactFormValues } from "@/lib/contact-schema";
@@ -20,15 +21,49 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 // UI-SPEC §9 Form column: form's first real async call. `status` replaces
 // Phase 2's boolean `submitted` flag with the full idle/loading/success/
 // error/rate-limited cycle the Server Action (04-02) now supports.
 type Status = "idle" | "loading" | "success" | "error" | "rate-limited";
 
+// D-02 field-level detail: 11 Incoterms 2020 codes, each rendered
+// "CODE (Full Name)". The "Not sure yet" option is a real selectable
+// SelectItem (below), not this list.
+const INCOTERMS: ReadonlyArray<readonly [code: string, name: string]> = [
+  ["EXW", "Ex Works"],
+  ["FCA", "Free Carrier"],
+  ["CPT", "Carriage Paid To"],
+  ["CIP", "Carriage and Insurance Paid To"],
+  ["DAP", "Delivered at Place"],
+  ["DPU", "Delivered at Place Unloaded"],
+  ["DDP", "Delivered Duty Paid"],
+  ["FAS", "Free Alongside Ship"],
+  ["FOB", "Free on Board"],
+  ["CFR", "Cost and Freight"],
+  ["CIF", "Cost, Insurance and Freight"],
+];
+
 export function ContactForm() {
   const t = useTranslations("contact");
   const [status, setStatus] = useState<Status>("idle");
+
+  // D-02/D-03: RFQ mode is derived client-side from the `product` query
+  // param (never a re-pickable dropdown). `productName` is a display-only
+  // hint from the linking page; when it's missing/empty the banner falls
+  // back to the raw slug (UI-SPEC backstop truth).
+  const searchParams = useSearchParams();
+  const product = searchParams.get("product") ?? "";
+  const productNameParam = searchParams.get("productName") ?? "";
+  const isRfqMode = product.length > 0;
+  const productLabel = productNameParam || product;
 
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactSchema),
@@ -41,6 +76,11 @@ export function ContactForm() {
       message: "",
       companyWebsite: "",
       turnstileToken: "",
+      product,
+      productName: productNameParam,
+      quantity: "",
+      destinationCountry: "",
+      incoterm: "",
     },
   });
 
@@ -55,10 +95,8 @@ export function ContactForm() {
       const result = await submitContactForm(values);
       if (result.status === "success") {
         setStatus("success");
-        // ponytail: RFQ mode (values.product) is wired here but not yet
-        // populated — 04-04 adds the hidden `product` field bound to the
-        // `?product=` query param, at which point this branch starts firing
-        // rfq_submit for real. Only the product slug is ever passed (T-04-06).
+        // T-04-06: only the product slug is ever passed as an analytics
+        // param — never quantity/destination/incoterm/PII.
         trackEvent(values.product ? "rfq_submit" : "inquiry_submit", {
           product: values.product ?? "",
         });
@@ -76,7 +114,7 @@ export function ContactForm() {
   if (status === "success") {
     return (
       <div className="rounded-md bg-primary-100 p-lg text-body" role="status">
-        {t("successMessage")}
+        {isRfqMode ? t("successRfq", { productName: productLabel }) : t("successMessage")}
       </div>
     );
   }
@@ -88,6 +126,21 @@ export function ContactForm() {
           <div className="rounded-md border border-destructive bg-destructive/10 p-md text-body text-destructive">
             {status === "rate-limited" ? t("rateLimitBanner") : t("errorBanner")}
           </div>
+        )}
+        {isRfqMode && (
+          <>
+            {/* D-03: read-only, presentation-only banner — product identity
+                submits via the hidden registered inputs below, never an
+                editable/re-pickable control. */}
+            <div className="rounded-md bg-primary-100 px-md py-sm text-body">
+              {t.rich("productBanner", {
+                productName: productLabel,
+                b: (chunks) => <span className="font-semibold">{chunks}</span>,
+              })}
+            </div>
+            <input type="hidden" {...form.register("product")} />
+            <input type="hidden" {...form.register("productName")} />
+          </>
         )}
         <FormField
           control={form.control}
@@ -160,6 +213,82 @@ export function ContactForm() {
             )}
           />
         </div>
+        {isRfqMode && (
+          <>
+            <p className="mt-sm text-label font-semibold">{t("quoteDetails")}</p>
+            <div className="grid grid-cols-1 gap-md sm:grid-cols-2 lg:grid-cols-3">
+              <FormField
+                control={form.control}
+                name="quantity"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{t("quantityLabel")}</FormLabel>
+                    <FormControl>
+                      <Input {...field} readOnly={isLoading} />
+                    </FormControl>
+                    <p className="text-label text-neutral-600">{t("quantityHelper")}</p>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="destinationCountry"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{t("destinationCountryLabel")}</FormLabel>
+                    <FormControl>
+                      <Input {...field} readOnly={isLoading} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="incoterm"
+                render={({ field }) => {
+                  const selected = INCOTERMS.find(([code]) => code === field.value);
+                  return (
+                    <FormItem>
+                      <FormLabel>{t("incotermLabel")}</FormLabel>
+                      <Select
+                        onValueChange={field.onChange}
+                        value={field.value}
+                        disabled={isLoading}
+                      >
+                        <FormControl>
+                          <SelectTrigger className="w-full">
+                            {/* RTL Extensions: the rendered code is wrapped
+                                in <bdi> so it doesn't reverse under RTL. */}
+                            <SelectValue placeholder={t("incotermNotSure")}>
+                              {selected ? (
+                                <>
+                                  <bdi>{selected[0]}</bdi> ({selected[1]})
+                                </>
+                              ) : field.value === "not-sure" ? (
+                                t("incotermNotSure")
+                              ) : undefined}
+                            </SelectValue>
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="not-sure">{t("incotermNotSure")}</SelectItem>
+                          {INCOTERMS.map(([code, name]) => (
+                            <SelectItem key={code} value={code}>
+                              <bdi>{code}</bdi> ({name})
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  );
+                }}
+              />
+            </div>
+          </>
+        )}
         <FormField
           control={form.control}
           name="message"
@@ -220,6 +349,8 @@ export function ContactForm() {
               <Loader2 aria-hidden="true" className="size-4 animate-spin" />
               {t("loadingSubmit")}
             </>
+          ) : isRfqMode ? (
+            t("submitRfq")
           ) : (
             t("submit")
           )}

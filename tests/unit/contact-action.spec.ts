@@ -19,6 +19,15 @@ vi.mock("next/headers", () => ({
 const fetchMock = vi.fn();
 vi.stubGlobal("fetch", fetchMock);
 
+// Mocked so the RFQ-payload test can assert exactly which fields reach the
+// rendered email (contact-action.ts calls `LeadNotification(data)` and
+// passes the result as `react` on the Resend payload) without depending on
+// react-email's internal element shape.
+const leadNotificationMock = vi.fn(() => null);
+vi.mock("@/emails/LeadNotification", () => ({
+  LeadNotification: leadNotificationMock,
+}));
+
 const { submitContactForm } = await import("@/lib/contact-action");
 
 const basePayload = {
@@ -37,6 +46,7 @@ describe("submitContactForm", () => {
     sendMock.mockReset();
     fetchMock.mockReset();
     headersGetMock.mockReset();
+    leadNotificationMock.mockClear();
 
     process.env.RESEND_API_KEY = "re_test_key";
     process.env.RESEND_FROM_ADDRESS = "leads@mail.example.com";
@@ -125,7 +135,20 @@ describe("submitContactForm", () => {
 
     expect(result).toEqual({ status: "success" });
     expect(sendMock).toHaveBeenCalledTimes(1);
-    expect(sendMock.mock.calls[0][0].to).toBe("sales@example.com");
+    const sentPayload = sendMock.mock.calls[0][0];
+    expect(sentPayload.to).toBe("sales@example.com");
+    expect(sentPayload.subject).toBe("New RFQ: Basmati Rice");
+    // Proves the RFQ fields actually reach the rendered email, not just the
+    // Resend envelope (LEAD-02).
+    expect(leadNotificationMock).toHaveBeenCalledWith(
+      expect.objectContaining({
+        product: "basmati-rice",
+        productName: "Basmati Rice",
+        quantity: "20 MT",
+        destinationCountry: "Saudi Arabia",
+        incoterm: "FOB",
+      }),
+    );
   });
 
   it("returns a graceful network error when RESEND_API_KEY is unset, never throwing", async () => {

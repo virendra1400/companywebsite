@@ -53,7 +53,16 @@
     "rateLimitBanner": "You're submitting a bit too quickly. Please wait a moment and try again.",
     "whatsappLabel": "Chat on WhatsApp",
     "whatsappAria": "Chat on WhatsApp",
-    "successMessage": "Thank you. We've received your inquiry and our export team will respond within one business day. You can also reach us on WhatsApp or by email in the meantime."
+    "successMessage": "Thank you. We've received your inquiry and our export team will respond within one business day. You can also reach us on WhatsApp or by email in the meantime.",
+    "quoteDetails": "Quote Details",
+    "quantityLabel": "Quantity",
+    "quantityHelper": "e.g. 20 MT, or 1 x 20ft container",
+    "destinationCountryLabel": "Destination Country",
+    "incotermLabel": "Incoterm",
+    "incotermNotSure": "Not sure yet",
+    "productBanner": "Requesting a quote for <b>{productName}</b>.",
+    "submitRfq": "Send Quote Request",
+    "successRfq": "Thank you. We've received your quote request for {productName}. Our export team will respond within one business day with pricing and next steps."
   },
   "products": {
     "heading": "Our Products",

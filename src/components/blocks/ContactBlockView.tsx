@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { getTranslations } from "next-intl/server";
 import { MapPin, Phone, Mail } from "lucide-react";
 import { ContactForm } from "./ContactForm";
@@ -57,7 +58,14 @@ export async function ContactBlockView({ block, index }: { block: ContactBlockDa
             <span>{phone}</span>
           </a>
         </div>
-        <ContactForm />
+        {/* ContactForm reads the `?product=`/`productName=` query params via
+            useSearchParams() (D-02/D-03, RFQ mode) — Next.js requires a
+            Suspense boundary around any client subtree using that hook so
+            this statically-generated page (revalidate=60) doesn't fail to
+            build. */}
+        <Suspense fallback={null}>
+          <ContactForm />
+        </Suspense>
       </div>
     </section>
   );
