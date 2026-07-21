@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { getFormatter, getTranslations } from "next-intl/server";
 import { Button } from "@/components/ui/button";
+import { WhatsAppTrackedLink } from "@/components/chrome/WhatsAppTrackedLink";
 import { Link } from "@/i18n/navigation";
 import { getSiteBrand } from "@/lib/payload-fetch";
 import type { Page, Media } from "../../../payload-types";
@@ -73,9 +74,9 @@ export async function HeroBlock({ block }: { block: HeroData; index: number }) {
               className="border-white text-white hover:bg-white/10 focus-visible:ring-accent-600"
             >
               {/* WhatsApp CTA — number from SiteSettings (single source), ignores stale seeded href */}
-              <a href={waHref} target="_blank" rel="noopener noreferrer">
+              <WhatsAppTrackedLink href={waHref} location="hero" target="_blank" rel="noopener noreferrer">
                 {block.secondaryCta.label}
-              </a>
+              </WhatsAppTrackedLink>
             </Button>
           ) : null}
         </div>

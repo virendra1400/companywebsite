@@ -5,6 +5,7 @@ import { ContactForm } from "./ContactForm";
 import { sectionBg } from "./RenderBlocks";
 import { getSiteBrand } from "@/lib/payload-fetch";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
+import { WhatsAppTrackedLink } from "@/components/chrome/WhatsAppTrackedLink";
 import type { Page } from "../../../payload-types";
 
 type ContactBlockData = Extract<NonNullable<Page["layout"]>[number], { blockType: "contactBlock" }>;
@@ -31,8 +32,9 @@ export async function ContactBlockView({ block, index }: { block: ContactBlockDa
           </p>
           {/* WhatsApp: NOT icon-only — visible text label + value beside the
               icon, plus aria-label (UI-SPEC §9 explicit requirement). */}
-          <a
+          <WhatsAppTrackedLink
             href={waHref}
+            location="contact-page"
             target="_blank"
             rel="noopener noreferrer"
             aria-label={t("whatsappAria")}
@@ -42,7 +44,7 @@ export async function ContactBlockView({ block, index }: { block: ContactBlockDa
             <span>
               {t("whatsappLabel")} ({whatsapp})
             </span>
-          </a>
+          </WhatsAppTrackedLink>
           <a
             href={`mailto:${email}`}
             className="flex items-center gap-xs text-body hover:text-primary-700"

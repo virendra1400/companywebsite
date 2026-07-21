@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { WhatsAppTrackedLink } from "@/components/chrome/WhatsAppTrackedLink";
 import type { Page } from "../../../payload-types";
 
 type CTABandData = Extract<NonNullable<Page["layout"]>[number], { blockType: "ctaBand" }>;
@@ -26,7 +27,9 @@ export function CTABandBlock({ block }: { block: CTABandData; index: number }) {
               variant="outline"
               className="border-white text-white hover:bg-white/10 focus-visible:ring-accent-600"
             >
-              <a href={block.secondaryCta.href || "#"}>{block.secondaryCta.label}</a>
+              <WhatsAppTrackedLink href={block.secondaryCta.href || "#"} location="cta-band">
+                {block.secondaryCta.label}
+              </WhatsAppTrackedLink>
             </Button>
           ) : null}
         </div>
