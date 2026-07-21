@@ -40,7 +40,7 @@ Requirement ID format: `[CATEGORY]-[NUMBER]`. All v1 items are hypotheses until 
 - [x] **LEAD-04**: Submissions are delivered by transactional email (Resend) with SPF/DKIM/DMARC configured for deliverability
 - [x] **LEAD-05**: A CRM webhook integration point exists (stub) so a CRM can be wired later without rework
 - [ ] **LEAD-06**: WhatsApp Business click-to-chat CTA (`wa.me`) is available prominently across the site
-- [ ] **LEAD-07**: Inquiry/RFQ submissions and WhatsApp clicks are tracked as conversion events in analytics
+- [x] **LEAD-07**: Inquiry/RFQ submissions and WhatsApp clicks are tracked as conversion events in analytics
 
 ### Trust Surface (TRUST)
 
@@ -137,7 +137,7 @@ Requirement ID format: `[CATEGORY]-[NUMBER]`. All v1 items are hypotheses until 
 | LEAD-04 | Phase 4 | Complete |
 | LEAD-05 | Phase 4 | Complete |
 | LEAD-06 | Phase 4 | Pending |
-| LEAD-07 | Phase 4 | Pending |
+| LEAD-07 | Phase 4 | Complete |
 | ANALY-01 | Phase 4 | Pending |
 | SEO-01 | Phase 5 | Pending |
 | SEO-02 | Phase 5 | Pending |
