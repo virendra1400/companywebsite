@@ -34,11 +34,11 @@ Requirement ID format: `[CATEGORY]-[NUMBER]`. All v1 items are hypotheses until 
 
 ### Lead Conversion (LEAD)
 
-- [ ] **LEAD-01**: Visitor can submit a general inquiry via a form (name, company, country, message)
-- [ ] **LEAD-02**: Visitor can submit a per-product RFQ with qualifying fields (product, quantity, destination country, incoterm, message)
-- [ ] **LEAD-03**: Form submissions are protected against spam (honeypot + rate-limit + Cloudflare Turnstile)
-- [ ] **LEAD-04**: Submissions are delivered by transactional email (Resend) with SPF/DKIM/DMARC configured for deliverability
-- [ ] **LEAD-05**: A CRM webhook integration point exists (stub) so a CRM can be wired later without rework
+- [x] **LEAD-01**: Visitor can submit a general inquiry via a form (name, company, country, message)
+- [x] **LEAD-02**: Visitor can submit a per-product RFQ with qualifying fields (product, quantity, destination country, incoterm, message)
+- [x] **LEAD-03**: Form submissions are protected against spam (honeypot + rate-limit + Cloudflare Turnstile)
+- [x] **LEAD-04**: Submissions are delivered by transactional email (Resend) with SPF/DKIM/DMARC configured for deliverability
+- [x] **LEAD-05**: A CRM webhook integration point exists (stub) so a CRM can be wired later without rework
 - [ ] **LEAD-06**: WhatsApp Business click-to-chat CTA (`wa.me`) is available prominently across the site
 - [ ] **LEAD-07**: Inquiry/RFQ submissions and WhatsApp clicks are tracked as conversion events in analytics
 
@@ -131,11 +131,11 @@ Requirement ID format: `[CATEGORY]-[NUMBER]`. All v1 items are hypotheses until 
 | CAT-02 | Phase 3 | Pending |
 | CAT-03 | Phase 3 | Pending |
 | CAT-04 | Phase 3 | Pending |
-| LEAD-01 | Phase 4 | Pending |
-| LEAD-02 | Phase 4 | Pending |
-| LEAD-03 | Phase 4 | Pending |
-| LEAD-04 | Phase 4 | Pending |
-| LEAD-05 | Phase 4 | Pending |
+| LEAD-01 | Phase 4 | Complete |
+| LEAD-02 | Phase 4 | Complete |
+| LEAD-03 | Phase 4 | Complete |
+| LEAD-04 | Phase 4 | Complete |
+| LEAD-05 | Phase 4 | Complete |
 | LEAD-06 | Phase 4 | Pending |
 | LEAD-07 | Phase 4 | Pending |
 | ANALY-01 | Phase 4 | Pending |
