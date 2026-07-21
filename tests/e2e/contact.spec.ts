@@ -1,9 +1,15 @@
 import { test, expect } from "@playwright/test";
+import { mockTurnstileSuccess } from "./turnstile-mock";
 
 // PAGE-03 / D-07 — the Contact page shows real contact channels (address,
-// WhatsApp with a VISIBLE text label, email, phone) and a client-side-only
-// inquiry form stub: empty submit shows per-field errors + aria-invalid, and
-// issues NO navigation/network request. Both en and /ar paths are exercised
+// WhatsApp with a VISIBLE text label, email, phone). As of Phase 4 (04-03)
+// the form submits for real via submitContactForm (see
+// contact-error-state.spec.ts for the loading/success/error/rate-limit
+// states) — but client-side zod validation (contactSchema, shared with the
+// server) still short-circuits an empty submit BEFORE any network call: RHF's
+// handleSubmit only invokes onSubmit (and therefore the Server Action) once
+// validation passes, so this test still asserts per-field errors +
+// aria-invalid with NO request issued. Both en and /ar paths are exercised
 // (UI-SPEC RTL Extensions "Contact form field order" — two-column layout
 // mirrors automatically under dir=rtl, no manual reordering).
 const PATHS = ["/contact", "/ar/contact"];
@@ -43,6 +49,11 @@ for (const path of PATHS) {
   test(`${path}: empty submit shows per-field errors + aria-invalid, and issues NO navigation/network`, async ({
     page,
   }) => {
+    // Submit is gated on a non-empty turnstileToken (LEAD-03) regardless of
+    // the rest of the form — fake the widget so the button is clickable at
+    // all, then confirm client-side zod validation is what actually blocks
+    // the empty submit, not the Turnstile gate.
+    await mockTurnstileSuccess(page);
     await page.goto(path);
     const startUrl = page.url();
 
@@ -53,7 +64,9 @@ for (const path of PATHS) {
       if (req.method() !== "GET") requests.push(`${req.method()} ${req.url()}`);
     });
 
-    await page.getByRole("button", { name: /send inquiry/i }).click();
+    const submitButton = page.getByRole("button", { name: /send inquiry/i });
+    await expect(submitButton).toBeEnabled();
+    await submitButton.click();
 
     // Client-side zod validation renders synchronously after RHF's
     // handleSubmit resolves — no server round-trip to wait for.
@@ -67,8 +80,9 @@ for (const path of PATHS) {
     const nameInput = page.getByLabel("Full Name");
     await expect(nameInput).toHaveAttribute("aria-invalid", "true");
 
-    // D-07: no network request of any kind (no fetch/server action/route
-    // handler exists yet), and no navigation away from the contact page.
+    // Client-side validation blocks BEFORE the Server Action is ever
+    // invoked, so still no network request of any kind, and no navigation
+    // away from the contact page.
     expect(requests).toEqual([]);
     expect(page.url()).toBe(startUrl);
   });

@@ -51,19 +51,26 @@ export function ContactForm() {
 
   async function onSubmit(values: ContactFormValues) {
     setStatus("loading");
-    const result = await submitContactForm(values);
-    if (result.status === "success") {
-      setStatus("success");
-      // ponytail: RFQ mode (values.product) is wired here but not yet
-      // populated — 04-04 adds the hidden `product` field bound to the
-      // `?product=` query param, at which point this branch starts firing
-      // rfq_submit for real. Only the product slug is ever passed (T-04-06).
-      trackEvent(values.product ? "rfq_submit" : "inquiry_submit", {
-        product: values.product ?? "",
-      });
-      return;
+    try {
+      const result = await submitContactForm(values);
+      if (result.status === "success") {
+        setStatus("success");
+        // ponytail: RFQ mode (values.product) is wired here but not yet
+        // populated — 04-04 adds the hidden `product` field bound to the
+        // `?product=` query param, at which point this branch starts firing
+        // rfq_submit for real. Only the product slug is ever passed (T-04-06).
+        trackEvent(values.product ? "rfq_submit" : "inquiry_submit", {
+          product: values.product ?? "",
+        });
+        return;
+      }
+      setStatus(result.message === "rate-limited" ? "rate-limited" : "error");
+    } catch {
+      // The Server Action call itself is a network request (LEAD-04) — a
+      // dropped connection throws here rather than resolving to the typed
+      // error result above; treat it the same as a generic send failure.
+      setStatus("error");
     }
-    setStatus(result.message === "rate-limited" ? "rate-limited" : "error");
   }
 
   if (status === "success") {
@@ -167,15 +174,19 @@ export function ContactForm() {
           )}
         />
         {/* LEAD-03 honeypot: always rendered, always empty for real users.
-            Off-canvas positioning (not display:none/visibility:hidden,
-            which some bots specifically skip) + aria-hidden + tabIndex=-1
-            keeps it invisible to sighted, keyboard, and screen-reader
-            users while remaining fillable by naive form-scraping bots. */}
+            Tailwind's `sr-only` clip-hides (not display:none/visibility:
+            hidden, which some bots specifically skip) without an offscreen
+            physical `left` offset — UI-SPEC's literal "-left-[9999px]"
+            pushes the element outside the RTL document's scrollable area
+            and reintroduces horizontal overflow under dir=rtl (caught by
+            responsive-rtl.spec.ts / contact.spec.ts's overflow assertion);
+            `sr-only` gets the identical "present in the DOM, invisible,
+            unreachable by tab" result via clip + 1px box, no offset. */}
         <FormField
           control={form.control}
           name="companyWebsite"
           render={({ field }) => (
-            <FormItem className="absolute -left-[9999px] top-auto h-px w-px overflow-hidden">
+            <FormItem className="sr-only">
               <FormLabel>Company Website</FormLabel>
               <FormControl>
                 <Input {...field} aria-hidden="true" tabIndex={-1} autoComplete="off" />
