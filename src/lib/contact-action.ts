@@ -44,8 +44,15 @@ export async function submitContactForm(raw: unknown): Promise<SubmitResult> {
   const data = parsed.data;
 
   // headers() is async since Next.js 15 (Pitfall 5) — must be awaited.
+  // Use the LAST x-forwarded-for entry, not the first: a client can send its
+  // own X-Forwarded-For header, and Vercel's edge appends the true connecting
+  // IP rather than replacing it — the first entry is attacker-controlled and
+  // trivially spoofable per-request, defeating the rate limiter entirely.
+  // ponytail: trusts Vercel as the sole fronting proxy (single-hop edge); a
+  // multi-proxy chain would need real trusted-proxy-chain validation.
   const headersList = await headers();
-  const ip = headersList.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+  const forwardedFor = headersList.get("x-forwarded-for");
+  const ip = forwardedFor?.split(",").pop()?.trim() || "unknown";
 
   if (!checkRateLimit(ip)) {
     return { status: "error", message: "rate-limited" };
