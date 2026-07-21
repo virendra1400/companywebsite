@@ -46,6 +46,21 @@ export default defineConfig({
           fileParallelism: false,
         },
       },
+      {
+        resolve: {
+          alias: {
+            "@payload-config": path.resolve(dirname, "./src/payload.config.ts"),
+            "@": path.resolve(dirname, "./src"),
+          },
+        },
+        test: {
+          name: "unit",
+          environment: "node",
+          include: ["tests/unit/**/*.spec.ts"],
+          // Pure-function / mocked-dependency tests — no Payload DB, no
+          // globalSetup, no SQLite file needed.
+        },
+      },
     ],
   },
 });
