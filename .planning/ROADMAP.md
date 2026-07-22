@@ -123,10 +123,14 @@ Plans:
 
 **Plans**: 5 plans
 Plans:
+**Wave 1**
 
 - [ ] 05-01-PLAN.md — Insights collection + revalidate hook + config registration + schema push (BLOG-02)
 - [ ] 05-02-PLAN.md — SEO metadata lib: getTranslatedLocales + buildAlternates + buildMetadata + NEXT_PUBLIC_SITE_URL (SEO-01/02/05)
 - [ ] 05-03-PLAN.md — Structured data lib: Organization/Product/BreadcrumbList JSON-LD + shared XSS-safe <JsonLd> + SiteSettings address/sameAs (SEO-04)
+
+**Wave 2** *(blocked on Wave 1 completion)*
+
 - [ ] 05-04-PLAN.md — Insights UI: /insights list + /insights/[slug] article + InsightCard + nav + i18n + latn dates + seed (BLOG-01)
 - [ ] 05-05-PLAN.md — sitemap.ts + robots.ts + layout metadataBase/Org JSON-LD + product-detail metadata/Product+Breadcrumb JSON-LD (SEO-01/02/03/04/05)
 
