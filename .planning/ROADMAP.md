@@ -121,7 +121,15 @@ Plans:
   4. Organization, Product, and BreadcrumbList structured data validate on relevant pages via a rich-results test.
   5. Visitor can browse a blog/insights list and read an article, and staff can publish a new article per locale via the CMS.
 
-**Plans**: TBD
+**Plans**: 5 plans
+Plans:
+
+- [ ] 05-01-PLAN.md — Insights collection + revalidate hook + config registration + schema push (BLOG-02)
+- [ ] 05-02-PLAN.md — SEO metadata lib: getTranslatedLocales + buildAlternates + buildMetadata + NEXT_PUBLIC_SITE_URL (SEO-01/02/05)
+- [ ] 05-03-PLAN.md — Structured data lib: Organization/Product/BreadcrumbList JSON-LD + shared XSS-safe <JsonLd> + SiteSettings address/sameAs (SEO-04)
+- [ ] 05-04-PLAN.md — Insights UI: /insights list + /insights/[slug] article + InsightCard + nav + i18n + latn dates + seed (BLOG-01)
+- [ ] 05-05-PLAN.md — sitemap.ts + robots.ts + layout metadataBase/Org JSON-LD + product-detail metadata/Product+Breadcrumb JSON-LD (SEO-01/02/03/04/05)
+
 **UI hint**: yes
 
 ### Phase 6: Performance & Cross-Locale RTL QA Hardening
@@ -150,5 +158,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | 2. Core Marketing Pages & Trust Surfaces | 8/8 | Complete   | 2026-07-15 |
 | 3. Product Catalog | 3/3 | Complete   | 2026-07-15 |
 | 4. Lead Conversion — RFQ/Inquiry/WhatsApp/Analytics | 5/5 | Complete    | 2026-07-21 |
-| 5. SEO Infrastructure & Insights/Blog | 0/TBD | Not started | - |
+| 5. SEO Infrastructure & Insights/Blog | 0/5 | Not started | - |
 | 6. Performance & Cross-Locale RTL QA Hardening | 0/TBD | Not started | - |
