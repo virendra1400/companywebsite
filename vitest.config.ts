@@ -56,7 +56,9 @@ export default defineConfig({
         test: {
           name: "unit",
           environment: "node",
-          include: ["tests/unit/**/*.spec.ts"],
+          // .tsx included alongside .ts — seo-json-ld.spec.tsx renders the
+          // shared <JsonLd> component via react-dom/server.
+          include: ["tests/unit/**/*.spec.ts", "tests/unit/**/*.spec.tsx"],
           // Pure-function / mocked-dependency tests — no Payload DB, no
           // globalSetup, no SQLite file needed.
         },
