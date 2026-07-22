@@ -60,11 +60,11 @@ Requirement ID format: `[CATEGORY]-[NUMBER]`. All v1 items are hypotheses until 
 
 ### SEO (SEO)
 
-- [ ] **SEO-01**: Every page emits correct metadata (title, description, Open Graph) per locale
-- [ ] **SEO-02**: Correct reciprocal hreflang tags + x-default across all locales, CMS-generated (not hand-maintained)
+- [x] **SEO-01**: Every page emits correct metadata (title, description, Open Graph) per locale
+- [x] **SEO-02**: Correct reciprocal hreflang tags + x-default across all locales, CMS-generated (not hand-maintained)
 - [ ] **SEO-03**: XML sitemap(s) generated including all locales
 - [x] **SEO-04**: Structured data (Organization, Product, BreadcrumbList) emitted where applicable
-- [ ] **SEO-05**: Clean canonical URLs; no duplicate-content or canonical/hreflang conflicts
+- [x] **SEO-05**: Clean canonical URLs; no duplicate-content or canonical/hreflang conflicts
 
 ### Insights / Blog (BLOG)
 
@@ -139,11 +139,11 @@ Requirement ID format: `[CATEGORY]-[NUMBER]`. All v1 items are hypotheses until 
 | LEAD-06 | Phase 4 | Complete |
 | LEAD-07 | Phase 4 | Complete |
 | ANALY-01 | Phase 4 | Complete |
-| SEO-01 | Phase 5 | Pending |
-| SEO-02 | Phase 5 | Pending |
+| SEO-01 | Phase 5 | Complete |
+| SEO-02 | Phase 5 | Complete |
 | SEO-03 | Phase 5 | Pending |
 | SEO-04 | Phase 5 | Complete |
-| SEO-05 | Phase 5 | Pending |
+| SEO-05 | Phase 5 | Complete |
 | BLOG-01 | Phase 5 | Pending |
 | BLOG-02 | Phase 5 | Pending |
 | PERF-01 | Phase 6 | Pending |
