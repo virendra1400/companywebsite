@@ -155,3 +155,12 @@ None - no external service configuration required.
 ---
 *Phase: 05-seo-infrastructure-insights-blog*
 *Completed: 2026-07-22*
+
+## Self-Check: PASSED
+
+- FOUND: src/lib/seo/json-ld.tsx
+- FOUND: tests/unit/seo-json-ld.spec.tsx
+- FOUND: address in src/globals/SiteSettings.ts
+- FOUND commit: ea854ea (test)
+- FOUND commit: fe05059 (feat)
+- FOUND commit: 808c3ad (docs)
