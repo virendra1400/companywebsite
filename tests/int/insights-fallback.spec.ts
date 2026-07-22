@@ -92,11 +92,18 @@ describe("insights collection translation-status existence check", () => {
   });
 
   it("once fr has real content, isTranslated becomes true", async () => {
+    // excerpt/body are required+localized, so writing the fr locale must
+    // supply values for them too (Payload validates required fields per
+    // locale on write) — unlike Pages, where only `title` is required+localized.
     await payload.update({
       collection: "insights",
       id: insightId,
       locale: "fr",
-      data: { title: "Fallback Test Insight FR" },
+      data: {
+        title: "Fallback Test Insight FR",
+        excerpt: "Fallback fixture excerpt FR.",
+        body: lexicalRoot("Fallback fixture body FR."),
+      },
       overrideAccess: true,
       context: { disableRevalidate: true },
     });
