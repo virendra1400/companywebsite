@@ -866,6 +866,25 @@ export interface SiteSetting {
      */
     whatsapp: string;
   };
+  /**
+   * Postal address used for the Organization structured-data (JSON-LD) markup (D-09).
+   */
+  address?: {
+    street?: string | null;
+    city?: string | null;
+    state?: string | null;
+    postalCode?: string | null;
+    country?: string | null;
+  };
+  /**
+   * Official profile URLs (LinkedIn, etc.) included in the Organization structured-data markup.
+   */
+  sameAs?:
+    | {
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -882,6 +901,21 @@ export interface SiteSettingsSelect<T extends boolean = true> {
         email?: T;
         phone?: T;
         whatsapp?: T;
+      };
+  address?:
+    | T
+    | {
+        street?: T;
+        city?: T;
+        state?: T;
+        postalCode?: T;
+        country?: T;
+      };
+  sameAs?:
+    | T
+    | {
+        url?: T;
+        id?: T;
       };
   updatedAt?: T;
   createdAt?: T;
