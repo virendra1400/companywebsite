@@ -1,30 +1,29 @@
 {
   "version": "1.0",
-  "timestamp": "2026-07-22T16:13:57.868Z",
+  "timestamp": "2026-07-22T16:53:34.012Z",
   "phase": "05",
   "phase_name": "seo-infrastructure-insights-blog",
   "phase_dir": ".planning/phases/05-seo-infrastructure-insights-blog",
-  "plan": "05-01",
+  "plan": "05-04",
   "task": 0,
-  "total_tasks": 13,
+  "total_tasks": 6,
   "status": "paused",
-  "completed_tasks": [],
+  "completed_tasks": [
+    {"id": "05-01", "name": "Insights Payload collection", "status": "done", "wave": 1},
+    {"id": "05-02", "name": "SEO metadata module", "status": "done", "wave": 1},
+    {"id": "05-03", "name": "JSON-LD structured data", "status": "done", "wave": 1}
+  ],
   "remaining_tasks": [
-    {"id": "05-01", "name": "Insights Payload collection", "status": "not_started", "wave": 1},
-    {"id": "05-02", "name": "SEO metadata module", "status": "not_started", "wave": 1},
-    {"id": "05-03", "name": "JSON-LD structured data", "status": "not_started", "wave": 1},
-    {"id": "05-04", "name": "Visitor-facing Insights pages + nav", "status": "not_started", "wave": 2, "depends_on": ["05-01", "05-02", "05-03"]},
-    {"id": "05-05", "name": "Sitemap/robots/metadata wiring", "status": "not_started", "wave": 2, "depends_on": ["05-01", "05-02", "05-03"]}
+    {"id": "05-04", "name": "Visitor-facing Insights pages + nav", "status": "in_progress_unconfirmed", "wave": 2},
+    {"id": "05-05", "name": "Sitemap/robots/metadata wiring", "status": "in_progress_unconfirmed", "wave": 2}
   ],
-  "blockers": [
-    {"description": "Claude API session/usage limit hit while dispatching Wave 1 executors (05-01, 05-02, 05-03) — all three failed immediately with 'You've hit your session limit', resets 1:30pm (UTC) 2026-07-22", "type": "external", "workaround": "wait for quota reset, then re-run /gsd-execute-phase 5"}
-  ],
+  "blockers": [],
   "async_jobs": [],
-  "human_actions_pending": [
-    {"action": "Wait until 1:30pm UTC (2026-07-22) for Claude API session limit to reset, then re-run /gsd-execute-phase 5", "context": "All 3 Wave 1 executor Agent() dispatches terminated early on the session quota error before any task execution began", "blocking": true}
+  "human_actions_pending": [],
+  "decisions": [
+    {"decision": "Payload sqlite adapter default push-on-init only fires when NODE_ENV !== 'production'; explicit push:true on the adapter is a no-op under `next build` (verified in node_modules/@payloadcms/db-sqlite/dist/connect.js:50) and was reverted after testing", "rationale": "Local payload.db was missing the site_settings_same_as table added by 05-03's SiteSettings.address/sameAs fields, breaking `next build` prerender. Fixed by running a one-off script that imports payload.config and calls getPayload() under normal (non-production) NODE_ENV to trigger pushDevSchema against the on-disk payload.db, then reverted the payload.config.ts push:true experiment since it had no effect. The one-off script was deleted after use — not part of the repo.", "phase": "05"}
   ],
-  "decisions": [],
-  "uncommitted_files": [".planning/STATE.md"],
-  "next_action": "Re-run /gsd-execute-phase 5 after 1:30pm UTC reset — will re-dispatch Wave 1 (05-01, 05-02, 05-03) from scratch since zero progress was made (no worktrees, no branches, no commits, no SUMMARY.md files exist anywhere)",
-  "context_notes": "This is a clean quota failure, not a methodological one. No worktrees were left behind (git worktree list shows only main), no worktree-agent-* branches exist, no commits landed. STATE.md was updated by the orchestrator's state.begin-phase call before dispatch (marks phase 05 as active/in-progress) but that's the only change. Wave 1 execution plan is unchanged: 05-01/05-02/05-03 have no file overlaps and run fully parallel; Wave 2 (05-04, 05-05) depends on all three Wave 1 plans and also runs parallel. Resuming /gsd-execute-phase 5 will pick this up exactly where it left off since phase-plan-index still shows all 5 plans as incomplete (has_summary: false)."
+  "uncommitted_files": [],
+  "next_action": "Wait for Wave 2 executors (05-04, 05-05) to report completion, then: 1) record both in a fresh worktree.record-agent manifest, 2) spot-check SUMMARY.md + no Self-Check:FAILED marker, 3) worktree.cleanup-wave (watch for the same two failure modes hit in Wave 1: a REQUIREMENTS.md merge conflict between sibling plans marking different requirement IDs complete — resolve by taking both [x] lines; and a possible payload.db schema drift if either plan touches Payload collections/globals — rerun the getPayload() one-off push script if `next build` fails with 'no such table'), 4) run `npm run build` then `npm test` as the post-merge gate, 5) update tracking (roadmap.update-plan-progress + commit), 6) run execute:wave:post hooks (verify.schema-drift, verify.codebase-drift, ui.safety-gate — Wave 2 DOES touch frontend files so ui.safety-gate is live this time, check its result carefully), 7) proceed to code_review_gate, regression_gate, verify_phase_goal (gsd-verifier agent), update_roadmap (phase.complete), close_phase_todos, update_project_md, offer_next.",
+  "context_notes": "Executing /gsd-execute-phase 5 (no flags — full phase, both waves, no --wave/--gaps-only/--interactive). Wave 1 (05-01/05-02/05-03) fully merged, build-gate passed, test-gate passed (64/64 tests, 16 files), tracking committed (commits 655e1f3, 74f2d6d, fbce070, f23af63, 399c993, 555389b on main). MVP_MODE=true but TDD_MODE=false so the MVP+TDD RED-commit gate does not apply this phase. Wave 2 dispatched at base 555389b91cb40510a20a8568c226a1a89b5662ab: 05-04 as agent a90907792d7424c6c (worktree /workspaces/companywebsite/.claude/worktrees/agent-a90907792d7424c6c, branch worktree-agent-a90907792d7424c6c), 05-05 as agent a21c9e21a713e0f54 (worktree /workspaces/companywebsite/.claude/worktrees/agent-a21c9e21a713e0f54, branch worktree-agent-a21c9e21a713e0f54). Both worktrees exist and are 'locked' per `git worktree list` — this is normal Claude Code worktree-isolation locking, not a stuck state; neither has reported completion yet as of this handoff. NOTE: earlier in this session all 3 Wave-1 executors failed once on a Claude API session-limit error before making any progress (documented in the prior handoff commit 43e0506) — that was a clean external quota failure, fully recovered by simply re-dispatching Wave 1 after the reset. If Wave 2 executors are still running (not failed) when you resume, do NOT re-dispatch — first check `git worktree list` and the agent task-notification state; only re-dispatch a plan if its worktree is gone/failed with zero commits. IMPORTANT: on Wave 1 cleanup, `gsd_run query worktree.record-agent`'s self-reported `expected_base` field from one agent's own `<worktree_metadata>` block was WRONG (it echoed its own last commit hash instead of the true fork-point) — always cross-check the manifest's expected_base against `git merge-base <branch> main` before running cleanup-wave if the agent-reported base looks suspicious (e.g. equals one of that same branch's own commits)."
 }
