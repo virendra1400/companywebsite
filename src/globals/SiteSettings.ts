@@ -72,5 +72,29 @@ export const SiteSettings: GlobalConfig = {
         },
       ],
     },
+    {
+      type: "group",
+      name: "address",
+      label: "Company address",
+      admin: {
+        description: "Postal address used for the Organization structured-data (JSON-LD) markup (D-09).",
+      },
+      fields: [
+        { name: "street", type: "text" },
+        { name: "city", type: "text" },
+        { name: "state", type: "text" },
+        { name: "postalCode", type: "text" },
+        { name: "country", type: "text" },
+      ],
+    },
+    {
+      name: "sameAs",
+      type: "array",
+      label: "Social / profile links (sameAs)",
+      admin: {
+        description: "Official profile URLs (LinkedIn, etc.) included in the Organization structured-data markup.",
+      },
+      fields: [{ name: "url", type: "text", required: true }],
+    },
   ],
 };
