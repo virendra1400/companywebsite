@@ -8,12 +8,27 @@ A premium, multi-language corporate website for an India-based agricultural and 
 
 A first-time international buyer who has never heard of the company leaves the site trusting it enough to send a serious inquiry/RFQ. Everything else serves that conversion of trust into a qualified lead.
 
+## Current Milestone: v2.0 Premium Redesign
+
+**Goal:** Elevate the shipped VNP Global site to Stripe/Linear-tier premium — trust-first, without destabilizing the launch-ready build. Full plan: `.planning/references/REDESIGN-PLAN.md`.
+
+**Target features (phases 7–11):**
+- Design-system elevation — amended type scale (larger/thinner display + negative tracking), 64–96px rhythm, tabular stat figures, subtle depth. Keep IBM Plex (Arabic RTL) + add a Latin display face; colors unchanged.
+- Hero + homepage narrative — elevated hero and new CMS blocks: trust/partner-logo row, Why Choose Us, Manufacturing Excellence, Export Process timeline, Testimonials.
+- Component polish pass across cards, buttons, forms, CTAs, FAQ.
+- Motion & micro-interactions — tasteful, perf-guarded, RTL-safe.
+- Performance & Cross-Locale RTL QA hardening (absorbs the old v1.0 Phase 6, run last against the final design).
+
+**Locked decisions:** amend type scale (display only); keep Plex + add Latin display face (no full font swap — protects Arabic); colors unchanged (brief palette ≈ existing emerald/gold); each phase ships to Vercel prod; RTL-safe + CMS-driven + English-first throughout.
+
 ## Requirements
 
 ### Validated
 
 - [x] Technical SEO foundation: per-locale metadata, Organization/Product/BreadcrumbList structured data, localized XML sitemap, reciprocal hreflang — organic search is a primary export lead channel. Validated in Phase 5: SEO Infrastructure & Insights/Blog.
 - [x] Insights/blog surface for authority + SEO content. Validated in Phase 5: SEO Infrastructure & Insights/Blog.
+- [x] Brand renamed Star Agrevolution → VNP Global across render paths; live on prod.
+- [x] Primary navigation simplified 9 → 5 items (Products, About, Global Markets, Certifications, Contact); footer/mobile retain full set.
 
 ### Active
 
@@ -48,7 +63,7 @@ A first-time international buyer who has never heard of the company leaves the s
 - **Positioning:** trusted manufacturing + export partner — premium quality, competitive pricing, reliable supply, timely delivery, international compliance, sustainable sourcing, long-term relationships.
 - **Own domain / existing site:** https://staragrevolution.com/ — the client's current site and target domain. New site replaces/upgrades it; review for existing products/branding/content to migrate.
 - **Inspiration reference:** https://www.piyushfarms.com/ — minimum bar ("at least this"). Floor, not ceiling; target is to meet or exceed its polish/structure with a world-class B2B export experience.
-- **Company name:** likely "Star Agrevolution" (per domain) — confirm exact legal/brand name.
+- **Company name:** VNP Global (renamed from Star Agrevolution 2026-07-23; confirmed by user). Domain `staragrevolution.com` unchanged — cutover only at launch, per existing plan.
 - **Content readiness:** almost nothing yet (logo/assets/product data/certs/photos being gathered). Build structure first; slot real assets later via CMS.
 - **Advisory stance:** Claude acts as senior UX designer, branding consultant, and full-stack architect — challenge weak ideas, apply modern B2B export-site best practices, benchmark against leading international agro-export companies.
 
@@ -91,4 +106,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-07-23 after Phase 5 (SEO Infrastructure & Insights/Blog) completion*
+*Last updated: 2026-07-23 after starting milestone v2.0 Premium Redesign*

@@ -1,19 +1,16 @@
 ---
 gsd_state_version: 1.0
-milestone: v1.0
-milestone_name: milestone
-current_phase: 6
-current_phase_name: Performance & Cross-Locale RTL QA Hardening
+milestone: v2.0
+milestone_name: Premium Redesign
 status: planning
-stopped_at: Phase 5 UI-SPEC approved
-last_updated: "2026-07-23T08:32:42.370Z"
+last_updated: "2026-07-23T10:40:40.354Z"
 last_activity: 2026-07-23
-last_activity_desc: Phase 05 complete, transitioned to Phase 6
 progress:
-  total_phases: 5
-  completed_phases: 5
-  total_plans: 25
-  completed_plans: 25
+  total_phases: 0
+  completed_phases: 0
+  total_plans: 0
+  completed_plans: 0
+  percent: 0
 ---
 
 # Project State
@@ -27,12 +24,10 @@ See: .planning/PROJECT.md (updated 2026-07-14)
 
 ## Current Position
 
-Phase: 6 — Performance & Cross-Locale RTL QA Hardening
-Plan: Not started
-Status: Ready to plan
-Last activity: 2026-07-23 — Completed quick task 260723-e35: simplify primary navigation 9 → 5
-
-Progress: [████████░░] 75% (Phase 1-3 built + live; Phase 4 planned, not yet executed)
+Phase: Not started (defining requirements)
+Plan: —
+Status: Defining requirements
+Last activity: 2026-07-23 — Milestone v2.0 started
 
 ## Performance Metrics
 
