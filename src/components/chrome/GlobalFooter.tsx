@@ -7,6 +7,9 @@ import { BrandMark } from "@/components/chrome/BrandMark";
 // neutral-100 text, gold hover-underline links. Wordmark repeat, D-08 nav
 // wired to real /<slug> routes, switcher repeat, copyright. Single column
 // mobile -> logical row desktop. D-06: `products` now wired to /products.
+// Footer is the comprehensive discovery surface — it carries every page,
+// including the secondary ones trimmed from the primary header nav (Insights,
+// Manufacturing, Company) so nothing is orphaned on desktop.
 const NAV_KEYS = [
   "home",
   "about",
@@ -15,6 +18,7 @@ const NAV_KEYS = [
   "manufacturing",
   "export",
   "company",
+  "insights",
   "contact",
 ] as const;
 
@@ -26,6 +30,7 @@ const NAV_HREFS: Record<(typeof NAV_KEYS)[number], string> = {
   manufacturing: "/manufacturing",
   export: "/export",
   company: "/company",
+  insights: "/insights",
   contact: "/contact",
 };
 
