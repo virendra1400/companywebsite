@@ -28,12 +28,12 @@ const usePostgres = Boolean(process.env.DATABASE_URL);
 const db = usePostgres
   ? postgresAdapter({
       pool: { connectionString: process.env.DATABASE_URL as string },
-      // ponytail: force schema auto-sync on connect (Payload disables push in
-      // production by default). Acceptable for this small single-writer CMS —
-      // first deploy creates tables with no migration ceremony. If the catalog
-      // schema grows / multiple instances write concurrently, switch to
-      // committed `payload migrate` files + a `migrate && next build` step.
-      push: true,
+      // Payload's schema push only ever runs when NODE_ENV !== "production"
+      // (hardcoded in @payloadcms/db-postgres) — Vercel always sets
+      // NODE_ENV=production, so push never fires there regardless of this
+      // option. Schema changes reach prod via committed migrations only
+      // (src/migrations/, applied by vercel.json's `payload migrate` build
+      // step) — see 20260723_092747_phase5_seo_insights for the first one.
     })
   : sqliteAdapter({
       client: { url: process.env.DATABASE_URI ?? "file:./payload.db" },
