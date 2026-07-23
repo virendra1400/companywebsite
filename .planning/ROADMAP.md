@@ -15,7 +15,7 @@ Six phases carry the site from a locale-and-CMS-correct foundation to a fully la
 - [x] **Phase 2: Core Marketing Pages & Trust Surfaces** - Homepage, About, Contact, Certifications, Manufacturing, Export Track Record, Company pages live in English, CMS-driven (completed 2026-07-15)
 - [x] **Phase 3: Product Catalog** - Category browsing and product detail pages, scalable via CMS without rebuilds (completed 2026-07-15)
 - [x] **Phase 4: Lead Conversion — RFQ, Inquiry, WhatsApp, Analytics** - Visitors convert via forms/WhatsApp with spam defense, deliverable email, and tracked conversion events (completed 2026-07-21)
-- [ ] **Phase 5: SEO Infrastructure & Insights/Blog** - Correct per-locale metadata/hreflang/sitemaps/structured data; blog section live
+- [x] **Phase 5: SEO Infrastructure & Insights/Blog** - Correct per-locale metadata/hreflang/sitemaps/structured data; blog section live (completed 2026-07-23)
 - [ ] **Phase 6: Performance & Cross-Locale RTL QA Hardening** - Core Web Vitals and native-Arabic-reader RTL correctness verified pre-launch
 
 ## Phase Details
@@ -162,5 +162,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | 2. Core Marketing Pages & Trust Surfaces | 8/8 | Complete   | 2026-07-15 |
 | 3. Product Catalog | 3/3 | Complete   | 2026-07-15 |
 | 4. Lead Conversion — RFQ/Inquiry/WhatsApp/Analytics | 5/5 | Complete    | 2026-07-21 |
-| 5. SEO Infrastructure & Insights/Blog | 5/5 | In Progress|  |
+| 5. SEO Infrastructure & Insights/Blog | 5/5 | Complete    | 2026-07-23 |
 | 6. Performance & Cross-Locale RTL QA Hardening | 0/TBD | Not started | - |
