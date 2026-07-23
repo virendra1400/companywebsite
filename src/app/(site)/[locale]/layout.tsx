@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
@@ -8,7 +9,19 @@ import { routing, RTL_LOCALES } from "@/i18n/routing";
 import { GlobalHeader } from "@/components/chrome/GlobalHeader";
 import { GlobalFooter } from "@/components/chrome/GlobalFooter";
 import { getSiteBrand } from "@/lib/payload-fetch";
+import { JsonLd, organizationJsonLd } from "@/lib/seo/json-ld";
 import "../../globals.css";
+
+// SEO-01/SEO-05: metadataBase cascades to every descendant generateMetadata's
+// relative/absolute URL fields (openGraph.images, alternates). Pitfall 4:
+// localhost fallback is dev-only — NEXT_PUBLIC_SITE_URL MUST be set in prod
+// (user_setup) or every canonical/OG URL silently resolves to localhost.
+export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
+  title: { template: "%s · Star Agrevolution", default: "Star Agrevolution" },
+  description:
+    "Star Agrevolution — a trusted India-based manufacturer and exporter of premium agricultural and food products, serving importers and distributors worldwide.",
+};
 
 // Per-script fonts — only the needed subset ships per locale (FOUND-03 / UI-SPEC).
 const plexSans = IBM_Plex_Sans({
@@ -42,7 +55,8 @@ export default async function LocaleLayout({
 
   const dir = RTL_LOCALES.has(locale) ? "rtl" : "ltr";
   const fontVar = locale === "ar" ? plexSansArabic.variable : plexSans.variable;
-  const { siteName, logoUrl } = await getSiteBrand();
+  const { siteName, logoUrl, address, sameAs } = await getSiteBrand();
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
   // ANALY-01: Plausible chosen (checkpoint decision, 04-05) — cookieless, no
   // consent banner needed. Guarded so dev/CI render without the env var.
   const plausibleDomain = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
@@ -50,6 +64,10 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} dir={dir} className={fontVar}>
       <body className="flex min-h-dvh flex-col bg-background text-foreground antialiased">
+        {/* SEO-04: Organization JSON-LD once per page (not per product) — the
+            single shared <JsonLd> escaper applies the mandatory XSS escaping
+            (T-05-03). */}
+        <JsonLd data={organizationJsonLd({ siteName, url: siteUrl, logoUrl, address, sameAs })} />
         {plausibleDomain ? (
           <Script
             defer
