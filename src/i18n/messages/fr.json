@@ -7,6 +7,7 @@
     "manufacturing": "Fabrication",
     "export": "Export",
     "company": "Company",
+    "insights": "Insights",
     "contact": "Contact"
   },
   "switcher": {
@@ -73,5 +74,15 @@
     "galleryThumbAria": "View image {n} of {total}",
     "notFoundHeading": "Product not found.",
     "notFoundBody": "This product may have been removed or is no longer available."
+  },
+  "insights": {
+    "heading": "Insights",
+    "breadcrumbRoot": "Insights",
+    "emptyHeading": "Our insights section is being prepared.",
+    "emptyBody": "Check back shortly for export guidance and industry updates, or",
+    "emptyContactLinkLabel": "Get in touch directly",
+    "byline": "By {author} · {date}",
+    "notFoundHeading": "Article not found.",
+    "notFoundBody": "This article may have been removed or is no longer available. Browse all insights."
   }
 }

@@ -33,6 +33,7 @@ const NAV_KEYS = [
   "manufacturing",
   "export",
   "company",
+  "insights",
   "contact",
 ] as const;
 
@@ -44,6 +45,7 @@ const NAV_HREFS: Record<(typeof NAV_KEYS)[number], string> = {
   manufacturing: "/manufacturing",
   export: "/export",
   company: "/company",
+  insights: "/insights",
   contact: "/contact",
 };
 
