@@ -10,7 +10,11 @@ export const Insights: CollectionConfig = {
   slug: "insights",
   admin: { useAsTitle: "title" },
   access: {
-    read: () => true,
+    // Public REST reads are restricted to published docs; authenticated
+    // editors (CMS admin) can still read drafts. Query constraint form per
+    // Payload's access-control API (a returned Where is merged into every
+    // find), not the earlier `() => true` which had no filter at all.
+    read: ({ req: { user } }) => (user ? true : { published: { equals: true } }),
     create: ({ req: { user } }) => Boolean(user),
     update: ({ req: { user } }) => Boolean(user),
     delete: ({ req: { user } }) => Boolean(user),
