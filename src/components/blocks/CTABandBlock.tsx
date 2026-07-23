@@ -9,7 +9,7 @@ type CTABandData = Extract<NonNullable<Page["layout"]>[number], { blockType: "ct
 // matches the footer surface) per the UI-SPEC's documented exception.
 export function CTABandBlock({ block }: { block: CTABandData; index: number }) {
   return (
-    <section className="bg-primary-900 px-md py-2xl text-center text-white md:px-lg md:py-3xl xl:px-xl">
+    <section className="bg-primary-900 px-md py-2xl text-center text-white md:px-lg md:py-3xl xl:px-xl xl:py-4xl">
       <div className="mx-auto flex max-w-[42rem] flex-col items-center gap-md">
         <h2 className="text-heading font-semibold">{block.heading}</h2>
         {block.body ? <p className="text-body text-primary-100">{block.body}</p> : null}
