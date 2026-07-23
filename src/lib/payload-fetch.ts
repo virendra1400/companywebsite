@@ -39,7 +39,7 @@ export const getSiteBrand = cache(async function getSiteBrand(): Promise<{
   // serves the existing brand/contact fields plus address/sameAs, no second
   // query.
   return {
-    siteName: settings?.siteName || "Star Agrevolution",
+    siteName: settings?.siteName || "VNP Global",
     logoUrl,
     email: contact.email || "sales@example.com",
     phone: contact.phone || "+91 00000 00000",

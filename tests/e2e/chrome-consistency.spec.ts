@@ -29,13 +29,13 @@ for (const { name, base } of LOCALES) {
 
       // GlobalHeader brand wordmark.
       await expect(
-        page.locator("header").getByText("Star Agrevolution", { exact: true }),
+        page.locator("header").getByText("VNP Global", { exact: true }),
       ).toBeVisible();
 
       // GlobalFooter present (and its wordmark repeat).
       const footer = page.locator("footer");
       await expect(footer).toBeVisible();
-      await expect(footer.getByText("Star Agrevolution", { exact: true })).toBeVisible();
+      await expect(footer.getByText("VNP Global", { exact: true })).toBeVisible();
 
       // LanguageSwitcher present (header instance).
       await expect(

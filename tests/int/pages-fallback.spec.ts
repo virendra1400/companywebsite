@@ -17,9 +17,9 @@ describe("getPageContent fallback-detection helper", () => {
       collection: "pages",
       locale: "en",
       data: {
-        title: "Star Agrevolution",
+        title: "VNP Global",
         slug: "fallback-test",
-        layout: [{ blockType: "hero", variant: "compact", headline: "Star Agrevolution" }],
+        layout: [{ blockType: "hero", variant: "compact", headline: "VNP Global" }],
       },
       overrideAccess: true,
       context: { disableRevalidate: true },
@@ -35,13 +35,13 @@ describe("getPageContent fallback-detection helper", () => {
   it("en is always treated as translated", async () => {
     const { page, isTranslated } = await getPageContent("fallback-test", "en");
     expect(isTranslated).toBe(true);
-    expect(page?.title).toBe("Star Agrevolution");
+    expect(page?.title).toBe("VNP Global");
   });
 
   it("untranslated fr falls back to English content with isTranslated:false", async () => {
     const { page, isTranslated } = await getPageContent("fallback-test", "fr");
     expect(isTranslated).toBe(false);
-    expect(page?.title).toBe("Star Agrevolution");
+    expect(page?.title).toBe("VNP Global");
   });
 
   it("once fr has real content, isTranslated becomes true", async () => {
@@ -49,14 +49,14 @@ describe("getPageContent fallback-detection helper", () => {
       collection: "pages",
       id: pageId,
       locale: "fr",
-      data: { title: "Star Agrevolution FR" },
+      data: { title: "VNP Global FR" },
       overrideAccess: true,
       context: { disableRevalidate: true },
     });
 
     const { page, isTranslated } = await getPageContent("fallback-test", "fr");
     expect(isTranslated).toBe(true);
-    expect(page?.title).toBe("Star Agrevolution FR");
+    expect(page?.title).toBe("VNP Global FR");
   });
 
   it("returns page:null for a slug that does not exist", async () => {

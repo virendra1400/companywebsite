@@ -18,9 +18,9 @@ import "../../globals.css";
 // (user_setup) or every canonical/OG URL silently resolves to localhost.
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
-  title: { template: "%s · Star Agrevolution", default: "Star Agrevolution" },
+  title: { template: "%s · VNP Global", default: "VNP Global" },
   description:
-    "Star Agrevolution — a trusted India-based manufacturer and exporter of premium agricultural and food products, serving importers and distributors worldwide.",
+    "VNP Global — a trusted India-based manufacturer and exporter of premium agricultural and food products, serving importers and distributors worldwide.",
 };
 
 // Per-script fonts — only the needed subset ships per locale (FOUND-03 / UI-SPEC).
