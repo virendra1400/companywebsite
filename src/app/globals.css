@@ -29,7 +29,10 @@
   --spacing-2xl: 48px;
   --spacing-3xl: 64px;
 
-  /* Typography — exactly 4 sizes, 2 weights (400/600) */
+  /* Typography — body tiers (label/body/heading/display) are locked to
+     exactly 4 sizes, 2 weights (400/600) — Phase 1 UI-SPEC. Phase 6 amends
+     this lock for the DISPLAY TIER ONLY, adding two light-weight (300)
+     display-lg/xl sizes below; body tiers here remain byte-identical. */
   --text-label: 14px;
   --text-label--line-height: 1.4;
   --text-body: 16px;
@@ -48,6 +51,50 @@
      undefined: latin locales resolve --font-plex-sans, ar resolves the Arabic. */
   --font-sans: var(--font-plex-sans, var(--font-plex-sans-arabic, system-ui)),
     system-ui, sans-serif;
+
+  /* ---- Phase 6 amendment: display-tier type scale, rhythm, cards ---- */
+
+  /* Display tiers — ADDED above the existing --text-display (40px/600,
+     UNCHANGED, still used by StatsBand/ExportMap stat figures and the
+     compact interior-page hero). Two new tiers for premium hero use
+     (Phase 7 wires these into HeroBlock's headline — not applied here). */
+  --text-display-lg: 52px;
+  --text-display-lg--line-height: 1.1;
+  --text-display-lg--font-weight: 300;
+  --text-display-xl: 56px;
+  --text-display-xl--line-height: 1.05;
+  --text-display-xl--font-weight: 300;
+
+  /* Negative tracking — ONE proportional (em-based) token shared by both new
+     tiers so it self-scales: -0.025em == -1.3px@52px / -1.4px@56px, matching
+     the Stripe 56px/-1.4px reference point exactly at the xl tier. */
+  --tracking-display: -0.025em;
+
+  /* font-light (300) is Tailwind's own default-theme weight utility — it was
+     never removed by this file (no `--font-weight-*: initial` reset exists),
+     so no new font-weight token is needed. Contract: font-light is RESERVED
+     for text-display-lg/text-display-xl only — body/heading/label keep using
+     only font-regular (400, custom key) / font-semibold (600). */
+
+  /* Locale-scoped Latin display face. Mirrors the --font-sans nested-fallback
+     pattern above: when the locale layout is `ar`, --font-geist-display is
+     never set on <html>, so this falls back to --font-sans (Plex / Plex
+     Arabic) — Arabic NEVER receives the Latin display face. */
+  --font-display: var(--font-geist-display, var(--font-sans));
+
+  /* Section rhythm — NEW 4th step bumping the xl breakpoint from 64px to
+     96px. Mobile (48px) and tablet (64px) steps are unchanged; the range
+     64-96px is now covered across the responsive scale, not just at one
+     breakpoint. */
+  --spacing-4xl: 96px;
+
+  /* Card system — tightened, single source of truth replacing the current
+     rounded-lg/rounded-xl split, and replacing default shadow-sm/shadow-md
+     with a subtle brand-tinted (primary-900) ambient shadow instead of a
+     neutral drop-shadow stack. Border color is UNCHANGED (neutral-300). */
+  --radius-card: 10px;
+  --shadow-card: 0 1px 2px 0 rgb(15 46 34 / 0.04), 0 1px 1px 0 rgb(15 46 34 / 0.03);
+  --shadow-card-hover: 0 8px 20px -4px rgb(15 46 34 / 0.10), 0 2px 6px -2px rgb(15 46 34 / 0.05);
 
   /* Container */
   --breakpoint-xl: 1280px;

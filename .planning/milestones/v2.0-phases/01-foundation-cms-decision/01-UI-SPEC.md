@@ -63,6 +63,20 @@ Declared values (must be multiples of 4):
 
 Exactly 4 sizes, exactly 2 weights (400, 600) — declared per contract discipline. Nav-link active/hover state uses the existing 600 weight (no third weight introduced).
 
+> **Phase 6 amendment (display tier only):** the lock above is AMENDED for the
+> **display tier only** — it is no longer "exactly 4 sizes / 2 weights / 40px
+> max" as a whole-scale rule. Phase 6 adds two new tiers, `text-display-lg`
+> (52px, weight 300, tracking -0.025em) and `text-display-xl` (56px, weight
+> 300, tracking -0.025em), rendered in a Latin-only display face (Geist, via
+> `--font-display`). This new display face and both new tiers are
+> locale-scoped to `en`/`fr`/`ru` and are **never** applied to `ar` (D-02) —
+> Arabic always falls back to `--font-sans` (Plex Sans Arabic). Body tiers
+> (Label/Body/Heading, and this existing 40px/600 Display row above) remain
+> locked exactly as declared here — 2 weights (400/600), unchanged. Future
+> agents: do not read the "exactly 4 sizes, exactly 2 weights" line above as
+> still binding for display — see Phase 6 `06-CONTEXT.md` (Locked Decision 1)
+> and `06-UI-SPEC.md` for the authoritative amendment.
+
 **Usage:**
 - Label (14/400/1.4): nav links, footer links, language-switcher menu items, breadcrumb text (Phase 2+)
 - Body (16/400/1.5): paragraph copy, fallback-notice text, hero subhead
