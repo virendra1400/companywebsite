@@ -100,9 +100,11 @@ export default async function ProductDetailPage({
 
   const rfqHref = `/contact?product=${product.slug}&productName=${encodeURIComponent(product.name)}`;
 
+  // No category archive route exists to link to, so a category crumb would
+  // have to reuse the "/products" URL — an invalid duplicate-URL
+  // BreadcrumbList (WR-01). Omit it rather than fake a distinct URL.
   const breadcrumbTrail = [
     { name: t("breadcrumbRoot"), url: localeUrl(locale as Locale, "/products") },
-    ...(category ? [{ name: category.name, url: localeUrl(locale as Locale, "/products") }] : []),
     { name: product.name, url: localeUrl(locale as Locale, `/products/${slug}`) },
   ];
 

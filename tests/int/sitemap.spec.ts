@@ -186,7 +186,11 @@ describe("sitemap.ts", () => {
 
     expect(entries.some((e) => e.url === BASE)).toBe(true);
     expect(entries.some((e) => e.url === `${BASE}/products/sitemap-published-product`)).toBe(true);
-    expect(entries.some((e) => e.url.includes("insights"))).toBe(false);
+    // The /insights hub is a locale-invariant listing route (WR-02) — it stays
+    // in the sitemap even with zero articles. Only per-article detail entries
+    // should disappear.
+    expect(entries.some((e) => e.url === `${BASE}/insights`)).toBe(true);
+    expect(entries.some((e) => e.url.includes("/insights/"))).toBe(false);
 
     // Recreate so afterAll's deletes stay valid (avoids deleting an
     // already-deleted id).
