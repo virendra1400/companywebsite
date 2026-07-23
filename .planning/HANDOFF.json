@@ -1,29 +1,52 @@
 {
   "version": "1.0",
-  "timestamp": "2026-07-22T16:53:34.012Z",
+  "timestamp": "2026-07-23T05:02:00.000Z",
   "phase": "05",
   "phase_name": "seo-infrastructure-insights-blog",
   "phase_dir": ".planning/phases/05-seo-infrastructure-insights-blog",
-  "plan": "05-04",
-  "task": 0,
-  "total_tasks": 6,
+  "plan": "gap-closure",
+  "task": 3,
+  "total_tasks": 3,
   "status": "paused",
   "completed_tasks": [
-    {"id": "05-01", "name": "Insights Payload collection", "status": "done", "wave": 1},
-    {"id": "05-02", "name": "SEO metadata module", "status": "done", "wave": 1},
-    {"id": "05-03", "name": "JSON-LD structured data", "status": "done", "wave": 1}
+    {"id": "05-01..05-05", "name": "All 5 plans executed, merged, tracked", "status": "done"},
+    {"id": "code-review", "name": "Code review (1 Critical, 3 Warning, 4 Info)", "status": "done"},
+    {"id": "CR-01-fix", "name": "Insights public-read access-control fix", "status": "done", "commit": "cf8735a"},
+    {"id": "verify", "name": "Phase-goal verification (gsd-verifier)", "status": "done", "result": "gaps_found"},
+    {"id": "WR-02-fix", "name": "sitemap.ts: add /insights and /products hub entries", "status": "done_uncommitted"},
+    {"id": "WR-01-fix", "name": "product page: drop duplicate-URL category breadcrumb", "status": "done_uncommitted"},
+    {"id": "WR-03-fix", "name": "insights not-found.tsx with documented copy", "status": "done_uncommitted"},
+    {"id": "sitemap-test-update", "name": "tests/int/sitemap.spec.ts: update zero-insights assertion for hub-page-always-present", "status": "done_uncommitted"},
+    {"id": "tsc-check", "name": "npx tsc --noEmit after gap fixes", "status": "done", "result": "clean, 0 errors"}
   ],
   "remaining_tasks": [
-    {"id": "05-04", "name": "Visitor-facing Insights pages + nav", "status": "in_progress_unconfirmed", "wave": 2},
-    {"id": "05-05", "name": "Sitemap/robots/metadata wiring", "status": "in_progress_unconfirmed", "wave": 2}
+    {"id": "sitemap-spec-test", "name": "Run tests/int/sitemap.spec.ts alone to confirm still green after tsc fix (was green before the routing.locales readonly fix, needs one more run)", "status": "not_started"},
+    {"id": "full-test-suite", "name": "npm test (full vitest suite) to confirm no regressions from the 4 uncommitted files", "status": "not_started"},
+    {"id": "build-gate", "name": "npm run build to confirm production build still succeeds with the gap fixes", "status": "not_started"},
+    {"id": "commit-gap-fixes", "name": "Commit the 4 uncommitted files as a single gap-closure commit", "status": "not_started"},
+    {"id": "re-verify", "name": "Re-spawn gsd-verifier (or manually re-check WR-01/02/03 live) to confirm gaps_found -> passed", "status": "not_started"},
+    {"id": "update_roadmap", "name": "phase.complete + ROADMAP/STATE update + commit", "status": "not_started"},
+    {"id": "close_phase_todos", "name": "Auto-close todos tagged resolves_phase:05", "status": "not_started"},
+    {"id": "update_project_md", "name": "Evolve PROJECT.md after phase completion", "status": "not_started"},
+    {"id": "offer_next", "name": "Present phase-complete summary + next-phase options to user", "status": "not_started"}
   ],
   "blockers": [],
   "async_jobs": [],
-  "human_actions_pending": [],
-  "decisions": [
-    {"decision": "Payload sqlite adapter default push-on-init only fires when NODE_ENV !== 'production'; explicit push:true on the adapter is a no-op under `next build` (verified in node_modules/@payloadcms/db-sqlite/dist/connect.js:50) and was reverted after testing", "rationale": "Local payload.db was missing the site_settings_same_as table added by 05-03's SiteSettings.address/sameAs fields, breaking `next build` prerender. Fixed by running a one-off script that imports payload.config and calls getPayload() under normal (non-production) NODE_ENV to trigger pushDevSchema against the on-disk payload.db, then reverted the payload.config.ts push:true experiment since it had no effect. The one-off script was deleted after use — not part of the repo.", "phase": "05"}
+  "human_actions_pending": [
+    {"action": "None blocking. User previously flagged the WhatsApp CTA number (910000000000) is a placeholder — documented as intentional pre-launch placeholder in src/lib/seed-content.ts, needs the real number entered via CMS before launch. Separate from phase 05, not yet logged as a todo.", "context": "Raised mid-session, acknowledged as not-a-bug, user has not yet said whether to log it as a todo.", "blocking": false}
   ],
-  "uncommitted_files": [],
-  "next_action": "Wait for Wave 2 executors (05-04, 05-05) to report completion, then: 1) record both in a fresh worktree.record-agent manifest, 2) spot-check SUMMARY.md + no Self-Check:FAILED marker, 3) worktree.cleanup-wave (watch for the same two failure modes hit in Wave 1: a REQUIREMENTS.md merge conflict between sibling plans marking different requirement IDs complete — resolve by taking both [x] lines; and a possible payload.db schema drift if either plan touches Payload collections/globals — rerun the getPayload() one-off push script if `next build` fails with 'no such table'), 4) run `npm run build` then `npm test` as the post-merge gate, 5) update tracking (roadmap.update-plan-progress + commit), 6) run execute:wave:post hooks (verify.schema-drift, verify.codebase-drift, ui.safety-gate — Wave 2 DOES touch frontend files so ui.safety-gate is live this time, check its result carefully), 7) proceed to code_review_gate, regression_gate, verify_phase_goal (gsd-verifier agent), update_roadmap (phase.complete), close_phase_todos, update_project_md, offer_next.",
-  "context_notes": "Executing /gsd-execute-phase 5 (no flags — full phase, both waves, no --wave/--gaps-only/--interactive). Wave 1 (05-01/05-02/05-03) fully merged, build-gate passed, test-gate passed (64/64 tests, 16 files), tracking committed (commits 655e1f3, 74f2d6d, fbce070, f23af63, 399c993, 555389b on main). MVP_MODE=true but TDD_MODE=false so the MVP+TDD RED-commit gate does not apply this phase. Wave 2 dispatched at base 555389b91cb40510a20a8568c226a1a89b5662ab: 05-04 as agent a90907792d7424c6c (worktree /workspaces/companywebsite/.claude/worktrees/agent-a90907792d7424c6c, branch worktree-agent-a90907792d7424c6c), 05-05 as agent a21c9e21a713e0f54 (worktree /workspaces/companywebsite/.claude/worktrees/agent-a21c9e21a713e0f54, branch worktree-agent-a21c9e21a713e0f54). Both worktrees exist and are 'locked' per `git worktree list` — this is normal Claude Code worktree-isolation locking, not a stuck state; neither has reported completion yet as of this handoff. NOTE: earlier in this session all 3 Wave-1 executors failed once on a Claude API session-limit error before making any progress (documented in the prior handoff commit 43e0506) — that was a clean external quota failure, fully recovered by simply re-dispatching Wave 1 after the reset. If Wave 2 executors are still running (not failed) when you resume, do NOT re-dispatch — first check `git worktree list` and the agent task-notification state; only re-dispatch a plan if its worktree is gone/failed with zero commits. IMPORTANT: on Wave 1 cleanup, `gsd_run query worktree.record-agent`'s self-reported `expected_base` field from one agent's own `<worktree_metadata>` block was WRONG (it echoed its own last commit hash instead of the true fork-point) — always cross-check the manifest's expected_base against `git merge-base <branch> main` before running cleanup-wave if the agent-reported base looks suspicious (e.g. equals one of that same branch's own commits)."
+  "decisions": [
+    {"decision": "Fixed all 3 verification gaps (WR-01, WR-02, WR-03) directly instead of routing through /gsd-plan-phase 05 --gaps", "rationale": "User said 'whatever is best' when asked; all three were small single-file fixes with exact locations already scoped by the code review, so direct-fix was faster than a formal gap-closure planning cycle.", "phase": "05"},
+    {"decision": "WR-02 fix: added entriesForAllLocales() helper in sitemap.ts instead of reusing entriesFor() for the /products and /insights hub pages", "rationale": "entriesFor() calls getTranslatedLocales(collection, slug) which expects a real CMS document (Pages/Products/Insights) to check translation status against. /products and /insights are code-only listing routes with no backing CMS doc — they render unconditionally in all 4 locales per [locale]/layout.tsx's generateStaticParams — so they need an ungated, locale-invariant entry instead.", "phase": "05"},
+    {"decision": "WR-01 fix: removed the category breadcrumb entry entirely rather than making its url field optional", "rationale": "No category archive page exists to link to; the shared breadcrumbJsonLd() builder's type signature requires a non-optional url on every item. Omitting the entry (Products > Product Name, 2 levels) was simpler than touching the shared builder's type for one caller.", "phase": "05"},
+    {"decision": "Updated tests/int/sitemap.spec.ts's zero-insights test assertion", "rationale": "The old assertion `entries.some(url.includes('insights')) === false` was written before the WR-02 fix, when /insights only appeared via article detail pages. Now the /insights hub is always present (by design), so the test needed to distinguish 'no article detail entries' (url.includes('/insights/') === false) from 'hub entry present' (url === BASE+'/insights' === true). Not a test weakening — it now asserts the correct, more specific behavior.", "phase": "05"}
+  ],
+  "uncommitted_files": [
+    "src/app/sitemap.ts",
+    "src/app/(site)/[locale]/products/[slug]/page.tsx",
+    "src/app/(site)/[locale]/insights/not-found.tsx",
+    "tests/int/sitemap.spec.ts"
+  ],
+  "next_action": "Run tests/int/sitemap.spec.ts once more (confirm still 6/6 green after the routing.locales readonly-array tsc fix), then npm test (full suite) and npm run build. If both clean, commit all 4 files as one gap-closure commit (e.g. 'fix(05): close verification gaps WR-01/02/03'), then re-verify (spawn gsd-verifier again or manually curl-check sitemap.xml/product-page JSON-LD/insights 404) before proceeding to update_roadmap (phase.complete) and the remaining close-out steps.",
+  "context_notes": "This is the tail end of /gsd-execute-phase 5. All 5 plans (05-01..05-05) are executed, merged to main, and gated (build+test passed both waves). Code review found 1 Critical (CR-01, already fixed+committed at cf8735a) + 3 Warning + 4 Info. Phase verification (gsd-verifier) came back gaps_found on the 3 Warnings (WR-01/02/03), all matching what code review already flagged — none were novel discoveries. User said 'whatever is best' when given the choice between formal gap-closure planning vs direct fix; chose direct fix given the small, well-scoped nature. All 3 fixes are now written and typecheck-clean (tsc --noEmit exit 0) but NOT YET committed and NOT YET re-verified. This session hit repeated 'session limit' interruptions throughout (at least 3 times) — each time, work was either fully clean (Wave 1 first attempt: zero partial work, safe to re-dispatch) or safely resumable via SendMessage to the same background agent (Wave 1 retry, Wave 2 both plans). If interrupted again here, the safe resume point is exactly the 4 uncommitted files listed above — read them with git diff to see exactly what changed, run the remaining_tasks in order. Also worth knowing: this session had a scary red herring around 'next build'/'tsc' repeatedly dying with SIGTERM(143) — turned out to be ~92 leaked chroma-mcp background processes eating nearly all sandbox memory (load average ~6.7), NOT a code defect. They self-cleaned once the wave-2 activity settled; if you hit mysterious SIGTERM 143 on build/test/tsc again, check `free -h` and `ps aux | grep chroma-mcp` before assuming code is broken."
 }
