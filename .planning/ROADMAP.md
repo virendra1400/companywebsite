@@ -16,7 +16,11 @@ Six phases carry the site from a locale-and-CMS-correct foundation to a fully la
 - [x] **Phase 3: Product Catalog** - Category browsing and product detail pages, scalable via CMS without rebuilds (completed 2026-07-15)
 - [x] **Phase 4: Lead Conversion — RFQ, Inquiry, WhatsApp, Analytics** - Visitors convert via forms/WhatsApp with spam defense, deliverable email, and tracked conversion events (completed 2026-07-21)
 - [x] **Phase 5: SEO Infrastructure & Insights/Blog** - Correct per-locale metadata/hreflang/sitemaps/structured data; blog section live (completed 2026-07-23)
-- [ ] **Phase 6: Performance & Cross-Locale RTL QA Hardening** - Core Web Vitals and native-Arabic-reader RTL correctness verified pre-launch
+- [ ] **Phase 6: Design System Elevation** - Premium type scale, display tokens, rhythm/spacing (v2.0 Phase A)
+- [ ] **Phase 7: Hero & Homepage Narrative** - Elevated hero + new CMS trust blocks (v2.0 Phase B)
+- [ ] **Phase 8: Component Polish Pass** - Amended system applied consistently (v2.0 Phase C)
+- [ ] **Phase 9: Motion & Micro-interactions** - Reveal/stagger/hover, reduced-motion safe (v2.0 Phase D)
+- [ ] **Phase 10: Hardening** - CWV, a11y, SEO deltas, cross-locale RTL QA (v2.0 Phase E, absorbs former Phase 6)
 
 ## Phase Details
 
@@ -136,21 +140,6 @@ Plans:
 
 **UI hint**: yes
 
-### Phase 6: Performance & Cross-Locale RTL QA Hardening
-
-**Goal**: The site is fast and visually correct for every locale on real devices before launch, validated against real (non-placeholder) content where available.
-**Mode:** mvp
-**Depends on**: Phase 2, Phase 3, Phase 5 (all page types must exist to audit)
-**Requirements**: PERF-01, PERF-02, PERF-03
-**Success Criteria** (what must be TRUE):
-
-  1. Home, catalog, and product pages meet good Core Web Vitals (LCP/CLS/INP) on mobile and desktop, measured per locale — not English only.
-  2. Images, video embeds, and PDF links are lazy-loaded/optimized (responsive images, no full-resolution originals shipped, no inline PDF viewers).
-  3. A native Arabic reader confirms full RTL correctness (layout mirroring, numerals, mixed Arabic/English/incoterm text, icon direction) across every page type, checked against the first real content batch, not lorem-ipsum placeholders.
-
-**Plans**: TBD
-**UI hint**: yes
-
 ## Progress
 
 **Execution Order:**
@@ -163,4 +152,63 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | 3. Product Catalog | 3/3 | Complete   | 2026-07-15 |
 | 4. Lead Conversion — RFQ/Inquiry/WhatsApp/Analytics | 5/5 | Complete    | 2026-07-21 |
 | 5. SEO Infrastructure & Insights/Blog | 5/5 | Complete    | 2026-07-23 |
-| 6. Performance & Cross-Locale RTL QA Hardening | 0/TBD | Not started | - |
+
+### Phase 6: Design System Elevation — premium type scale, display tokens, rhythm and spacing
+
+**Goal:** Amended premium type scale live: display-xl/lg tiers (~52-56px), light display weight, negative tracking tokens in globals.css @theme; section rhythm 64-96px; hairline card system; tabular figures for stats. UI-SPEC amendment documented. lint:rtl green.
+**Requirements**: TBD
+**UI hint**: yes
+**Depends on:** Phase 5
+**Plans:** 0 plans
+
+Plans:
+
+- [ ] TBD (run /gsd-plan-phase 6 to break down)
+
+### Phase 7: Hero and Homepage Narrative — elevated hero plus new CMS trust/manufacturing/process/testimonial blocks
+
+**Goal:** Homepage tells the full trust narrative: elevated hero (large thin display headline, refined CTA rhythm, atmospheric image treatment) plus new CMS blocks — trust-indicator/partner row, Why Choose Us, Manufacturing Excellence, Export Process timeline, Testimonials — all Payload-editable, seeded with realistic placeholders.
+**Requirements**: TBD
+**UI hint**: yes
+**Depends on:** Phase 6
+**Plans:** 0 plans
+
+Plans:
+
+- [ ] TBD (run /gsd-plan-phase 7 to break down)
+
+### Phase 8: Component Polish Pass — apply amended design system across cards, buttons, forms, CTA bands
+
+**Goal:** Every reusable component (ProductCard, StatsBand, CertCard, buttons, forms, CTA bands, FAQ) consistently applies the amended design system with no residual v1 inconsistencies.
+**Requirements**: TBD
+**UI hint**: yes
+**Depends on:** Phase 7
+**Plans:** 0 plans
+
+Plans:
+
+- [ ] TBD (run /gsd-plan-phase 8 to break down)
+
+### Phase 9: Motion and Micro-interactions — reveal, stagger, hover, reduced-motion safe
+
+**Goal:** Tasteful reveal/stagger/hover/section transitions across the site; prefers-reduced-motion respected; RTL-safe; zero CLS/LCP regression.
+**Requirements**: TBD
+**UI hint**: yes
+**Depends on:** Phase 8
+**Plans:** 0 plans
+
+Plans:
+
+- [ ] TBD (run /gsd-plan-phase 9 to break down)
+
+### Phase 10: Hardening — performance, Core Web Vitals, accessibility, SEO deltas, cross-locale RTL QA
+
+**Goal:** Site is launch-hard: good Core Web Vitals per locale on home/catalog/product, images/fonts optimized, WCAG contrast/keyboard/focus verified, SEO metadata/JSON-LD verified against new sections, full cross-locale RTL QA (absorbs former Phase 6 scope).
+**Requirements**: TBD
+**UI hint**: yes
+**Depends on:** Phase 9
+**Plans:** 0 plans
+
+Plans:
+
+- [ ] TBD (run /gsd-plan-phase 10 to break down)
