@@ -15,6 +15,14 @@ export const getSiteBrand = cache(async function getSiteBrand(): Promise<{
   phone: string;
   whatsapp: string;
   waHref: string;
+  address?: {
+    street?: string;
+    city?: string;
+    state?: string;
+    postalCode?: string;
+    country?: string;
+  };
+  sameAs: string[];
 }> {
   const payload = await getPayload({ config });
   const settings = await payload.findGlobal({
@@ -26,6 +34,10 @@ export const getSiteBrand = cache(async function getSiteBrand(): Promise<{
     logo && typeof logo === "object" && "url" in logo ? (logo.url ?? null) : null;
   const contact = settings?.contact ?? {};
   const whatsapp = contact.whatsapp || "910000000000";
+  const address = settings?.address;
+  // D-09: Organization JSON-LD input — same single cached findGlobal query
+  // serves the existing brand/contact fields plus address/sameAs, no second
+  // query.
   return {
     siteName: settings?.siteName || "Star Agrevolution",
     logoUrl,
@@ -33,6 +45,16 @@ export const getSiteBrand = cache(async function getSiteBrand(): Promise<{
     phone: contact.phone || "+91 00000 00000",
     whatsapp,
     waHref: `https://wa.me/${whatsapp}`,
+    address: address
+      ? {
+          street: address.street ?? undefined,
+          city: address.city ?? undefined,
+          state: address.state ?? undefined,
+          postalCode: address.postalCode ?? undefined,
+          country: address.country ?? undefined,
+        }
+      : undefined,
+    sameAs: (settings?.sameAs ?? []).map((s) => s.url).filter(Boolean),
   };
 });
 

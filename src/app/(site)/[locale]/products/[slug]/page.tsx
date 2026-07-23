@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getPayload } from "payload";
 import config from "@payload-config";
@@ -13,6 +14,10 @@ import { ProductGallery } from "@/components/products/ProductGallery";
 import { SpecTable } from "@/components/products/SpecTable";
 import { LocaleFallbackNotice } from "@/components/chrome/LocaleFallbackNotice";
 import { getProduct, getSiteBrand } from "@/lib/payload-fetch";
+import { getTranslatedLocales } from "@/lib/seo/translated-locales";
+import { buildMetadata } from "@/lib/seo/metadata";
+import { localeUrl } from "@/lib/seo/alternates";
+import { JsonLd, productJsonLd, breadcrumbJsonLd } from "@/lib/seo/json-ld";
 import type { Locale } from "@/i18n/routing";
 import type { Media, Category, Certification } from "../../../../../../payload-types";
 
@@ -37,6 +42,31 @@ export async function generateStaticParams() {
     limit: 500,
   });
   return result.docs.map((doc) => ({ slug: doc.slug }));
+}
+
+// SEO-01/02/05: delegates to the shared buildMetadata/getTranslatedLocales
+// glue (05-02) — same reciprocal alternates map sitemap.ts uses (Pitfall 1).
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string; slug: string }>;
+}): Promise<Metadata> {
+  const { locale, slug } = await params;
+  const { product } = await getProduct(slug, locale as Locale);
+  if (!product) return {};
+
+  const images = (product.imageGallery ?? [])
+    .map((item) => (item.image && typeof item.image === "object" ? (item.image as Media) : null))
+    .filter((img): img is Media => Boolean(img?.url));
+
+  const translatedLocales = await getTranslatedLocales("products", slug);
+  return buildMetadata({
+    title: product.name,
+    description: product.shortDescription,
+    imageUrl: images[0]?.url,
+    translatedLocales,
+    path: `/products/${slug}`,
+  });
 }
 
 export default async function ProductDetailPage({
@@ -70,8 +100,27 @@ export default async function ProductDetailPage({
 
   const rfqHref = `/contact?product=${product.slug}&productName=${encodeURIComponent(product.name)}`;
 
+  const breadcrumbTrail = [
+    { name: t("breadcrumbRoot"), url: localeUrl(locale as Locale, "/products") },
+    ...(category ? [{ name: category.name, url: localeUrl(locale as Locale, "/products") }] : []),
+    { name: product.name, url: localeUrl(locale as Locale, `/products/${slug}`) },
+  ];
+
   return (
     <main>
+      {/* SEO-04/D-10/D-11: Product (no price/offers/review) + BreadcrumbList,
+          via the single shared <JsonLd> escaper. Organization JSON-LD is
+          emitted once in the locale layout, not repeated here. */}
+      <JsonLd
+        data={productJsonLd({
+          name: product.name,
+          images: images.map((img) => img.url),
+          description: product.shortDescription,
+          categoryName: category?.name,
+          certNames: certs.map((c) => c.name),
+        })}
+      />
+      <JsonLd data={breadcrumbJsonLd(breadcrumbTrail)} />
       {!isTranslated ? <LocaleFallbackNotice locale={locale as Locale} /> : null}
 
       {/* PageHeader — a lightweight in-page header, NOT a full photographic
