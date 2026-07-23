@@ -30,7 +30,7 @@ See: .planning/PROJECT.md (updated 2026-07-14)
 Phase: 6 — Performance & Cross-Locale RTL QA Hardening
 Plan: Not started
 Status: Ready to plan
-Last activity: 2026-07-23 — Completed quick task 260723-duo: rebrand Star Agrevolution → VNP Global
+Last activity: 2026-07-23 — Completed quick task 260723-e35: simplify primary navigation 9 → 5
 
 Progress: [████████░░] 75% (Phase 1-3 built + live; Phase 4 planned, not yet executed)
 
@@ -82,6 +82,7 @@ None yet.
 | # | Description | Date | Commit | Directory |
 |---|-------------|------|--------|-----------|
 | 260723-duo | Rebrand company name Star Agrevolution → VNP Global (code defaults, metadata, seed copy, tests) | 2026-07-23 | 5d2b566 | [260723-duo-rebrand-company-name-star-agrevolution-t](./quick/260723-duo-rebrand-company-name-star-agrevolution-t/) |
+| 260723-e35 | Simplify primary navigation 9 → 5 per brief (Products, About, Global Markets, Certifications, Contact) | 2026-07-23 | 94245f2 | [260723-e35-simplify-primary-navigation-from-9-items](./quick/260723-e35-simplify-primary-navigation-from-9-items/) |
 
 ## Deferred Items
 
