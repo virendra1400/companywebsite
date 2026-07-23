@@ -18,6 +18,9 @@ export default getRequestConfig(async ({ requestLocale }) => {
       number: {
         latn: { numberingSystem: "latn" },
       },
+      dateTime: {
+        latn: { numberingSystem: "latn", dateStyle: "long" },
+      },
     },
   };
 });
