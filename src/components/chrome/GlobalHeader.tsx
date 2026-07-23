@@ -11,29 +11,23 @@ import { getSiteBrand } from "@/lib/payload-fetch";
 // logical flex row (wordmark inline-start -> nav (>=lg) -> switcher -> CTA
 // inline-end). Auto-reverses in RTL via dir + logical flex, no manual
 // mirroring code.
-// D-08: full nav set, wired to real /<slug> routes (home is "/"). D-06:
-// `products` now resolves to the real Phase 3 catalog route.
+// Primary nav = 5 curated items (brief: Products, About, Global Markets,
+// Certifications, Contact). The logo covers Home; the "Request a Quote" button
+// covers the conversion path. Secondary pages (Manufacturing, Company,
+// Insights) stay reachable via the footer + mobile drawer — no orphans.
 const NAV_KEYS = [
-  "home",
-  "about",
   "products",
-  "certifications",
-  "manufacturing",
+  "about",
   "export",
-  "company",
-  "insights",
+  "certifications",
   "contact",
 ] as const;
 
 const NAV_HREFS: Record<(typeof NAV_KEYS)[number], string> = {
-  home: "/",
-  about: "/about",
   products: "/products",
-  certifications: "/certifications",
-  manufacturing: "/manufacturing",
+  about: "/about",
   export: "/export",
-  company: "/company",
-  insights: "/insights",
+  certifications: "/certifications",
   contact: "/contact",
 };
 

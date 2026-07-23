@@ -30,7 +30,7 @@ See: .planning/PROJECT.md (updated 2026-07-14)
 Phase: 6 — Performance & Cross-Locale RTL QA Hardening
 Plan: Not started
 Status: Ready to plan
-Last activity: 2026-07-23 — Phase 05 complete, transitioned to Phase 6
+Last activity: 2026-07-23 — Completed quick task 260723-e35: simplify primary navigation 9 → 5
 
 Progress: [████████░░] 75% (Phase 1-3 built + live; Phase 4 planned, not yet executed)
 
@@ -76,6 +76,13 @@ None yet.
 - Phase 1: CMS vendor/localization pattern is unresolved until the spike runs — Phase 2+ content-model work depends on this being settled first.
 - Phase 4: CRM vendor is TBD (HubSpot/Zoho/Pipedrive) — form/webhook architecture keeps this behind one internal function so the choice doesn't block the phase, but should be settled with the business before or during Phase 4.
 - All phases: real content (certs, photos, translations) doesn't exist yet — build against realistic-shaped placeholders; Phase 6 includes a first-real-content-batch validation checkpoint.
+
+### Quick Tasks Completed
+
+| # | Description | Date | Commit | Directory |
+|---|-------------|------|--------|-----------|
+| 260723-duo | Rebrand company name Star Agrevolution → VNP Global (code defaults, metadata, seed copy, tests) | 2026-07-23 | 5d2b566 | [260723-duo-rebrand-company-name-star-agrevolution-t](./quick/260723-duo-rebrand-company-name-star-agrevolution-t/) |
+| 260723-e35 | Simplify primary navigation 9 → 5 per brief (Products, About, Global Markets, Certifications, Contact) | 2026-07-23 | 94245f2 | [260723-e35-simplify-primary-navigation-from-9-items](./quick/260723-e35-simplify-primary-navigation-from-9-items/) |
 
 ## Deferred Items
 

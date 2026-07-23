@@ -211,7 +211,7 @@ export const PAGES_EN_SEED = [
     layout: [
       compactHero(
         "Three Generations of Agricultural Expertise",
-        "Star Agrevolution began as a family farming operation and grew into a full-spectrum export house serving institutional and retail buyers worldwide.",
+        "VNP Global began as a family farming operation and grew into a full-spectrum export house serving institutional and retail buyers worldwide.",
       ),
       richText(
         "What began three generations ago as a family farming operation has grown into a vertically integrated export house — from our own fields and sourcing network through processing, quality control, and global logistics.",
@@ -327,7 +327,7 @@ export const PAGES_EN_SEED = [
       // No fabricated IEC/FSSAI/registration NUMBER anywhere below —
       // generic compliance prose only (T-02-08, Pitfall 5/9).
       richText(
-        "Star Agrevolution operates under a valid Importer-Exporter Code (IEC) registration and maintains compliance with India's export-import regulatory framework, including APEDA registration for agricultural exports.",
+        "VNP Global operates under a valid Importer-Exporter Code (IEC) registration and maintains compliance with India's export-import regulatory framework, including APEDA registration for agricultural exports.",
         "Our documentation team ensures every shipment carries the certificates, phytosanitary clearances, and customs paperwork your import authority requires — verifiable on request, not just claimed.",
       ),
       richText(

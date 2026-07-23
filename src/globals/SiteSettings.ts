@@ -21,7 +21,7 @@ export const SiteSettings: GlobalConfig = {
       name: "siteName",
       type: "text",
       required: true,
-      defaultValue: "Star Agrevolution",
+      defaultValue: "VNP Global",
       admin: {
         description:
           "Company/brand name shown in the header, footer, and copyright across the whole site. Also used as the logo's alt text.",
