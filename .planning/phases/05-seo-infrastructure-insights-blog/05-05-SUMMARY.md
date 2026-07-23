@@ -140,3 +140,7 @@ None new beyond the existing 05-05-PLAN.md `user_setup` entry (already flagged i
 ---
 *Phase: 05-seo-infrastructure-insights-blog*
 *Completed: 2026-07-23*
+
+## Self-Check: PASSED
+
+All created/modified files confirmed on disk (tests/int/sitemap.spec.ts, src/app/sitemap.ts, src/app/robots.ts, locale layout.tsx, product page.tsx, payload-fetch.ts, this SUMMARY.md) and all 3 task commit hashes (8631fff, 63393dd, 073eabe) confirmed present in git log.
