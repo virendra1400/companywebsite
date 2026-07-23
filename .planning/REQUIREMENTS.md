@@ -69,7 +69,7 @@ Requirement ID format: `[CATEGORY]-[NUMBER]`. All v1 items are hypotheses until 
 ### Insights / Blog (BLOG)
 
 - [x] **BLOG-01**: Blog/insights section + article template built in v1 (structure ready)
-- [ ] **BLOG-02**: Staff can publish articles via CMS per locale as content is written
+- [x] **BLOG-02**: Staff can publish articles via CMS per locale as content is written
 
 ### Analytics (ANALY)
 
@@ -145,7 +145,7 @@ Requirement ID format: `[CATEGORY]-[NUMBER]`. All v1 items are hypotheses until 
 | SEO-04 | Phase 5 | Complete |
 | SEO-05 | Phase 5 | Complete |
 | BLOG-01 | Phase 5 | Complete |
-| BLOG-02 | Phase 5 | Pending |
+| BLOG-02 | Phase 5 | Complete |
 | PERF-01 | Phase 6 | Pending |
 | PERF-02 | Phase 6 | Pending |
 | PERF-03 | Phase 6 | Pending |
