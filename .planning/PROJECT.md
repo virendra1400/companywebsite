@@ -12,7 +12,8 @@ A first-time international buyer who has never heard of the company leaves the s
 
 ### Validated
 
-(None yet — ship to validate)
+- [x] Technical SEO foundation: per-locale metadata, Organization/Product/BreadcrumbList structured data, localized XML sitemap, reciprocal hreflang — organic search is a primary export lead channel. Validated in Phase 5: SEO Infrastructure & Insights/Blog.
+- [x] Insights/blog surface for authority + SEO content. Validated in Phase 5: SEO Infrastructure & Insights/Blog.
 
 ### Active
 
@@ -29,8 +30,7 @@ A first-time international buyer who has never heard of the company leaves the s
 - [ ] Trust surface — Manufacturing & process: facility photos/video, production capacity, QC labs, packaging, cold-chain
 - [ ] Trust surface — Export track record: countries served (world map), years exporting, volume/shipment stats, incoterms handled
 - [ ] Trust surface — Company & compliance: about/leadership, downloadable company-profile PDF, IEC/registration, logistics & documentation support
-- [ ] Technical SEO foundation (metadata, structured data, sitemaps, per-locale hreflang, fast Core Web Vitals) — organic search is a primary export lead channel
-- [ ] Insights/blog surface for authority + SEO content
+- [ ] Fast Core Web Vitals across key pages (home, product, catalog) — Phase 6: Performance & Cross-Locale RTL QA Hardening
 - [ ] Analytics + lead/inquiry tracking
 
 ### Out of Scope
@@ -70,7 +70,7 @@ A first-time international buyer who has never heard of the company leaves the s
 | CMS = Payload; Arabic admin glyph rendering verified on live deploy (D-02 spike) | Spike on Vercel/Neon showed Arabic renders/shapes correctly in admin fields (RTL, joined glyphs); no Sanity fallback needed | ✓ Good |
 | Launch 4 languages: EN/AR(RTL)/FR/RU | GCC, Africa/Europe, and CIS/Central Asia coverage; English as source locale | — Pending |
 | Professional human translation, no AI pipeline | Machine-translated B2B copy destroys credibility; avoid over-engineering a translation system | — Pending |
-| SEO + insights/blog treated as table stakes | Importers discover suppliers via organic search ("bulk [product] supplier India") | — Pending |
+| SEO + insights/blog treated as table stakes | Importers discover suppliers via organic search ("bulk [product] supplier India") | ✓ Good — Phase 5 shipped metadata/structured-data/sitemap/hreflang + Insights CMS |
 | Placeholder content + content checklist | Little real content exists; ship structure, slot real assets via CMS later | — Pending |
 
 ## Evolution
@@ -91,4 +91,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-07-14 after initialization*
+*Last updated: 2026-07-23 after Phase 5 (SEO Infrastructure & Insights/Blog) completion*
