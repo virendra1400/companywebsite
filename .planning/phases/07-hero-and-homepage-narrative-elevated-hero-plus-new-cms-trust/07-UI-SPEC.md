@@ -225,7 +225,14 @@ Exceptions: none new.
 
 ## Typography
 
-Body tiers unchanged. This phase is the first to *apply* the Phase 6 display tiers to real content:
+**Provenance note — this is not new scope.** The 6-size/3-weight scale below (14/16/28/40/52/56, weights 400/600/300) is the project's existing, already-amended type system, not a tier this phase introduces. Sequence of record:
+
+- Phase 1's original UI-SPEC locked "exactly 4 sizes / 2 weights, 40px max."
+- `06-CONTEXT.md` Locked Decision #1 explicitly amended that lock **for display tiers only**, adding both `display-lg` (52px) and `display-xl` (56px) at a new light/thin weight (300) with negative tracking. Body tiers (label/body/heading) were left untouched by that amendment and remain untouched here.
+- `06-UI-SPEC.md` shipped that exact 6-size/3-weight scale (see its Typography section, lines 150-172) and its own Dimension 4 checker review **passed** it, reasoning that the count exceeds the generic 4-size/2-weight ceiling but is explicitly authorized by the CONTEXT.md display-tier amendment — the context-aware rule, not a flag/block.
+- `globals.css` already ships both `--text-display-lg: 52px` and `--text-display-xl: 56px` as live tokens today (Phase 6, merged, in production — see `dc8902a`/`b2b01c9`).
+
+**What Phase 7 actually does:** apply the already-existing `text-display-xl` token to a component (Hero `full` headline) for the first time. Display-lg and Display-xl both already exist as of Phase 6 — Phase 7 adds zero new sizes and zero new weights to the project's type system. Body tiers unchanged.
 
 | Role | Size | Weight | Line Height | Applies to |
 |------|------|--------|-------------|------------|
@@ -233,9 +240,10 @@ Body tiers unchanged. This phase is the first to *apply* the Phase 6 display tie
 | Body | 16px | 400 | 1.5 | Subhead, quote text, feature body (unchanged) |
 | Heading | 28px | 600 | 1.2 | Section titles across all blocks (unchanged) |
 | Display (existing) | 40px | 600 | 1.15 | Hero `compact` headline, StatsBand/ExportMap stat figures (unchanged) |
-| **Display XL** | **56px** | **300 (light)** | **1.05** | **Hero `full` headline only** — `text-display-xl font-display font-light tracking-display` |
+| Display LG (existing, Phase 6, not applied this phase) | 52px | 300 (light) | 1.1 | No usage this phase — carried forward for completeness only |
+| **Display XL (existing token, Phase 6 — first applied this phase)** | **56px** | **300 (light)** | **1.05** | **Hero `full` headline only** — `text-display-xl font-display font-light tracking-display` |
 
-`font-display` resolves to Geist on `en`/`fr`/`ru`, falls back to Plex on `ar` (Phase 6 wiring, unchanged). `font-light` stays reserved for this one usage — no other element in this phase uses it.
+`font-display` resolves to Geist on `en`/`fr`/`ru`, falls back to Plex on `ar` (Phase 6 wiring, unchanged). `font-light` stays reserved for the two existing display tiers — no other element in this phase uses it.
 
 ---
 
