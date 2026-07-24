@@ -23,8 +23,8 @@ export function CertCard({ name, subtitle, logo, pdf, halal, t }: CertCardProps)
     <Card
       className={
         halal
-          ? "col-span-2 gap-sm border-2 border-accent-600 bg-white p-lg md:col-span-2"
-          : "gap-sm border border-neutral-300 bg-white p-lg"
+          ? "col-span-2 gap-sm rounded-card border-2 border-accent-600 bg-white p-lg shadow-card md:col-span-2"
+          : "gap-sm rounded-card border border-neutral-300 bg-white p-lg shadow-card"
       }
     >
       {halal ? <Badge className="mb-sm w-fit bg-accent-100 text-accent-800">{t("halalBadge")}</Badge> : null}
