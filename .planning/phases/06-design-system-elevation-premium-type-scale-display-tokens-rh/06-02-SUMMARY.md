@@ -65,8 +65,9 @@ coverage:
         status: pass
       - kind: manual_procedural
         ref: "live-render confirmation on a card-bearing page (products/insights/certifications)"
-        status: human_needed
+        status: unknown
     human_judgment: true
+    rationale: "Card visual convergence was confirmed by exact-string grep on the three components, but no live render of a card-bearing page (products/insights/certifications) was captured in this session — needs a human look, not just source assertions."
   - id: D4c
     description: "lint:rtl green, build succeeds, existing tests pass"
     requirement: "D-04"
@@ -79,10 +80,12 @@ coverage:
     description: "Homepage + one trust page pass full visual-regression sign-off"
     requirement: "D-04 / CONTEXT.md non-negotiable"
     verification:
-      - kind: manual
+      - kind: manual_procedural
         ref: "Human screenshot/browser review of /en and a trust page (certifications or product detail)"
-        status: pending
+        status: unknown
     human_judgment: true
+    rationale: "This is the CONTEXT.md non-negotiable visual-regression backstop — a subjective layout/no-overlap judgment call that only a human eyes-on-the-live-site check can close, not a source assertion."
+---
 
 ## What Was Built
 
