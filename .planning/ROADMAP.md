@@ -159,12 +159,12 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 **Requirements**: TBD
 **UI hint**: yes
 **Depends on:** Phase 5
-**Plans:** 1/2 plans executed
+**Plans:** 2/2 plans executed (implementation complete; visual-regression sign-off pending human review)
 
 Plans:
 
 - [x] 06-01-PLAN.md — Display-tier type-scale tokens, locale-scoped Geist display font, UI-SPEC amendment (wave 1)
-- [ ] 06-02-PLAN.md — Apply 96px section rhythm across 9 blocks + hairline card recipe on 3 cards (wave 2)
+- [x] 06-02-PLAN.md — Apply 96px section rhythm across 9 blocks + hairline card recipe on 3 cards (wave 2)
 
 ### Phase 7: Hero and Homepage Narrative — elevated hero plus new CMS trust/manufacturing/process/testimonial blocks
 
