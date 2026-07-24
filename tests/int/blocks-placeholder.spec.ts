@@ -28,6 +28,9 @@ vi.mock("@/components/blocks/RenderBlocks", () => ({
 
 const { FeatureGridBlock } = await import("@/components/blocks/FeatureGridBlock");
 const { StatsBandBlock } = await import("@/components/blocks/StatsBandBlock");
+const { TrustBarBlock } = await import("@/components/blocks/TrustBarBlock");
+const { ExportProcessBlock } = await import("@/components/blocks/ExportProcessBlock");
+const { TestimonialsBlock } = await import("@/components/blocks/TestimonialsBlock");
 
 const EMPTY_STATE_TEXT = "This section is being updated";
 
@@ -83,5 +86,77 @@ describe("FeatureGrid/StatsBand placeholder resilience", () => {
 
     const html = renderToStaticMarkup(await StatsBandBlock({ block, index: 1 }));
     expect(html).toContain(EMPTY_STATE_TEXT);
+  });
+});
+
+// Phase 7 Plan 2: TrustBar/ExportProcess/Testimonials resilience (D-05).
+describe("TrustBar/ExportProcess/Testimonials placeholder resilience", () => {
+  it("TrustBar renders the empty-state line for an empty items[], never crashes", async () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const block = { blockType: "trustBar", items: [] } as any;
+
+    const html = renderToStaticMarkup(await TrustBarBlock({ block, index: 0 }));
+    expect(html).toContain(EMPTY_STATE_TEXT);
+  });
+
+  it("TrustBar with a logo-less item renders the text-chip fallback, never a broken image", async () => {
+    const block = {
+      blockType: "trustBar",
+      items: [{ name: "Gulf & Middle East Importers" }],
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } as any;
+
+    const html = renderToStaticMarkup(await TrustBarBlock({ block, index: 0 }));
+    expect(html).toContain("Gulf &amp; Middle East Importers");
+  });
+
+  it("ExportProcess renders the empty-state line for an empty steps[], never crashes", async () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const block = { blockType: "exportProcess", steps: [] } as any;
+
+    const html = renderToStaticMarkup(await ExportProcessBlock({ block, index: 1 }));
+    expect(html).toContain(EMPTY_STATE_TEXT);
+  });
+
+  it("ExportProcess with two steps renders literal '01'/'02' badge text", async () => {
+    const block = {
+      blockType: "exportProcess",
+      steps: [
+        { title: "Inquiry", body: "Share your product and target quantity." },
+        { title: "Quote", body: "Receive a detailed quote." },
+      ],
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } as any;
+
+    const html = renderToStaticMarkup(await ExportProcessBlock({ block, index: 1 }));
+    expect(html).toContain("01");
+    expect(html).toContain("02");
+  });
+
+  it("Testimonials renders the empty-state line for an empty items[], never crashes", async () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const block = { blockType: "testimonials", items: [] } as any;
+
+    const html = renderToStaticMarkup(await TestimonialsBlock({ block, index: 0 }));
+    expect(html).toContain(EMPTY_STATE_TEXT);
+  });
+
+  it("Testimonials renders a quote with full attribution without throwing", async () => {
+    const block = {
+      blockType: "testimonials",
+      items: [
+        {
+          quote: "Consistent grading and on-time dispatch, shipment after shipment.",
+          name: "Procurement Lead",
+          company: "GCC-Based Food Importer",
+          country: "United Arab Emirates",
+        },
+      ],
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } as any;
+
+    const html = renderToStaticMarkup(await TestimonialsBlock({ block, index: 0 }));
+    expect(html).toContain("Procurement Lead");
+    expect(html).toContain("GCC-Based Food Importer · United Arab Emirates");
   });
 });
