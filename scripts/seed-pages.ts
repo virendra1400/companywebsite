@@ -57,24 +57,28 @@ const FACILITY_PHOTOS: Record<string, string> = {
   "Packing & Dispatch": "scripts/seed-assets/facility-packing-line.svg",
 };
 
-// Mutates the 'manufacturing' entry's mediaGallery block in PAGES_EN_SEED
-// in place, uploading (idempotently) a Media doc per caption and attaching
-// its id — runs BEFORE the create loop below so the required `image` field
-// is always populated at creation time. Re-running is safe: upsertMediaByAlt
-// never duplicates, and this always re-injects the same ids.
+// Mutates EVERY page's mediaGallery block(s) in PAGES_EN_SEED in place,
+// uploading (idempotently) a Media doc per caption and attaching its id —
+// runs BEFORE the create loop below so the required `image` field is always
+// populated at creation time. Re-running is safe: upsertMediaByAlt never
+// duplicates, and this always re-injects the same ids. Generalized in 07-03
+// from a single manufacturing-only lookup so the homepage's reused
+// "Manufacturing Excellence" MediaGallery instance (same caption keys) also
+// gets its placeholder photos, without duplicating the upload logic.
 async function injectFacilityPhotos() {
-  const manufacturingPage = PAGES_EN_SEED.find((p) => p.slug === "manufacturing");
-  const galleryBlock = manufacturingPage?.layout.find(
-    (b): b is Extract<(typeof manufacturingPage.layout)[number], { blockType: "mediaGallery" }> =>
-      b.blockType === "mediaGallery",
-  );
-  if (!galleryBlock) return;
-
-  for (const item of galleryBlock.items) {
-    const assetPath = FACILITY_PHOTOS[item.caption];
-    if (!assetPath) continue;
-    const media = await upsertMediaByAlt(`${item.caption} placeholder photo`, assetPath);
-    item.image = media.id;
+  for (const page of PAGES_EN_SEED) {
+    const galleryBlocks = page.layout.filter(
+      (b): b is Extract<(typeof page.layout)[number], { blockType: "mediaGallery" }> =>
+        b.blockType === "mediaGallery",
+    );
+    for (const galleryBlock of galleryBlocks) {
+      for (const item of galleryBlock.items) {
+        const assetPath = FACILITY_PHOTOS[item.caption];
+        if (!assetPath) continue;
+        const media = await upsertMediaByAlt(`${item.caption} placeholder photo`, assetPath);
+        item.image = media.id;
+      }
+    }
   }
 }
 
