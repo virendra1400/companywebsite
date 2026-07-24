@@ -16,7 +16,7 @@ Six phases carry the site from a locale-and-CMS-correct foundation to a fully la
 - [x] **Phase 3: Product Catalog** - Category browsing and product detail pages, scalable via CMS without rebuilds (completed 2026-07-15)
 - [x] **Phase 4: Lead Conversion — RFQ, Inquiry, WhatsApp, Analytics** - Visitors convert via forms/WhatsApp with spam defense, deliverable email, and tracked conversion events (completed 2026-07-21)
 - [x] **Phase 5: SEO Infrastructure & Insights/Blog** - Correct per-locale metadata/hreflang/sitemaps/structured data; blog section live (completed 2026-07-23)
-- [ ] **Phase 6: Design System Elevation** - Premium type scale, display tokens, rhythm/spacing (v2.0 Phase A)
+- [x] **Phase 6: Design System Elevation** - Premium type scale, display tokens, rhythm/spacing (v2.0 Phase A) (completed 2026-07-24)
 - [ ] **Phase 7: Hero & Homepage Narrative** - Elevated hero + new CMS trust blocks (v2.0 Phase B)
 - [ ] **Phase 8: Component Polish Pass** - Amended system applied consistently (v2.0 Phase C)
 - [ ] **Phase 9: Motion & Micro-interactions** - Reveal/stagger/hover, reduced-motion safe (v2.0 Phase D)
@@ -159,7 +159,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 **Requirements**: TBD
 **UI hint**: yes
 **Depends on:** Phase 5
-**Plans:** 2/2 plans executed (implementation complete; visual-regression sign-off pending human review)
+**Plans:** 2/2 plans complete
 
 Plans:
 
