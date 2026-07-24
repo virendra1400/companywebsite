@@ -10,6 +10,9 @@ import { DocumentCardBlock } from "./DocumentCardBlock";
 import { MediaGalleryBlock } from "./MediaGalleryBlock";
 import { ExportMapBlock } from "./ExportMapBlock";
 import { ContactBlockView } from "./ContactBlockView";
+import { TrustBarBlock } from "./TrustBarBlock";
+import { ExportProcessBlock } from "./ExportProcessBlock";
+import { TestimonialsBlock } from "./TestimonialsBlock";
 
 type LayoutBlock = NonNullable<Page["layout"]>[number];
 
@@ -30,6 +33,9 @@ const BLOCK_MAP: Record<string, ComponentType<{ block: any; index: number }>> = 
   mediaGallery: MediaGalleryBlock,
   exportMap: ExportMapBlock,
   contactBlock: ContactBlockView,
+  trustBar: TrustBarBlock,
+  exportProcess: ExportProcessBlock,
+  testimonials: TestimonialsBlock,
 };
 
 // UI-SPEC "Section rhythm rule": two consecutive blocks never share the same

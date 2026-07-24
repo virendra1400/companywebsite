@@ -321,6 +321,47 @@ export interface Page {
             blockName?: string | null;
             blockType: 'contactBlock';
           }
+        | {
+            sectionTitle?: string | null;
+            items?:
+              | {
+                  logo?: (number | null) | Media;
+                  name: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'trustBar';
+          }
+        | {
+            sectionTitle?: string | null;
+            steps?:
+              | {
+                  title: string;
+                  body: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'exportProcess';
+          }
+        | {
+            sectionTitle?: string | null;
+            items?:
+              | {
+                  quote: string;
+                  name: string;
+                  company?: string | null;
+                  country?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'testimonials';
+          }
       )[]
     | null;
   updatedAt: string;
@@ -713,6 +754,50 @@ export interface PagesSelect<T extends boolean = true> {
           | {
               intro?: T;
               address?: T;
+              id?: T;
+              blockName?: T;
+            };
+        trustBar?:
+          | T
+          | {
+              sectionTitle?: T;
+              items?:
+                | T
+                | {
+                    logo?: T;
+                    name?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        exportProcess?:
+          | T
+          | {
+              sectionTitle?: T;
+              steps?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        testimonials?:
+          | T
+          | {
+              sectionTitle?: T;
+              items?:
+                | T
+                | {
+                    quote?: T;
+                    name?: T;
+                    company?: T;
+                    country?: T;
+                    id?: T;
+                  };
               id?: T;
               blockName?: T;
             };

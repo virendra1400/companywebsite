@@ -172,12 +172,12 @@ Plans:
 **Requirements**: TBD
 **UI hint**: yes
 **Depends on:** Phase 6
-**Plans:** 1/3 plans executed
+**Plans:** 2/3 plans executed
 
 Plans:
 
 - [x] 07-01-PLAN.md — Elevate the homepage `full` Hero to the display-xl tier (Phase-6 tokens, softened gradient); `compact` untouched [Wave 1]
-- [ ] 07-02-PLAN.md — Build + register 3 new CMS blocks (TrustBar, ExportProcess, Testimonials) + renderers + Postgres migration [Wave 1]
+- [x] 07-02-PLAN.md — Build + register 3 new CMS blocks (TrustBar, ExportProcess, Testimonials) + renderers + Postgres migration [Wave 1]
 - [ ] 07-03-PLAN.md — Compose + seed the 11-block homepage narrative (incl. reused Manufacturing MediaGallery+StatsBand) [Wave 2, depends 07-02]
 
 ### Phase 8: Component Polish Pass — apply amended design system across cards, buttons, forms, CTA bands

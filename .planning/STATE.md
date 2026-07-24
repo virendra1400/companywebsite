@@ -3,17 +3,17 @@ gsd_state_version: 1.0
 milestone: v2.0
 milestone_name: Premium Redesign
 current_phase: 07
-current_phase_name: Hero and Homepage Narrative — elevated hero plus new CMS trust/manufacturing/process/testimonial blocks
+current_phase_name: hero-and-homepage-narrative-elevated-hero-plus-new-cms-trust
 status: executing
-stopped_at: Completed 07-01-PLAN.md
-last_updated: "2026-07-24T09:37:43.370Z"
+stopped_at: Completed 07-01-PLAN.md and 07-02-PLAN.md (parallel wave 1)
+last_updated: "2026-07-24T09:43:00.000Z"
 last_activity: 2026-07-24
-last_activity_desc: Phase 07 execution started
+last_activity_desc: Phase 07 Wave 1 complete (07-01 hero elevation, 07-02 new blocks); 07-03 (homepage seed) remains
 progress:
   total_phases: 5
   completed_phases: 1
   total_plans: 5
-  completed_plans: 3
+  completed_plans: 4
 ---
 
 # Project State
@@ -23,14 +23,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-07-14)
 
 **Core value:** A first-time international buyer who has never heard of the company leaves the site trusting it enough to send a serious inquiry/RFQ.
-**Current focus:** Phase 06 — design-system-elevation-premium-type-scale-display-tokens-rh
+**Current focus:** Phase 07 — hero-and-homepage-narrative-elevated-hero-plus-new-cms-trust
 
 ## Current Position
 
-Phase: 07 — Hero and Homepage Narrative — elevated hero plus new CMS trust/manufacturing/process/testimonial blocks
-Plan: 2 of 3
-Status: Ready to execute
-Last activity: 2026-07-24 — Phase 07 execution started
+Phase: 07 (hero-and-homepage-narrative-elevated-hero-plus-new-cms-trust) — EXECUTING
+Plan: 2 of 3 complete (07-01, 07-02); 07-03 (homepage seed, depends on 07-02) remains
+Status: Executing Phase 07
+Last activity: 2026-07-24 — Phase 07 Wave 1 complete (07-01 + 07-02)
 
 ## Performance Metrics
 
@@ -60,6 +60,7 @@ Last activity: 2026-07-24 — Phase 07 execution started
 |------|----------|-------|-------|
 | Phase 06 P01 | 20min | 3 tasks | 3 files |
 | Phase 07 P01 | 15min | 1 tasks | 1 files |
+| Phase 07 P02 | 23min | 2 tasks | 14 files |
 
 ## Accumulated Context
 
@@ -72,7 +73,8 @@ Recent decisions affecting current work:
 - Roadmap: Payload Arabic RTL admin-chrome limitation (if Payload chosen) must be verified as cosmetic-only in Phase 1, not assumed away.
 - Roadmap: hreflang, form spam/email-auth, and per-locale Core Web Vitals are built into their implementation phases (1, 4, 6), not deferred to launch-day polish.
 - [Phase ?]: Copied .env/payload.db from main checkout into worktree (gitignored, dev-only) to run build/test verification end-to-end
-- [Phase ?]: Hero elevation: applied Phase 6's exact literal isFull-conditional class strings verbatim from 07-UI-SPEC.md Part 1 — no deviations
+- Phase 07 P01: Hero elevation: applied Phase 6's exact literal isFull-conditional class strings verbatim from 07-UI-SPEC.md Part 1 — no deviations
+- Phase 07 P02: Built TrustBar/ExportProcess/Testimonials Payload blocks + renderers, registered end-to-end, regenerated payload-types.ts, committed an additive Postgres migration (stripped an unrelated pre-existing site_settings.site_name schema-drift line from the auto-generated diff to keep it scoped)
 
 ### Pending Todos
 
@@ -101,6 +103,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-07-24T09:37:43.351Z
-Stopped at: Completed 07-01-PLAN.md
+Last session: 2026-07-24T09:43:00.000Z
+Stopped at: Completed 07-01-PLAN.md and 07-02-PLAN.md (parallel wave 1)
 Resume file: None
