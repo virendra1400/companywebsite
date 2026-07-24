@@ -22,7 +22,7 @@ export async function DocumentCardBlock({
   const file = block.file && typeof block.file === "object" ? (block.file as Media) : null;
 
   return (
-    <section className={`${sectionBg(index)} px-md py-2xl md:px-lg md:py-3xl xl:px-xl`}>
+    <section className={`${sectionBg(index)} px-md py-2xl md:px-lg md:py-3xl xl:px-xl xl:py-4xl`}>
       {/* Bracket value, NOT the named max-w-sm utility: this project's custom
           --spacing-sm theme token (8px) collides with Tailwind v4's named
           max-w-{size} scale, silently shrinking it to 8px — see

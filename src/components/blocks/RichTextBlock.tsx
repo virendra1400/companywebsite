@@ -10,7 +10,7 @@ export function RichTextBlock({ block, index }: { block: RichTextData; index: nu
   if (!block.content) return null;
 
   return (
-    <section className={`${sectionBg(index)} px-md py-2xl md:px-lg md:py-3xl xl:px-xl`}>
+    <section className={`${sectionBg(index)} px-md py-2xl md:px-lg md:py-3xl xl:px-xl xl:py-4xl`}>
       <div className="mx-auto max-w-[720px] text-body">
         <RichText data={block.content} />
       </div>

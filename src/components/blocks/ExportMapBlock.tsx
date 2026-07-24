@@ -102,7 +102,7 @@ export async function ExportMapBlock({ block, index }: { block: ExportMapData; i
   );
 
   return (
-    <section className={`${sectionBg(index)} px-md py-2xl md:px-lg md:py-3xl xl:px-xl`}>
+    <section className={`${sectionBg(index)} px-md py-2xl md:px-lg md:py-3xl xl:px-xl xl:py-4xl`}>
       <div className="mx-auto max-w-[1280px]">
         {block.sectionTitle ? (
           <h2 className="mb-lg text-center text-heading font-semibold">{block.sectionTitle}</h2>

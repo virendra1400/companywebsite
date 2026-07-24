@@ -22,7 +22,7 @@ export async function ContactBlockView({ block, index }: { block: ContactBlockDa
   )}`;
 
   return (
-    <section className={`${sectionBg(index)} px-md py-2xl md:px-lg md:py-3xl xl:px-xl`}>
+    <section className={`${sectionBg(index)} px-md py-2xl md:px-lg md:py-3xl xl:px-xl xl:py-4xl`}>
       <div className="mx-auto grid max-w-[1280px] grid-cols-1 gap-2xl lg:grid-cols-2">
         <div className="flex flex-col gap-md">
           {block.intro ? <p className="text-body">{block.intro}</p> : null}
