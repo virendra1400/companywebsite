@@ -23,6 +23,23 @@ export async function HeroBlock({ block }: { block: HeroData; index: number }) {
   // FOUND-03: force Western (latn) digits — Intl defaults `ar` to Arabic-Indic.
   const buyers = format.number(60, "latn");
 
+  // Phase 7 D-01/D-02: elevate the `full` (homepage) hero to the Phase 6
+  // display-xl tier; `compact` (every interior page) stays on the prior
+  // classes verbatim.
+  const heroPadding = isFull
+    ? "px-md py-3xl md:px-lg md:py-3xl xl:px-xl xl:py-4xl"
+    : "px-md py-3xl md:px-lg xl:px-xl";
+  const overlayClass = isFull
+    ? "bg-gradient-to-t from-primary-900/75 via-primary-900/25 to-transparent"
+    : "bg-gradient-to-t from-primary-900/80 via-primary-900/30 to-transparent";
+  const stackGap = isFull ? "gap-xl" : "gap-lg";
+  const headlineClass = isFull
+    ? "max-w-[46rem] text-display-xl font-display font-light tracking-display text-white"
+    : "max-w-[42rem] text-display font-semibold text-white";
+  const subheadClass = isFull
+    ? "max-w-[38rem] text-body text-primary-100"
+    : "max-w-[36rem] text-body text-primary-100";
+
   // heroImage is a relation: number (id, not populated) | Media (populated) | null/undefined.
   const image =
     block.heroImage && typeof block.heroImage === "object" ? (block.heroImage as Media) : null;
@@ -30,7 +47,7 @@ export async function HeroBlock({ block }: { block: HeroData; index: number }) {
   return (
     <section
       data-testid="hero"
-      className={`relative flex flex-col justify-center overflow-hidden bg-primary-900 px-md py-3xl text-white md:px-lg xl:px-xl ${
+      className={`relative flex flex-col justify-center overflow-hidden bg-primary-900 text-white ${heroPadding} ${
         isFull ? "min-h-[70dvh]" : "min-h-[320px] md:min-h-[400px]"
       }`}
     >
@@ -47,18 +64,15 @@ export async function HeroBlock({ block }: { block: HeroData; index: number }) {
           className="object-cover"
         />
       ) : null}
+      <div aria-hidden="true" className={`absolute inset-0 ${overlayClass}`} />
       <div
-        aria-hidden="true"
-        className="absolute inset-0 bg-gradient-to-t from-primary-900/80 via-primary-900/30 to-transparent"
-      />
-      <div className="relative mx-auto flex w-full max-w-[1280px] flex-col items-start gap-lg text-start">
+        className={`relative mx-auto flex w-full max-w-[1280px] flex-col items-start text-start ${stackGap}`}
+      >
         {block.eyebrow ? (
           <p className="text-label tracking-wide text-primary-100">{block.eyebrow}</p>
         ) : null}
-        <h1 className="max-w-[42rem] text-display font-semibold text-white">{block.headline}</h1>
-        {block.subhead ? (
-          <p className="max-w-[36rem] text-body text-primary-100">{block.subhead}</p>
-        ) : null}
+        <h1 className={headlineClass}>{block.headline}</h1>
+        {block.subhead ? <p className={subheadClass}>{block.subhead}</p> : null}
         <div className="flex flex-col items-start gap-sm sm:flex-row sm:items-center">
           <Button asChild className="hover:bg-primary-500 focus-visible:ring-accent-600">
             {block.primaryCta?.href ? (
