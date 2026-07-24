@@ -52,6 +52,30 @@ function statsBand(stats: { value: string; label: string }[], sectionTitle?: str
   return { blockType: "statsBand" as const, sectionTitle, stats };
 }
 
+// UI-SPEC §2a — generic editor-authored logo/label row, no Certifications-
+// collection binding (that's CertStrip's job, not this block's — see
+// CONTEXT.md D-03). Seed items below are logo-less region/segment
+// descriptors, never fabricated named clients (Pitfall 5).
+function trustBar(sectionTitle: string, items: { name: string }[]) {
+  return { blockType: "trustBar" as const, sectionTitle, items };
+}
+
+// UI-SPEC §2b — ordered inquiry-to-delivery steps, rendered as a semantic
+// <ol> with literal "01"-"05" badge strings (never Intl.NumberFormat).
+function exportProcess(sectionTitle: string, steps: { title: string; body: string }[]) {
+  return { blockType: "exportProcess" as const, sectionTitle, steps };
+}
+
+// UI-SPEC §2c — placeholder testimonials pending real client quotes. Per
+// Pitfall 5: role + generic buyer-category + real served country, never a
+// fabricated-but-real-sounding named-client endorsement.
+function testimonials(
+  sectionTitle: string,
+  items: { quote: string; name: string; company?: string; country?: string }[],
+) {
+  return { blockType: "testimonials" as const, sectionTitle, items };
+}
+
 // TRUST-04 — realistic served-country set (GCC + Europe + a few others),
 // every code present in src/lib/country-names.ts and drawn as a tile in
 // src/lib/world-map-svg.ts. D-06: static SVG, no map library.
@@ -164,13 +188,24 @@ export const PAGES_EN_SEED = [
   {
     slug: "home",
     title: "Home",
-    // UI-SPEC Page Composition "Homepage" row order: Hero -> FeatureGrid
-    // (value props) -> CertStrip -> StatsBand -> ExportMap (02-06 gap) ->
-    // CTABand. FeatureGrid comes BEFORE CertStrip here, matching this same
-    // plan's frontmatter must_haves truth and the UI-SPEC table (see
-    // Deviations — the plan's own Task 2 action text inverted this order).
+    // Phase 7 UI-SPEC Part 3 — full 11-block trust narrative: Hero(full) ->
+    // TrustBar -> FeatureGrid(icon, "Why Choose Us") -> MediaGallery
+    // (condensed "Manufacturing Excellence" teaser, reusing the /manufacturing
+    // captions+figures verbatim) -> StatsBand(capacity/QC/cold-chain) ->
+    // CertStrip -> StatsBand(15+/40+/500+) -> ExportProcess -> ExportMap
+    // (compact) -> Testimonials -> CTABand. The two StatsBand instances carry
+    // distinct label sets (capacity vs. years/countries/shipments) so
+    // "Years Exporting" always resolves to the later (row 7) band — see
+    // key_links in 07-03-PLAN.md.
     layout: [
       homeHero,
+      trustBar("Trusted by Importers Across the Globe", [
+        { name: "Gulf & Middle East Importers" },
+        { name: "European Distributors" },
+        { name: "North American Buyers" },
+        { name: "African Trade Partners" },
+        { name: "Southeast Asian Wholesalers" },
+      ]),
       featureGrid("icon", [
         {
           icon: "shieldCheck",
@@ -193,14 +228,78 @@ export const PAGES_EN_SEED = [
           body: "Established supply lines across the Gulf, Europe, and beyond — built for buyers who need a partner that already understands cross-border logistics.",
         },
       ]),
+      // Condensed "Manufacturing Excellence" teaser — 3 of the 4 existing
+      // /manufacturing MediaGallery captions (Packing & Dispatch dropped),
+      // paired with the /manufacturing StatsBand figures reused verbatim.
+      // Captions MUST match FACILITY_PHOTOS keys in scripts/seed-pages.ts.
+      mediaGallery(
+        [
+          { caption: "Processing Floor" },
+          { caption: "Quality Control Lab" },
+          { caption: "Cold Storage" },
+        ],
+        "Manufacturing Excellence",
+      ),
+      statsBand([
+        { value: "500+", label: "Metric Tons Monthly Capacity" },
+        { value: "3", label: "In-House QC Checkpoints" },
+        { value: "24/7", label: "Cold-Chain Monitoring" },
+      ]),
       certStrip("strip"),
       statsBand([
         { value: "15+", label: "Years Exporting" },
         { value: "40+", label: "Countries Served" },
         { value: "500+", label: "Container Shipments" },
       ]),
+      exportProcess("How an Order Moves From Inquiry to Delivery", [
+        {
+          title: "Inquiry",
+          body: "Share your product, target quantity, and destination port — our export team responds within one business day.",
+        },
+        {
+          title: "Quote",
+          body: "Receive a detailed quote covering pricing, incoterms, and lead time, scoped to your order volume.",
+        },
+        {
+          title: "Production & QC",
+          body: "Your order enters production under documented SOPs, with quality checkpoints at intake, mid-process, and pre-dispatch.",
+        },
+        {
+          title: "Export Documentation",
+          body: "Phytosanitary certificates, packing lists, and certificates of origin are prepared ahead of dispatch, so customs clearance stays on schedule.",
+        },
+        {
+          title: "Delivery",
+          body: "Your shipment is tracked in transit to your port, with cold-chain and handling standards maintained until arrival.",
+        },
+      ]),
       exportMap("compact", [
         { value: `${SERVED_COUNTRY_CODES.length}+`, label: "Countries We Currently Export To" },
+      ]),
+      // Placeholder testimonials — see the `testimonials()` helper comment
+      // above (Pitfall 5: role + buyer-category + real served country, not a
+      // fabricated named-client endorsement) — pending real client quotes.
+      testimonials("What Our Buyers Say", [
+        {
+          quote:
+            "Consistent grading and on-time dispatch, shipment after shipment — exactly what we need from an overseas supplier.",
+          name: "Procurement Lead",
+          company: "GCC-Based Food Importer",
+          country: "United Arab Emirates",
+        },
+        {
+          quote:
+            "Their documentation is always complete before the container leaves port, which has cut our customs clearance time significantly.",
+          name: "Import Operations Manager",
+          company: "European Distribution Partner",
+          country: "Germany",
+        },
+        {
+          quote: "We've scaled our order volume three times over and quality has never dipped.",
+          name: "Category Buyer",
+          company: "Wholesale Import Group",
+          country: "Singapore",
+        },
       ]),
       ctaBand("Ready to Source With Confidence?"),
     ],

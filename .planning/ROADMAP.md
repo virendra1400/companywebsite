@@ -17,7 +17,7 @@ Six phases carry the site from a locale-and-CMS-correct foundation to a fully la
 - [x] **Phase 4: Lead Conversion — RFQ, Inquiry, WhatsApp, Analytics** - Visitors convert via forms/WhatsApp with spam defense, deliverable email, and tracked conversion events (completed 2026-07-21)
 - [x] **Phase 5: SEO Infrastructure & Insights/Blog** - Correct per-locale metadata/hreflang/sitemaps/structured data; blog section live (completed 2026-07-23)
 - [x] **Phase 6: Design System Elevation** - Premium type scale, display tokens, rhythm/spacing (v2.0 Phase A) (completed 2026-07-24)
-- [ ] **Phase 7: Hero & Homepage Narrative** - Elevated hero + new CMS trust blocks (v2.0 Phase B)
+- [x] **Phase 7: Hero & Homepage Narrative** - Elevated hero + new CMS trust blocks (v2.0 Phase B) (completed 2026-07-24)
 - [ ] **Phase 8: Component Polish Pass** - Amended system applied consistently (v2.0 Phase C)
 - [ ] **Phase 9: Motion & Micro-interactions** - Reveal/stagger/hover, reduced-motion safe (v2.0 Phase D)
 - [ ] **Phase 10: Hardening** - CWV, a11y, SEO deltas, cross-locale RTL QA (v2.0 Phase E, absorbs former Phase 6)
@@ -172,13 +172,13 @@ Plans:
 **Requirements**: TBD
 **UI hint**: yes
 **Depends on:** Phase 6
-**Plans:** 2/3 plans executed
+**Plans:** 3/3 plans executed
 
 Plans:
 
 - [x] 07-01-PLAN.md — Elevate the homepage `full` Hero to the display-xl tier (Phase-6 tokens, softened gradient); `compact` untouched [Wave 1]
 - [x] 07-02-PLAN.md — Build + register 3 new CMS blocks (TrustBar, ExportProcess, Testimonials) + renderers + Postgres migration [Wave 1]
-- [ ] 07-03-PLAN.md — Compose + seed the 11-block homepage narrative (incl. reused Manufacturing MediaGallery+StatsBand) [Wave 2, depends 07-02]
+- [x] 07-03-PLAN.md — Compose + seed the 11-block homepage narrative (incl. reused Manufacturing MediaGallery+StatsBand) [Wave 2, depends 07-02]
 
 ### Phase 8: Component Polish Pass — apply amended design system across cards, buttons, forms, CTA bands
 
