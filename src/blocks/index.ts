@@ -11,3 +11,6 @@ export { DocumentCard } from "./DocumentCard";
 export { MediaGallery } from "./MediaGallery";
 export { ExportMap } from "./ExportMap";
 export { ContactBlock } from "./ContactBlock";
+export { TrustBar } from "./TrustBar";
+export { ExportProcess } from "./ExportProcess";
+export { Testimonials } from "./Testimonials";
