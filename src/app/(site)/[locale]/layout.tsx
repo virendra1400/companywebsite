@@ -8,6 +8,7 @@ import Script from "next/script";
 import { routing, RTL_LOCALES } from "@/i18n/routing";
 import { GlobalHeader } from "@/components/chrome/GlobalHeader";
 import { GlobalFooter } from "@/components/chrome/GlobalFooter";
+import { WhatsAppFloatingButton } from "@/components/chrome/WhatsAppFloatingButton";
 import { getSiteBrand } from "@/lib/payload-fetch";
 import { JsonLd, organizationJsonLd } from "@/lib/seo/json-ld";
 import "../../globals.css";
@@ -89,6 +90,7 @@ export default async function LocaleLayout({
         <NextIntlClientProvider>
           <GlobalHeader siteName={siteName} logoUrl={logoUrl} />
           <div className="flex-1">{children}</div>
+          <WhatsAppFloatingButton />
           <GlobalFooter siteName={siteName} logoUrl={logoUrl} />
         </NextIntlClientProvider>
       </body>
