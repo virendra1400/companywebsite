@@ -1,7 +1,10 @@
 // Brand mark for the chrome: renders the CMS logo image when SiteSettings.logo
 // is set, otherwise the text wordmark (siteName). One component, reused by
 // header / footer / mobile so brand rendering stays consistent.
-// `variant` controls the text-wordmark color; the logo image is color-agnostic.
+// `variant` controls the text-wordmark color. The logo image itself keeps its
+// uploaded colors on light backgrounds; on dark (footer) it's forced to a
+// white silhouette via CSS filter (brightness-0 invert) so any single
+// uploaded asset stays legible on both backgrounds without a second upload.
 
 type BrandMarkProps = {
   siteName: string;
@@ -14,7 +17,17 @@ export function BrandMark({ siteName, logoUrl, variant = "light" }: BrandMarkPro
     // Logo served from Blob CDN (unoptimized per next.config); plain <img> keeps
     // arbitrary aspect ratios simple. Height-constrained, width auto.
     // eslint-disable-next-line @next/next/no-img-element
-    return <img src={logoUrl} alt={siteName} className="h-11 w-auto sm:h-12 lg:h-14" />;
+    return (
+      <img
+        src={logoUrl}
+        alt={siteName}
+        className={
+          variant === "dark"
+            ? "h-12 w-auto brightness-0 invert lg:h-14"
+            : "h-12 w-auto lg:h-14"
+        }
+      />
+    );
   }
   return (
     <span
