@@ -30,7 +30,7 @@ See: .planning/PROJECT.md (updated 2026-07-14)
 Phase: 08 — Component Polish Pass — apply amended design system across cards, buttons, forms, CTA bands
 Plan: Not started
 Status: Ready to plan
-Last activity: 2026-07-25 — Phase 07 complete, transitioned to Phase 08
+Last activity: 2026-07-25 - Completed quick task 260725-5ho: Add a persistent floating WhatsApp action button sitewide
 
 ## Performance Metrics
 
@@ -96,6 +96,7 @@ None yet.
 | 260723-duo | Rebrand company name Star Agrevolution → VNP Global (code defaults, metadata, seed copy, tests) | 2026-07-23 | 5d2b566 | [260723-duo-rebrand-company-name-star-agrevolution-t](./quick/260723-duo-rebrand-company-name-star-agrevolution-t/) |
 | 260723-e35 | Simplify primary navigation 9 → 5 per brief (Products, About, Global Markets, Certifications, Contact) | 2026-07-23 | 94245f2 | [260723-e35-simplify-primary-navigation-from-9-items](./quick/260723-e35-simplify-primary-navigation-from-9-items/) |
 | 260725-5ca | Fix invisible/low-contrast shadcn dropdown/popover/dialog components sitewide (bridge shadcn semantic tokens into Tailwind v4 @theme) | 2026-07-25 | 0bc53b5 | [260725-5ca-fix-invisible-low-contrast-shadcn-dropdo](./quick/260725-5ca-fix-invisible-low-contrast-shadcn-dropdo/) |
+| 260725-5ho | Add a persistent floating WhatsApp action button sitewide (bottom-corner, additive to existing contextual CTAs) | 2026-07-25 | 66183f3 | [260725-5ho-add-a-persistent-floating-whatsapp-actio](./quick/260725-5ho-add-a-persistent-floating-whatsapp-actio/) |
 
 ## Deferred Items
 
