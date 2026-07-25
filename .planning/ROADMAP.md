@@ -172,7 +172,7 @@ Plans:
 **Requirements**: TBD
 **UI hint**: yes
 **Depends on:** Phase 6
-**Plans:** 3/3 plans executed
+**Plans:** 3/3 plans complete
 
 Plans:
 
