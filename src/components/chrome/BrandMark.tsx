@@ -14,7 +14,7 @@ export function BrandMark({ siteName, logoUrl, variant = "light" }: BrandMarkPro
     // Logo served from Blob CDN (unoptimized per next.config); plain <img> keeps
     // arbitrary aspect ratios simple. Height-constrained, width auto.
     // eslint-disable-next-line @next/next/no-img-element
-    return <img src={logoUrl} alt={siteName} className="h-9 w-auto" />;
+    return <img src={logoUrl} alt={siteName} className="h-11 w-auto sm:h-12 lg:h-14" />;
   }
   return (
     <span
