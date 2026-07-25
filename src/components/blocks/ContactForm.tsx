@@ -51,9 +51,24 @@ const INCOTERMS: ReadonlyArray<readonly [code: string, name: string]> = [
   ["CIF", "Cost, Insurance and Freight"],
 ];
 
+// Visual-only required-field cue. aria-hidden because the legend paragraph
+// plus each field's existing FormMessage validation already convey
+// required-ness to assistive tech.
+function RequiredMark() {
+  return (
+    <span aria-hidden="true" className="text-destructive">
+      {" "}
+      *
+    </span>
+  );
+}
+
 export function ContactForm() {
   const t = useTranslations("contact");
   const [status, setStatus] = useState<Status>("idle");
+  // Decoupled from `status` so a Turnstile load/error failure gets its own
+  // distinct banner instead of the generic submit-failure copy.
+  const [captchaError, setCaptchaError] = useState(false);
 
   // D-02/D-03: RFQ mode is derived client-side from the `product` query
   // param (never a re-pickable dropdown). `productName` is a display-only
@@ -142,12 +157,16 @@ export function ContactForm() {
             <input type="hidden" {...form.register("productName")} />
           </>
         )}
+        <p className="text-label text-neutral-600">{t("requiredLegend")}</p>
         <FormField
           control={form.control}
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{t("nameLabel")}</FormLabel>
+              <FormLabel>
+                {t("nameLabel")}
+                <RequiredMark />
+              </FormLabel>
               <FormControl>
                 <Input {...field} readOnly={isLoading} />
               </FormControl>
@@ -160,7 +179,10 @@ export function ContactForm() {
           name="company"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{t("companyLabel")}</FormLabel>
+              <FormLabel>
+                {t("companyLabel")}
+                <RequiredMark />
+              </FormLabel>
               <FormControl>
                 <Input {...field} readOnly={isLoading} />
               </FormControl>
@@ -173,7 +195,10 @@ export function ContactForm() {
           name="country"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{t("countryLabel")}</FormLabel>
+              <FormLabel>
+                {t("countryLabel")}
+                <RequiredMark />
+              </FormLabel>
               <FormControl>
                 <Input {...field} readOnly={isLoading} />
               </FormControl>
@@ -213,6 +238,7 @@ export function ContactForm() {
             )}
           />
         </div>
+        <p className="text-label text-neutral-600">{t("contactMethodHelper")}</p>
         {isRfqMode && (
           <>
             <p className="mt-sm text-label font-semibold">{t("quoteDetails")}</p>
@@ -294,7 +320,10 @@ export function ContactForm() {
           name="message"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{t("messageLabel")}</FormLabel>
+              <FormLabel>
+                {t("messageLabel")}
+                <RequiredMark />
+              </FormLabel>
               <FormControl>
                 <Textarea rows={5} {...field} readOnly={isLoading} />
               </FormControl>
@@ -331,14 +360,29 @@ export function ContactForm() {
             silently-dead submit button. */}
         <Turnstile
           siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? ""}
-          onSuccess={(token) => form.setValue("turnstileToken", token)}
+          onSuccess={(token) => {
+            form.setValue("turnstileToken", token);
+            setCaptchaError(false);
+          }}
           onExpire={() => form.setValue("turnstileToken", "")}
           onError={() => {
             form.setValue("turnstileToken", "");
-            setStatus("error");
+            setCaptchaError(true);
           }}
-          scriptOptions={{ onError: () => setStatus("error") }}
+          scriptOptions={{ onError: () => setCaptchaError(true) }}
         />
+        {captchaError ? (
+          <div
+            role="alert"
+            className="rounded-md border border-destructive bg-destructive/10 p-md text-body text-destructive"
+          >
+            {t("captchaErrorBanner")}
+          </div>
+        ) : !turnstileToken ? (
+          <p role="status" className="text-label text-neutral-600">
+            {t("captchaVerifying")}
+          </p>
+        ) : null}
         <Button
           type="submit"
           disabled={isLoading || !turnstileToken}
