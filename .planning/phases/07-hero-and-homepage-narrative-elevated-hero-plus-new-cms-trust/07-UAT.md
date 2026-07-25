@@ -1,33 +1,31 @@
 ---
-status: testing
+status: complete
 phase: 07-hero-and-homepage-narrative-elevated-hero-plus-new-cms-trust
 source: [07-01-SUMMARY.md, 07-02-SUMMARY.md, 07-03-SUMMARY.md]
 started: 2026-07-24T11:11:36Z
-updated: 2026-07-24T11:11:36Z
+updated: 2026-07-24T15:10:00Z
 ---
 
 ## Current Test
-<!-- OVERWRITE each test - shows where we are -->
 
-number: 1
-name: Hero headline reads as premium, not just resized
-expected: |
-  On the homepage (https://star-agrevolution.vercel.app/en once deployed, or a local preview), the hero headline is large, thin-weight, tightly tracked — reads as an intentional premium display treatment, not just "bigger text." Overlay is atmospheric (image reads through), not a heavy dark scrim.
-awaiting: user response
+[testing complete]
 
 ## Tests
 
 ### 1. Hero headline reads as premium, not just resized
 expected: On the homepage, the hero headline is large, thin-weight, tightly tracked — reads as an intentional premium display treatment, not just "bigger text." Overlay is atmospheric (image reads through), not a heavy dark scrim.
-result: [pending]
+result: pass
+reported: "Confirmed via full-page screenshot of https://star-agrevolution.vercel.app/en — headline large/thin/tracked, overlay atmospheric."
 
 ### 2. New homepage blocks render coherently (TrustBar, Export Process, Testimonials)
 expected: Scrolling the homepage, the new TrustBar (region chips), Export Process (5-step timeline), and Testimonials (3-card grid) sections render with no broken layout, no missing content, no visual regression against the rest of the page's existing premium look.
-result: [pending]
+result: pass
+reported: "All new blocks render clean in the full-page screenshot. Two pre-existing (non-Phase-7) issues noted and explicitly deferred: CertStrip logos mostly show placeholder tiles, ExportMap SVG renders unrecognizable as a map — neither touched by this phase."
 
 ### 3. Full homepage narrative flow reads as one coherent story
 expected: The 11-block homepage (Hero → TrustBar → Why Choose Us → Manufacturing Excellence → stats → certifications → stats → Export Process → Global Presence → Testimonials → CTA) reads as a coherent trust narrative, not a disjointed stack of sections. Section rhythm/spacing feels consistent throughout (no visually cramped or oversized gaps).
-result: [pending]
+result: pass
+reported: "Confirmed via full-page screenshot — flow reads coherently top to bottom. User separately flagged header (5 items) vs footer (9 items) nav mismatch as a question — confirmed as an intentional, pre-existing (pre-Phase-6) design decision documented in REDESIGN-PLAN.md, not a Phase 7 defect; user said move on."
 
 ### 4. Hero display-xl typography tokens applied (auto-verified)
 expected: Homepage full-variant Hero headline uses text-display-xl font-display font-light tracking-display (56px/300/-0.025em); compact variant (interior pages) stays byte-identical to before
@@ -122,9 +120,9 @@ coverage_id: D-05
 ## Summary
 
 total: 18
-passed: 15
+passed: 18
 issues: 0
-pending: 3
+pending: 0
 skipped: 0
 blocked: 0
 
