@@ -30,7 +30,7 @@ See: .planning/PROJECT.md (updated 2026-07-14)
 Phase: 08 — Component Polish Pass — apply amended design system across cards, buttons, forms, CTA bands
 Plan: Not started
 Status: Ready to plan
-Last activity: 2026-07-25 - Completed quick task 260725-5ho: Add a persistent floating WhatsApp action button sitewide
+Last activity: 2026-07-25 - Completed quick tasks 260725-68r (footer social icons) and 260725-69i (contact form captcha UX)
 
 ## Performance Metrics
 
@@ -97,6 +97,8 @@ None yet.
 | 260723-e35 | Simplify primary navigation 9 → 5 per brief (Products, About, Global Markets, Certifications, Contact) | 2026-07-23 | 94245f2 | [260723-e35-simplify-primary-navigation-from-9-items](./quick/260723-e35-simplify-primary-navigation-from-9-items/) |
 | 260725-5ca | Fix invisible/low-contrast shadcn dropdown/popover/dialog components sitewide (bridge shadcn semantic tokens into Tailwind v4 @theme) | 2026-07-25 | 0bc53b5 | [260725-5ca-fix-invisible-low-contrast-shadcn-dropdo](./quick/260725-5ca-fix-invisible-low-contrast-shadcn-dropdo/) |
 | 260725-5ho | Add a persistent floating WhatsApp action button sitewide (bottom-corner, additive to existing contextual CTAs) | 2026-07-25 | 66183f3 | [260725-5ho-add-a-persistent-floating-whatsapp-actio](./quick/260725-5ho-add-a-persistent-floating-whatsapp-actio/) |
+| 260725-68r | Render Instagram and LinkedIn icons in the footer from the existing sameAs CMS field | 2026-07-25 | e3baaaa | [260725-68r-render-instagram-and-linkedin-icons-in-t](./quick/260725-68r-render-instagram-and-linkedin-icons-in-t/) |
+| 260725-69i | Improve contact form captcha UX (three-state messaging) and add required-field indicators | 2026-07-25 | 8fa1ae5 | [260725-69i-improve-contact-form-captcha-ux-so-the-s](./quick/260725-69i-improve-contact-form-captcha-ux-so-the-s/) |
 
 ## Deferred Items
 
