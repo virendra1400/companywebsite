@@ -6,7 +6,7 @@ current_phase: 08
 current_phase_name: Component Polish Pass — apply amended design system across cards, buttons, forms, CTA bands
 status: planning
 stopped_at: Completed 07-03-PLAN.md (Phase 07 fully complete)
-last_updated: "2026-07-25T10:21:03.915Z"
+last_updated: "2026-07-25T10:36:23.659Z"
 last_activity: 2026-07-25
 last_activity_desc: Completed quick tasks 260725-68r (footer social icons) and 260725-69i (contact form captcha UX)
 progress:
@@ -101,6 +101,7 @@ None yet.
 | 260725-69i | Improve contact form captcha UX (three-state messaging) and add required-field indicators | 2026-07-25 | 8fa1ae5 | [260725-69i-improve-contact-form-captcha-ux-so-the-s](./quick/260725-69i-improve-contact-form-captcha-ux-so-the-s/) |
 | 7 | Increase CMS logo size (BrandMark.tsx h-9 to responsive h-11/12/14) so brand mark is prominent across header/footer/mobile | 2026-07-25 | 77245da | — |
 | 8 | Bump logo size further (h-12 lg:h-14) and add brightness-0 invert filter for footer/dark-background legibility | 2026-07-25 | 248a8e0 | — |
+| 9 | Diagnosed and fixed the real logo-size root cause: uploaded SVG's viewBox was a full A4 export canvas with the actual mark occupying <20% of it, so no CSS height could make it look prominent. Recomputed a tight viewBox from the SVG's own path/text coordinates, replaced the SAME CMS Media doc in place via a one-time protected route (SiteSettings.logo relationship unaffected, zero visual content changed) | 2026-07-25 | f094040 | — |
 
 ## Deferred Items
 
