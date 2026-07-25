@@ -91,7 +91,7 @@ export default async function LocaleLayout({
           <GlobalHeader siteName={siteName} logoUrl={logoUrl} />
           <div className="flex-1">{children}</div>
           <WhatsAppFloatingButton />
-          <GlobalFooter siteName={siteName} logoUrl={logoUrl} />
+          <GlobalFooter siteName={siteName} logoUrl={logoUrl} sameAs={sameAs} />
         </NextIntlClientProvider>
       </body>
     </html>

@@ -2,6 +2,9 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { LanguageSwitcher } from "@/components/chrome/LanguageSwitcher";
 import { BrandMark } from "@/components/chrome/BrandMark";
+import { resolveSocialLinks } from "@/components/chrome/social-links";
+import { InstagramIcon } from "@/components/icons/InstagramIcon";
+import { LinkedInIcon } from "@/components/icons/LinkedInIcon";
 
 // UI-SPEC Component Inventory — GlobalFooter: primary-900 surface, white/
 // neutral-100 text, gold hover-underline links. Wordmark repeat, D-08 nav
@@ -37,12 +40,15 @@ const NAV_HREFS: Record<(typeof NAV_KEYS)[number], string> = {
 export async function GlobalFooter({
   siteName,
   logoUrl,
+  sameAs,
 }: {
   siteName: string;
   logoUrl: string | null;
+  sameAs: string[];
 }) {
   const t = await getTranslations("nav");
   const year = new Date().getFullYear();
+  const socials = resolveSocialLinks(sameAs);
 
   return (
     <footer className="bg-primary-900 px-md py-2xl text-neutral-100 md:px-lg xl:px-xl">
@@ -68,6 +74,27 @@ export async function GlobalFooter({
 
         <LanguageSwitcher onDark />
       </div>
+
+      {socials.length > 0 ? (
+        <div className="mx-auto mt-lg flex w-full max-w-[1280px] gap-sm">
+          {socials.map((s) => (
+            <a
+              key={s.platform}
+              href={s.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={s.label}
+              className="text-neutral-100 hover:text-accent-600"
+            >
+              {s.platform === "instagram" ? (
+                <InstagramIcon className="h-5 w-5" />
+              ) : (
+                <LinkedInIcon className="h-5 w-5" />
+              )}
+            </a>
+          ))}
+        </div>
+      ) : null}
 
       <p className="mx-auto mt-xl w-full max-w-[1280px] text-label text-neutral-300">
         {`© ${year} ${siteName}. All rights reserved.`}
