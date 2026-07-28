@@ -183,14 +183,21 @@ Plans:
 ### Phase 8: Component Polish Pass — apply amended design system across cards, buttons, forms, CTA bands
 
 **Goal:** Every reusable component (ProductCard, StatsBand, CertCard, buttons, forms, CTA bands, FAQ) consistently applies the amended design system with no residual v1 inconsistencies.
-**Requirements**: TBD
+**Requirements**: POLISH-01, POLISH-02, POLISH-03, POLISH-04, POLISH-05, POLISH-06, POLISH-07, POLISH-08, FAQ-01, POLISH-VR (derived from 08-UI-SPEC.md's 9-row Component Audit + the CONTEXT-locked FAQ build + the Contract §4 visual-regression backstop; no REQUIREMENTS.md IDs are scoped to this phase)
 **UI hint**: yes
 **Depends on:** Phase 7
-**Plans:** 0 plans
+**Plans:** 4 plans
 
 Plans:
+**Wave 1**
 
-- [ ] TBD (run /gsd-plan-phase 8 to break down)
+- [ ] 08-01-PLAN.md — Hairline card recipe on FeatureGrid/SpecTable + tabular-nums on StatsBand/ExportMap/SpecTable (Audit #1-#5)
+- [ ] 08-02-PLAN.md — Button primitive consolidation (brand hover, accent focus ring, new outlineOnDark variant) + 8 call-site cleanups (Audit #6-#8)
+- [ ] 08-03-PLAN.md — New FAQ block end-to-end: Faq config, shadcn Accordion, FaqBlock renderer, registration, migration, Contact-page seed (Audit #9)
+
+**Wave 2** *(blocked on Wave 1 completion)*
+
+- [ ] 08-04-PLAN.md — Full gate suite on merged output + blocking human live-render sign-off (Contract §4 backstop + FAQ RTL check)
 
 ### Phase 9: Motion and Micro-interactions — reveal, stagger, hover, reduced-motion safe
 
