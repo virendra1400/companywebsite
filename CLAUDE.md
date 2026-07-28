@@ -33,13 +33,22 @@
 <!-- GSD:conventions-start source:CONVENTIONS.md -->
 ## Conventions
 
-Conventions not yet established. Will populate as patterns emerge during development.
+- **Payload blocks:** schema definitions in `src/blocks/*.ts` (no "Block" suffix) paired 1:1 with React renderers in `src/components/blocks/*Block.tsx`, composed via `RenderBlocks.tsx`.
+- **Collections:** `src/collections/*.ts` export a typed `CollectionConfig`, PascalCase name matching the filename, access-gated via `Boolean(user)` checks.
+- **RTL:** never use physical-direction Tailwind utilities (`ml-*/mr-*/text-left/text-right/left-*/right-*`) — logical properties + `rtl:` variant only. Enforced by `npm run lint:rtl` (`scripts/check-physical-direction.mjs`).
+- **Design tokens:** centralized in `globals.css` `@theme` block (Tailwind v4) — color ramp, 4px-multiple spacing scale, locked typography tiers, sourced from UI-SPEC docs.
+- **Source comments** cite the originating research/phase decision inline (e.g. `// RESEARCH D-02/D-04 / Pattern 2: ...`).
 <!-- GSD:conventions-end -->
 
 <!-- GSD:architecture-start source:ARCHITECTURE.md -->
 ## Architecture
 
-Architecture not yet mapped. Follow existing patterns found in the codebase. See `graphify-out/GRAPH_REPORT.md` for a generated code-graph overview.
+- **Routing:** Next.js App Router, two route groups — `(site)/[locale]/` for public locale-prefixed pages (dynamic `[slug]` for CMS Pages, plus `products/` and `insights/` sections) and `(payload)/admin` + `(payload)/api` for the embedded Payload CMS.
+- **CMS config:** `src/payload.config.ts`; collections in `src/collections/`.
+- **Locale routing:** `src/middleware.ts` handles locale negotiation; `src/i18n/{routing,navigation,request}.ts` + `src/i18n/messages/{en,ar,fr,ru}.json` (next-intl v4).
+- **Cross-cutting utilities:** `src/lib/` (`seo/`, contact form action + schema + CRM webhook + rate-limit, analytics).
+- **Payload hooks:** `src/hooks/` (e.g. `revalidateCatalog`).
+- **UI primitives:** `src/components/ui/` (shadcn/radix-ui).
 <!-- GSD:architecture-end -->
 
 <!-- GSD:skills-start source:skills/ -->
