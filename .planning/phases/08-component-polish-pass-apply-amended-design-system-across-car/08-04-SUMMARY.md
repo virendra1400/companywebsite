@@ -162,3 +162,7 @@ None - no external service configuration required. The local dev DB patch is dev
 ---
 *Phase: 08-component-polish-pass-apply-amended-design-system-across-car*
 *Completed: 2026-07-29*
+
+## Self-Check: PASSED
+
+`08-04-SUMMARY.md` found on disk; both commits (`b804288`, `b320da4`) found in git log.
