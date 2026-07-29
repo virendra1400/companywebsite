@@ -55,10 +55,18 @@ function AccordionContent({
   return (
     <AccordionPrimitive.Content
       data-slot="accordion-content"
-      className="overflow-hidden text-sm data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
+      // 09-CONTEXT.md accordion carve-out from D-03 (grid-template-rows, not
+      // height) + a11y guard: staying mounted while closed lets the closing
+      // transition play (Radix Presence would otherwise unmount it
+      // immediately), and the closed-state visibility class below removes
+      // the collapsed content from the accessibility tree/tab order.
+      // `visibility` is listed in the transition property so it interpolates
+      // as a step function timed to the close duration.
+      forceMount
+      className="grid grid-rows-[0fr] text-sm transition-[grid-template-rows,visibility] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] data-[state=closed]:invisible data-[state=open]:grid-rows-[1fr] motion-reduce:transition-none"
       {...props}
     >
-      <div className={cn("pt-0 pb-4", className)}>{children}</div>
+      <div className={cn("overflow-hidden pt-0 pb-4", className)}>{children}</div>
     </AccordionPrimitive.Content>
   )
 }

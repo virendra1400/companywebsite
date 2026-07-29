@@ -172,7 +172,7 @@ describe("FaqBlock placeholder resilience", () => {
     expect(html).toContain(EMPTY_STATE_TEXT);
   });
 
-  it("renders a long question without throwing; the collapsed answer stays out of the initial closed-state DOM by design (Radix Presence unmounts un-opened AccordionContent — verified against @radix-ui/react-collapsible source, not assumed)", async () => {
+  it("renders a long question without throwing; the closed-state answer stays present in the DOM (09-04: forceMount keeps content mounted so the grid-template-rows close transition can play, guarded by data-[state=closed]:invisible for a11y — verified against the edited accordion.tsx, not assumed)", async () => {
     const block = {
       blockType: "faq",
       items: [{ question: "Q".repeat(80), answer: "A".repeat(400) }],
@@ -181,5 +181,9 @@ describe("FaqBlock placeholder resilience", () => {
 
     const html = renderToStaticMarkup(await FaqBlock({ block, index: 0 }));
     expect(html).toContain("Q".repeat(80));
+    // forceMount: closed-state content renders (not unmounted), with
+    // data-state="closed" so the a11y-hiding class targets it correctly.
+    expect(html).toContain("A".repeat(400));
+    expect(html).toContain('data-state="closed"');
   });
 });
