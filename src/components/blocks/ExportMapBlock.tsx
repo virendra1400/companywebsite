@@ -28,7 +28,7 @@ function StatTiles({ stats, className }: { stats: Stat[]; className: string }) {
     <div className={className}>
       {stats.map((stat, i) => (
         <div key={i} className="text-center">
-          <p className="text-display font-semibold text-primary-700">{stat.value}</p>
+          <p className="text-display font-semibold tabular-nums text-primary-700">{stat.value}</p>
           <p className="text-label text-neutral-600">{stat.label}</p>
         </div>
       ))}

@@ -24,7 +24,7 @@ export async function StatsBandBlock({ block, index }: { block: StatsBandData; i
           <div className="grid grid-cols-2 gap-lg md:grid-cols-4">
             {stats.map((stat, i) => (
               <div key={i} className="text-center">
-                <p className="text-display font-semibold text-primary-700">{stat.value}</p>
+                <p className="text-display font-semibold tabular-nums text-primary-700">{stat.value}</p>
                 <p className="text-label text-neutral-600">{stat.label}</p>
               </div>
             ))}

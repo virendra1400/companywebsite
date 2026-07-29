@@ -34,7 +34,7 @@ export function SpecTable({
                 {row.label}
               </dt>
               <dd
-                className={`py-sm text-body font-semibold text-neutral-900 text-start break-words ${borderClass}`}
+                className={`py-sm text-body font-semibold tabular-nums text-neutral-900 text-start break-words ${borderClass}`}
               >
                 {row.value}
               </dd>
