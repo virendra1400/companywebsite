@@ -202,14 +202,18 @@ Plans:
 ### Phase 9: Motion and Micro-interactions — reveal, stagger, hover, reduced-motion safe
 
 **Goal:** Tasteful reveal/stagger/hover/section transitions across the site; prefers-reduced-motion respected; RTL-safe; zero CLS/LCP regression.
-**Requirements**: TBD
+**Requirements**: PERF-01, PERF-03 (cross-cutting — this phase must not regress CWV or RTL; no v1 requirement IDs map to this v2.0 redesign phase)
 **UI hint**: yes
 **Depends on:** Phase 8
-**Plans:** 0 plans
+**Plans:** 5 plans
 
 Plans:
 
-- [ ] TBD (run /gsd-plan-phase 9 to break down)
+- [ ] 09-01-PLAN.md — Motion foundation: useInView hook, Reveal/RevealItem wrappers, globals.css tokens + tw-animate-css (wave 1)
+- [ ] 09-02-PLAN.md — Section-level reveal in RenderBlocks with hero LCP exception + reduced-motion e2e spec (wave 2)
+- [ ] 09-03-PLAN.md — Per-item stagger across grid blocks and catalog grids + RTL directional-slide assertions (wave 2)
+- [ ] 09-04-PLAN.md — Component micro-interactions: accordion fix, tap feedback, WhatsApp entrance, card hover (wave 2)
+- [ ] 09-05-PLAN.md — Merged-tree gate suite + human sign-off on motion quality, CLS/LCP, Arabic mirroring (wave 3)
 
 ### Phase 10: Hardening — performance, Core Web Vitals, accessibility, SEO deltas, cross-locale RTL QA
 
