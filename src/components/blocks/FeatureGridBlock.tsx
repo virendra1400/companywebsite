@@ -48,7 +48,8 @@ export async function FeatureGridBlock({ block, index }: { block: FeatureGridDat
                 item.photo && typeof item.photo === "object" ? (item.photo as Media) : null;
               const Icon = ICONS[item.icon ?? ""] ?? Sparkles;
               return (
-                <Card key={i} className="gap-sm p-lg">
+                // 08-UI-SPEC Contract §1 — hairline card recipe convergence
+                <Card key={i} className="gap-sm rounded-card border border-neutral-300 bg-white p-lg shadow-card">
                   {block.variant === "photo" ? (
                     <div className="relative size-24 shrink-0 overflow-hidden rounded-full bg-neutral-100">
                       {photo?.url ? (

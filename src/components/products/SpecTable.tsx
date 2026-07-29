@@ -22,7 +22,8 @@ export function SpecTable({
   if (allRows.length === 0) return null;
 
   return (
-    <Card className="gap-0 bg-neutral-100 p-lg">
+    // 08-UI-SPEC Contract §2 — hairline card recipe convergence (data-panel bg-neutral-100 retained)
+    <Card className="gap-0 rounded-card border border-neutral-300 bg-neutral-100 p-lg shadow-card">
       <dl className="grid grid-cols-[minmax(120px,auto)_1fr] md:grid-cols-[minmax(160px,auto)_1fr]">
         {allRows.map((row, i) => {
           const isLast = i === allRows.length - 1;
