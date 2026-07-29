@@ -15,7 +15,7 @@ export function Reveal({ children }: { children: React.ReactNode }) {
       ref={ref}
       data-motion="reveal"
       data-revealed={inView || undefined}
-      className="translate-y-6 opacity-0 transition-[opacity,translate] duration-600 ease-[cubic-bezier(0.16,1,0.3,1)] data-[revealed]:translate-y-0 data-[revealed]:opacity-100 motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none"
+      className="translate-y-6 opacity-0 transition-[opacity,translate] duration-600 ease-[cubic-bezier(0.16,1,0.3,1)] data-[revealed]:translate-y-0 data-[revealed]:opacity-100 motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:duration-0"
     >
       {children}
     </div>
