@@ -5,15 +5,15 @@ milestone_name: Premium Redesign
 current_phase: 08
 current_phase_name: component-polish-pass-apply-amended-design-system-across-car
 status: executing
-stopped_at: Completed 08-01-PLAN.md
-last_updated: "2026-07-29T00:17:49.560Z"
+stopped_at: Completed 08-02-PLAN.md
+last_updated: "2026-07-29T00:23:27.634Z"
 last_activity: 2026-07-28
 last_activity_desc: Phase 08 execution started
 progress:
   total_phases: 5
   completed_phases: 2
   total_plans: 9
-  completed_plans: 6
+  completed_plans: 7
 ---
 
 # Project State
@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-07-14)
 ## Current Position
 
 Phase: 08 (component-polish-pass-apply-amended-design-system-across-car) — EXECUTING
-Plan: 2 of 4
+Plan: 3 of 4
 Status: Ready to execute
 Last activity: 2026-07-28 — Phase 08 execution started
 
@@ -64,6 +64,7 @@ Last activity: 2026-07-28 — Phase 08 execution started
 | Phase 07 P02 | 23min | 2 tasks | 14 files |
 | Phase 07 P03 | 36min | 2 tasks | 2 files |
 | Phase 08 P01 | 10min | 2 tasks | 4 files |
+| Phase 08 P02 | 12min | 2 tasks | 6 files |
 
 ## Accumulated Context
 
@@ -80,6 +81,7 @@ Recent decisions affecting current work:
 - Phase 07 P02: Built TrustBar/ExportProcess/Testimonials Payload blocks + renderers, registered end-to-end, regenerated payload-types.ts, committed an additive Postgres migration (stripped an unrelated pre-existing site_settings.site_name schema-drift line from the auto-generated diff to keep it scoped)
 - [Phase ?]: Phase 07 P03: Composed homepage into 11-block trust narrative (TrustBar/MediaGallery+StatsBand Manufacturing teaser/ExportProcess/Testimonials interleaved with existing blocks); generalized injectFacilityPhotos to all pages' mediaGallery blocks
 - [Phase ?]: Phase 08 P01: Applied Contract §1/§2/§3 class strings verbatim for card recipe convergence + tabular-nums; logged 5 pre-existing unrelated lint errors to deferred-items.md instead of fixing (out of scope)
+- [Phase ?]: Phase 08 P02: Consolidated Button brand hover, accent focus ring, and dark-surface outline treatments into buttonVariants primitive (new outlineOnDark variant); stripped duplicated overrides from 8 call sites, keeping GlobalHeader's single-use outline-on-light WhatsApp treatment as a deliberate call-site override
 
 ### Pending Todos
 
@@ -118,6 +120,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-07-29T00:17:49.543Z
-Stopped at: Completed 08-01-PLAN.md
+Last session: 2026-07-29T00:23:27.618Z
+Stopped at: Completed 08-02-PLAN.md
 Resume file: None
