@@ -15,7 +15,7 @@ A first-time international buyer who has never heard of the company leaves the s
 **Target features (phases 7–11):**
 - Design-system elevation — amended type scale (larger/thinner display + negative tracking), 64–96px rhythm, tabular stat figures, subtle depth. Keep IBM Plex (Arabic RTL) + add a Latin display face; colors unchanged.
 - Hero + homepage narrative — elevated hero and new CMS blocks: trust/partner-logo row, Why Choose Us, Manufacturing Excellence, Export Process timeline, Testimonials.
-- Component polish pass across cards, buttons, forms, CTAs, FAQ.
+- Component polish pass across cards, buttons, forms, CTAs, FAQ. — **Validated in Phase 8** (2026-07-29): hairline card recipe converged on FeatureGrid/SpecTable, tabular-nums wired onto all stat figures, Button primitive consolidated (brand hover/focus-ring/new outlineOnDark variant), FAQ block built end-to-end and seeded live in both dev and prod.
 - Motion & micro-interactions — tasteful, perf-guarded, RTL-safe.
 - Performance & Cross-Locale RTL QA hardening (absorbs the old v1.0 Phase 6, run last against the final design).
 
@@ -106,4 +106,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-07-23 after starting milestone v2.0 Premium Redesign*
+*Last updated: 2026-07-29 after completing Phase 8 (Component Polish Pass)*
