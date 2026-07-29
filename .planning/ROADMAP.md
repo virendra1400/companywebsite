@@ -18,7 +18,7 @@ Six phases carry the site from a locale-and-CMS-correct foundation to a fully la
 - [x] **Phase 5: SEO Infrastructure & Insights/Blog** - Correct per-locale metadata/hreflang/sitemaps/structured data; blog section live (completed 2026-07-23)
 - [x] **Phase 6: Design System Elevation** - Premium type scale, display tokens, rhythm/spacing (v2.0 Phase A) (completed 2026-07-24)
 - [x] **Phase 7: Hero & Homepage Narrative** - Elevated hero + new CMS trust blocks (v2.0 Phase B) (completed 2026-07-24)
-- [ ] **Phase 8: Component Polish Pass** - Amended system applied consistently (v2.0 Phase C)
+- [x] **Phase 8: Component Polish Pass** - Amended system applied consistently (v2.0 Phase C) (completed 2026-07-29)
 - [ ] **Phase 9: Motion & Micro-interactions** - Reveal/stagger/hover, reduced-motion safe (v2.0 Phase D)
 - [ ] **Phase 10: Hardening** - CWV, a11y, SEO deltas, cross-locale RTL QA (v2.0 Phase E, absorbs former Phase 6)
 
@@ -186,7 +186,7 @@ Plans:
 **Requirements**: POLISH-01, POLISH-02, POLISH-03, POLISH-04, POLISH-05, POLISH-06, POLISH-07, POLISH-08, FAQ-01, POLISH-VR (derived from 08-UI-SPEC.md's 9-row Component Audit + the CONTEXT-locked FAQ build + the Contract §4 visual-regression backstop; no REQUIREMENTS.md IDs are scoped to this phase)
 **UI hint**: yes
 **Depends on:** Phase 7
-**Plans:** 4/4 plans executed
+**Plans:** 4/4 plans complete
 
 Plans:
 **Wave 1**
