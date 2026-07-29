@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { Card } from "@/components/ui/card";
+import { RevealItem } from "@/components/motion/RevealItem";
 import { sectionBg } from "./RenderBlocks";
 import { ShieldCheck, RefreshCw, FileCheck2, Globe2, Sparkles, type LucideIcon } from "lucide-react";
 import type { Page, Media } from "../../../payload-types";
@@ -48,20 +49,25 @@ export async function FeatureGridBlock({ block, index }: { block: FeatureGridDat
                 item.photo && typeof item.photo === "object" ? (item.photo as Media) : null;
               const Icon = ICONS[item.icon ?? ""] ?? Sparkles;
               return (
-                // 08-UI-SPEC Contract §1 — hairline card recipe convergence
-                <Card key={i} className="gap-sm rounded-card border border-neutral-300 bg-white p-lg shadow-card">
-                  {block.variant === "photo" ? (
-                    <div className="relative size-24 shrink-0 overflow-hidden rounded-full bg-neutral-100">
-                      {photo?.url ? (
-                        <Image src={photo.url} alt={photo.alt} fill className="object-cover" />
-                      ) : null}
-                    </div>
-                  ) : (
-                    <Icon aria-hidden="true" className="size-8 text-primary-700" />
-                  )}
-                  <p className="mt-md text-body font-semibold">{item.title}</p>
-                  <p className="text-body text-neutral-600">{item.body}</p>
-                </Card>
+                // 09-01 RevealItem: full-height wrapper + card restores the
+                // equal-height row that CSS grid's default align-items:
+                // stretch gave the Card directly (Phase 8 recipe).
+                <RevealItem key={i} index={i} className="h-full">
+                  {/* 08-UI-SPEC Contract §1 — hairline card recipe convergence */}
+                  <Card className="h-full gap-sm rounded-card border border-neutral-300 bg-white p-lg shadow-card">
+                    {block.variant === "photo" ? (
+                      <div className="relative size-24 shrink-0 overflow-hidden rounded-full bg-neutral-100">
+                        {photo?.url ? (
+                          <Image src={photo.url} alt={photo.alt} fill className="object-cover" />
+                        ) : null}
+                      </div>
+                    ) : (
+                      <Icon aria-hidden="true" className="size-8 text-primary-700" />
+                    )}
+                    <p className="mt-md text-body font-semibold">{item.title}</p>
+                    <p className="text-body text-neutral-600">{item.body}</p>
+                  </Card>
+                </RevealItem>
               );
             })}
           </div>

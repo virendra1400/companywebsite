@@ -1,4 +1,5 @@
 import { getTranslations } from "next-intl/server";
+import { RevealItem } from "@/components/motion/RevealItem";
 import { sectionBg } from "./RenderBlocks";
 import type { Page } from "../../../payload-types";
 
@@ -39,11 +40,18 @@ export async function ExportProcessBlock({
           <ol className={`grid grid-cols-1 gap-lg sm:grid-cols-2 ${colsClass(steps.length)}`}>
             {steps.map((step, i) => (
               <li key={i}>
-                <span className="flex size-10 items-center justify-center rounded-full bg-primary-700 text-body font-semibold text-white">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <p className="mt-md text-body font-semibold">{step.title}</p>
-                <p className="mt-xs text-label text-neutral-600">{step.body}</p>
+                {/* D-10: the one directional-slide surface this phase allows —
+                    steps arrive from the inline-start edge, mirroring under
+                    dir="rtl" via RevealItem's rtl: variant. lint:rtl cannot
+                    catch a sign mistake here (translate-x-* isn't banned);
+                    tests/e2e/rtl-arabic.spec.ts is the real gate. */}
+                <RevealItem index={i} direction="start">
+                  <span className="flex size-10 items-center justify-center rounded-full bg-primary-700 text-body font-semibold text-white">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <p className="mt-md text-body font-semibold">{step.title}</p>
+                  <p className="mt-xs text-label text-neutral-600">{step.body}</p>
+                </RevealItem>
               </li>
             ))}
           </ol>
