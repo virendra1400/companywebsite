@@ -186,14 +186,14 @@ Plans:
 **Requirements**: POLISH-01, POLISH-02, POLISH-03, POLISH-04, POLISH-05, POLISH-06, POLISH-07, POLISH-08, FAQ-01, POLISH-VR (derived from 08-UI-SPEC.md's 9-row Component Audit + the CONTEXT-locked FAQ build + the Contract §4 visual-regression backstop; no REQUIREMENTS.md IDs are scoped to this phase)
 **UI hint**: yes
 **Depends on:** Phase 7
-**Plans:** 2/4 plans executed
+**Plans:** 3/4 plans executed
 
 Plans:
 **Wave 1**
 
 - [x] 08-01-PLAN.md — Hairline card recipe on FeatureGrid/SpecTable + tabular-nums on StatsBand/ExportMap/SpecTable (Audit #1-#5)
 - [x] 08-02-PLAN.md — Button primitive consolidation (brand hover, accent focus ring, new outlineOnDark variant) + 8 call-site cleanups (Audit #6-#8)
-- [ ] 08-03-PLAN.md — New FAQ block end-to-end: Faq config, shadcn Accordion, FaqBlock renderer, registration, migration, Contact-page seed (Audit #9)
+- [x] 08-03-PLAN.md — New FAQ block end-to-end: Faq config, shadcn Accordion, FaqBlock renderer, registration, migration, Contact-page seed (Audit #9)
 
 **Wave 2** *(blocked on Wave 1 completion)*
 

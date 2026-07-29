@@ -5,15 +5,15 @@ milestone_name: Premium Redesign
 current_phase: 08
 current_phase_name: component-polish-pass-apply-amended-design-system-across-car
 status: executing
-stopped_at: Completed 08-02-PLAN.md
-last_updated: "2026-07-29T00:23:27.634Z"
+stopped_at: Completed 08-03-PLAN.md
+last_updated: "2026-07-29T01:57:24.031Z"
 last_activity: 2026-07-28
 last_activity_desc: Phase 08 execution started
 progress:
   total_phases: 5
   completed_phases: 2
   total_plans: 9
-  completed_plans: 7
+  completed_plans: 8
 ---
 
 # Project State
@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-07-14)
 ## Current Position
 
 Phase: 08 (component-polish-pass-apply-amended-design-system-across-car) — EXECUTING
-Plan: 3 of 4
+Plan: 4 of 4
 Status: Ready to execute
 Last activity: 2026-07-28 — Phase 08 execution started
 
@@ -65,6 +65,7 @@ Last activity: 2026-07-28 — Phase 08 execution started
 | Phase 07 P03 | 36min | 2 tasks | 2 files |
 | Phase 08 P01 | 10min | 2 tasks | 4 files |
 | Phase 08 P02 | 12min | 2 tasks | 6 files |
+| Phase 08 P03 | 89min | 3 tasks | 12 files |
 
 ## Accumulated Context
 
@@ -82,6 +83,7 @@ Recent decisions affecting current work:
 - [Phase ?]: Phase 07 P03: Composed homepage into 11-block trust narrative (TrustBar/MediaGallery+StatsBand Manufacturing teaser/ExportProcess/Testimonials interleaved with existing blocks); generalized injectFacilityPhotos to all pages' mediaGallery blocks
 - [Phase ?]: Phase 08 P01: Applied Contract §1/§2/§3 class strings verbatim for card recipe convergence + tabular-nums; logged 5 pre-existing unrelated lint errors to deferred-items.md instead of fixing (out of scope)
 - [Phase ?]: Phase 08 P02: Consolidated Button brand hover, accent focus ring, and dark-surface outline treatments into buttonVariants primitive (new outlineOnDark variant); stripped duplicated overrides from 8 call sites, keeping GlobalHeader's single-use outline-on-light WhatsApp treatment as a deliberate call-site override
+- [Phase ?]: Phase 08 P03: Built the FAQ block end-to-end (Payload config, shadcn Accordion over the existing radix-ui package, single-collapsible card-less renderer, additive Postgres migration, seeded Contact-page content) -- closes 08-UI-SPEC Component Audit #9 scope gap; test assertion adjusted (not production code) to match Radix Accordion's verified closed-state Presence behavior
 
 ### Pending Todos
 
@@ -120,6 +122,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-07-29T00:23:27.618Z
-Stopped at: Completed 08-02-PLAN.md
+Last session: 2026-07-29T01:57:24.009Z
+Stopped at: Completed 08-03-PLAN.md
 Resume file: None
