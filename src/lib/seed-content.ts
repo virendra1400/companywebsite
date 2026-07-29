@@ -76,6 +76,14 @@ function testimonials(
   return { blockType: "testimonials" as const, sectionTitle, items };
 }
 
+// 08-UI-SPEC Contract §6 — seeded answers restate only process facts already
+// published elsewhere on the site (response time, documentation, samples);
+// no certifications, volumes, prices, lead times or client names invented
+// (Pitfall 5).
+function faq(sectionTitle: string, items: { question: string; answer: string }[]) {
+  return { blockType: "faq" as const, sectionTitle, items };
+}
+
 // TRUST-04 — realistic served-country set (GCC + Europe + a few others),
 // every code present in src/lib/country-names.ts and drawn as a tile in
 // src/lib/world-map-svg.ts. D-06: static SVG, no map library.
@@ -450,6 +458,27 @@ export const PAGES_EN_SEED = [
         "Our export team responds to every inquiry within one business day.",
       ),
       contactBlock(),
+      faq("Frequently Asked Questions", [
+        {
+          question: "What should I include in my first inquiry?",
+          answer:
+            "Tell us the product, your destination country, the volume you need, and your preferred incoterm. That is enough for our export team to come back with an indicative quotation.",
+        },
+        {
+          question: "How quickly will I hear back?",
+          answer: "Our export team responds to every inquiry within one business day.",
+        },
+        {
+          question: "Can you provide export documentation for customs clearance?",
+          answer:
+            "Yes. Every shipment travels with the documentation set agreed at order confirmation, prepared for your destination market's requirements.",
+        },
+        {
+          question: "Do you send samples before a first order?",
+          answer:
+            "Yes, samples can be arranged for qualified buyers. Mention it in your inquiry and include the delivery address.",
+        },
+      ]),
     ],
   },
 ];
