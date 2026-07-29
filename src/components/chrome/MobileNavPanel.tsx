@@ -112,7 +112,7 @@ export function MobileNavPanel({
           onNavigate={() => setOpen(false)}
           className="w-full"
         />
-        <Button asChild className="hover:bg-primary-500 focus-visible:ring-accent-600">
+        <Button asChild>
           <Link href="/contact">{tHero("cta")}</Link>
         </Button>
       </SheetContent>

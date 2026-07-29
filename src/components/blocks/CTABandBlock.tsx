@@ -15,18 +15,14 @@ export function CTABandBlock({ block }: { block: CTABandData; index: number }) {
         {block.body ? <p className="text-body text-primary-100">{block.body}</p> : null}
         <div className="flex flex-col items-center gap-sm sm:flex-row">
           {block.primaryCta?.label ? (
-            <Button asChild className="hover:bg-primary-500 focus-visible:ring-accent-600">
+            <Button asChild>
               <a href={block.primaryCta.href || "/contact"}>
                 {block.primaryCta.label}
               </a>
             </Button>
           ) : null}
           {block.secondaryCta?.label ? (
-            <Button
-              asChild
-              variant="outline"
-              className="border-white text-white hover:bg-white/10 focus-visible:ring-accent-600"
-            >
+            <Button asChild variant="outlineOnDark">
               <WhatsAppTrackedLink href={block.secondaryCta.href || "#"} location="cta-band">
                 {block.secondaryCta.label}
               </WhatsAppTrackedLink>

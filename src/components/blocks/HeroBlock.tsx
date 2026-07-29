@@ -74,7 +74,7 @@ export async function HeroBlock({ block }: { block: HeroData; index: number }) {
         <h1 className={headlineClass}>{block.headline}</h1>
         {block.subhead ? <p className={subheadClass}>{block.subhead}</p> : null}
         <div className="flex flex-col items-start gap-sm sm:flex-row sm:items-center">
-          <Button asChild className="hover:bg-primary-500 focus-visible:ring-accent-600">
+          <Button asChild>
             {block.primaryCta?.href ? (
               <a href={block.primaryCta.href}>{block.primaryCta?.label || t("cta")}</a>
             ) : (
@@ -82,11 +82,7 @@ export async function HeroBlock({ block }: { block: HeroData; index: number }) {
             )}
           </Button>
           {block.secondaryCta?.label ? (
-            <Button
-              asChild
-              variant="outline"
-              className="border-white text-white hover:bg-white/10 focus-visible:ring-accent-600"
-            >
+            <Button asChild variant="outlineOnDark">
               {/* WhatsApp CTA — number from SiteSettings (single source), ignores stale seeded href */}
               <WhatsAppTrackedLink href={waHref} location="hero" target="_blank" rel="noopener noreferrer">
                 {block.secondaryCta.label}

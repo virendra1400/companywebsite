@@ -166,7 +166,7 @@ export default async function ProductDetailPage({
                 <RichText data={product.description} />
               </div>
             ) : null}
-            <Button asChild className="mt-lg hover:bg-primary-500 focus-visible:ring-accent-600">
+            <Button asChild className="mt-lg">
               <a href={rfqHref}>{t("rfqCta")}</a>
             </Button>
           </div>

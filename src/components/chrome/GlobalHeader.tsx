@@ -69,13 +69,10 @@ export async function GlobalHeader({
             iconOnly
             href={waHref}
             ariaLabel={tContact("whatsappAria")}
-            className="hidden size-11 border-primary-700 text-primary-700 hover:bg-primary-100 focus-visible:ring-accent-600 sm:inline-flex"
+            className="hidden size-11 border-primary-700 text-primary-700 hover:bg-primary-100 sm:inline-flex"
           />
-          <Button
-            asChild
-            size="sm"
-            className="hidden hover:bg-primary-500 focus-visible:ring-accent-600 sm:inline-flex"
-          >
+          {/* 08-UI-SPEC Contract §4: brand hover + accent ring now inherited from the Button primitive */}
+          <Button asChild size="sm" className="hidden sm:inline-flex">
             <Link href="/contact">{tHero("cta")}</Link>
           </Button>
           <MobileNavPanel siteName={siteName} logoUrl={logoUrl} waHref={waHref} />
