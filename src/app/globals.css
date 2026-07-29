@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
 /*
   Phase 1 design tokens — source: 01-UI-SPEC.md.
@@ -96,8 +97,33 @@
   --shadow-card: 0 1px 2px 0 rgb(15 46 34 / 0.04), 0 1px 1px 0 rgb(15 46 34 / 0.03);
   --shadow-card-hover: 0 8px 20px -4px rgb(15 46 34 / 0.10), 0 2px 6px -2px rgb(15 46 34 / 0.05);
 
+  /* Phase 9 D-09: floating-CTA entrance animation. Keyframes must be nested
+     inside @theme for Tailwind v4 to emit the animate-float-in utility. */
+  --animate-float-in: float-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  @keyframes float-in {
+    from {
+      opacity: 0;
+      transform: translateY(16px) scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
   /* Container */
   --breakpoint-xl: 1280px;
+}
+
+/* Phase 9 no-JS guard: Reveal/RevealItem ship opacity-0 in server-rendered
+   HTML and only become visible once the client hook runs. Without this,
+   a scripting-disabled agent sees permanently blank sections — unacceptable
+   on a trust-critical B2B site. */
+@media (scripting: none) {
+  [data-motion] {
+    opacity: 1 !important;
+    translate: none !important;
+  }
 }
 
 /* shadcn base variables (neutral preset) overridden with UI-SPEC tokens */
