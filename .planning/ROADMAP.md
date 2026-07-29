@@ -208,11 +208,18 @@ Plans:
 **Plans:** 5 plans
 
 Plans:
+**Wave 1**
 
 - [ ] 09-01-PLAN.md — Motion foundation: useInView hook, Reveal/RevealItem wrappers, globals.css tokens + tw-animate-css (wave 1)
+
+**Wave 2** *(blocked on Wave 1 completion)*
+
 - [ ] 09-02-PLAN.md — Section-level reveal in RenderBlocks with hero LCP exception + reduced-motion e2e spec (wave 2)
 - [ ] 09-03-PLAN.md — Per-item stagger across grid blocks and catalog grids + RTL directional-slide assertions (wave 2)
 - [ ] 09-04-PLAN.md — Component micro-interactions: accordion fix, tap feedback, WhatsApp entrance, card hover (wave 2)
+
+**Wave 3** *(blocked on Wave 2 completion)*
+
 - [ ] 09-05-PLAN.md — Merged-tree gate suite + human sign-off on motion quality, CLS/LCP, Arabic mirroring (wave 3)
 
 ### Phase 10: Hardening — performance, Core Web Vitals, accessibility, SEO deltas, cross-locale RTL QA
