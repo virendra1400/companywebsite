@@ -205,12 +205,12 @@ Plans:
 **Requirements**: PERF-01, PERF-03 (cross-cutting — this phase must not regress CWV or RTL; no v1 requirement IDs map to this v2.0 redesign phase)
 **UI hint**: yes
 **Depends on:** Phase 8
-**Plans:** 5 plans
+**Plans:** 1/5 plans executed
 
 Plans:
 **Wave 1**
 
-- [ ] 09-01-PLAN.md — Motion foundation: useInView hook, Reveal/RevealItem wrappers, globals.css tokens + tw-animate-css (wave 1)
+- [x] 09-01-PLAN.md — Motion foundation: useInView hook, Reveal/RevealItem wrappers, globals.css tokens + tw-animate-css (wave 1)
 
 **Wave 2** *(blocked on Wave 1 completion)*
 

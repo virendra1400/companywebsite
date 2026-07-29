@@ -3,17 +3,17 @@ gsd_state_version: 1.0
 milestone: v2.0
 milestone_name: Premium Redesign
 current_phase: 09
-current_phase_name: Motion and Micro-interactions — reveal, stagger, hover, reduced-motion safe
+current_phase_name: motion-and-micro-interactions-reveal-stagger-hover-reduced-m
 status: executing
-stopped_at: Phase 09 UI-SPEC approved
-last_updated: "2026-07-29T12:13:19.484Z"
+stopped_at: Completed 09-01-PLAN.md
+last_updated: "2026-07-29T16:46:44.757Z"
 last_activity: 2026-07-29
-last_activity_desc: Phase 08 complete, transitioned to Phase 09
+last_activity_desc: Phase 09 execution started
 progress:
   total_phases: 5
   completed_phases: 3
-  total_plans: 9
-  completed_plans: 9
+  total_plans: 14
+  completed_plans: 10
 ---
 
 # Project State
@@ -23,14 +23,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-07-14)
 
 **Core value:** A first-time international buyer who has never heard of the company leaves the site trusting it enough to send a serious inquiry/RFQ.
-**Current focus:** Phase 08 — component-polish-pass-apply-amended-design-system-across-car
+**Current focus:** Phase 09 — motion-and-micro-interactions-reveal-stagger-hover-reduced-m
 
 ## Current Position
 
-Phase: 09 — Motion and Micro-interactions — reveal, stagger, hover, reduced-motion safe
-Plan: Not started
+Phase: 09 (motion-and-micro-interactions-reveal-stagger-hover-reduced-m) — EXECUTING
+Plan: 2 of 5
 Status: Ready to execute
-Last activity: 2026-07-29 — Phase 08 complete, transitioned to Phase 09
+Last activity: 2026-07-29 — Phase 09 execution started
 
 ## Performance Metrics
 
@@ -68,6 +68,7 @@ Last activity: 2026-07-29 — Phase 08 complete, transitioned to Phase 09
 | Phase 08 P02 | 12min | 2 tasks | 6 files |
 | Phase 08 P03 | 89min | 3 tasks | 12 files |
 | Phase 08 P04 | 95min | 2 tasks | 1 files |
+| Phase 09 P01 | 44min | 3 tasks | 7 files |
 
 ## Accumulated Context
 
@@ -87,6 +88,7 @@ Recent decisions affecting current work:
 - [Phase ?]: Phase 08 P02: Consolidated Button brand hover, accent focus ring, and dark-surface outline treatments into buttonVariants primitive (new outlineOnDark variant); stripped duplicated overrides from 8 call sites, keeping GlobalHeader's single-use outline-on-light WhatsApp treatment as a deliberate call-site override
 - [Phase ?]: Phase 08 P03: Built the FAQ block end-to-end (Payload config, shadcn Accordion over the existing radix-ui package, single-collapsible card-less renderer, additive Postgres migration, seeded Contact-page content) -- closes 08-UI-SPEC Component Audit #9 scope gap; test assertion adjusted (not production code) to match Radix Accordion's verified closed-state Presence behavior
 - [Phase ?]: Phase 08 P04: Verified merged Wave 1 output (lint/lint:rtl/typecheck/vitest/build/e2e) on the full tree; root-caused 16 e2e failures to 3 pre-existing unrelated bugs (GlobalFooter overflow, ContactForm label mismatch, nav-links test fragility) plus dev-server contention, none in Phase 8 files; obtained human live-render sign-off closing 08-UI-SPEC's one backstop item (outlineOnDark transparency, focus rings, card recipe, FAQ LTR/RTL)
+- [Phase ?]: Phase 09 P01: Built motion foundation (useInView IntersectionObserver hook, Reveal/RevealItem client wrappers, tw-animate-css devDependency, globals.css float-in keyframes + no-JS guard); suppressed a new eslint-config-next 16 react-hooks/set-state-in-effect error with a scoped disable + rationale comment rather than a hydration-unsafe lazy useState initializer
 
 ### Pending Todos
 
@@ -125,6 +127,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-07-29T11:28:51.827Z
-Stopped at: Phase 09 UI-SPEC approved
-Resume file: .planning/phases/09-motion-and-micro-interactions-reveal-stagger-hover-reduced-m/09-UI-SPEC.md
+Last session: 2026-07-29T16:46:44.740Z
+Stopped at: Completed 09-01-PLAN.md
+Resume file: None

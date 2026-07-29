@@ -77,9 +77,9 @@ Requirement ID format: `[CATEGORY]-[NUMBER]`. All v1 items are hypotheses until 
 
 ### Performance & QA (PERF)
 
-- [ ] **PERF-01**: Good Core Web Vitals on key pages (home, product, catalog) on mobile and desktop
+- [x] **PERF-01**: Good Core Web Vitals on key pages (home, product, catalog) on mobile and desktop
 - [ ] **PERF-02**: Images/video/PDFs optimized and lazy-loaded appropriately
-- [ ] **PERF-03**: Cross-locale RTL/LTR QA pass before launch (Arabic layout, fonts, numerals verified against real content)
+- [x] **PERF-03**: Cross-locale RTL/LTR QA pass before launch (Arabic layout, fonts, numerals verified against real content)
 
 ---
 
@@ -146,8 +146,8 @@ Requirement ID format: `[CATEGORY]-[NUMBER]`. All v1 items are hypotheses until 
 | SEO-05 | Phase 5 | Complete |
 | BLOG-01 | Phase 5 | Complete |
 | BLOG-02 | Phase 5 | Complete |
-| PERF-01 | Phase 6 | Pending |
+| PERF-01 | Phase 6 | Complete |
 | PERF-02 | Phase 6 | Pending |
-| PERF-03 | Phase 6 | Pending |
+| PERF-03 | Phase 6 | Complete |
 
 **Coverage:** 42/42 v1 requirements mapped. No orphans.
