@@ -14,3 +14,4 @@ export { ContactBlock } from "./ContactBlock";
 export { TrustBar } from "./TrustBar";
 export { ExportProcess } from "./ExportProcess";
 export { Testimonials } from "./Testimonials";
+export { Faq } from "./Faq";

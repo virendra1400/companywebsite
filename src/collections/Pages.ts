@@ -14,6 +14,7 @@ import {
   TrustBar,
   ExportProcess,
   Testimonials,
+  Faq,
 } from "@/blocks";
 
 // RESEARCH D-02 resolution / Pattern 1: replaces the Phase 1 Home global.
@@ -55,6 +56,7 @@ export const Pages: CollectionConfig = {
         TrustBar,
         ExportProcess,
         Testimonials,
+        Faq,
       ],
     },
   ],

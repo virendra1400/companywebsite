@@ -362,6 +362,19 @@ export interface Page {
             blockName?: string | null;
             blockType: 'testimonials';
           }
+        | {
+            sectionTitle?: string | null;
+            items?:
+              | {
+                  question: string;
+                  answer: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'faq';
+          }
       )[]
     | null;
   updatedAt: string;
@@ -796,6 +809,20 @@ export interface PagesSelect<T extends boolean = true> {
                     name?: T;
                     company?: T;
                     country?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        faq?:
+          | T
+          | {
+              sectionTitle?: T;
+              items?:
+                | T
+                | {
+                    question?: T;
+                    answer?: T;
                     id?: T;
                   };
               id?: T;
