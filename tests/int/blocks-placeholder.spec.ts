@@ -31,6 +31,7 @@ const { StatsBandBlock } = await import("@/components/blocks/StatsBandBlock");
 const { TrustBarBlock } = await import("@/components/blocks/TrustBarBlock");
 const { ExportProcessBlock } = await import("@/components/blocks/ExportProcessBlock");
 const { TestimonialsBlock } = await import("@/components/blocks/TestimonialsBlock");
+const { FaqBlock } = await import("@/components/blocks/FaqBlock");
 
 const EMPTY_STATE_TEXT = "This section is being updated";
 
@@ -158,5 +159,27 @@ describe("TrustBar/ExportProcess/Testimonials placeholder resilience", () => {
     const html = renderToStaticMarkup(await TestimonialsBlock({ block, index: 0 }));
     expect(html).toContain("Procurement Lead");
     expect(html).toContain("GCC-Based Food Importer · United Arab Emirates");
+  });
+});
+
+// Phase 8 Plan 3: FaqBlock resilience (FAQ-01).
+describe("FaqBlock placeholder resilience", () => {
+  it("renders the empty-state line for an empty items[], never crashes", async () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const block = { blockType: "faq", items: [] } as any;
+
+    const html = renderToStaticMarkup(await FaqBlock({ block, index: 0 }));
+    expect(html).toContain(EMPTY_STATE_TEXT);
+  });
+
+  it("renders a long question without throwing; the collapsed answer stays out of the initial closed-state DOM by design (Radix Presence unmounts un-opened AccordionContent — verified against @radix-ui/react-collapsible source, not assumed)", async () => {
+    const block = {
+      blockType: "faq",
+      items: [{ question: "Q".repeat(80), answer: "A".repeat(400) }],
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } as any;
+
+    const html = renderToStaticMarkup(await FaqBlock({ block, index: 0 }));
+    expect(html).toContain("Q".repeat(80));
   });
 });

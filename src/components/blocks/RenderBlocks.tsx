@@ -13,6 +13,7 @@ import { ContactBlockView } from "./ContactBlockView";
 import { TrustBarBlock } from "./TrustBarBlock";
 import { ExportProcessBlock } from "./ExportProcessBlock";
 import { TestimonialsBlock } from "./TestimonialsBlock";
+import { FaqBlock } from "./FaqBlock";
 
 type LayoutBlock = NonNullable<Page["layout"]>[number];
 
@@ -36,6 +37,7 @@ const BLOCK_MAP: Record<string, ComponentType<{ block: any; index: number }>> = 
   trustBar: TrustBarBlock,
   exportProcess: ExportProcessBlock,
   testimonials: TestimonialsBlock,
+  faq: FaqBlock,
 };
 
 // UI-SPEC "Section rhythm rule": two consecutive blocks never share the same
