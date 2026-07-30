@@ -35,7 +35,7 @@ export async function HeroBlock({ block }: { block: HeroData; index: number }) {
   const stackGap = isFull ? "gap-xl" : "gap-lg";
   const headlineClass = isFull
     ? "max-w-[46rem] text-display-xl font-display font-light tracking-display text-white"
-    : "max-w-[42rem] text-display font-semibold text-white";
+    : "max-w-[42rem] text-display font-display font-semibold text-white";
   const subheadClass = isFull
     ? "max-w-[38rem] text-body text-primary-100"
     : "max-w-[36rem] text-body text-primary-100";

@@ -58,7 +58,7 @@ export async function GlobalFooter({
         </Link>
 
         <nav
-          className="flex flex-col gap-sm text-label sm:flex-row sm:gap-lg"
+          className="flex flex-col gap-sm text-label sm:flex-row sm:flex-wrap sm:gap-lg"
           aria-label="Footer"
         >
           {NAV_KEYS.map((key) => (
