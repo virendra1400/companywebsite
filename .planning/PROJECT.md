@@ -16,7 +16,7 @@ A first-time international buyer who has never heard of the company leaves the s
 - Design-system elevation — amended type scale (larger/thinner display + negative tracking), 64–96px rhythm, tabular stat figures, subtle depth. Keep IBM Plex (Arabic RTL) + add a Latin display face; colors unchanged.
 - Hero + homepage narrative — elevated hero and new CMS blocks: trust/partner-logo row, Why Choose Us, Manufacturing Excellence, Export Process timeline, Testimonials.
 - Component polish pass across cards, buttons, forms, CTAs, FAQ. — **Validated in Phase 8** (2026-07-29): hairline card recipe converged on FeatureGrid/SpecTable, tabular-nums wired onto all stat figures, Button primitive consolidated (brand hover/focus-ring/new outlineOnDark variant), FAQ block built end-to-end and seeded live in both dev and prod.
-- Motion & micro-interactions — tasteful, perf-guarded, RTL-safe.
+- Motion & micro-interactions — tasteful, perf-guarded, RTL-safe. — **Validated in Phase 9** (2026-07-30): sitewide scroll-reveal + per-item stagger via a custom `useInView`/`Reveal`/`RevealItem` primitive (zero new animation dependency), FAQ accordion's dead animation fixed, tap/hover/WhatsApp-entrance micro-interactions landed, `prefers-reduced-motion` respected throughout. Human-verified CLS 0 / LCP 2.1s on `/products`; a post-checkpoint code review caught and fixed a real double-nested-reveal bug (RenderBlocks wrapping already-self-staggering blocks) before sign-off.
 - Performance & Cross-Locale RTL QA hardening (absorbs the old v1.0 Phase 6, run last against the final design).
 
 **Locked decisions:** amend type scale (display only); keep Plex + add Latin display face (no full font swap — protects Arabic); colors unchanged (brief palette ≈ existing emerald/gold); each phase ships to Vercel prod; RTL-safe + CMS-driven + English-first throughout.
@@ -106,4 +106,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-07-29 after completing Phase 8 (Component Polish Pass)*
+*Last updated: 2026-07-30 after completing Phase 9 (Motion and Micro-interactions)*
