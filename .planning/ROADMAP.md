@@ -205,7 +205,7 @@ Plans:
 **Requirements**: PERF-01, PERF-03 (cross-cutting — this phase must not regress CWV or RTL; no v1 requirement IDs map to this v2.0 redesign phase)
 **UI hint**: yes
 **Depends on:** Phase 8
-**Plans:** 4/5 plans executed
+**Plans:** 5/5 plans executed
 
 Plans:
 **Wave 1**
@@ -220,7 +220,7 @@ Plans:
 
 **Wave 3** *(blocked on Wave 2 completion)*
 
-- [ ] 09-05-PLAN.md — Merged-tree gate suite + human sign-off on motion quality, CLS/LCP, Arabic mirroring (wave 3)
+- [x] 09-05-PLAN.md — Merged-tree gate suite + human sign-off on motion quality, CLS/LCP, Arabic mirroring (wave 3)
 
 ### Phase 10: Hardening — performance, Core Web Vitals, accessibility, SEO deltas, cross-locale RTL QA
 
