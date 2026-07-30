@@ -23,8 +23,8 @@ export function BrandMark({ siteName, logoUrl, variant = "light" }: BrandMarkPro
         alt={siteName}
         className={
           variant === "dark"
-            ? "h-12 w-auto brightness-0 invert lg:h-14"
-            : "h-12 w-auto lg:h-14"
+            ? "h-14 w-auto brightness-0 invert lg:h-16"
+            : "h-14 w-auto lg:h-16"
         }
       />
     );
