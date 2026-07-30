@@ -1,3 +1,5 @@
+import { readFile } from "fs/promises";
+import path from "path";
 import { ImageResponse } from "next/og";
 import { getSiteBrand } from "@/lib/payload-fetch";
 
@@ -5,12 +7,19 @@ export const size = { width: 512, height: 512 };
 export const contentType = "image/png";
 
 // CMS-driven favicon (SiteSettings.favicon). Falls back to the default VNP
-// monogram when no editor upload exists. Arbitrary uploaded aspect ratios are
-// letterboxed into the square via objectFit: contain rather than stretched.
+// monogram — read from disk as a data URI rather than self-fetched over HTTP,
+// since a server-side fetch back to the app's own origin during rendering is
+// unreliable (deadlocks/fails silently in some runtimes). Arbitrary uploaded
+// aspect ratios are letterboxed into the square via objectFit: contain.
 export default async function Icon() {
   const { faviconUrl } = await getSiteBrand();
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
-  const src = faviconUrl || `${siteUrl}/images/favicon-default.png`;
+  let src = faviconUrl;
+  if (!src) {
+    const defaultIcon = await readFile(
+      path.join(process.cwd(), "public/images/favicon-default.png")
+    );
+    src = `data:image/png;base64,${defaultIcon.toString("base64")}`;
+  }
 
   return new ImageResponse(
     (
