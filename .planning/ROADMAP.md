@@ -19,7 +19,7 @@ Six phases carry the site from a locale-and-CMS-correct foundation to a fully la
 - [x] **Phase 6: Design System Elevation** - Premium type scale, display tokens, rhythm/spacing (v2.0 Phase A) (completed 2026-07-24)
 - [x] **Phase 7: Hero & Homepage Narrative** - Elevated hero + new CMS trust blocks (v2.0 Phase B) (completed 2026-07-24)
 - [x] **Phase 8: Component Polish Pass** - Amended system applied consistently (v2.0 Phase C) (completed 2026-07-29)
-- [ ] **Phase 9: Motion & Micro-interactions** - Reveal/stagger/hover, reduced-motion safe (v2.0 Phase D)
+- [x] **Phase 9: Motion & Micro-interactions** - Reveal/stagger/hover, reduced-motion safe (v2.0 Phase D) (completed 2026-07-30)
 - [ ] **Phase 10: Hardening** - CWV, a11y, SEO deltas, cross-locale RTL QA (v2.0 Phase E, absorbs former Phase 6)
 
 ## Phase Details
@@ -205,7 +205,7 @@ Plans:
 **Requirements**: PERF-01, PERF-03 (cross-cutting — this phase must not regress CWV or RTL; no v1 requirement IDs map to this v2.0 redesign phase)
 **UI hint**: yes
 **Depends on:** Phase 8
-**Plans:** 5/5 plans executed
+**Plans:** 5/5 plans complete
 
 Plans:
 **Wave 1**
