@@ -5,6 +5,7 @@ import { HeroBlock } from "@/components/blocks/HeroBlock";
 import { CTABandBlock } from "@/components/blocks/CTABandBlock";
 import { sectionBg } from "@/components/blocks/RenderBlocks";
 import { ProductCard } from "@/components/products/ProductCard";
+import { Reveal } from "@/components/motion/Reveal";
 import { RevealItem } from "@/components/motion/RevealItem";
 import { getProductsByCategory, getSiteBrand } from "@/lib/payload-fetch";
 import type { Locale } from "@/i18n/routing";
@@ -109,15 +110,20 @@ export default async function ProductsPage({
         </section>
       ))}
 
-      <CTABandBlock
-        block={{
-          blockType: "ctaBand",
-          heading: "Ready to Source These Products?",
-          primaryCta: REQUEST_QUOTE_CTA,
-          secondaryCta: { label: "Chat on WhatsApp", href: waHref },
-        }}
-        index={grouped.length}
-      />
+      {/* WR-01: this page bypasses RenderBlocks (hand-built, not a CMS Page
+          layout), so CTABandBlock needs its own Reveal wrap to match the
+          scroll-reveal treatment every CMS Page gets automatically. */}
+      <Reveal>
+        <CTABandBlock
+          block={{
+            blockType: "ctaBand",
+            heading: "Ready to Source These Products?",
+            primaryCta: REQUEST_QUOTE_CTA,
+            secondaryCta: { label: "Chat on WhatsApp", href: waHref },
+          }}
+          index={grouped.length}
+        />
+      </Reveal>
     </main>
   );
 }

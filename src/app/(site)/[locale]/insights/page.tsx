@@ -5,6 +5,7 @@ import { Link } from "@/i18n/navigation";
 import { HeroBlock } from "@/components/blocks/HeroBlock";
 import { CTABandBlock } from "@/components/blocks/CTABandBlock";
 import { InsightCard } from "@/components/insights/InsightCard";
+import { Reveal } from "@/components/motion/Reveal";
 import { RevealItem } from "@/components/motion/RevealItem";
 import { getSiteBrand } from "@/lib/payload-fetch";
 import type { Locale } from "@/i18n/routing";
@@ -86,15 +87,20 @@ export default async function InsightsPage({
         </div>
       </section>
 
-      <CTABandBlock
-        block={{
-          blockType: "ctaBand",
-          heading: "Ready to Source With Confidence?",
-          primaryCta: REQUEST_QUOTE_CTA,
-          secondaryCta: { label: "Chat on WhatsApp", href: waHref },
-        }}
-        index={1}
-      />
+      {/* WR-01: this page bypasses RenderBlocks (hand-built, not a CMS Page
+          layout), so CTABandBlock needs its own Reveal wrap to match the
+          scroll-reveal treatment every CMS Page gets automatically. */}
+      <Reveal>
+        <CTABandBlock
+          block={{
+            blockType: "ctaBand",
+            heading: "Ready to Source With Confidence?",
+            primaryCta: REQUEST_QUOTE_CTA,
+            secondaryCta: { label: "Chat on WhatsApp", href: waHref },
+          }}
+          index={1}
+        />
+      </Reveal>
     </main>
   );
 }
