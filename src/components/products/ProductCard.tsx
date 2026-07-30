@@ -1,9 +1,9 @@
 import Image from "next/image";
-import { ImageOff } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { pickProductFallback } from "@/lib/stock-fallback-images";
 import type { Product, Media, Category } from "../../../payload-types";
 
 // UI-SPEC §Component Inventory #1 ProductCard — CatalogIndex grid item.
@@ -16,24 +16,22 @@ export function ProductCard({ product }: { product: Product }) {
   const first = product.imageGallery?.[0]?.image;
   const image = first && typeof first === "object" ? (first as Media) : null;
   const category = typeof product.category === "object" ? (product.category as Category) : null;
+  const fallbackSrc = pickProductFallback(product.slug || product.name);
 
   return (
     <Link href={`/products/${product.slug}`} className="group block">
       <Card className="gap-sm rounded-card border border-neutral-300 bg-white p-md shadow-card transition-transform duration-150 motion-reduce:transition-none group-hover:-translate-y-[2px] group-hover:shadow-card-hover group-focus-visible:-translate-y-[2px] group-focus-visible:shadow-card-hover group-focus-visible:ring-2 group-focus-visible:ring-accent-600 md:p-lg">
         <AspectRatio ratio={4 / 3} className="overflow-hidden rounded-md bg-neutral-100">
-          {image?.url ? (
-            <Image
-              src={image.url}
-              alt={image.alt}
-              fill
-              sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
-              className="object-cover transition-transform duration-300 motion-reduce:transition-none group-hover:scale-[1.03]"
-            />
-          ) : (
-            <div className="flex size-full items-center justify-center">
-              <ImageOff aria-hidden="true" className="size-8 text-neutral-600" />
-            </div>
-          )}
+          {/* Real photography uploaded via Payload Media wins; until then a
+              deterministic stock fallback (temporary, see stock-fallback-images.ts)
+              keeps the catalog grid from rendering broken-image icons. */}
+          <Image
+            src={image?.url || fallbackSrc}
+            alt={image?.alt || product.name}
+            fill
+            sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
+            className="object-cover transition-transform duration-300 motion-reduce:transition-none group-hover:scale-[1.03]"
+          />
         </AspectRatio>
         {category ? (
           <Badge variant="secondary" className="w-fit bg-neutral-100 text-neutral-900">

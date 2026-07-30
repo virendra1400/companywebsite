@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { WhatsAppTrackedLink } from "@/components/chrome/WhatsAppTrackedLink";
 import { Link } from "@/i18n/navigation";
 import { getSiteBrand } from "@/lib/payload-fetch";
+import { pickHeroFallback } from "@/lib/stock-fallback-images";
 import type { Page, Media } from "../../../payload-types";
 
 type HeroData = Extract<NonNullable<Page["layout"]>[number], { blockType: "hero" }>;
@@ -43,6 +44,7 @@ export async function HeroBlock({ block }: { block: HeroData; index: number }) {
   // heroImage is a relation: number (id, not populated) | Media (populated) | null/undefined.
   const image =
     block.heroImage && typeof block.heroImage === "object" ? (block.heroImage as Media) : null;
+  const fallbackSrc = pickHeroFallback(block.headline || "hero");
 
   return (
     <section
@@ -51,19 +53,17 @@ export async function HeroBlock({ block }: { block: HeroData; index: number }) {
         isFull ? "min-h-[70dvh]" : "min-h-[320px] md:min-h-[400px]"
       }`}
     >
-      {/* Known stub: no real photography uploaded to Payload Media yet — the
-          section renders on its primary-900 background alone until content
-          editors add a heroImage via /admin. */}
-      {image?.url ? (
-        <Image
-          src={image.url}
-          alt={image.alt}
-          fill
-          priority={isFull}
-          sizes="100vw"
-          className="object-cover"
-        />
-      ) : null}
+      {/* Real photography uploaded via Payload Media wins; until then a
+          deterministic stock fallback (temporary, see stock-fallback-images.ts)
+          keeps the hero from rendering as an empty color block. */}
+      <Image
+        src={image?.url || fallbackSrc}
+        alt={image?.alt || ""}
+        fill
+        priority={isFull}
+        sizes="100vw"
+        className="object-cover"
+      />
       <div aria-hidden="true" className={`absolute inset-0 ${overlayClass}`} />
       <div
         className={`relative mx-auto flex w-full max-w-[1280px] flex-col items-start text-start ${stackGap}`}
