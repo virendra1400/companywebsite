@@ -10,6 +10,13 @@
     "insights": "Insights",
     "contact": "اتصل بنا"
   },
+  "footer": {
+    "usefulLinks": "Useful Links",
+    "contactInformation": "Contact Information",
+    "corporateOffice": "Registered Office",
+    "email": "Email",
+    "phone": "Phone"
+  },
   "switcher": {
     "ariaLabel": "تغيير اللغة (الحالية: {current})"
   },

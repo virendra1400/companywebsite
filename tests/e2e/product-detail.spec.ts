@@ -32,10 +32,15 @@ test("en: Basmati Rice SpecTable renders as a <dl> with >=5 rows plus a Packagin
   await expect(dl.getByText("Packaging", { exact: true })).toBeVisible();
 });
 
-test("en: Basmati Rice applicable-certification cards are present (Halal + FSSC)", async ({ page }) => {
+// Certifications collection is intentionally empty (no fabricated cert
+// data) — the applicable-certification section renders nothing rather than
+// a blank grid. Re-add badge assertions once /admin has real certifications
+// linked to this product.
+test("en: Basmati Rice detail page renders with no certification badges (none seeded)", async ({
+  page,
+}) => {
   await page.goto(`/products/${BASMATI.slug}`);
-  await expect(page.getByText("Halal Certification for Food Processing & Export")).toBeVisible();
-  await expect(page.getByText("Food Safety System Certification (FSSC) 22000")).toBeVisible();
+  await expect(page.getByText("Halal Certification for Food Processing & Export")).not.toBeVisible();
 });
 
 test("en: Basmati Rice RFQ CTA anchor href carries the product slug + encoded name", async ({ page }) => {

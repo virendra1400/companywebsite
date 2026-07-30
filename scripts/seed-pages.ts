@@ -110,37 +110,11 @@ for (const seedPage of PAGES_EN_SEED) {
 }
 
 // --- Certifications (TRUST-01/02) ---------------------------------------
-// Self-authored placeholder logos + a placeholder PDF under
-// scripts/seed-assets/ (see that dir's README — NOT real cert-body logos or
-// documents, no fabricated certificate/registration numbers, Pitfall 5/9).
-// One halal:true cert (elevated + PDF-present), one standard PDF-present,
-// one standard PDF-absent ("available on request").
-const CERTIFICATIONS_EN_SEED = [
-  {
-    name: "Halal Certification for Food Processing & Export",
-    issuingBody: "International Halal Accreditation Forum",
-    halal: true,
-    logoPath: "scripts/seed-assets/logo-halal.svg",
-    hasPdf: true,
-    displayOrder: 1,
-  },
-  {
-    name: "Food Safety System Certification (FSSC) 22000",
-    issuingBody: "FSSC Foundation",
-    halal: false,
-    logoPath: "scripts/seed-assets/logo-food-safety.svg",
-    hasPdf: true,
-    displayOrder: 2,
-  },
-  {
-    name: "ISO 22000:2018 Food Safety Management Systems Certification",
-    issuingBody: "International Organization for Standardization",
-    halal: false,
-    logoPath: "scripts/seed-assets/logo-iso-22000.svg",
-    hasPdf: false, // drives the PDF-absent "available on request" state
-    displayOrder: 3,
-  },
-];
+// Intentionally NOT seeded with placeholder certs — the company doesn't yet
+// hold verifiable certifications, and fabricated cert entries read as false
+// claims to international buyers. CertStripBlock/the /certifications page
+// already render a "coming soon" empty state when this collection is empty;
+// add real certifications via /admin once they exist.
 
 // --- Company/Compliance leadership placeholder photos (TRUST-05) ---------
 // Self-authored generic initials-in-circle avatars (T-02-09: no real people
@@ -210,49 +184,5 @@ async function attachLeadershipPhotos() {
 }
 
 await attachLeadershipPhotos();
-
-let sharedPdfId: number | null = null;
-
-for (const cert of CERTIFICATIONS_EN_SEED) {
-  const existingCert = await payload.find({
-    collection: "certifications",
-    where: { name: { equals: cert.name } },
-    locale: "en",
-    fallbackLocale: false,
-    overrideAccess: true,
-    limit: 1,
-  });
-
-  if (existingCert.docs[0]) {
-    console.log(`Certification '${cert.name}' already seeded — skipping.`);
-    continue;
-  }
-
-  const logoDoc = await upsertMediaByAlt(`${cert.name} logo`, cert.logoPath);
-
-  if (cert.hasPdf && sharedPdfId === null) {
-    const pdfDoc = await upsertMediaByAlt(
-      "Sample certificate placeholder PDF",
-      "scripts/seed-assets/sample-certificate.pdf",
-    );
-    sharedPdfId = pdfDoc.id;
-  }
-
-  await payload.create({
-    collection: "certifications",
-    locale: "en",
-    data: {
-      name: cert.name,
-      issuingBody: cert.issuingBody,
-      logo: logoDoc.id,
-      certificatePdf: cert.hasPdf ? (sharedPdfId ?? undefined) : undefined,
-      halal: cert.halal,
-      displayOrder: cert.displayOrder,
-    },
-    overrideAccess: true,
-    context: { disableRevalidate: true },
-  });
-  console.log(`Seeded certification '${cert.name}'.`);
-}
 
 await payload.destroy();

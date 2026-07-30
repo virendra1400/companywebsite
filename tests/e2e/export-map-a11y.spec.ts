@@ -28,13 +28,9 @@ for (const path of EXPORT_PATHS) {
     await expect(page.getByText("Germany", { exact: true })).toBeVisible();
   });
 
-  test(`${path}: StatsBand (years exporting / shipment volume / incoterms) renders`, async ({
-    page,
-  }) => {
+  test(`${path}: StatsBand (incoterms) renders`, async ({ page }) => {
     await page.goto(path);
-    await expect(page.getByText("Years Exporting", { exact: true })).toBeVisible();
-    await expect(page.getByText("Container Shipments", { exact: true })).toBeVisible();
-    await expect(page.getByText("Incoterms Handled", { exact: true })).toBeVisible();
+    await expect(page.getByText("Incoterms We Work With", { exact: true })).toBeVisible();
   });
 
   test(`${path}: map SVG carries no dir-based mirror transform`, async ({ page }) => {
@@ -48,15 +44,6 @@ for (const path of EXPORT_PATHS) {
   });
 }
 
-test("homepage (/) renders the compact ExportMap variant", async ({ page }) => {
-  await page.goto("/");
-  await expect(page.getByRole("img", { name: /countries/i }).first()).toBeVisible();
-});
-
-test("/ar homepage renders the compact ExportMap variant, not mirrored", async ({ page }) => {
-  await page.goto("/ar");
-  const map = page.getByRole("img", { name: /countries/i }).first();
-  await expect(map).toBeVisible();
-  const transform = await map.evaluate((el) => getComputedStyle(el).transform);
-  expect(transform).toBe("none");
-});
+// ExportMap was removed from the homepage (unverified "countries served"
+// claim for a company with no direct export history yet) — it now lives
+// only on /export, covered by the EXPORT_PATHS suite above.

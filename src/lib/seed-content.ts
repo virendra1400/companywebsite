@@ -11,10 +11,9 @@ const WHATSAPP_CTA = { label: "Chat on WhatsApp", href: WHATSAPP_PLACEHOLDER_LIN
 const homeHero = {
   blockType: "hero" as const,
   variant: "full" as const,
-  eyebrow: "ISO / HACCP / APEDA CERTIFIED",
-  headline: "Trusted Agricultural Exports, From Farm to Global Table",
+  headline: "Premium Agricultural Exports, Direct From India",
   subhead:
-    "ISO- and HACCP-aligned processing, Halal-certified supply lines, and 15+ years serving importers across the Gulf, Europe, and beyond.",
+    "Direct sourcing from Indian growers, careful quality control, and export-ready processing — built to serve importers across the Gulf, Europe, and beyond.",
   primaryCta: REQUEST_QUOTE_CTA,
   secondaryCta: WHATSAPP_CTA,
 };
@@ -207,7 +206,7 @@ export const PAGES_EN_SEED = [
     // key_links in 07-03-PLAN.md.
     layout: [
       homeHero,
-      trustBar("Trusted by Importers Across the Globe", [
+      trustBar("Built to Serve Importers Across the Globe", [
         { name: "Gulf & Middle East Importers" },
         { name: "European Distributors" },
         { name: "North American Buyers" },
@@ -228,12 +227,12 @@ export const PAGES_EN_SEED = [
         {
           icon: "fileCheck",
           title: "Compliance",
-          body: "ISO- and HACCP-aligned processing with full export documentation support, so your import authority sees exactly what it needs to see.",
+          body: "Full export documentation support on every order, so your import authority sees exactly what it needs to see.",
         },
         {
           icon: "globe",
           title: "Global Reach",
-          body: "Established supply lines across the Gulf, Europe, and beyond — built for buyers who need a partner that already understands cross-border logistics.",
+          body: "Purpose-built to serve importers across the Gulf, Europe, and beyond — direct sourcing and export-ready processing from day one.",
         },
       ]),
       // Condensed "Manufacturing Excellence" teaser — 3 of the 4 existing
@@ -248,21 +247,11 @@ export const PAGES_EN_SEED = [
         ],
         "Manufacturing Excellence",
       ),
-      statsBand([
-        { value: "500+", label: "Metric Tons Monthly Capacity" },
-        { value: "3", label: "In-House QC Checkpoints" },
-        { value: "24/7", label: "Cold-Chain Monitoring" },
-      ]),
       certStrip(
         "strip",
         "Product Accreditation & Certification",
         "Our products are processed and packed under the quality and safety certifications shown below.",
       ),
-      statsBand([
-        { value: "15+", label: "Years Exporting" },
-        { value: "40+", label: "Countries Served" },
-        { value: "500+", label: "Container Shipments" },
-      ]),
       exportProcess("How an Order Moves From Inquiry to Delivery", [
         {
           title: "Inquiry",
@@ -283,34 +272,6 @@ export const PAGES_EN_SEED = [
         {
           title: "Delivery",
           body: "Your shipment is tracked in transit to your port, with cold-chain and handling standards maintained until arrival.",
-        },
-      ]),
-      exportMap("compact", [
-        { value: `${SERVED_COUNTRY_CODES.length}+`, label: "Countries We Currently Export To" },
-      ]),
-      // Placeholder testimonials — see the `testimonials()` helper comment
-      // above (Pitfall 5: role + buyer-category + real served country, not a
-      // fabricated named-client endorsement) — pending real client quotes.
-      testimonials("What Our Buyers Say", [
-        {
-          quote:
-            "Consistent grading and on-time dispatch, shipment after shipment — exactly what we need from an overseas supplier.",
-          name: "Procurement Lead",
-          company: "GCC-Based Food Importer",
-          country: "United Arab Emirates",
-        },
-        {
-          quote:
-            "Their documentation is always complete before the container leaves port, which has cut our customs clearance time significantly.",
-          name: "Import Operations Manager",
-          company: "European Distribution Partner",
-          country: "Germany",
-        },
-        {
-          quote: "We've scaled our order volume three times over and quality has never dipped.",
-          name: "Category Buyer",
-          company: "Wholesale Import Group",
-          country: "Singapore",
         },
       ]),
       ctaBand("Ready to Source With Confidence?"),
@@ -336,8 +297,8 @@ export const PAGES_EN_SEED = [
     title: "Certifications",
     layout: [
       compactHero(
-        "Certified for Global Trust",
-        "Every certification we hold is backed by a downloadable document — verify our compliance before you commit.",
+        "Committed to Certified Quality Standards",
+        "We're working toward the certifications international buyers expect. Check back as they're confirmed, or ask us directly.",
       ),
       certStrip("grid", "Our Certifications"),
       ctaBand("Have a Compliance Question?"),
@@ -371,38 +332,26 @@ export const PAGES_EN_SEED = [
         ],
         "Inside Our Facilities",
       ),
-      // T-02-12 mitigation: realistic-SHAPED capacity/QC/cold-chain figures,
-      // not presented as audited — same non-fabricated-figure precedent as
-      // the homepage StatsBand.
-      statsBand([
-        { value: "500+", label: "Metric Tons Monthly Capacity" },
-        { value: "3", label: "In-House QC Checkpoints" },
-        { value: "24/7", label: "Cold-Chain Monitoring" },
-      ]),
       ctaBand("Want a Facility Walkthrough?"),
     ],
   },
   {
     slug: "export",
-    title: "Export Track Record",
-    // UI-SPEC Page Composition "Export Track Record" row: Hero(compact) ->
-    // StatsBand(years/volume/incoterms) -> ExportMap(full, own stats + chip
-    // list) -> CTABand. T-02-15: realistic-SHAPED figures, never presented
-    // as an audited fact.
+    title: "Global Markets",
+    // Reframed from a claimed track record (years/shipments/countries
+    // "served") to honest forward-looking positioning — this is a new
+    // exporter with no direct shipment history yet. No fabricated
+    // years/volume figures; the map lists target markets, not past activity.
     layout: [
       compactHero(
-        "A Track Record Buyers Can Verify",
-        "Real countries, real shipment volumes, real incoterms — not a vague export claim.",
+        "Markets We're Built to Serve",
+        "We're positioned to export to the Gulf, Europe, and other international markets — reach out to discuss your destination and requirements.",
       ),
-      statsBand([
-        { value: "15+", label: "Years Exporting" },
-        { value: "500+", label: "Container Shipments" },
-        { value: "FOB / CIF / CFR", label: "Incoterms Handled" },
-      ]),
+      statsBand([{ value: "FOB / CIF / CFR", label: "Incoterms We Work With" }]),
       exportMap(
         "full",
-        [{ value: `${SERVED_COUNTRY_CODES.length}+`, label: "Countries Served" }],
-        "Where We Export",
+        [{ value: `${SERVED_COUNTRY_CODES.length}+`, label: "Target Export Markets" }],
+        "Where We're Ready to Export",
       ),
       ctaBand("Ready to Discuss Your Order Volume?"),
     ],

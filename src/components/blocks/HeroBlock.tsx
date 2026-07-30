@@ -24,9 +24,6 @@ export async function HeroBlock({ block }: { block: HeroData; index: number }) {
   // FOUND-03: force Western (latn) digits — Intl defaults `ar` to Arabic-Indic.
   const buyers = format.number(60, "latn");
 
-  // Phase 7 D-01/D-02: elevate the `full` (homepage) hero to the Phase 6
-  // display-xl tier; `compact` (every interior page) stays on the prior
-  // classes verbatim.
   const heroPadding = isFull
     ? "px-md py-3xl md:px-lg md:py-3xl xl:px-xl xl:py-4xl"
     : "px-md py-3xl md:px-lg xl:px-xl";
@@ -34,9 +31,12 @@ export async function HeroBlock({ block }: { block: HeroData; index: number }) {
     ? "bg-gradient-to-t from-primary-900/75 via-primary-900/25 to-transparent"
     : "bg-gradient-to-t from-primary-900/80 via-primary-900/30 to-transparent";
   const stackGap = isFull ? "gap-xl" : "gap-lg";
+  // Same display-xl/light/tracking treatment as the homepage hero on every
+  // page — only the max-width cap differs (compact hero band is shorter,
+  // so a slightly narrower measure keeps line count sane).
   const headlineClass = isFull
     ? "max-w-[46rem] text-display-xl font-display font-light tracking-display text-white"
-    : "max-w-[42rem] text-display font-display font-semibold text-white";
+    : "max-w-[42rem] text-display-xl font-display font-light tracking-display text-white";
   const subheadClass = isFull
     ? "max-w-[38rem] text-body text-primary-100"
     : "max-w-[36rem] text-body text-primary-100";

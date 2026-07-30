@@ -1,47 +1,25 @@
 import { test, expect } from "@playwright/test";
 
-// TRUST-01/02: the Certifications page renders every seeded cert as a card;
-// the halal cert is visually elevated (accent-600 border + Halal Certified
-// badge + 2-column span); a PDF-present cert exposes a safe (noopener)
-// download link; a PDF-absent cert shows the muted "available on request"
-// copy and renders NO dead link. Both en and /ar paths are exercised to
-// confirm the grid auto-flows correctly under dir=rtl (UI-SPEC RTL
-// Extensions — CertCard grid needs no extra RTL rules).
+// TRUST-01/02: the Certifications collection is intentionally empty (no
+// fabricated cert data — see seed-content.ts/seed-pages.ts) until real
+// certifications are added via /admin. Both CertStripBlock variants (grid on
+// /certifications, strip on the homepage) render the built-in "coming soon"
+// empty state rather than a blank grid. The halal-badge/PDF-download/
+// PDF-absent CertCard behavior (border-accent-600 elevation, safe download
+// link, "available on request" copy) is real, implemented functionality —
+// it just has no e2e coverage right now because there's no real cert data to
+// exercise it against; re-add card-level assertions once /admin has real
+// certifications seeded.
 const PATHS = ["/certifications", "/ar/certifications"];
 
 for (const path of PATHS) {
-  test(`${path}: halal cert renders the Halal Certified badge with accent elevation`, async ({
-    page,
-  }) => {
+  test(`${path}: renders the "coming soon" empty state, not a blank grid`, async ({ page }) => {
     await page.goto(path);
-    const halalCard = page.locator('[data-slot="card"]', { hasText: "Halal Certified" }).first();
-    await expect(halalCard).toBeVisible();
-    await expect(halalCard).toHaveClass(/border-accent-600/);
-    await expect(halalCard).toHaveClass(/col-span-2/);
-  });
-
-  test(`${path}: a PDF-present cert shows a safe Download PDF link`, async ({ page }) => {
-    await page.goto(path);
-    const downloadLink = page.getByRole("link", { name: /download.*pdf/i }).first();
-    await expect(downloadLink).toBeVisible();
-    expect(await downloadLink.getAttribute("download")).not.toBeNull();
-    expect(await downloadLink.getAttribute("target")).toBe("_blank");
-    expect(await downloadLink.getAttribute("rel")).toContain("noopener");
-  });
-
-  test(`${path}: a PDF-absent cert shows "Certificate available on request" with no dead link`, async ({
-    page,
-  }) => {
-    await page.goto(path);
-    const noPdfCard = page.locator('[data-slot="card"]', { hasText: "ISO 22000" }).first();
-    await expect(noPdfCard).toBeVisible();
-    await expect(noPdfCard.getByText("Certificate available on request")).toBeVisible();
-    await expect(noPdfCard.locator("a")).toHaveCount(0);
+    await expect(page.getByText("Certifications coming soon.", { exact: true })).toBeVisible();
   });
 }
 
-test("homepage CertStrip renders logo links to /certifications", async ({ page }) => {
+test("homepage CertStrip renders the empty state, not broken logo links", async ({ page }) => {
   await page.goto("/");
-  const certLinks = page.locator('a[href="/certifications"]');
-  await expect(certLinks.first()).toBeVisible();
+  await expect(page.getByText("Certifications coming soon.", { exact: true })).toBeVisible();
 });
