@@ -205,7 +205,7 @@ Plans:
 **Requirements**: PERF-01, PERF-03 (cross-cutting — this phase must not regress CWV or RTL; no v1 requirement IDs map to this v2.0 redesign phase)
 **UI hint**: yes
 **Depends on:** Phase 8
-**Plans:** 1/5 plans executed
+**Plans:** 4/5 plans executed
 
 Plans:
 **Wave 1**
@@ -214,9 +214,9 @@ Plans:
 
 **Wave 2** *(blocked on Wave 1 completion)*
 
-- [ ] 09-02-PLAN.md — Section-level reveal in RenderBlocks with hero LCP exception + reduced-motion e2e spec (wave 2)
-- [ ] 09-03-PLAN.md — Per-item stagger across grid blocks and catalog grids + RTL directional-slide assertions (wave 2)
-- [ ] 09-04-PLAN.md — Component micro-interactions: accordion fix, tap feedback, WhatsApp entrance, card hover (wave 2)
+- [x] 09-02-PLAN.md — Section-level reveal in RenderBlocks with hero LCP exception + reduced-motion e2e spec (wave 2)
+- [x] 09-03-PLAN.md — Per-item stagger across grid blocks and catalog grids + RTL directional-slide assertions (wave 2)
+- [x] 09-04-PLAN.md — Component micro-interactions: accordion fix, tap feedback, WhatsApp entrance, card hover (wave 2)
 
 **Wave 3** *(blocked on Wave 2 completion)*
 
