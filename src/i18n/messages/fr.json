@@ -26,7 +26,7 @@
   },
   "hero": {
     "headline": "Exportations agroalimentaires indiennes premium, reconnues sur les marchés mondiaux",
-    "subhead": "De nos installations certifiées à votre port — approvisionnement fiable, conformité internationale et partenariat durable pour les importateurs du monde entier.",
+    "subhead": "De nos installations certifiées à votre port, approvisionnement fiable, conformité internationale et partenariat durable pour les importateurs du monde entier.",
     "cta": "Demander un devis"
   },
   "sample": {
@@ -41,10 +41,10 @@
     "downloadPdf": "Download PDF",
     "pdfUnavailable": "Certificate available on request",
     "comingSoonHeading": "Certifications coming soon.",
-    "comingSoonBody": "We're finalizing documentation for our quality certifications — contact us directly for current compliance status."
+    "comingSoonBody": "We're finalizing documentation for our quality certifications. Contact us directly for current compliance status."
   },
   "blocks": {
-    "emptyState": "This section is being updated — check back shortly.",
+    "emptyState": "This section is being updated. Check back shortly.",
     "watchVideo": "Watch video",
     "exportMapAriaLabel": "World map highlighting {count} countries we export to"
   },
@@ -60,8 +60,8 @@
     "errorBanner": "Something went wrong sending your message. Please try again in a moment, or reach us directly via WhatsApp or email.",
     "rateLimitBanner": "You're submitting a bit too quickly. Please wait a moment and try again.",
     "requiredLegend": "Fields marked * are required.",
-    "contactMethodHelper": "Provide at least one so we can reach you — email or phone.",
-    "captchaVerifying": "Running a quick security check — this only takes a moment.",
+    "contactMethodHelper": "Provide at least one so we can reach you: email or phone.",
+    "captchaVerifying": "Running a quick security check. This only takes a moment.",
     "captchaErrorBanner": "We couldn't load the security check, so the form can't be submitted right now. Please reach us directly on WhatsApp or by email instead.",
     "whatsappLabel": "Chat on WhatsApp",
     "whatsappAria": "Chat on WhatsApp",

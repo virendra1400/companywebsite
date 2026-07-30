@@ -75,8 +75,8 @@ export async function GlobalFooter({
   const formattedAddress = formatAddress(address);
 
   return (
-    <footer className="bg-primary-900 px-md py-2xl text-neutral-100 md:px-lg xl:px-xl">
-      <div className="mx-auto grid w-full max-w-[1280px] grid-cols-1 gap-xl md:grid-cols-3 md:gap-lg">
+    <footer className="bg-primary-900 px-md py-xl text-neutral-100 md:px-lg md:py-2xl xl:px-xl">
+      <div className="mx-auto grid w-full max-w-[1280px] grid-cols-1 gap-lg md:grid-cols-3 md:gap-lg">
         <div className="flex flex-col gap-md">
           <Link href="/" className="w-fit">
             <BrandMark siteName={siteName} logoUrl={logoUrl} variant="dark" />
@@ -105,7 +105,7 @@ export async function GlobalFooter({
 
         <div className="flex flex-col gap-sm">
           <h2 className="text-body font-semibold text-white">{tf("usefulLinks")}</h2>
-          <nav className="flex flex-col gap-sm text-label" aria-label="Footer">
+          <nav className="grid grid-cols-2 gap-x-md gap-y-xs text-label" aria-label="Footer">
             {NAV_KEYS.map((key) => (
               <Link
                 key={key}
@@ -120,7 +120,7 @@ export async function GlobalFooter({
 
         <div className="flex flex-col gap-sm">
           <h2 className="text-body font-semibold text-white">{tf("contactInformation")}</h2>
-          <ul className="flex flex-col gap-sm text-label">
+          <ul className="flex flex-col gap-xs text-label">
             {formattedAddress ? (
               <li className="flex items-start gap-sm">
                 <MapPin aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-accent-600" />
@@ -146,7 +146,7 @@ export async function GlobalFooter({
         </div>
       </div>
 
-      <div className="mx-auto mt-xl flex w-full max-w-[1280px] flex-col-reverse items-start gap-md sm:flex-row sm:items-center sm:justify-between">
+      <div className="mx-auto mt-lg flex w-full max-w-[1280px] flex-col-reverse items-start gap-md border-t border-white/10 pt-md sm:flex-row sm:items-center sm:justify-between">
         <p className="text-label text-neutral-300">{`© ${year} ${siteName}. All rights reserved.`}</p>
         <LanguageSwitcher onDark />
       </div>

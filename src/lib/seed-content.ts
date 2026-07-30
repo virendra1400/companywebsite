@@ -13,7 +13,7 @@ const homeHero = {
   variant: "full" as const,
   headline: "Premium Agricultural Exports, Direct From India",
   subhead:
-    "Direct sourcing from Indian growers, careful quality control, and export-ready processing — built to serve importers across the Gulf, Europe, and beyond.",
+    "Direct sourcing from Indian growers, careful quality control, and export-ready processing, built to serve importers across the Gulf, Europe, and beyond.",
   primaryCta: REQUEST_QUOTE_CTA,
   secondaryCta: WHATSAPP_CTA,
 };
@@ -155,7 +155,7 @@ function contactBlock() {
   return {
     blockType: "contactBlock" as const,
     intro:
-      "Reach out directly, or send an inquiry below — our export team responds to every message within one business day.",
+      "Reach out directly, or send an inquiry below. Our export team responds to every message within one business day.",
     address: "Plot 14, MIDC Industrial Area, Nashik, Maharashtra 422010, India",
   };
 }
@@ -222,7 +222,7 @@ export const PAGES_EN_SEED = [
         {
           icon: "refreshCw",
           title: "Reliability",
-          body: "Consistent grading, on-time dispatch, and dependable lead times — the same standards whether it's your first order or your fiftieth.",
+          body: "Consistent grading, on-time dispatch, and dependable lead times, the same standards whether it's your first order or your fiftieth.",
         },
         {
           icon: "fileCheck",
@@ -232,7 +232,7 @@ export const PAGES_EN_SEED = [
         {
           icon: "globe",
           title: "Global Reach",
-          body: "Purpose-built to serve importers across the Gulf, Europe, and beyond — direct sourcing and export-ready processing from day one.",
+          body: "Purpose-built to serve importers across the Gulf, Europe, and beyond, with direct sourcing and export-ready processing from day one.",
         },
       ]),
       // Condensed "Manufacturing Excellence" teaser — 3 of the 4 existing
@@ -255,7 +255,7 @@ export const PAGES_EN_SEED = [
       exportProcess("How an Order Moves From Inquiry to Delivery", [
         {
           title: "Inquiry",
-          body: "Share your product, target quantity, and destination port — our export team responds within one business day.",
+          body: "Share your product, target quantity, and destination port. Our export team responds within one business day.",
         },
         {
           title: "Quote",
@@ -282,11 +282,11 @@ export const PAGES_EN_SEED = [
     title: "About",
     layout: [
       compactHero(
-        "Three Generations of Agricultural Expertise",
-        "VNP Global began as a family farming operation and grew into a full-spectrum export house serving institutional and retail buyers worldwide.",
+        "Rooted in Indian Agriculture, Built for Global Trade",
+        "VNP Global sources, processes, and prepares agricultural products for export, built from the ground up to meet the standards international buyers expect.",
       ),
       richText(
-        "What began three generations ago as a family farming operation has grown into a vertically integrated export house — from our own fields and sourcing network through processing, quality control, and global logistics.",
+        "VNP Global sources, grades, and processes agricultural products for export, built from day one around the standards international buyers expect. Quality control, documentation, and reliable communication.",
         "Our mission is simple: deliver consistently graded, safely processed agricultural products to international buyers who can't afford supply-chain surprises. Leadership bios and compliance details live on our Company & Compliance page.",
       ),
       ctaBand("Want to Know More About Our Story?"),
@@ -320,7 +320,7 @@ export const PAGES_EN_SEED = [
       ),
       richText(
         "Every shipment begins on our own processing floor, where incoming produce is graded, cleaned, and sorted before moving into product-specific processing lines under documented standard operating procedures.",
-        "Our quality control lab tests samples at multiple checkpoints — intake, mid-process, and pre-dispatch — so defects are caught before a batch ever reaches packing, not after a buyer receives it.",
+        "Our quality control lab tests samples at multiple checkpoints (intake, mid-process, and pre-dispatch), so defects are caught before a batch ever reaches packing, not after a buyer receives it.",
         "Temperature-controlled cold storage protects perishable batches between processing and dispatch, and every pallet is documented and traceable back to its intake batch for full chain-of-custody visibility.",
       ),
       mediaGallery(
@@ -345,7 +345,7 @@ export const PAGES_EN_SEED = [
     layout: [
       compactHero(
         "Markets We're Built to Serve",
-        "We're positioned to export to the Gulf, Europe, and other international markets — reach out to discuss your destination and requirements.",
+        "We're positioned to export to the Gulf, Europe, and other international markets. Reach out to discuss your destination and requirements.",
       ),
       statsBand([{ value: "FOB / CIF / CFR", label: "Incoterms We Work With" }]),
       exportMap(
@@ -388,7 +388,7 @@ export const PAGES_EN_SEED = [
       // generic compliance prose only (T-02-08, Pitfall 5/9).
       richText(
         "VNP Global operates under a valid Importer-Exporter Code (IEC) registration and maintains compliance with India's export-import regulatory framework, including APEDA registration for agricultural exports.",
-        "Our documentation team ensures every shipment carries the certificates, phytosanitary clearances, and customs paperwork your import authority requires — verifiable on request, not just claimed.",
+        "Our documentation team ensures every shipment carries the certificates, phytosanitary clearances, and customs paperwork your import authority requires, verifiable on request, not just claimed.",
       ),
       richText(
         "From letter-of-credit documentation to phytosanitary certificates, packing lists, and certificates of origin, our logistics team prepares every export document your customs broker and import authority require.",
