@@ -962,6 +962,10 @@ export interface SiteSetting {
    */
   logo?: (number | null) | Media;
   /**
+   * Browser tab icon. Leave empty to use the default VNP monogram. Recommended: square (e.g. 512x512) transparent PNG or SVG — any other aspect ratio gets letterboxed into a square automatically.
+   */
+  favicon?: (number | null) | Media;
+  /**
    * Single source for contact details used site-wide — header/hero CTAs, product pages, and the Contact page all read from here.
    */
   contact: {
@@ -1007,6 +1011,7 @@ export interface SiteSetting {
 export interface SiteSettingsSelect<T extends boolean = true> {
   siteName?: T;
   logo?: T;
+  favicon?: T;
   contact?:
     | T
     | {

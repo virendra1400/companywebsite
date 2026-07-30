@@ -11,6 +11,7 @@ import type { Page, Certification, Category, Product } from "../../payload-types
 export const getSiteBrand = cache(async function getSiteBrand(): Promise<{
   siteName: string;
   logoUrl: string | null;
+  faviconUrl: string | null;
   email: string;
   phone: string;
   whatsapp: string;
@@ -32,6 +33,9 @@ export const getSiteBrand = cache(async function getSiteBrand(): Promise<{
   const logo = settings?.logo;
   const logoUrl =
     logo && typeof logo === "object" && "url" in logo ? (logo.url ?? null) : null;
+  const favicon = settings?.favicon;
+  const faviconUrl =
+    favicon && typeof favicon === "object" && "url" in favicon ? (favicon.url ?? null) : null;
   const contact = settings?.contact ?? {};
   const whatsapp = contact.whatsapp || "910000000000";
   const address = settings?.address;
@@ -41,6 +45,7 @@ export const getSiteBrand = cache(async function getSiteBrand(): Promise<{
   return {
     siteName: settings?.siteName || "VNP Global",
     logoUrl,
+    faviconUrl,
     email: contact.email || "sales@example.com",
     phone: contact.phone || "+91 00000 00000",
     whatsapp,

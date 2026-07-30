@@ -38,6 +38,16 @@ export const SiteSettings: GlobalConfig = {
       },
     },
     {
+      name: "favicon",
+      type: "upload",
+      relationTo: "media",
+      required: false,
+      admin: {
+        description:
+          "Browser tab icon. Leave empty to use the default VNP monogram. Recommended: square (e.g. 512x512) transparent PNG or SVG — any other aspect ratio gets letterboxed into a square automatically.",
+      },
+    },
+    {
       type: "group",
       name: "contact",
       label: "Contact channels",
