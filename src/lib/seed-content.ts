@@ -34,8 +34,8 @@ function ctaBand(heading: string) {
 
 // TRUST-01/02: no cert data lives on the block — it queries the
 // Certifications collection at render time (see CertStripBlock.tsx).
-function certStrip(variant: "strip" | "grid", sectionTitle?: string) {
-  return { blockType: "certStrip" as const, variant, sectionTitle };
+function certStrip(variant: "strip" | "grid", sectionTitle?: string, intro?: string) {
+  return { blockType: "certStrip" as const, variant, sectionTitle, intro };
 }
 
 type FeatureGridItem = { icon?: string; title: string; body: string };
@@ -253,7 +253,11 @@ export const PAGES_EN_SEED = [
         { value: "3", label: "In-House QC Checkpoints" },
         { value: "24/7", label: "Cold-Chain Monitoring" },
       ]),
-      certStrip("strip"),
+      certStrip(
+        "strip",
+        "Product Accreditation & Certification",
+        "Our products are processed and packed under the quality and safety certifications shown below.",
+      ),
       statsBand([
         { value: "15+", label: "Years Exporting" },
         { value: "40+", label: "Countries Served" },
