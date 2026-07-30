@@ -99,3 +99,117 @@ test("/ar/contact: two-column info+form block renders under dir=rtl without hori
   );
   expect(hasHorizontalOverflow).toBe(false);
 });
+
+// 09-04 (D-13): the FAQ accordion animates open AND close via
+// grid-template-rows with forceMount — closed content stays present in the
+// DOM (so the closing transition can play) but is hidden from assistive
+// tech via data-[state=closed]:invisible. Always scroll the FAQ into view
+// first so this passes identically whether or not 09-02's section reveal
+// has merged yet.
+test("/contact: FAQ accordion animates open and closed via grid-template-rows, staying a11y-hidden while closed", async ({
+  page,
+}) => {
+  await page.goto("/contact");
+
+  // Scope content to the SAME AccordionItem as the trigger clicked below
+  // ("How quickly will I hear back?" — item-1, not item-0) — a single-
+  // collapsible accordion only flips the item that was actually clicked.
+  const trigger = page.getByRole("button", { name: /how quickly will i hear back/i });
+  const item = page.locator('[data-slot="accordion-item"]').filter({ has: trigger });
+  const content = item.locator('[data-slot="accordion-content"]');
+  await content.scrollIntoViewIfNeeded();
+
+  // Closed, before any interaction: present in the DOM (forceMount), but
+  // hidden from assistive tech via computed visibility. Reads force a
+  // reflow first (el.offsetWidth) and are polled — a bare getComputedStyle
+  // right after scrollIntoViewIfNeeded can return a stale pre-reflow
+  // snapshot for var()-based properties under load.
+  await expect(content).toBeAttached();
+  await expect(content).toHaveAttribute("data-state", "closed");
+  await expect
+    .poll(async () =>
+      content.evaluate((el) => {
+        void (el as HTMLElement).offsetWidth;
+        return getComputedStyle(el).visibility;
+      }),
+    )
+    .toBe("hidden");
+
+  // Open: click the trigger by the seeded question text (shortest, most
+  // stable string — src/lib/seed-content.ts Contact FAQ items).
+  await trigger.click();
+
+  await expect(content).toHaveAttribute("data-state", "open");
+  await expect
+    .poll(async () =>
+      content.evaluate((el) => {
+        void (el as HTMLElement).offsetWidth;
+        return getComputedStyle(el).visibility;
+      }),
+    )
+    .toBe("visible");
+  const openRows = await content.evaluate((el) => getComputedStyle(el).gridTemplateRows);
+  expect(openRows).not.toBe("0px");
+
+  // Close again: data-state flips immediately, visibility only flips back
+  // to hidden once the ~300ms close transition elapses — this is the half
+  // Radix's default unmount-on-close behaviour used to swallow entirely.
+  // Assert on ELAPSED TIME rather than reading the raw CSS
+  // transition-duration property: getComputedStyle's resolved value for a
+  // var()-driven transition-duration is observably unstable in this Next.js
+  // dev-mode/Turbopack HMR session (confirmed correct and stable in the
+  // served stylesheet and in `next build` output — this is a dev-server
+  // read-timing artifact, not a production behavior). The wall-clock delay
+  // before visibility flips is the actual behavioral proof that closing
+  // isn't instant, and it can't be faked by a stale style read.
+  const closeStart = Date.now();
+  await trigger.click();
+  await expect(content).toHaveAttribute("data-state", "closed");
+  await expect
+    .poll(async () => content.evaluate((el) => getComputedStyle(el).visibility), { timeout: 2000 })
+    .toBe("hidden");
+  expect(Date.now() - closeStart).toBeGreaterThan(100);
+});
+
+// 09-04 (D-11/D-12): tap feedback lives at a single edit site in
+// buttonVariants — active:scale-[0.98], suppressed to no visual delta under
+// prefers-reduced-motion. Tailwind v4 compiles scale-* utilities to the
+// standalone `scale` CSS property (not `transform`).
+test("/contact: submit button tap feedback scales 0.98 while pressed, suppressed under reduced motion", async ({
+  page,
+}) => {
+  await mockTurnstileSuccess(page);
+  await page.goto("/contact");
+
+  const submitButton = page.getByRole("button", { name: /send inquiry/i });
+  // `.hover()` (not a manual boundingBox+mouse.move) so Playwright's own
+  // occlusion check positions the cursor past the sticky header rather than
+  // landing on whatever sits at the raw scrollIntoViewIfNeeded coordinates.
+  await submitButton.hover();
+
+  expect(await submitButton.evaluate((el) => getComputedStyle(el).scale)).toBe("none");
+
+  await page.mouse.down();
+  // transition-all's default duration means the pressed scale interpolates
+  // rather than jumping straight to 0.98 — poll until it settles.
+  await expect
+    .poll(async () => submitButton.evaluate((el) => getComputedStyle(el).scale))
+    .toMatch(/^0\.98/);
+  await page.mouse.up();
+  // Let the release transition (0.98 -> rest) fully settle before the next
+  // press, so it isn't caught mid-interpolation.
+  await expect
+    .poll(async () => submitButton.evaluate((el) => getComputedStyle(el).scale))
+    .toBe("none");
+
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  // Re-hover: emulateMedia can drop the tracked hover state, and a
+  // mouse.down without the cursor back over the button wouldn't register
+  // as :active at all.
+  await submitButton.hover();
+  await page.mouse.down();
+  await expect
+    .poll(async () => submitButton.evaluate((el) => getComputedStyle(el).scale))
+    .toBe("1");
+  await page.mouse.up();
+});
