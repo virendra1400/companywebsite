@@ -1,5 +1,6 @@
 import type { ComponentType } from "react";
 import type { Page } from "../../../payload-types";
+import { Reveal } from "@/components/motion/Reveal";
 import { HeroBlock } from "./HeroBlock";
 import { RichTextBlock } from "./RichTextBlock";
 import { CTABandBlock } from "./CTABandBlock";
@@ -53,7 +54,13 @@ export function RenderBlocks({ blocks }: { blocks: LayoutBlock[] }) {
       {blocks.map((block, index) => {
         const Component = BLOCK_MAP[block.blockType];
         if (!Component) return null; // unknown blockType: fail soft, not a blank crash
-        return <Component key={block.id ?? index} block={block} index={index} />;
+        const rendered = <Component key={block.id ?? index} block={block} index={index} />;
+        // D-07: hero is the LCP candidate on any page that has one — never
+        // gate it behind a scroll-triggered Reveal. Explicit blockType check
+        // (not index/threshold) so this stays correct if hero ever appears
+        // at a position other than 0.
+        if (block.blockType === "hero") return rendered;
+        return <Reveal key={block.id ?? index}>{rendered}</Reveal>;
       })}
     </>
   );
