@@ -18,7 +18,7 @@ export async function WhatsAppFloatingButton() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label={t("whatsappAria")}
-      className="fixed bottom-md end-md z-40 inline-flex size-14 items-center justify-center rounded-full bg-primary-700 text-white shadow-card-hover transition-colors hover:bg-primary-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-600 focus-visible:ring-offset-2"
+      className="fixed bottom-md end-md z-40 inline-flex size-14 items-center justify-center rounded-full bg-primary-700 text-white shadow-card-hover transition-[background-color,scale] duration-200 hover:scale-105 hover:bg-primary-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-600 focus-visible:ring-offset-2 animate-float-in motion-reduce:animate-none motion-reduce:transition-none"
     >
       <WhatsAppIcon className="size-7" />
     </WhatsAppTrackedLink>

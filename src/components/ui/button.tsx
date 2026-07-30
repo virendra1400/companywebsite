@@ -5,13 +5,14 @@ import { Slot } from "radix-ui"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex shrink-0 items-center justify-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-accent-600 disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+  "inline-flex shrink-0 items-center justify-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-all outline-none active:scale-[0.98] motion-reduce:active:scale-100 focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-accent-600 disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
   {
     variants: {
       // 08-UI-SPEC Contract §4: brand hover and the full-opacity accent
       // focus ring were consolidated here from call sites (previously
-      // repeated 5x/6x); outlineOnDark below replaces two hand-rolled
-      // dark-surface CTA overrides with an explicit transparent variant.
+      // repeated 5x/6x); the dark-surface variant below replaces two
+      // hand-rolled dark-surface CTA overrides with an explicit
+      // transparent variant.
       variant: {
         default: "bg-primary text-primary-foreground hover:bg-primary-500",
         destructive:

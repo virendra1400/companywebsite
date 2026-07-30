@@ -19,7 +19,7 @@ export function ProductCard({ product }: { product: Product }) {
 
   return (
     <Link href={`/products/${product.slug}`} className="group block">
-      <Card className="gap-sm rounded-card border border-neutral-300 bg-white p-md shadow-card transition-transform duration-150 group-hover:-translate-y-[1px] group-hover:shadow-card-hover group-focus-visible:-translate-y-[1px] group-focus-visible:shadow-card-hover group-focus-visible:ring-2 group-focus-visible:ring-accent-600 md:p-lg">
+      <Card className="gap-sm rounded-card border border-neutral-300 bg-white p-md shadow-card transition-transform duration-150 motion-reduce:transition-none group-hover:-translate-y-[2px] group-hover:shadow-card-hover group-focus-visible:-translate-y-[2px] group-focus-visible:shadow-card-hover group-focus-visible:ring-2 group-focus-visible:ring-accent-600 md:p-lg">
         <AspectRatio ratio={4 / 3} className="overflow-hidden rounded-md bg-neutral-100">
           {image?.url ? (
             <Image
@@ -27,7 +27,7 @@ export function ProductCard({ product }: { product: Product }) {
               alt={image.alt}
               fill
               sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
-              className="object-cover"
+              className="object-cover transition-transform duration-300 motion-reduce:transition-none group-hover:scale-[1.03]"
             />
           ) : (
             <div className="flex size-full items-center justify-center">
