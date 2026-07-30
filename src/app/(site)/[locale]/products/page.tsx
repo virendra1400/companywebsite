@@ -9,6 +9,7 @@ import { Reveal } from "@/components/motion/Reveal";
 import { RevealItem } from "@/components/motion/RevealItem";
 import { getProductsByCategory, getSiteBrand } from "@/lib/payload-fetch";
 import type { Locale } from "@/i18n/routing";
+import type { Media } from "../../../../../payload-types";
 
 // ISR: CMS edits (Pages/Products/SiteSettings) appear within 60s without a redeploy.
 // Complements the on-demand revalidate hooks (instant when they fire).
@@ -35,7 +36,7 @@ export default async function ProductsPage({
   const t = await getTranslations("products");
   const tBlocks = await getTranslations("blocks");
   const grouped = await getProductsByCategory(locale as Locale);
-  const { waHref } = await getSiteBrand();
+  const { waHref, productsHeroUrl } = await getSiteBrand();
 
   // Pre-seed state: zero categories at all. Whole-catalog empty state, still
   // wrapped in a data-testid="hero" region so nav-links.spec's "every nav
@@ -64,7 +65,14 @@ export default async function ProductsPage({
   return (
     <main>
       <HeroBlock
-        block={{ blockType: "hero", variant: "compact", headline: t("heading") }}
+        block={{
+          blockType: "hero",
+          variant: "compact",
+          headline: t("heading"),
+          heroImage: productsHeroUrl
+            ? ({ url: productsHeroUrl, alt: t("heading") } as Media)
+            : null,
+        }}
         index={0}
       />
 

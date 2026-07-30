@@ -9,7 +9,7 @@ import { Reveal } from "@/components/motion/Reveal";
 import { RevealItem } from "@/components/motion/RevealItem";
 import { getSiteBrand } from "@/lib/payload-fetch";
 import type { Locale } from "@/i18n/routing";
-import type { Insight } from "../../../../../payload-types";
+import type { Insight, Media } from "../../../../../payload-types";
 
 // ISR: CMS edits (Insights/SiteSettings) appear within 60s without a
 // redeploy. Complements the on-demand revalidateInsight hook.
@@ -44,7 +44,7 @@ export default async function InsightsPage({
 
   const t = await getTranslations("insights");
   const insights = await getPublishedInsights(locale as Locale);
-  const { waHref } = await getSiteBrand();
+  const { waHref, insightsHeroUrl } = await getSiteBrand();
 
   // Pre-seed state: zero published articles. Whole-page empty state, still
   // wrapped in a data-testid="hero" region so nav-links.spec's "every nav
@@ -73,7 +73,14 @@ export default async function InsightsPage({
   return (
     <main>
       <HeroBlock
-        block={{ blockType: "hero", variant: "compact", headline: t("heading") }}
+        block={{
+          blockType: "hero",
+          variant: "compact",
+          headline: t("heading"),
+          heroImage: insightsHeroUrl
+            ? ({ url: insightsHeroUrl, alt: t("heading") } as Media)
+            : null,
+        }}
         index={0}
       />
 

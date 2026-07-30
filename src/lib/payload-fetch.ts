@@ -8,21 +8,26 @@ import type { Page, Certification, Category, Product } from "../../payload-types
 // source for name/logo/email/phone/whatsapp). Not localized. Media relation
 // guard per RESEARCH Pitfall 3. Wrapped in React cache() so the many callers
 // (chrome, hero, CTA band, product pages, contact block) share ONE query/request.
+type Address = {
+  street?: string;
+  city?: string;
+  state?: string;
+  postalCode?: string;
+  country?: string;
+};
+
 export const getSiteBrand = cache(async function getSiteBrand(): Promise<{
   siteName: string;
   logoUrl: string | null;
   faviconUrl: string | null;
+  productsHeroUrl: string | null;
+  insightsHeroUrl: string | null;
   email: string;
   phone: string;
   whatsapp: string;
   waHref: string;
-  address?: {
-    street?: string;
-    city?: string;
-    state?: string;
-    postalCode?: string;
-    country?: string;
-  };
+  address?: Address;
+  factoryAddress?: Address & { facilityName?: string };
   sameAs: string[];
 }> {
   const payload = await getPayload({ config });
@@ -36,9 +41,20 @@ export const getSiteBrand = cache(async function getSiteBrand(): Promise<{
   const favicon = settings?.favicon;
   const faviconUrl =
     favicon && typeof favicon === "object" && "url" in favicon ? (favicon.url ?? null) : null;
+  const productsHero = settings?.productsHeroImage;
+  const productsHeroUrl =
+    productsHero && typeof productsHero === "object" && "url" in productsHero
+      ? (productsHero.url ?? null)
+      : null;
+  const insightsHero = settings?.insightsHeroImage;
+  const insightsHeroUrl =
+    insightsHero && typeof insightsHero === "object" && "url" in insightsHero
+      ? (insightsHero.url ?? null)
+      : null;
   const contact = settings?.contact ?? {};
   const whatsapp = contact.whatsapp || "910000000000";
   const address = settings?.address;
+  const factoryAddress = settings?.factoryAddress;
   // D-09: Organization JSON-LD input — same single cached findGlobal query
   // serves the existing brand/contact fields plus address/sameAs, no second
   // query.
@@ -46,6 +62,8 @@ export const getSiteBrand = cache(async function getSiteBrand(): Promise<{
     siteName: settings?.siteName || "VNP Global",
     logoUrl,
     faviconUrl,
+    productsHeroUrl,
+    insightsHeroUrl,
     email: contact.email || "sales@example.com",
     phone: contact.phone || "+91 00000 00000",
     whatsapp,
@@ -57,6 +75,16 @@ export const getSiteBrand = cache(async function getSiteBrand(): Promise<{
           state: address.state ?? undefined,
           postalCode: address.postalCode ?? undefined,
           country: address.country ?? undefined,
+        }
+      : undefined,
+    factoryAddress: factoryAddress
+      ? {
+          facilityName: factoryAddress.facilityName ?? undefined,
+          street: factoryAddress.street ?? undefined,
+          city: factoryAddress.city ?? undefined,
+          state: factoryAddress.state ?? undefined,
+          postalCode: factoryAddress.postalCode ?? undefined,
+          country: factoryAddress.country ?? undefined,
         }
       : undefined,
     sameAs: (settings?.sameAs ?? []).map((s) => s.url).filter(Boolean),

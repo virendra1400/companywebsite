@@ -972,6 +972,14 @@ export interface SiteSetting {
    */
   favicon?: (number | null) | Media;
   /**
+   * Hero background photo for the /products catalog page. That page isn't a CMS Page (it's the product catalog listing), so its hero image lives here instead of on a Pages layout block.
+   */
+  productsHeroImage?: (number | null) | Media;
+  /**
+   * Hero background photo for the /insights listing page. Same reason as productsHeroImage: not a CMS Page.
+   */
+  insightsHeroImage?: (number | null) | Media;
+  /**
    * Single source for contact details used site-wide — header/hero CTAs, product pages, and the Contact page all read from here.
    */
   contact: {
@@ -989,9 +997,23 @@ export interface SiteSetting {
     whatsapp: string;
   };
   /**
-   * Postal address used for the Organization structured-data (JSON-LD) markup (D-09).
+   * Legal/registered office address. Used for the Organization structured-data (JSON-LD) markup (D-09) and the footer's Registered Office line.
    */
   address?: {
+    street?: string | null;
+    city?: string | null;
+    state?: string | null;
+    postalCode?: string | null;
+    country?: string | null;
+  };
+  /**
+   * Manufacturing facility address, shown separately from the registered office (e.g. on the Manufacturing/Company pages and footer).
+   */
+  factoryAddress?: {
+    /**
+     * e.g. the facility or partner name.
+     */
+    facilityName?: string | null;
     street?: string | null;
     city?: string | null;
     state?: string | null;
@@ -1018,6 +1040,8 @@ export interface SiteSettingsSelect<T extends boolean = true> {
   siteName?: T;
   logo?: T;
   favicon?: T;
+  productsHeroImage?: T;
+  insightsHeroImage?: T;
   contact?:
     | T
     | {
@@ -1028,6 +1052,16 @@ export interface SiteSettingsSelect<T extends boolean = true> {
   address?:
     | T
     | {
+        street?: T;
+        city?: T;
+        state?: T;
+        postalCode?: T;
+        country?: T;
+      };
+  factoryAddress?:
+    | T
+    | {
+        facilityName?: T;
         street?: T;
         city?: T;
         state?: T;
