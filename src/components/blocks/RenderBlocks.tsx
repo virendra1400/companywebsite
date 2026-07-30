@@ -48,6 +48,13 @@ export function sectionBg(index: number) {
   return index % 2 === 0 ? "bg-white" : "bg-neutral-100";
 }
 
+// CR-01: hero is the LCP exception (D-07); these four already implement
+// their own item-level RevealItem stagger internally (see
+// FeatureGridBlock/MediaGalleryBlock/ExportProcessBlock/TestimonialsBlock) —
+// wrapping them in an outer section-level Reveal too nests two independent
+// IntersectionObserver-driven wrappers, compounding opacity/translate.
+const OWN_ITEM_REVEAL = new Set(["hero", "featureGrid", "mediaGallery", "exportProcess", "testimonials"]);
+
 export function RenderBlocks({ blocks }: { blocks: LayoutBlock[] }) {
   return (
     <>
@@ -55,11 +62,7 @@ export function RenderBlocks({ blocks }: { blocks: LayoutBlock[] }) {
         const Component = BLOCK_MAP[block.blockType];
         if (!Component) return null; // unknown blockType: fail soft, not a blank crash
         const rendered = <Component key={block.id ?? index} block={block} index={index} />;
-        // D-07: hero is the LCP candidate on any page that has one — never
-        // gate it behind a scroll-triggered Reveal. Explicit blockType check
-        // (not index/threshold) so this stays correct if hero ever appears
-        // at a position other than 0.
-        if (block.blockType === "hero") return rendered;
+        if (OWN_ITEM_REVEAL.has(block.blockType)) return rendered;
         return <Reveal key={block.id ?? index}>{rendered}</Reveal>;
       })}
     </>
