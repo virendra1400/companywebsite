@@ -5,6 +5,7 @@ import { HeroBlock } from "@/components/blocks/HeroBlock";
 import { CTABandBlock } from "@/components/blocks/CTABandBlock";
 import { sectionBg } from "@/components/blocks/RenderBlocks";
 import { ProductCard } from "@/components/products/ProductCard";
+import { RevealItem } from "@/components/motion/RevealItem";
 import { getProductsByCategory, getSiteBrand } from "@/lib/payload-fetch";
 import type { Locale } from "@/i18n/routing";
 
@@ -97,8 +98,10 @@ export default async function ProductsPage({
               <p className="mt-lg text-body text-neutral-600">{tBlocks("emptyState")}</p>
             ) : (
               <div className="mt-lg grid grid-cols-2 gap-md md:grid-cols-3 md:gap-lg lg:grid-cols-4">
-                {products.map((product) => (
-                  <ProductCard key={product.id} product={product} />
+                {products.map((product, i) => (
+                  <RevealItem key={product.id} index={i}>
+                    <ProductCard product={product} />
+                  </RevealItem>
                 ))}
               </div>
             )}

@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { Quote } from "lucide-react";
 import { Card } from "@/components/ui/card";
+import { RevealItem } from "@/components/motion/RevealItem";
 import { sectionBg } from "./RenderBlocks";
 import type { Page } from "../../../payload-types";
 
@@ -34,17 +35,16 @@ export async function TestimonialsBlock({
             {items.map((item, i) => {
               const attribution = [item.company, item.country].filter(Boolean).join(" · ");
               return (
-                <Card
-                  key={i}
-                  className="gap-sm rounded-card border border-neutral-300 bg-white p-lg shadow-card"
-                >
-                  <Quote aria-hidden="true" className="size-6 text-accent-600" />
-                  <p className="text-body text-neutral-900">{item.quote}</p>
-                  <p className="text-label font-semibold text-neutral-900">{item.name}</p>
-                  {attribution ? (
-                    <p className="text-label text-neutral-600">{attribution}</p>
-                  ) : null}
-                </Card>
+                <RevealItem key={i} index={i} className="h-full">
+                  <Card className="h-full gap-sm rounded-card border border-neutral-300 bg-white p-lg shadow-card">
+                    <Quote aria-hidden="true" className="size-6 text-accent-600" />
+                    <p className="text-body text-neutral-900">{item.quote}</p>
+                    <p className="text-label font-semibold text-neutral-900">{item.name}</p>
+                    {attribution ? (
+                      <p className="text-label text-neutral-600">{attribution}</p>
+                    ) : null}
+                  </Card>
+                </RevealItem>
               );
             })}
           </div>

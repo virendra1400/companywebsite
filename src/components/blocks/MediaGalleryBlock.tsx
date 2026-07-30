@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { RevealItem } from "@/components/motion/RevealItem";
 import { sectionBg } from "./RenderBlocks";
 import type { Page, Media } from "../../../payload-types";
 
@@ -39,7 +40,7 @@ export async function MediaGalleryBlock({
                 item.image && typeof item.image === "object" ? (item.image as Media) : null;
               if (!image?.url) return null;
               return (
-                <div key={i}>
+                <RevealItem key={i} index={i}>
                   <AspectRatio ratio={4 / 3} className="overflow-hidden rounded-md bg-neutral-100">
                     <Image
                       src={image.url}
@@ -62,7 +63,7 @@ export async function MediaGalleryBlock({
                       {t("watchVideo")}
                     </a>
                   ) : null}
-                </div>
+                </RevealItem>
               );
             })}
           </div>

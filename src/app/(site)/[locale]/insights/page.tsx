@@ -5,6 +5,7 @@ import { Link } from "@/i18n/navigation";
 import { HeroBlock } from "@/components/blocks/HeroBlock";
 import { CTABandBlock } from "@/components/blocks/CTABandBlock";
 import { InsightCard } from "@/components/insights/InsightCard";
+import { RevealItem } from "@/components/motion/RevealItem";
 import { getSiteBrand } from "@/lib/payload-fetch";
 import type { Locale } from "@/i18n/routing";
 import type { Insight } from "../../../../../payload-types";
@@ -77,8 +78,10 @@ export default async function InsightsPage({
 
       <section className="px-md py-2xl md:px-lg md:py-3xl xl:px-xl">
         <div className="mx-auto grid max-w-[1280px] grid-cols-1 gap-md md:grid-cols-2 md:gap-lg lg:grid-cols-3">
-          {insights.map((insight) => (
-            <InsightCard key={insight.id} insight={insight} />
+          {insights.map((insight, i) => (
+            <RevealItem key={insight.id} index={i}>
+              <InsightCard insight={insight} />
+            </RevealItem>
           ))}
         </div>
       </section>
