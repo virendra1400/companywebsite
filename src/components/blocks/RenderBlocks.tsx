@@ -61,9 +61,18 @@ export function RenderBlocks({ blocks }: { blocks: LayoutBlock[] }) {
       {blocks.map((block, index) => {
         const Component = BLOCK_MAP[block.blockType];
         if (!Component) return null; // unknown blockType: fail soft, not a blank crash
-        const rendered = <Component key={block.id ?? index} block={block} index={index} />;
-        if (OWN_ITEM_REVEAL.has(block.blockType)) return rendered;
-        return <Reveal key={block.id ?? index}>{rendered}</Reveal>;
+        const key = block.id ?? index;
+        // WR-02: `key` only matters on whichever element is the direct
+        // child of this array (React ignores it elsewhere) — Component
+        // when returned bare, Reveal when Component is its child.
+        if (OWN_ITEM_REVEAL.has(block.blockType)) {
+          return <Component key={key} block={block} index={index} />;
+        }
+        return (
+          <Reveal key={key}>
+            <Component block={block} index={index} />
+          </Reveal>
+        );
       })}
     </>
   );
