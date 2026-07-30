@@ -66,7 +66,7 @@ export default async function LocaleLayout({
   const fontVar = locale === "ar" ? plexSansArabic.variable : plexSans.variable;
   // Phase 6 (D-02): never set on ar — --font-display falls back to --font-sans.
   const displayVar = locale === "ar" ? "" : geistDisplay.variable;
-  const { siteName, logoUrl, address, sameAs, email, phone } = await getSiteBrand();
+  const { siteName, logoUrl, address, factoryAddress, sameAs, email, phone } = await getSiteBrand();
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
   // ANALY-01: Plausible chosen (checkpoint decision, 04-05) — cookieless, no
   // consent banner needed. Guarded so dev/CI render without the env var.
@@ -98,6 +98,7 @@ export default async function LocaleLayout({
             email={email}
             phone={phone}
             address={address}
+            factoryAddress={factoryAddress}
           />
         </NextIntlClientProvider>
       </body>

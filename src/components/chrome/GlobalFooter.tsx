@@ -60,6 +60,7 @@ export async function GlobalFooter({
   email,
   phone,
   address,
+  factoryAddress,
 }: {
   siteName: string;
   logoUrl: string | null;
@@ -67,12 +68,14 @@ export async function GlobalFooter({
   email: string;
   phone: string;
   address?: FooterAddress;
+  factoryAddress?: FooterAddress & { facilityName?: string };
 }) {
   const t = await getTranslations("nav");
   const tf = await getTranslations("footer");
   const year = new Date().getFullYear();
   const socials = resolveSocialLinks(sameAs);
   const formattedAddress = formatAddress(address);
+  const formattedFactoryAddress = formatAddress(factoryAddress);
 
   return (
     <footer className="bg-primary-900 px-md py-xl text-neutral-100 md:px-lg md:py-2xl xl:px-xl">
@@ -127,6 +130,16 @@ export async function GlobalFooter({
                 <span>
                   <span className="block font-semibold text-white">{tf("corporateOffice")}</span>
                   {formattedAddress}
+                </span>
+              </li>
+            ) : null}
+            {formattedFactoryAddress ? (
+              <li className="flex items-start gap-sm">
+                <MapPin aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-accent-600" />
+                <span>
+                  <span className="block font-semibold text-white">{tf("factory")}</span>
+                  {factoryAddress?.facilityName ? `${factoryAddress.facilityName}, ` : ""}
+                  {formattedFactoryAddress}
                 </span>
               </li>
             ) : null}
