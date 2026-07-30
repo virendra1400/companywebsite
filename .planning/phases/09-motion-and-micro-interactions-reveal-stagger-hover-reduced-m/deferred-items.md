@@ -1,0 +1,7 @@
+# Deferred Items — Phase 09
+
+Out-of-scope discoveries logged during execution, not fixed per the executor scope boundary rule (only auto-fix issues directly caused by the current task's changes).
+
+| Plan | Discovered during | File | Issue | Status |
+|------|-------------------|------|-------|--------|
+| 09-04 | Task 3 verify (`npx playwright test tests/e2e/contact-error-state.spec.ts`) | `src/components/blocks/ContactForm.tsx` | Same pre-existing issue already logged in `08-component-polish-pass-apply-amended-design-system-across-car/deferred-items.md` (row 11): all 3 cases in `contact-error-state.spec.ts` time out on `getByLabel("Company", { exact: true })` because the required-field asterisk markup makes the label's computed accessible name not equal the exact string "Company". Re-confirmed present here, unrelated to load (reproduced identically at system load average 37-43 and again at 16.95), and unrelated to 09-04's diff — `ContactForm.tsx` is not in 09-04's `files_modified` (`accordion.tsx`, `button.tsx`, `WhatsAppFloatingButton.tsx`, `ProductCard.tsx`, `InsightCard.tsx`, `tests/int/blocks-placeholder.spec.ts`, `tests/e2e/contact.spec.ts`) and no commit in this plan touches it or its labels | Not fixed — out of scope for 09-04, pre-existing test/markup mismatch predating this phase |
