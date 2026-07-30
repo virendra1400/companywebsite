@@ -11,6 +11,10 @@ export const revalidateSiteSettings: GlobalAfterChangeHook = ({ doc, req: { cont
     revalidatePath("/ar", "layout");
     revalidatePath("/fr", "layout");
     revalidatePath("/ru", "layout");
+    // icon.tsx lives at the true app root, outside every locale layout above
+    // — it's prerendered as a static route (Next has no dynamic API usage to
+    // key off) and only picks up a new CMS favicon via this explicit bust.
+    revalidatePath("/icon");
   }
   return doc;
 };
