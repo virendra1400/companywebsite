@@ -368,7 +368,7 @@ export const PAGES_EN_SEED = [
     layout: [
       compactHero(
         "The Compliance Behind the Claims",
-        "IEC registration, export documentation support, and leadership with decades of trade experience.",
+        "IEC and APEDA registration in progress, with full export documentation support on every order.",
       ),
       featureGrid("photo", [
         {
@@ -384,10 +384,12 @@ export const PAGES_EN_SEED = [
           body: "Coordinates logistics, documentation, and on-time delivery for international buyers.",
         },
       ]),
-      // No fabricated IEC/FSSAI/registration NUMBER anywhere below —
-      // generic compliance prose only (T-02-08, Pitfall 5/9).
+      // T-008: registrations reworded from settled fact to in-progress —
+      // neither is confirmed live yet (playbook DECISION_LOG Open
+      // Placeholders). No fabricated IEC/FSSAI/registration NUMBER anywhere
+      // below — generic compliance prose only (T-02-08, Pitfall 5/9).
       richText(
-        "VNP Global operates under a valid Importer-Exporter Code (IEC) registration and maintains compliance with India's export-import regulatory framework, including APEDA registration for agricultural exports.",
+        "VNP Global's IEC and APEDA registrations are in progress as part of our export compliance setup. Registration numbers will be published here once issued.",
         "Our documentation team ensures every shipment carries the certificates, phytosanitary clearances, and customs paperwork your import authority requires, verifiable on request, not just claimed.",
       ),
       richText(
