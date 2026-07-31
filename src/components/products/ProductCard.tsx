@@ -16,7 +16,7 @@ export function ProductCard({ product }: { product: Product }) {
   const first = product.imageGallery?.[0]?.image;
   const image = first && typeof first === "object" ? (first as Media) : null;
   const category = typeof product.category === "object" ? (product.category as Category) : null;
-  const fallbackSrc = pickProductFallback(product.slug || product.name);
+  const fallbackSrc = pickProductFallback(product.slug || product.name, category?.slug);
 
   return (
     <Link href={`/products/${product.slug}`} className="group block">
