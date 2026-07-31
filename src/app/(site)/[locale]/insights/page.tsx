@@ -5,6 +5,7 @@ import { Link } from "@/i18n/navigation";
 import { HeroBlock } from "@/components/blocks/HeroBlock";
 import { CTABandBlock } from "@/components/blocks/CTABandBlock";
 import { InsightCard } from "@/components/insights/InsightCard";
+import { LocaleFallbackNotice } from "@/components/chrome/LocaleFallbackNotice";
 import { Reveal } from "@/components/motion/Reveal";
 import { RevealItem } from "@/components/motion/RevealItem";
 import { getSiteBrand } from "@/lib/payload-fetch";
@@ -52,6 +53,7 @@ export default async function InsightsPage({
   if (insights.length === 0) {
     return (
       <main>
+        {locale !== "en" ? <LocaleFallbackNotice locale={locale as Locale} /> : null}
         <section
           data-testid="hero"
           className="flex min-h-[320px] flex-col items-center justify-center bg-primary-900 px-md py-3xl text-center text-white md:min-h-[400px] md:px-lg xl:px-xl"
@@ -72,6 +74,7 @@ export default async function InsightsPage({
 
   return (
     <main>
+      {locale !== "en" ? <LocaleFallbackNotice locale={locale as Locale} /> : null}
       <HeroBlock
         block={{
           blockType: "hero",
