@@ -48,7 +48,7 @@ export async function InsightCard({ insight }: { insight: Insight }) {
             </Badge>
           ) : null}
           {category && date ? <span aria-hidden="true">·</span> : null}
-          {date ? <span>{date}</span> : null}
+          {date ? <span data-testid="insight-date">{date}</span> : null}
         </div>
         <p className="line-clamp-2 text-body font-semibold text-neutral-900">{insight.title}</p>
         <p className="line-clamp-3 text-body text-neutral-600">{insight.excerpt}</p>

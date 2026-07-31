@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { getFormatter, getTranslations } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import { Button } from "@/components/ui/button";
 import { WhatsAppTrackedLink } from "@/components/chrome/WhatsAppTrackedLink";
 import { Link } from "@/i18n/navigation";
@@ -11,18 +11,16 @@ type HeroData = Extract<NonNullable<Page["layout"]>[number], { blockType: "hero"
 
 // UI-SPEC Block Library #1 — generalizes the Phase 1 placeholder Hero
 // (src/components/Hero.tsx, now retired) into a page-builder block. `full`
-// (homepage only) keeps the existing 70dvh photography hero + the FOUND-03
-// sample-count line (kept ONLY on `full` so the existing rtl-arabic.spec.ts
-// e2e assertion stays green); `compact` (every interior page) drops to a
-// smaller footprint per UI-SPEC.
+// (homepage only) keeps the existing 70dvh photography hero; `compact`
+// (every interior page) drops to a smaller footprint per UI-SPEC.
+// T-001: the fabricated "Trusted by 60+ international buyers" sample-count
+// line that used to render here has been removed (playbook D-01 honesty rule
+// — zero real customers). The RTL Western-digit assertion it fed now targets
+// insight published-dates instead (tests/e2e/rtl-arabic.spec.ts).
 export async function HeroBlock({ block }: { block: HeroData; index: number }) {
   const t = await getTranslations("hero");
-  const tSample = await getTranslations("sample");
-  const format = await getFormatter();
   const { waHref } = await getSiteBrand();
   const isFull = block.variant === "full";
-  // FOUND-03: force Western (latn) digits — Intl defaults `ar` to Arabic-Indic.
-  const buyers = format.number(60, "latn");
 
   const heroPadding = isFull
     ? "px-md py-3xl md:px-lg md:py-3xl xl:px-xl xl:py-4xl"
@@ -90,11 +88,6 @@ export async function HeroBlock({ block }: { block: HeroData; index: number }) {
             </Button>
           ) : null}
         </div>
-        {isFull ? (
-          <p data-testid="sample-count" className="text-label text-primary-100">
-            {tSample("count", { count: buyers })}
-          </p>
-        ) : null}
       </div>
     </section>
   );

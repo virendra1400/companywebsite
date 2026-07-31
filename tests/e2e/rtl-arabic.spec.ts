@@ -14,9 +14,12 @@ test("/ renders <html dir=ltr>", async ({ page }) => {
   await expect(page.locator("html")).toHaveAttribute("dir", "ltr");
 });
 
-test("/ar sample number uses Western (latn) digits", async ({ page }) => {
-  await page.goto("/ar");
-  const text = (await page.getByTestId("sample-count").innerText()).trim();
+test("/ar insight date uses Western (latn) digits", async ({ page }) => {
+  // T-001: was asserted against the fabricated "Trusted by 60+ buyers" hero
+  // badge (removed per playbook D-01); retargeted to InsightCard's published
+  // date, which uses the same format.dateTime(date, "latn") call.
+  await page.goto("/ar/insights");
+  const text = (await page.getByTestId("insight-date").first().innerText()).trim();
   expect(text).toMatch(/[0-9]/); // has a Western digit
   expect(text).not.toMatch(/[٠-٩]/); // no Arabic-Indic ٠-٩
 });
