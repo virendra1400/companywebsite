@@ -163,3 +163,9 @@ console.log(`Updated 'home' (en) layout: ${layout.length} blocks -> ${newLayout.
 console.log(newLayout.map((b) => (b as { blockType: string }).blockType).join(" -> "));
 
 await payload.destroy();
+// The Postgres adapter's pool doesn't fully release its keep-alive handle
+// on destroy() — without this, the process (and the Vercel buildCommand's
+// `&&` chain waiting on it) hangs indefinitely instead of proceeding to
+// `npm run build`. Harmless against SQLite (dev) where the process already
+// exits cleanly; explicit here so both paths behave the same.
+process.exit(0);
