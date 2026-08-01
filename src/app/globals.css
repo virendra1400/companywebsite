@@ -8,18 +8,32 @@
 */
 
 @theme {
-  /* Color ramp (UI-SPEC) */
-  --color-primary-900: #0F2E22;
-  --color-primary-700: #1B5E45;
-  --color-primary-500: #3D8266;
-  --color-primary-100: #E3EEE8;
-  --color-accent-800: #8A6612;
-  --color-accent-600: #C9A227;
-  --color-accent-100: #F7EFDD;
-  --color-neutral-900: #1A1F1C;
-  --color-neutral-600: #5B655F;
-  --color-neutral-300: #D7DBD8;
-  --color-neutral-100: #F5F6F4;
+  /* Color ramp — remapped to playbook/DESIGN_SYSTEM.md §2 (T-101). Token
+     NAMES unchanged (primary/accent/neutral-*) so every existing component
+     class (bg-primary-700, text-accent-600, border-neutral-300, ...) picks
+     up the new palette automatically with zero component edits — only the
+     underlying hex VALUES moved to the playbook's forest-green/gold system.
+     Mapping: primary-900→green-950, primary-700→green-700(=brand-forest),
+     primary-500→green-600, primary-100→green-100, accent-800→gold-600,
+     accent-600→gold-500(=brand-gold), accent-100→gold-100,
+     neutral-900→neutral-950, neutral-600→neutral-700, neutral-300/100 were
+     already near-identical to the playbook's values. */
+  --color-primary-900: #0B2E16;
+  --color-primary-700: #165C2A;
+  --color-primary-500: #1E7A38;
+  --color-primary-100: #E4F0E4;
+  --color-accent-800: #D99A0B;
+  --color-accent-600: #F4B321;
+  --color-accent-100: #FBEED0;
+  --color-neutral-900: #1A1D1A;
+  --color-neutral-600: #454A45;
+  --color-neutral-300: #D5D9D4;
+  --color-neutral-100: #EFF1EE;
+  /* New in T-101: brand-fresh green — ACCENT ONLY (icons/tags/dataviz),
+     never body text or large fills (fails contrast on white, DESIGN_SYSTEM
+     §2.3). Page background — warm off-white, not pure white. */
+  --color-lime-500: #86B72F;
+  --color-cream-50: #FAF9F5;
 
   /* Spacing scale (multiples of 4) */
   --spacing-xs: 4px;
@@ -59,12 +73,16 @@
      UNCHANGED, still used by StatsBand/ExportMap stat figures and the
      compact interior-page hero). Two new tiers for premium hero use
      (Phase 7 wires these into HeroBlock's headline — not applied here). */
+  /* T-101: weight 500, per DESIGN_SYSTEM §3 ("Hero H1 in Fraunces 500") —
+     was 300 for the old Geist thin-display treatment; Fraunces at 500 is
+     display's design weight, not a substitute-thin-serif look. HeroBlock.tsx
+     pairs this with `font-medium` (see that file's T-101 note). */
   --text-display-lg: 52px;
   --text-display-lg--line-height: 1.1;
-  --text-display-lg--font-weight: 300;
+  --text-display-lg--font-weight: 500;
   --text-display-xl: 56px;
   --text-display-xl--line-height: 1.05;
-  --text-display-xl--font-weight: 300;
+  --text-display-xl--font-weight: 500;
 
   /* Negative tracking — ONE proportional (em-based) token shared by both new
      tiers so it self-scales: -0.025em == -1.3px@52px / -1.4px@56px, matching
@@ -128,7 +146,9 @@
 
 /* shadcn base variables (neutral preset) overridden with UI-SPEC tokens */
 :root {
-  --background: #ffffff;
+  /* T-101: page bg is cream-50 (warm off-white), not pure white — cards
+     and popovers below stay pure white, giving them lift off the page. */
+  --background: var(--color-cream-50);
   --foreground: var(--color-neutral-900);
   --primary: var(--color-primary-700);
   --primary-foreground: #ffffff;

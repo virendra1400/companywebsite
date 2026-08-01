@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
-import { Geist, IBM_Plex_Sans, IBM_Plex_Sans_Arabic } from "next/font/google";
+import { Fraunces, Archivo, IBM_Plex_Sans_Arabic } from "next/font/google";
 import Script from "next/script";
 import { routing, RTL_LOCALES } from "@/i18n/routing";
 import { GlobalHeader } from "@/components/chrome/GlobalHeader";
@@ -25,9 +25,14 @@ export const metadata: Metadata = {
 };
 
 // Per-script fonts — only the needed subset ships per locale (FOUND-03 / UI-SPEC).
-const plexSans = IBM_Plex_Sans({
+// T-101: Latin body font moved from IBM Plex Sans to Archivo per
+// DESIGN_SYSTEM §3 ("sturdy grotesque... distinct from Inter-default").
+// Arabic keeps IBM Plex Sans Arabic — DESIGN_SYSTEM §3 explicitly pairs
+// Fraunces/Archivo with Plex Arabic for the future Arabic build, not a
+// second Latin-only swap.
+const archivo = Archivo({
   subsets: ["latin"],
-  weight: ["400", "600"],
+  weight: ["400", "500", "600"],
   variable: "--font-plex-sans",
   display: "swap",
 });
@@ -37,11 +42,13 @@ const plexSansArabic = IBM_Plex_Sans_Arabic({
   variable: "--font-plex-sans-arabic",
   display: "swap",
 });
-// Phase 6 (D-02): Latin-only display face, locale-scoped below so it never
-// reaches Arabic content — subsets/weight kept minimal (single 300 weight).
-const geistDisplay = Geist({
+// T-101: Latin-only display face, locale-scoped below so it never reaches
+// Arabic content — was Geist (Phase 6 D-02), now Fraunces per DESIGN_SYSTEM
+// §3 ("Display/headings: Fraunces... distances VNP from generic exporter
+// sites"). Weight 500 matches the display-tier token weight (globals.css).
+const frauncesDisplay = Fraunces({
   subsets: ["latin"],
-  weight: ["300"],
+  weight: ["500", "600"],
   variable: "--font-geist-display",
   display: "swap",
 });
@@ -63,9 +70,9 @@ export default async function LocaleLayout({
   setRequestLocale(locale);
 
   const dir = RTL_LOCALES.has(locale) ? "rtl" : "ltr";
-  const fontVar = locale === "ar" ? plexSansArabic.variable : plexSans.variable;
+  const fontVar = locale === "ar" ? plexSansArabic.variable : archivo.variable;
   // Phase 6 (D-02): never set on ar — --font-display falls back to --font-sans.
-  const displayVar = locale === "ar" ? "" : geistDisplay.variable;
+  const displayVar = locale === "ar" ? "" : frauncesDisplay.variable;
   const { siteName, logoUrl, address, factoryAddress, sameAs, email, phone } = await getSiteBrand();
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
   // ANALY-01: Plausible chosen (checkpoint decision, 04-05) — cookieless, no

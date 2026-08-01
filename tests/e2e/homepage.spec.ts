@@ -28,10 +28,11 @@ for (const path of PATHS) {
     const mediaGallery = page.getByRole("heading", { name: "Manufacturing Excellence" });
     await expect(mediaGallery).toBeVisible();
 
-    // CertStrip logo-strip links to /certifications. Scope to <main> — the
-    // header nav now also links to /certifications (outside <main>).
-    const certStripLink = page.locator('main a[href$="/certifications"]').first();
-    await expect(certStripLink).toBeVisible();
+    // CertStrip renders the honest "coming soon" empty state — the
+    // Certifications collection is intentionally empty (no fabricated cert
+    // data, see certifications.spec.ts) until real certs exist.
+    const certStrip = page.getByText("Certifications coming soon.", { exact: true });
+    await expect(certStrip).toBeVisible();
 
     const exportProcess = page.getByRole("heading", {
       name: "How an Order Moves From Inquiry to Delivery",
@@ -50,7 +51,7 @@ for (const path of PATHS) {
         trustBar.boundingBox(),
         featureGrid.boundingBox(),
         mediaGallery.boundingBox(),
-        certStripLink.boundingBox(),
+        certStrip.boundingBox(),
         exportProcess.boundingBox(),
         ctaBand.boundingBox(),
       ]);

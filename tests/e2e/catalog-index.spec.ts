@@ -8,7 +8,7 @@ import { test, expect } from "@playwright/test";
 // instead of an empty grid. Uses ONLY seeded fixture data — no
 // test-created content.
 const SEEDED_CATEGORIES = ["Grains", "Spices", "Pulses", "Oilseeds"];
-const EMPTY_STATE_COPY = "This section is being updated — check back shortly.";
+const EMPTY_STATE_COPY = "This section is being updated. Check back shortly.";
 
 test("en: /products returns 200 and renders the hero heading region", async ({ page }) => {
   const res = await page.goto("/products");

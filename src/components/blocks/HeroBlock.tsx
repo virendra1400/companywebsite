@@ -29,12 +29,15 @@ export async function HeroBlock({ block }: { block: HeroData; index: number }) {
     ? "bg-gradient-to-t from-primary-900/75 via-primary-900/25 to-transparent"
     : "bg-gradient-to-t from-primary-900/80 via-primary-900/30 to-transparent";
   const stackGap = isFull ? "gap-xl" : "gap-lg";
-  // Same display-xl/light/tracking treatment as the homepage hero on every
-  // page — only the max-width cap differs (compact hero band is shorter,
-  // so a slightly narrower measure keeps line count sane).
+  // Same display-xl/tracking treatment as the homepage hero on every page —
+  // only the max-width cap differs (compact hero band is shorter, so a
+  // slightly narrower measure keeps line count sane). T-101: font-medium
+  // (500), not font-light (300) — Fraunces' display weight, replacing the
+  // old Geist thin-display treatment (DESIGN_SYSTEM §3: "Hero H1 in
+  // Fraunces 500").
   const headlineClass = isFull
-    ? "max-w-[46rem] text-display-xl font-display font-light tracking-display text-white"
-    : "max-w-[42rem] text-display-xl font-display font-light tracking-display text-white";
+    ? "max-w-[46rem] text-display-xl font-display font-medium tracking-display text-white"
+    : "max-w-[42rem] text-display-xl font-display font-medium tracking-display text-white";
   const subheadClass = isFull
     ? "max-w-[38rem] text-body text-primary-100"
     : "max-w-[36rem] text-body text-primary-100";

@@ -14,7 +14,12 @@ const buttonVariants = cva(
       // hand-rolled dark-surface CTA overrides with an explicit
       // transparent variant.
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary-500",
+        // T-101: primary CTA is gold (DESIGN_SYSTEM §2.3 — "Request a
+        // Quote": accent-600/gold-500 bg, dark text, 10.4:1 contrast).
+        // Deliberately NOT the shared shadcn --primary token (still green,
+        // correct for badges/inputs/links elsewhere) — this variant owns
+        // its own color so changing it doesn't ripple into those.
+        default: "bg-accent-600 text-neutral-900 hover:bg-accent-800",
         destructive:
           "bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:bg-destructive/60 dark:focus-visible:ring-destructive/40",
         outline:
