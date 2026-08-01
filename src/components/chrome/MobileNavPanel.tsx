@@ -52,10 +52,14 @@ const NAV_HREFS: Record<(typeof NAV_KEYS)[number], string> = {
 export function MobileNavPanel({
   siteName,
   logoUrl,
+  logoWidth,
+  logoHeight,
   waHref,
 }: {
   siteName: string;
   logoUrl: string | null;
+  logoWidth: number | null;
+  logoHeight: number | null;
   waHref: string;
 }) {
   const [open, setOpen] = useState(false);
@@ -89,7 +93,13 @@ export function MobileNavPanel({
       >
         <SheetHeader className="p-0">
           <SheetTitle className="text-heading">
-            <BrandMark siteName={siteName} logoUrl={logoUrl} variant="light" />
+            <BrandMark
+              siteName={siteName}
+              logoUrl={logoUrl}
+              logoWidth={logoWidth}
+              logoHeight={logoHeight}
+              variant="light"
+            />
           </SheetTitle>
         </SheetHeader>
         <nav className="flex flex-col gap-md" aria-label="Primary">

@@ -73,8 +73,18 @@ export default async function LocaleLayout({
   const fontVar = locale === "ar" ? plexSansArabic.variable : archivo.variable;
   // Phase 6 (D-02): never set on ar — --font-display falls back to --font-sans.
   const displayVar = locale === "ar" ? "" : frauncesDisplay.variable;
-  const { siteName, logoUrl, address, factoryAddress, legalIdentity, sameAs, email, phone } =
-    await getSiteBrand();
+  const {
+    siteName,
+    logoUrl,
+    logoWidth,
+    logoHeight,
+    address,
+    factoryAddress,
+    legalIdentity,
+    sameAs,
+    email,
+    phone,
+  } = await getSiteBrand();
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
   // ANALY-01: Plausible chosen (checkpoint decision, 04-05) — cookieless, no
   // consent banner needed. Guarded so dev/CI render without the env var.
@@ -96,12 +106,20 @@ export default async function LocaleLayout({
           />
         ) : null}
         <NextIntlClientProvider>
-          <GlobalHeader siteName={siteName} logoUrl={logoUrl} locale={locale as Locale} />
+          <GlobalHeader
+            siteName={siteName}
+            logoUrl={logoUrl}
+            logoWidth={logoWidth}
+            logoHeight={logoHeight}
+            locale={locale as Locale}
+          />
           <div className="flex-1">{children}</div>
           <WhatsAppFloatingButton />
           <GlobalFooter
             siteName={siteName}
             logoUrl={logoUrl}
+            logoWidth={logoWidth}
+            logoHeight={logoHeight}
             sameAs={sameAs}
             email={email}
             phone={phone}

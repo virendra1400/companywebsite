@@ -31,10 +31,14 @@ const NAV_HREFS: Record<(typeof NAV_KEYS)[number], string> = {
 export async function GlobalHeader({
   siteName,
   logoUrl,
+  logoWidth,
+  logoHeight,
   locale,
 }: {
   siteName: string;
   logoUrl: string | null;
+  logoWidth: number | null;
+  logoHeight: number | null;
   locale: Locale;
 }) {
   const t = await getTranslations("nav");
@@ -56,7 +60,13 @@ export async function GlobalHeader({
       <div className="mx-auto flex w-full max-w-[1280px] items-center justify-between gap-lg">
         <Link href="/" className="shrink-0">
           {/* Brand: CMS logo if set, else text wordmark. RTL contract — never mirrors. */}
-          <BrandMark siteName={siteName} logoUrl={logoUrl} variant="light" />
+          <BrandMark
+            siteName={siteName}
+            logoUrl={logoUrl}
+            logoWidth={logoWidth}
+            logoHeight={logoHeight}
+            variant="light"
+          />
         </Link>
 
         <nav className="hidden items-center gap-lg xl:flex" aria-label="Primary">
@@ -97,7 +107,13 @@ export async function GlobalHeader({
           <Button asChild size="sm" className="hidden sm:inline-flex">
             <Link href="/contact">{tHero("cta")}</Link>
           </Button>
-          <MobileNavPanel siteName={siteName} logoUrl={logoUrl} waHref={waHref} />
+          <MobileNavPanel
+            siteName={siteName}
+            logoUrl={logoUrl}
+            logoWidth={logoWidth}
+            logoHeight={logoHeight}
+            waHref={waHref}
+          />
         </div>
       </div>
     </HeaderShell>

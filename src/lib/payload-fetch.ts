@@ -19,6 +19,8 @@ type Address = {
 export const getSiteBrand = cache(async function getSiteBrand(): Promise<{
   siteName: string;
   logoUrl: string | null;
+  logoWidth: number | null;
+  logoHeight: number | null;
   faviconUrl: string | null;
   productsHeroUrl: string | null;
   insightsHeroUrl: string | null;
@@ -39,6 +41,12 @@ export const getSiteBrand = cache(async function getSiteBrand(): Promise<{
   const logo = settings?.logo;
   const logoUrl =
     logo && typeof logo === "object" && "url" in logo ? (logo.url ?? null) : null;
+  // T-104/D-32: next/image requires explicit width+height for a non-`fill`
+  // <Image> — Payload auto-populates these on upload (sharp), so no extra
+  // query needed. Nullable in the type (never wired on this global) but
+  // always present for a real image upload in practice.
+  const logoWidth = logo && typeof logo === "object" && "width" in logo ? (logo.width ?? null) : null;
+  const logoHeight = logo && typeof logo === "object" && "height" in logo ? (logo.height ?? null) : null;
   const favicon = settings?.favicon;
   const faviconUrl =
     favicon && typeof favicon === "object" && "url" in favicon ? (favicon.url ?? null) : null;
@@ -63,6 +71,8 @@ export const getSiteBrand = cache(async function getSiteBrand(): Promise<{
   return {
     siteName: settings?.siteName || "VNP Global",
     logoUrl,
+    logoWidth,
+    logoHeight,
     faviconUrl,
     productsHeroUrl,
     insightsHeroUrl,

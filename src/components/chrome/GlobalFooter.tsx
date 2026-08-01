@@ -72,6 +72,8 @@ function formatLegalIdentity(legal?: LegalIdentity): string | null {
 export async function GlobalFooter({
   siteName,
   logoUrl,
+  logoWidth,
+  logoHeight,
   sameAs,
   email,
   phone,
@@ -81,6 +83,8 @@ export async function GlobalFooter({
 }: {
   siteName: string;
   logoUrl: string | null;
+  logoWidth: number | null;
+  logoHeight: number | null;
   sameAs: string[];
   email: string;
   phone: string;
@@ -101,7 +105,13 @@ export async function GlobalFooter({
       <div className="mx-auto grid w-full max-w-[1280px] grid-cols-1 gap-lg md:grid-cols-3 md:gap-lg">
         <div className="flex flex-col gap-md">
           <Link href="/" className="w-fit">
-            <BrandMark siteName={siteName} logoUrl={logoUrl} variant="dark" />
+            <BrandMark
+              siteName={siteName}
+              logoUrl={logoUrl}
+              logoWidth={logoWidth}
+              logoHeight={logoHeight}
+              variant="dark"
+            />
           </Link>
           {socials.length > 0 ? (
             <div className="flex gap-sm">

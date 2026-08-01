@@ -6,16 +6,41 @@
 // white silhouette via CSS filter (brightness-0 invert) so any single
 // uploaded asset stays legible on both backgrounds without a second upload.
 
+import Image from "next/image";
+import { isSvgUrl } from "@/lib/is-svg-url";
+
 type BrandMarkProps = {
   siteName: string;
   logoUrl: string | null;
+  logoWidth: number | null;
+  logoHeight: number | null;
   variant?: "light" | "dark"; // light = dark text (header/mobile), dark = white text (footer)
 };
 
-export function BrandMark({ siteName, logoUrl, variant = "light" }: BrandMarkProps) {
+export function BrandMark({ siteName, logoUrl, logoWidth, logoHeight, variant = "light" }: BrandMarkProps) {
+  if (logoUrl && logoWidth && logoHeight) {
+    // T-104/D-32: explicit width/height (Payload/sharp-populated) lets next/image
+    // optimize + resize this instead of shipping the raw upload — arbitrary
+    // aspect ratio preserved via h-* + w-auto, same as the old plain <img>.
+    return (
+      <Image
+        src={logoUrl}
+        alt={siteName}
+        width={logoWidth}
+        height={logoHeight}
+        unoptimized={isSvgUrl(logoUrl)}
+        className={
+          variant === "dark"
+            ? "h-14 w-auto brightness-0 invert lg:h-16"
+            : "h-14 w-auto lg:h-16"
+        }
+      />
+    );
+  }
   if (logoUrl) {
-    // Logo served from Blob CDN (unoptimized per next.config); plain <img> keeps
-    // arbitrary aspect ratios simple. Height-constrained, width auto.
+    // Width/height metadata missing (older upload predating this field, or a
+    // non-image-derived value) — fall back to the plain <img> rather than
+    // fail to render the logo at all.
     // eslint-disable-next-line @next/next/no-img-element
     return (
       <img
