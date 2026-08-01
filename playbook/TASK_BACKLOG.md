@@ -65,8 +65,10 @@ Done (2026-08-01): all §7.3 fields shipped on Products (specs by category, pack
 Not done this pass: product-page rendering still reads only the old flat fields — every new field is empty on all real products (T-110 hasn't entered data yet), so there's nothing to render. Recategorizing existing flat spec rows into the new typed buckets is an editor/T-110 task, not automated here. Old `specifications`/`packaging` fields NOT removed — still the only populated source for the live catalog.
 Acceptance (re-scoped): schema live in prod, editors can enter structured data immediately. "All 8 products render from structured fields" carries forward to T-105 (product template) once T-110 populates real data — see DECISION_LOG D-30.
 
-### T-104 Homepage rebuild — `TODO` · O · Large · P-03
-Acceptance: per prompt; QA §A–§F; Lighthouse ≥90.
+### T-104 Homepage rebuild — `DONE (Lighthouse gap open)` · O · Large · P-03
+Done (2026-08-01): rebuilt to CONTENT_PLAYBOOK §4's full 9-section order (was 7 blocks, missing Product categories + Markets entirely, stale copy on Proof strip + De-risk tiles). Fixed a real production bug found along the way: 29.3s LCP from unoptimized 2-2.3MB hero/logo PNGs (next.config.ts's blanket `images.unoptimized: true`), now 4.8s. See DECISION_LOG D-31/D-32.
+Not done: Lighthouse mobile performance is 51/100 on production, short of the ≥90 gate. Root cause is diffuse (3.8s main-thread JS/hydration work + a first-visit-only locale-cookie redirect), not a single fixable bug — flagged as a dedicated follow-up (bundle-size/hydration audit), not silently treated as passing. Accessibility 96/best-practices 100/SEO 100.
+Acceptance: QA §A–§F content/structure — met. Lighthouse ≥90 — NOT met (51/100), open follow-up.
 
 ### T-105 Product template + 8 pages + URL migration — `TODO` · O · Large · P-04
 Includes 301 map from MASTER_PLAN §5.2.
