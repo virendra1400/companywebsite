@@ -1,29 +1,33 @@
 import { test, expect } from "@playwright/test";
 
-// PAGE-01: the homepage renders its FULL block sequence in order — Hero ->
-// TrustBar -> FeatureGrid (value props) -> MediaGallery -> CertStrip ->
-// ExportProcess -> CTABand. StatsBand (years/countries/shipments) and
-// ExportMap were removed from the homepage — unverified export-history
-// claims for a company with no direct export history yet.
+// PAGE-01/T-104: the homepage renders its FULL 9-section block sequence per
+// CONTENT_PLAYBOOK.md §4 Home, in order — Hero -> TrustBar (proof strip) ->
+// FeatureGrid (product categories) -> FeatureGrid (de-risk tiles) ->
+// MediaGallery -> CertStrip -> ExportProcess -> ExportMap (Gulf-first
+// markets) -> CTABand. ExportMap was previously removed over unverified
+// export-history claims (16 highlighted countries + shipment stats); T-104
+// reintroduces it in a corrected, honest form — Gulf-only highlighted set,
+// zero stats, capability-framed copy ("built to serve", not "we export to")
+// — see DECISION_LOG D-31.
 const PATHS = ["/", "/ar"];
 
 for (const path of PATHS) {
-  test(`${path}: renders the full block sequence Hero -> TrustBar -> FeatureGrid -> MediaGallery -> CertStrip -> ExportProcess -> CTABand, in order`, async ({
-    page,
-  }) => {
+  test(`${path}: renders the full 9-block sequence in order`, async ({ page }) => {
     await page.goto(path);
 
     const hero = page.getByTestId("hero");
     await expect(hero).toBeVisible();
 
-    const trustBar = page.getByRole("heading", {
-      name: "Built to Serve Importers Across the Globe",
+    const proofStrip = page.getByRole("heading", {
+      name: "Why Buyers Can Trust This Supply Chain",
     });
-    await expect(trustBar).toBeVisible();
+    await expect(proofStrip).toBeVisible();
 
-    // "Quality" is one of the seeded homepage FeatureGrid value-prop titles.
-    const featureGrid = page.getByText("Quality", { exact: true }).first();
-    await expect(featureGrid).toBeVisible();
+    const productCategories = page.getByRole("heading", { name: "What We Export" });
+    await expect(productCategories).toBeVisible();
+
+    const deRiskTiles = page.getByRole("heading", { name: "How We De-Risk Your First Order" });
+    await expect(deRiskTiles).toBeVisible();
 
     const mediaGallery = page.getByRole("heading", { name: "Manufacturing Excellence" });
     await expect(mediaGallery).toBeVisible();
@@ -39,35 +43,71 @@ for (const path of PATHS) {
     });
     await expect(exportProcess).toBeVisible();
 
+    const markets = page.getByRole("heading", { name: "Markets We're Built to Serve" });
+    await expect(markets).toBeVisible();
+
     // CTABand closing action band — seeded homepage heading.
     const ctaBand = page.getByRole("heading", {
       name: "Ready to Source With Confidence?",
     });
     await expect(ctaBand).toBeVisible();
 
-    const [heroBox, trustBarBox, featureGridBox, mediaGalleryBox, certStripBox, exportProcessBox, ctaBandBox] =
-      await Promise.all([
-        hero.boundingBox(),
-        trustBar.boundingBox(),
-        featureGrid.boundingBox(),
-        mediaGallery.boundingBox(),
-        certStrip.boundingBox(),
-        exportProcess.boundingBox(),
-        ctaBand.boundingBox(),
-      ]);
+    const [
+      heroBox,
+      proofStripBox,
+      productCategoriesBox,
+      deRiskTilesBox,
+      mediaGalleryBox,
+      certStripBox,
+      exportProcessBox,
+      marketsBox,
+      ctaBandBox,
+    ] = await Promise.all([
+      hero.boundingBox(),
+      proofStrip.boundingBox(),
+      productCategories.boundingBox(),
+      deRiskTiles.boundingBox(),
+      mediaGallery.boundingBox(),
+      certStrip.boundingBox(),
+      exportProcess.boundingBox(),
+      markets.boundingBox(),
+      ctaBand.boundingBox(),
+    ]);
 
-    expect(heroBox!.y).toBeLessThan(trustBarBox!.y);
-    expect(trustBarBox!.y).toBeLessThan(featureGridBox!.y);
-    expect(featureGridBox!.y).toBeLessThan(mediaGalleryBox!.y);
+    expect(heroBox!.y).toBeLessThan(proofStripBox!.y);
+    expect(proofStripBox!.y).toBeLessThan(productCategoriesBox!.y);
+    expect(productCategoriesBox!.y).toBeLessThan(deRiskTilesBox!.y);
+    expect(deRiskTilesBox!.y).toBeLessThan(mediaGalleryBox!.y);
     expect(mediaGalleryBox!.y).toBeLessThan(certStripBox!.y);
     expect(certStripBox!.y).toBeLessThan(exportProcessBox!.y);
-    expect(exportProcessBox!.y).toBeLessThan(ctaBandBox!.y);
+    expect(exportProcessBox!.y).toBeLessThan(marketsBox!.y);
+    expect(marketsBox!.y).toBeLessThan(ctaBandBox!.y);
   });
 
-  test(`${path}: FeatureGrid renders all 4 value props with no layout break`, async ({ page }) => {
+  test(`${path}: product-category FeatureGrid renders all 3 categories with no layout break`, async ({
+    page,
+  }) => {
     await page.goto(path);
-    for (const label of ["Quality", "Reliability", "Compliance", "Global Reach"]) {
+    for (const label of ["Frozen Vegetables", "Fruit Pulp & Purees", "Value-Added & Specialty"]) {
+      await expect(page.getByText(label, { exact: true }).first()).toBeVisible();
+    }
+  });
+
+  test(`${path}: de-risk FeatureGrid renders all 4 tiles with no layout break`, async ({ page }) => {
+    await page.goto(path);
+    for (const label of ["Open Specifications", "Sample Program", "Inspection Welcome", "24-Hour Response"]) {
       await expect(page.getByText(label, { exact: true })).toBeVisible();
     }
+  });
+
+  test(`${path}: Markets section highlights Gulf countries only, no fabricated stats`, async ({ page }) => {
+    await page.goto(path);
+    const chips = page.getByTestId("export-map-chips");
+    await expect(chips).toBeVisible();
+    for (const country of ["United Arab Emirates", "Saudi Arabia", "Qatar", "Kuwait", "Bahrain", "Oman"]) {
+      await expect(chips.getByText(country, { exact: true })).toBeVisible();
+    }
+    // Explicitly NOT a "we export to N countries" claim — no stat tiles.
+    await expect(page.getByText(/\d+\+?\s*(countries|years|shipments)/i)).toHaveCount(0);
   });
 }

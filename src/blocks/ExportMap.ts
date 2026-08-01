@@ -9,6 +9,10 @@ export const ExportMap: Block = {
   labels: { singular: "Export Map", plural: "Export Maps" },
   fields: [
     { name: "sectionTitle", type: "text" },
+    // T-104: capability-framing copy (logistics/Halal/labeling awareness),
+    // same field shape as CertStrip.intro — never claims of past shipment
+    // volume/history (D-01: new company, zero real customer history yet).
+    { name: "intro", type: "textarea" },
     {
       name: "variant",
       type: "select",

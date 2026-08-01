@@ -204,37 +204,69 @@ export const PAGES_EN_SEED = [
     // distinct label sets (capacity vs. years/countries/shipments) so
     // "Years Exporting" always resolves to the later (row 7) band — see
     // key_links in 07-03-PLAN.md.
+    // T-104/CONTENT_PLAYBOOK §4 Home 1-9 order. Product category names below
+    // are the REAL production taxonomy (Frozen Vegetables/Fruit Pulp &
+    // Purees/Value-Added & Specialty) — intentionally does NOT match this
+    // file's placeholder Grains/Spices/Pulses/Oilseeds catalog below; that
+    // mismatch is the pre-existing, already-tracked "sync local seed to real
+    // catalog" gap (D-27), not something this pass fixes. These are static
+    // marketing-card strings, not a live Categories query, so nothing breaks
+    // — the cards are just thematically ahead of the local placeholder data.
     layout: [
       homeHero,
-      trustBar("Built to Serve Importers Across the Globe", [
-        { name: "Gulf & Middle East Importers" },
-        { name: "European Distributors" },
-        { name: "North American Buyers" },
-        { name: "African Trade Partners" },
-        { name: "Southeast Asian Wholesalers" },
+      trustBar("Why Buyers Can Trust This Supply Chain", [
+        { name: "Multi-Checkpoint Quality Control" },
+        { name: "Temperature-Controlled Cold Storage" },
+        { name: "Full Batch Traceability" },
+        { name: "Manufactured in Karad, Maharashtra" },
       ]),
-      featureGrid("icon", [
-        {
-          icon: "shieldCheck",
-          title: "Quality",
-          body: "Every batch is inspected against strict quality parameters before it leaves our processing facilities, so what you receive matches what you were quoted.",
-        },
-        {
-          icon: "refreshCw",
-          title: "Reliability",
-          body: "Consistent grading, on-time dispatch, and dependable lead times, the same standards whether it's your first order or your fiftieth.",
-        },
-        {
-          icon: "fileCheck",
-          title: "Compliance",
-          body: "Full export documentation support on every order, so your import authority sees exactly what it needs to see.",
-        },
-        {
-          icon: "globe",
-          title: "Global Reach",
-          body: "Purpose-built to serve importers across the Gulf, Europe, and beyond, with direct sourcing and export-ready processing from day one.",
-        },
-      ]),
+      featureGrid(
+        "icon",
+        [
+          {
+            icon: "snowflake",
+            title: "Frozen Vegetables",
+            body: "IQF frozen vegetables, processed and frozen shortly after harvest.",
+          },
+          {
+            icon: "droplet",
+            title: "Fruit Pulp & Purees",
+            body: "Aseptic fruit pulp and purees for food and beverage processing.",
+          },
+          {
+            icon: "package",
+            title: "Value-Added & Specialty",
+            body: "Prepared vegetable and paste products for food service and retail.",
+          },
+        ],
+        "What We Export",
+      ),
+      featureGrid(
+        "icon",
+        [
+          {
+            icon: "fileCheck",
+            title: "Open Specifications",
+            body: "Full product specifications shared on request, before you place an order — no surprises after the container ships.",
+          },
+          {
+            icon: "refreshCw",
+            title: "Sample Program",
+            body: "Pre-shipment samples available so you can verify quality before committing to a full order.",
+          },
+          {
+            icon: "shieldCheck",
+            title: "Inspection Welcome",
+            body: "Third-party inspection welcome at your nomination (SGS, Bureau Veritas, Intertek) — we have nothing to hide.",
+          },
+          {
+            icon: "clock",
+            title: "24-Hour Response",
+            body: "Every inquiry gets a reply within one business day, from a real person on our export team.",
+          },
+        ],
+        "How We De-Risk Your First Order",
+      ),
       // Condensed "Manufacturing Excellence" teaser — 3 of the 4 existing
       // /manufacturing MediaGallery captions (Packing & Dispatch dropped),
       // paired with the /manufacturing StatsBand figures reused verbatim.
@@ -274,6 +306,16 @@ export const PAGES_EN_SEED = [
           body: "Your shipment is tracked in transit to your port, with cold-chain and handling standards maintained until arrival.",
         },
       ]),
+      // T-104/D-31: Gulf-first only, zero stats — capability framing, not a
+      // shipped-to claim (D-01: new company, no export history yet). See
+      // exportMap()'s own doc comment above for the general shape; this call
+      // intentionally overrides the broader SERVED_COUNTRY_CODES default.
+      {
+        ...exportMap("full", [], "Markets We're Built to Serve"),
+        highlightedCountryCodes: ["AE", "SA", "QA", "KW", "BH", "OM"],
+        intro:
+          "Gulf and Middle East buyers first: reefer-ready logistics to ports including Jebel Ali and Dammam, Halal-compliant processing, and Arabic labeling capability. Southeast Asia and other markets available on request.",
+      },
       ctaBand("Ready to Source With Confidence?"),
     ],
   },

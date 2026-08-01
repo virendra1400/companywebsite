@@ -107,6 +107,11 @@ export async function ExportMapBlock({ block, index }: { block: ExportMapData; i
         {block.sectionTitle ? (
           <h2 className="mb-lg text-center text-heading font-semibold">{block.sectionTitle}</h2>
         ) : null}
+        {block.intro ? (
+          <p className="mx-auto mb-lg max-w-[720px] text-center text-body text-neutral-600">
+            {block.intro}
+          </p>
+        ) : null}
         {isCompact ? (
           <div className="grid grid-cols-1 items-center gap-xl lg:grid-cols-2">
             {map}

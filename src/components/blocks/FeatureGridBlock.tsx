@@ -3,7 +3,18 @@ import { getTranslations } from "next-intl/server";
 import { Card } from "@/components/ui/card";
 import { RevealItem } from "@/components/motion/RevealItem";
 import { sectionBg } from "./RenderBlocks";
-import { ShieldCheck, RefreshCw, FileCheck2, Globe2, Sparkles, type LucideIcon } from "lucide-react";
+import {
+  ShieldCheck,
+  RefreshCw,
+  FileCheck2,
+  Globe2,
+  Sparkles,
+  Snowflake,
+  Droplet,
+  Package,
+  Clock,
+  type LucideIcon,
+} from "lucide-react";
 import type { Page, Media } from "../../../payload-types";
 
 type FeatureGridData = Extract<NonNullable<Page["layout"]>[number], { blockType: "featureGrid" }>;
@@ -16,6 +27,10 @@ const ICONS: Record<string, LucideIcon> = {
   refreshCw: RefreshCw,
   fileCheck: FileCheck2,
   globe: Globe2,
+  snowflake: Snowflake,
+  droplet: Droplet,
+  package: Package,
+  clock: Clock,
 };
 
 // Item count drives column count (UI-SPEC §3), capped at 4 — planner's

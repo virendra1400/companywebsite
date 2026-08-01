@@ -308,6 +308,7 @@ export interface Page {
           }
         | {
             sectionTitle?: string | null;
+            intro?: string | null;
             variant: 'compact' | 'full';
             highlightedCountryCodes?: string[] | null;
             stats?:
@@ -938,6 +939,7 @@ export interface PagesSelect<T extends boolean = true> {
           | T
           | {
               sectionTitle?: T;
+              intro?: T;
               variant?: T;
               highlightedCountryCodes?: T;
               stats?:

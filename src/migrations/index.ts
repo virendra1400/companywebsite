@@ -10,6 +10,7 @@ import * as migration_20260730_161400_users_api_key from './20260730_161400_user
 import * as migration_20260730_170943_site_settings_hero_factory from './20260730_170943_site_settings_hero_factory';
 import * as migration_20260801_121552_site_settings_legal_identity from './20260801_121552_site_settings_legal_identity';
 import * as migration_20260801_145559_t103_cms_content_model from './20260801_145559_t103_cms_content_model';
+import * as migration_20260801_154416_t104_export_map_intro from './20260801_154416_t104_export_map_intro';
 
 export const migrations = [
   {
@@ -70,6 +71,11 @@ export const migrations = [
   {
     up: migration_20260801_145559_t103_cms_content_model.up,
     down: migration_20260801_145559_t103_cms_content_model.down,
-    name: '20260801_145559_t103_cms_content_model'
+    name: '20260801_145559_t103_cms_content_model',
+  },
+  {
+    up: migration_20260801_154416_t104_export_map_intro.up,
+    down: migration_20260801_154416_t104_export_map_intro.down,
+    name: '20260801_154416_t104_export_map_intro'
   },
 ];
