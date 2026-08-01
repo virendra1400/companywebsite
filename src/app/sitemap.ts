@@ -40,18 +40,16 @@ async function entriesFor(
     }));
 }
 
-// /products and /insights are code-only listing routes with no backing
-// Pages CMS doc — unlike INTERIOR_SLUGS, translation status can't be looked
-// up via getTranslatedLocales, so every locale (routing.locales) gets an
-// entry unconditionally (the routes render in all four unconditionally,
-// per [locale]/layout.tsx's generateStaticParams).
-function entriesForAllLocales(path: string): MetadataRoute.Sitemap {
-  const { languages } = buildAlternates([...routing.locales], path);
-  const alternates = { languages: languages as Record<string, string> };
-  return routing.locales.map((locale) => ({
-    url: localeUrl(locale, path),
-    alternates,
-  }));
+// T-005/D-18: /products and /insights are code-only listing routes with no
+// backing Pages CMS doc, so translation status can't be looked up via
+// getTranslatedLocales — but they also have zero real ar/fr/ru translation
+// (English content + a disclosed fallback notice). Listing them for
+// untranslated locales in the sitemap is duplicate-content risk Google can't
+// distinguish from real per-locale pages, so the sitemap only lists the
+// English entry; the routes themselves still render (with disclosure) for
+// direct/linked visits in other locales, just aren't submitted for indexing.
+function entriesForDefaultLocaleOnly(path: string): MetadataRoute.Sitemap {
+  return [{ url: localeUrl(routing.defaultLocale, path) }];
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -64,8 +62,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     entries.push(...(await entriesFor(`/${slug}`, "pages", slug)));
   }
 
-  entries.push(...entriesForAllLocales("/products"));
-  entries.push(...entriesForAllLocales("/insights"));
+  entries.push(...entriesForDefaultLocaleOnly("/products"));
+  entries.push(...entriesForDefaultLocaleOnly("/insights"));
 
   const products = await payload.find({
     collection: "products",
