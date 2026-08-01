@@ -1021,6 +1021,15 @@ export interface SiteSetting {
     country?: string | null;
   };
   /**
+   * T-102/COMPONENT_LIBRARY C-03: shown as a small one-line strip in the footer, e.g. "CIN U12345MH2026PTC000000 · GST 27ABCDE1234F1Z5". Leave any field blank until the real number is issued — the footer only shows the ones that are actually filled in, never a placeholder dash.
+   */
+  legalIdentity?: {
+    cin?: string | null;
+    gst?: string | null;
+    iec?: string | null;
+    fssai?: string | null;
+  };
+  /**
    * Official profile URLs (LinkedIn, etc.) included in the Organization structured-data markup.
    */
   sameAs?:
@@ -1067,6 +1076,14 @@ export interface SiteSettingsSelect<T extends boolean = true> {
         state?: T;
         postalCode?: T;
         country?: T;
+      };
+  legalIdentity?:
+    | T
+    | {
+        cin?: T;
+        gst?: T;
+        iec?: T;
+        fssai?: T;
       };
   sameAs?:
     | T

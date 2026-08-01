@@ -5,26 +5,23 @@ import { LanguageSwitcher } from "@/components/chrome/LanguageSwitcher";
 import { MobileNavPanel } from "@/components/chrome/MobileNavPanel";
 import { BrandMark } from "@/components/chrome/BrandMark";
 import { WhatsAppCta } from "@/components/chrome/WhatsAppCta";
-import { getSiteBrand } from "@/lib/payload-fetch";
+import { HeaderShell } from "@/components/chrome/HeaderShell";
+import { ProductsMegaMenu } from "@/components/chrome/ProductsMegaMenu";
+import { getSiteBrand, getProductsByCategory } from "@/lib/payload-fetch";
+import type { Locale } from "@/i18n/routing";
 
 // UI-SPEC Component Inventory — GlobalHeader: 72px desktop / 64px mobile,
 // logical flex row (wordmark inline-start -> nav (>=lg) -> switcher -> CTA
 // inline-end). Auto-reverses in RTL via dir + logical flex, no manual
 // mirroring code.
-// Primary nav = 5 curated items (brief: Products, About, Global Markets,
-// Certifications, Contact). The logo covers Home; the "Request a Quote" button
-// covers the conversion path. Secondary pages (Manufacturing, Company,
-// Insights) stay reachable via the footer + mobile drawer — no orphans.
-const NAV_KEYS = [
-  "products",
-  "about",
-  "export",
-  "certifications",
-  "contact",
-] as const;
+// Primary nav = 4 curated items + the Products mega-menu (T-102/C-02: brief:
+// Products, About, Global Markets, Certifications, Contact). The logo covers
+// Home; the "Request a Quote" button covers the conversion path. Secondary
+// pages (Manufacturing, Company, Insights) stay reachable via the footer +
+// mobile drawer — no orphans.
+const NAV_KEYS = ["about", "export", "certifications", "contact"] as const;
 
 const NAV_HREFS: Record<(typeof NAV_KEYS)[number], string> = {
-  products: "/products",
   about: "/about",
   export: "/export",
   certifications: "/certifications",
@@ -34,17 +31,28 @@ const NAV_HREFS: Record<(typeof NAV_KEYS)[number], string> = {
 export async function GlobalHeader({
   siteName,
   logoUrl,
+  locale,
 }: {
   siteName: string;
   logoUrl: string | null;
+  locale: Locale;
 }) {
   const t = await getTranslations("nav");
   const tHero = await getTranslations("hero");
   const tContact = await getTranslations("contact");
+  const tProducts = await getTranslations("products");
   const { waHref } = await getSiteBrand();
+  const grouped = await getProductsByCategory(locale);
+  const megaMenuCategories = grouped
+    .filter(({ products }) => products.length > 0)
+    .map(({ category, products }) => ({
+      id: category.id,
+      name: category.name,
+      products: products.map((p) => ({ slug: p.slug, name: p.name })),
+    }));
 
   return (
-    <header className="sticky top-0 z-40 flex h-16 items-center border-b border-neutral-300 bg-white px-md lg:h-[72px] lg:px-xl">
+    <HeaderShell>
       <div className="mx-auto flex w-full max-w-[1280px] items-center justify-between gap-lg">
         <Link href="/" className="shrink-0">
           {/* Brand: CMS logo if set, else text wordmark. RTL contract — never mirrors. */}
@@ -52,6 +60,20 @@ export async function GlobalHeader({
         </Link>
 
         <nav className="hidden items-center gap-lg xl:flex" aria-label="Primary">
+          {megaMenuCategories.length > 0 ? (
+            <ProductsMegaMenu
+              label={t("products")}
+              categories={megaMenuCategories}
+              allProductsLabel={tProducts("viewAll")}
+            />
+          ) : (
+            <Link
+              href="/products"
+              className="text-label text-neutral-900 underline-offset-4 hover:text-primary-700 hover:underline decoration-accent-600"
+            >
+              {t("products")}
+            </Link>
+          )}
           {NAV_KEYS.map((key) => (
             <Link
               key={key}
@@ -78,6 +100,6 @@ export async function GlobalHeader({
           <MobileNavPanel siteName={siteName} logoUrl={logoUrl} waHref={waHref} />
         </div>
       </div>
-    </header>
+    </HeaderShell>
   );
 }

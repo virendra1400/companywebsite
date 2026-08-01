@@ -5,7 +5,7 @@ import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { Fraunces, Archivo, IBM_Plex_Sans_Arabic } from "next/font/google";
 import Script from "next/script";
-import { routing, RTL_LOCALES } from "@/i18n/routing";
+import { routing, RTL_LOCALES, type Locale } from "@/i18n/routing";
 import { GlobalHeader } from "@/components/chrome/GlobalHeader";
 import { GlobalFooter } from "@/components/chrome/GlobalFooter";
 import { WhatsAppFloatingButton } from "@/components/chrome/WhatsAppFloatingButton";
@@ -73,7 +73,8 @@ export default async function LocaleLayout({
   const fontVar = locale === "ar" ? plexSansArabic.variable : archivo.variable;
   // Phase 6 (D-02): never set on ar — --font-display falls back to --font-sans.
   const displayVar = locale === "ar" ? "" : frauncesDisplay.variable;
-  const { siteName, logoUrl, address, factoryAddress, sameAs, email, phone } = await getSiteBrand();
+  const { siteName, logoUrl, address, factoryAddress, legalIdentity, sameAs, email, phone } =
+    await getSiteBrand();
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
   // ANALY-01: Plausible chosen (checkpoint decision, 04-05) — cookieless, no
   // consent banner needed. Guarded so dev/CI render without the env var.
@@ -95,7 +96,7 @@ export default async function LocaleLayout({
           />
         ) : null}
         <NextIntlClientProvider>
-          <GlobalHeader siteName={siteName} logoUrl={logoUrl} />
+          <GlobalHeader siteName={siteName} logoUrl={logoUrl} locale={locale as Locale} />
           <div className="flex-1">{children}</div>
           <WhatsAppFloatingButton />
           <GlobalFooter
@@ -106,6 +107,7 @@ export default async function LocaleLayout({
             phone={phone}
             address={address}
             factoryAddress={factoryAddress}
+            legalIdentity={legalIdentity}
           />
         </NextIntlClientProvider>
       </body>

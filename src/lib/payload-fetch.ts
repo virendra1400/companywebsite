@@ -28,6 +28,7 @@ export const getSiteBrand = cache(async function getSiteBrand(): Promise<{
   waHref: string;
   address?: Address;
   factoryAddress?: Address & { facilityName?: string };
+  legalIdentity?: { cin?: string; gst?: string; iec?: string; fssai?: string };
   sameAs: string[];
 }> {
   const payload = await getPayload({ config });
@@ -55,6 +56,7 @@ export const getSiteBrand = cache(async function getSiteBrand(): Promise<{
   const whatsapp = contact.whatsapp || "910000000000";
   const address = settings?.address;
   const factoryAddress = settings?.factoryAddress;
+  const legalIdentity = settings?.legalIdentity;
   // D-09: Organization JSON-LD input — same single cached findGlobal query
   // serves the existing brand/contact fields plus address/sameAs, no second
   // query.
@@ -85,6 +87,14 @@ export const getSiteBrand = cache(async function getSiteBrand(): Promise<{
           state: factoryAddress.state ?? undefined,
           postalCode: factoryAddress.postalCode ?? undefined,
           country: factoryAddress.country ?? undefined,
+        }
+      : undefined,
+    legalIdentity: legalIdentity
+      ? {
+          cin: legalIdentity.cin ?? undefined,
+          gst: legalIdentity.gst ?? undefined,
+          iec: legalIdentity.iec ?? undefined,
+          fssai: legalIdentity.fssai ?? undefined,
         }
       : undefined,
     sameAs: (settings?.sameAs ?? []).map((s) => s.url).filter(Boolean),

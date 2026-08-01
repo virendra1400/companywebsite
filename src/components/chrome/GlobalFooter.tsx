@@ -53,6 +53,22 @@ function formatAddress(address?: FooterAddress): string | null {
   return parts.length > 0 ? parts.join(", ") : null;
 }
 
+type LegalIdentity = { cin?: string; gst?: string; iec?: string; fssai?: string };
+
+// T-102/COMPONENT_LIBRARY C-03: only the fields the owner has actually
+// supplied render — no "CIN: — " placeholder wall for numbers that don't
+// exist yet (CONTENT_PLAYBOOK §6: unresolved facts are cut, not faked).
+function formatLegalIdentity(legal?: LegalIdentity): string | null {
+  if (!legal) return null;
+  const parts = [
+    legal.cin ? `CIN ${legal.cin}` : null,
+    legal.gst ? `GST ${legal.gst}` : null,
+    legal.iec ? `IEC ${legal.iec}` : null,
+    legal.fssai ? `FSSAI ${legal.fssai}` : null,
+  ].filter(Boolean);
+  return parts.length > 0 ? parts.join(" · ") : null;
+}
+
 export async function GlobalFooter({
   siteName,
   logoUrl,
@@ -61,6 +77,7 @@ export async function GlobalFooter({
   phone,
   address,
   factoryAddress,
+  legalIdentity,
 }: {
   siteName: string;
   logoUrl: string | null;
@@ -69,6 +86,7 @@ export async function GlobalFooter({
   phone: string;
   address?: FooterAddress;
   factoryAddress?: FooterAddress & { facilityName?: string };
+  legalIdentity?: LegalIdentity;
 }) {
   const t = await getTranslations("nav");
   const tf = await getTranslations("footer");
@@ -76,6 +94,7 @@ export async function GlobalFooter({
   const socials = resolveSocialLinks(sameAs);
   const formattedAddress = formatAddress(address);
   const formattedFactoryAddress = formatAddress(factoryAddress);
+  const formattedLegalIdentity = formatLegalIdentity(legalIdentity);
 
   return (
     <footer className="bg-primary-900 px-md py-xl text-neutral-100 md:px-lg md:py-2xl xl:px-xl">
@@ -163,6 +182,11 @@ export async function GlobalFooter({
         <p className="text-label text-neutral-300">{`© ${year} ${siteName}. All rights reserved.`}</p>
         <LanguageSwitcher onDark />
       </div>
+      {formattedLegalIdentity ? (
+        <p className="mx-auto mt-sm w-full max-w-[1280px] text-label text-neutral-300">
+          {formattedLegalIdentity}
+        </p>
+      ) : null}
     </footer>
   );
 }

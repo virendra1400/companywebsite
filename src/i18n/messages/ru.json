@@ -76,6 +76,7 @@
   },
   "products": {
     "heading": "Our Products",
+    "viewAll": "View All Products",
     "catalogEmptyHeading": "Our catalog is being prepared.",
     "catalogEmptyBody": "Check back shortly, or contact us directly about specific products.",
     "rfqCta": "Request a Quote for This Product",

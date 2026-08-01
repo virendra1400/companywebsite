@@ -8,6 +8,7 @@ import * as migration_20260729_002548_phase8_faq_block from './20260729_002548_p
 import * as migration_20260730_135645_favicon_field from './20260730_135645_favicon_field';
 import * as migration_20260730_161400_users_api_key from './20260730_161400_users_api_key';
 import * as migration_20260730_170943_site_settings_hero_factory from './20260730_170943_site_settings_hero_factory';
+import * as migration_20260801_121552_site_settings_legal_identity from './20260801_121552_site_settings_legal_identity';
 
 export const migrations = [
   {
@@ -58,6 +59,11 @@ export const migrations = [
   {
     up: migration_20260730_170943_site_settings_hero_factory.up,
     down: migration_20260730_170943_site_settings_hero_factory.down,
-    name: '20260730_170943_site_settings_hero_factory'
+    name: '20260730_170943_site_settings_hero_factory',
+  },
+  {
+    up: migration_20260801_121552_site_settings_legal_identity.up,
+    down: migration_20260801_121552_site_settings_legal_identity.down,
+    name: '20260801_121552_site_settings_legal_identity'
   },
 ];

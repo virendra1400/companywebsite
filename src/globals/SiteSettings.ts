@@ -136,6 +136,21 @@ export const SiteSettings: GlobalConfig = {
       ],
     },
     {
+      type: "group",
+      name: "legalIdentity",
+      label: "Legal identity (footer strip)",
+      admin: {
+        description:
+          "T-102/COMPONENT_LIBRARY C-03: shown as a small one-line strip in the footer, e.g. \"CIN U12345MH2026PTC000000 · GST 27ABCDE1234F1Z5\". Leave any field blank until the real number is issued — the footer only shows the ones that are actually filled in, never a placeholder dash.",
+      },
+      fields: [
+        { name: "cin", type: "text", label: "CIN" },
+        { name: "gst", type: "text", label: "GST" },
+        { name: "iec", type: "text", label: "IEC" },
+        { name: "fssai", type: "text", label: "FSSAI" },
+      ],
+    },
+    {
       name: "sameAs",
       type: "array",
       label: "Social / profile links (sameAs)",

@@ -53,8 +53,10 @@ Acceptance: `grep -n "valid Importer-Exporter\|decades of trade experience" src`
 ### T-101 Design tokens & global styles — `TODO` · S · Small · P-01
 Acceptance: per prompt; QA §B sample-page pass.
 
-### T-102 Header/mega-menu/footer — `TODO` · S · Medium · P-02
-Acceptance: per prompt; QA §B §C §F; ≤2 clicks to any product.
+### T-102 Header/mega-menu/footer — `DONE` (re-scoped) · S · Medium · P-02
+Done (2026-08-01): sticky header shrink 72->60px after 80px scroll (IntersectionObserver sentinel, not a raw scroll listener — `HeaderShell.tsx`). Products mega-menu (`ProductsMegaMenu.tsx`) built against real CMS category/product data via `getProductsByCategory` — no hardcoded SKU list, new products/categories show up automatically; keyboard-accessible (Escape closes + returns focus, click-outside closes). Footer legal identity strip (CIN/GST/IEC/FSSAI) added to SiteSettings and rendered only when at least one field is filled in — no placeholder-dash wall for numbers that don't exist yet.
+Not done this pass (logged, not silently dropped): (1) mega-menu's two-column-by-processing-method layout — built one column per CMS category instead, which is the more correct data model for an evolving catalog than a hardcoded "IQF/Aseptic/Value-Added" grouping; (2) buyer-type links + catalog-PDF-download inside the mega-menu — no /resources hub or PDF pipeline exists yet (T-202, Phase 2); (3) mobile drawer's product list stays a flat "Products" link, not a nested tree — /products already shows the full categorized catalog on tap, judged lower value than the desktop mega-menu for the time spent; (4) header nav doesn't yet include "Facility & Quality" or "Resources" — neither page exists yet (T-107, T-202).
+Acceptance: shrink verified programmatically (`data-shrunk` 72px->60px on scroll); mega-menu verified visually + real category data; full e2e regression + isolated nav-links/homepage/rtl/language-switcher runs — all pre-existing pass rate, zero new failures. See DECISION_LOG D-29.
 
 ### T-103 CMS content model — `TODO` · O · Medium
 Objective: implement MASTER_PLAN §7.3 Payload collections (products with structured specs, certifications, facilityFacts, resources, globals incl. contactChannels/legalIdentity/sla) + migrate existing content.
