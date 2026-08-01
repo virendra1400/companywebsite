@@ -151,6 +151,15 @@ export const SiteSettings: GlobalConfig = {
       ],
     },
     {
+      type: "group",
+      name: "sla",
+      label: "Service commitment",
+      admin: {
+        description: "T-103/MASTER_PLAN §7.3: shown near RFQ/contact CTAs, e.g. \"We respond within 24 hours.\" Leave blank to omit.",
+      },
+      fields: [{ name: "responseTime", type: "text", localized: true }],
+    },
+    {
       name: "sameAs",
       type: "array",
       label: "Social / profile links (sameAs)",

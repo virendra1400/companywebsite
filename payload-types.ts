@@ -74,6 +74,8 @@ export interface Config {
     categories: Category;
     products: Product;
     insights: Insight;
+    'facility-facts': FacilityFact;
+    resources: Resource;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -88,6 +90,8 @@ export interface Config {
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     products: ProductsSelect<false> | ProductsSelect<true>;
     insights: InsightsSelect<false> | InsightsSelect<true>;
+    'facility-facts': FacilityFactsSelect<false> | FacilityFactsSelect<true>;
+    resources: ResourcesSelect<false> | ResourcesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -395,6 +399,21 @@ export interface Certification {
   certificatePdf?: (number | null) | Media;
   validityNotes?: string | null;
   halal?: boolean | null;
+  /**
+   * Drives the certifications status board (T-106).
+   */
+  status?: ('registered' | 'in-certification') | null;
+  number?: string | null;
+  validFrom?: string | null;
+  validTo?: string | null;
+  /**
+   * e.g. "Frozen vegetables, IQF processing".
+   */
+  scope?: string | null;
+  /**
+   * For in-certification items — expected completion date, shown on the status board.
+   */
+  targetDate?: string | null;
   displayOrder?: number | null;
   updatedAt: string;
   createdAt: string;
@@ -441,6 +460,7 @@ export interface Product {
   imageGallery?:
     | {
         image: number | Media;
+        role?: ('pack' | 'macro' | 'context') | null;
         id?: string | null;
       }[]
     | null;
@@ -452,6 +472,126 @@ export interface Product {
       }[]
     | null;
   packaging?: string | null;
+  /**
+   * e.g. "Bakery fillings", "Retail frozen aisle" — short use-case tags.
+   */
+  applications?: string[] | null;
+  /**
+   * T-103/MASTER_PLAN §7.3: buyer-facing spec sheet, split by category. Each row: parameter, value, optional unit + test method. Leave a category empty to omit it from the product page.
+   */
+  specs?: {
+    physicoChemical?:
+      | {
+          parameter: string;
+          value: string;
+          unit?: string | null;
+          /**
+           * Test method, e.g. "AOAC 925.10".
+           */
+          method?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    organoleptic?:
+      | {
+          parameter: string;
+          value: string;
+          unit?: string | null;
+          /**
+           * Test method, e.g. "AOAC 925.10".
+           */
+          method?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    microbiological?:
+      | {
+          parameter: string;
+          value: string;
+          unit?: string | null;
+          /**
+           * Test method, e.g. "AOAC 925.10".
+           */
+          method?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    contaminants?:
+      | {
+          parameter: string;
+          value: string;
+          unit?: string | null;
+          /**
+           * Test method, e.g. "AOAC 925.10".
+           */
+          method?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * T-103/MASTER_PLAN §7.3: packaging formats offered for this product.
+   */
+  packagingOptions?:
+    | {
+        /**
+         * e.g. "IQF pouch", "Aseptic drum".
+         */
+        format: string;
+        /**
+         * e.g. "1 kg", "200 L".
+         */
+        netWeight: string;
+        unitsPerCarton?: number | null;
+        cartonsPerPallet?: number | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * T-103/MASTER_PLAN §7.3: shown to buyers sizing a shipment.
+   */
+  containerLoading?: {
+    teu20Units?: number | null;
+    teu20NetMT?: number | null;
+    palletNote?: string | null;
+  };
+  /**
+   * e.g. "24 months from date of manufacture".
+   */
+  shelfLife?: string | null;
+  /**
+   * e.g. "-18°C or below".
+   */
+  storageTemp?: string | null;
+  /**
+   * e.g. "1 x 20' container".
+   */
+  moqRange?: string | null;
+  faq?:
+    | {
+        q: string;
+        a: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Spec sheets, COAs, other per-product documents. Label is localized, file is not.
+   */
+  downloads?:
+    | {
+        label: string;
+        file: number | Media;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Optional per-product overrides. Leave blank to fall back to name / shortDescription (buildMetadata's existing default).
+   */
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+    ogImage?: (number | null) | Media;
+  };
   certifications?: (number | Certification)[] | null;
   displayOrder?: number | null;
   published?: boolean | null;
@@ -487,6 +627,40 @@ export interface Insight {
   };
   publishedDate?: string | null;
   published?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "facility-facts".
+ */
+export interface FacilityFact {
+  id: number;
+  /**
+   * Stable identifier, e.g. "cold-storage-capacity". Not shown to visitors.
+   */
+  key: string;
+  label: string;
+  value: string;
+  /**
+   * Only verified facts should render on the public site (D-01).
+   */
+  verified?: boolean | null;
+  displayOrder?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "resources".
+ */
+export interface Resource {
+  id: number;
+  title: string;
+  type: 'catalog' | 'brochure' | 'spec-sheet' | 'certificate' | 'other';
+  file: number | Media;
+  product?: (number | null) | Product;
+  displayOrder?: number | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -541,6 +715,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'insights';
         value: number | Insight;
+      } | null)
+    | ({
+        relationTo: 'facility-facts';
+        value: number | FacilityFact;
+      } | null)
+    | ({
+        relationTo: 'resources';
+        value: number | Resource;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -849,6 +1031,12 @@ export interface CertificationsSelect<T extends boolean = true> {
   certificatePdf?: T;
   validityNotes?: T;
   halal?: T;
+  status?: T;
+  number?: T;
+  validFrom?: T;
+  validTo?: T;
+  scope?: T;
+  targetDate?: T;
   displayOrder?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -880,6 +1068,7 @@ export interface ProductsSelect<T extends boolean = true> {
     | T
     | {
         image?: T;
+        role?: T;
         id?: T;
       };
   specifications?:
@@ -890,6 +1079,87 @@ export interface ProductsSelect<T extends boolean = true> {
         id?: T;
       };
   packaging?: T;
+  applications?: T;
+  specs?:
+    | T
+    | {
+        physicoChemical?:
+          | T
+          | {
+              parameter?: T;
+              value?: T;
+              unit?: T;
+              method?: T;
+              id?: T;
+            };
+        organoleptic?:
+          | T
+          | {
+              parameter?: T;
+              value?: T;
+              unit?: T;
+              method?: T;
+              id?: T;
+            };
+        microbiological?:
+          | T
+          | {
+              parameter?: T;
+              value?: T;
+              unit?: T;
+              method?: T;
+              id?: T;
+            };
+        contaminants?:
+          | T
+          | {
+              parameter?: T;
+              value?: T;
+              unit?: T;
+              method?: T;
+              id?: T;
+            };
+      };
+  packagingOptions?:
+    | T
+    | {
+        format?: T;
+        netWeight?: T;
+        unitsPerCarton?: T;
+        cartonsPerPallet?: T;
+        id?: T;
+      };
+  containerLoading?:
+    | T
+    | {
+        teu20Units?: T;
+        teu20NetMT?: T;
+        palletNote?: T;
+      };
+  shelfLife?: T;
+  storageTemp?: T;
+  moqRange?: T;
+  faq?:
+    | T
+    | {
+        q?: T;
+        a?: T;
+        id?: T;
+      };
+  downloads?:
+    | T
+    | {
+        label?: T;
+        file?: T;
+        id?: T;
+      };
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        ogImage?: T;
+      };
   certifications?: T;
   displayOrder?: T;
   published?: T;
@@ -910,6 +1180,32 @@ export interface InsightsSelect<T extends boolean = true> {
   body?: T;
   publishedDate?: T;
   published?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "facility-facts_select".
+ */
+export interface FacilityFactsSelect<T extends boolean = true> {
+  key?: T;
+  label?: T;
+  value?: T;
+  verified?: T;
+  displayOrder?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "resources_select".
+ */
+export interface ResourcesSelect<T extends boolean = true> {
+  title?: T;
+  type?: T;
+  file?: T;
+  product?: T;
+  displayOrder?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1030,6 +1326,12 @@ export interface SiteSetting {
     fssai?: string | null;
   };
   /**
+   * T-103/MASTER_PLAN §7.3: shown near RFQ/contact CTAs, e.g. "We respond within 24 hours." Leave blank to omit.
+   */
+  sla?: {
+    responseTime?: string | null;
+  };
+  /**
    * Official profile URLs (LinkedIn, etc.) included in the Organization structured-data markup.
    */
   sameAs?:
@@ -1084,6 +1386,11 @@ export interface SiteSettingsSelect<T extends boolean = true> {
         gst?: T;
         iec?: T;
         fssai?: T;
+      };
+  sla?:
+    | T
+    | {
+        responseTime?: T;
       };
   sameAs?:
     | T

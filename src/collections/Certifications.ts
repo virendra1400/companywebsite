@@ -22,6 +22,29 @@ export const Certifications: CollectionConfig = {
     { name: "certificatePdf", type: "upload", relationTo: "media" },
     { name: "validityNotes", type: "text", localized: true },
     { name: "halal", type: "checkbox", defaultValue: false },
+    // T-103/MASTER_PLAN §7.3: status board fields. `status` intentionally has
+    // no defaultValue — existing certs stay unset (null) until an editor
+    // confirms which bucket they belong in, rather than assuming every
+    // pre-existing row is "registered".
+    {
+      name: "status",
+      type: "select",
+      options: [
+        { label: "Registered", value: "registered" },
+        { label: "In certification", value: "in-certification" },
+      ],
+      admin: { description: "Drives the certifications status board (T-106)." },
+    },
+    { name: "number", type: "text", label: "Certificate number" },
+    { name: "validFrom", type: "date" },
+    { name: "validTo", type: "date" },
+    { name: "scope", type: "text", localized: true, admin: { description: "e.g. \"Frozen vegetables, IQF processing\"." } },
+    {
+      name: "targetDate",
+      type: "date",
+      label: "Target certification date",
+      admin: { description: "For in-certification items — expected completion date, shown on the status board." },
+    },
     // Editor-controlled sort order, avoids hard-coding order in the query.
     { name: "displayOrder", type: "number", defaultValue: 0 },
   ],

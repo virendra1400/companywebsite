@@ -9,6 +9,7 @@ import * as migration_20260730_135645_favicon_field from './20260730_135645_favi
 import * as migration_20260730_161400_users_api_key from './20260730_161400_users_api_key';
 import * as migration_20260730_170943_site_settings_hero_factory from './20260730_170943_site_settings_hero_factory';
 import * as migration_20260801_121552_site_settings_legal_identity from './20260801_121552_site_settings_legal_identity';
+import * as migration_20260801_145559_t103_cms_content_model from './20260801_145559_t103_cms_content_model';
 
 export const migrations = [
   {
@@ -64,6 +65,11 @@ export const migrations = [
   {
     up: migration_20260801_121552_site_settings_legal_identity.up,
     down: migration_20260801_121552_site_settings_legal_identity.down,
-    name: '20260801_121552_site_settings_legal_identity'
+    name: '20260801_121552_site_settings_legal_identity',
+  },
+  {
+    up: migration_20260801_145559_t103_cms_content_model.up,
+    down: migration_20260801_145559_t103_cms_content_model.down,
+    name: '20260801_145559_t103_cms_content_model'
   },
 ];

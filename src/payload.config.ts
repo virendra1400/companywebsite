@@ -14,6 +14,8 @@ import { Certifications } from "@/collections/Certifications";
 import { Categories } from "@/collections/Categories";
 import { Products } from "@/collections/Products";
 import { Insights } from "@/collections/Insights";
+import { FacilityFacts } from "@/collections/FacilityFacts";
+import { Resources } from "@/collections/Resources";
 import { SiteSettings } from "@/globals/SiteSettings";
 
 const filename = fileURLToPath(import.meta.url);
@@ -63,7 +65,7 @@ export default buildConfig({
   admin: {
     user: Users.slug,
   },
-  collections: [Users, Media, Pages, Certifications, Categories, Products, Insights],
+  collections: [Users, Media, Pages, Certifications, Categories, Products, Insights, FacilityFacts, Resources],
   globals: [SiteSettings],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET ?? "",
