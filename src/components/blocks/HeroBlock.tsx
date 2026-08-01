@@ -5,6 +5,7 @@ import { WhatsAppTrackedLink } from "@/components/chrome/WhatsAppTrackedLink";
 import { Link } from "@/i18n/navigation";
 import { getSiteBrand } from "@/lib/payload-fetch";
 import { pickHeroFallback } from "@/lib/stock-fallback-images";
+import { isSvgUrl } from "@/lib/is-svg-url";
 import type { Page, Media } from "../../../payload-types";
 
 type HeroData = Extract<NonNullable<Page["layout"]>[number], { blockType: "hero" }>;
@@ -63,6 +64,7 @@ export async function HeroBlock({ block }: { block: HeroData; index: number }) {
         fill
         priority={isFull}
         sizes="100vw"
+        unoptimized={isSvgUrl(image?.url || fallbackSrc)}
         className="object-cover"
       />
       <div aria-hidden="true" className={`absolute inset-0 ${overlayClass}`} />

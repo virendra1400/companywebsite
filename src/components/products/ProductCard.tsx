@@ -4,6 +4,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { pickProductFallback } from "@/lib/stock-fallback-images";
+import { isSvgUrl } from "@/lib/is-svg-url";
 import type { Product, Media, Category } from "../../../payload-types";
 
 // UI-SPEC §Component Inventory #1 ProductCard — CatalogIndex grid item.
@@ -30,6 +31,7 @@ export function ProductCard({ product }: { product: Product }) {
             alt={image?.alt || product.name}
             fill
             sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
+            unoptimized={isSvgUrl(image?.url || fallbackSrc)}
             className="object-cover transition-transform duration-300 motion-reduce:transition-none group-hover:scale-[1.03]"
           />
         </AspectRatio>

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { sectionBg } from "./RenderBlocks";
+import { isSvgUrl } from "@/lib/is-svg-url";
 import type { Page, Media } from "../../../payload-types";
 
 type TrustBarData = Extract<NonNullable<Page["layout"]>[number], { blockType: "trustBar" }>;
@@ -32,6 +33,7 @@ export async function TrustBarBlock({ block, index }: { block: TrustBarData; ind
                     alt={logo.alt}
                     fill
                     sizes="112px"
+                    unoptimized={isSvgUrl(logo.url)}
                     className="object-contain"
                   />
                 </div>

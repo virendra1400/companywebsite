@@ -2,6 +2,7 @@ import Image from "next/image";
 import { getTranslations, getLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { getCertifications } from "@/lib/payload-fetch";
+import { isSvgUrl } from "@/lib/is-svg-url";
 import { CertCard } from "./CertCard";
 import { sectionBg } from "./RenderBlocks";
 import type { Locale } from "@/i18n/routing";
@@ -53,7 +54,13 @@ export async function CertStripBlock({ block, index }: { block: CertStripData; i
                   }`}
                 >
                   {logo?.url ? (
-                    <Image src={logo.url} alt={logo.alt} fill className="object-contain" />
+                    <Image
+                      src={logo.url}
+                      alt={logo.alt}
+                      fill
+                      unoptimized={isSvgUrl(logo.url)}
+                      className="object-contain"
+                    />
                   ) : null}
                 </Link>
               );

@@ -5,6 +5,7 @@ import { Link } from "@/i18n/navigation";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { isSvgUrl } from "@/lib/is-svg-url";
 import type { Insight, Media, Category } from "../../../payload-types";
 
 // UI-SPEC §Component Inventory #2 InsightCard — Insights list grid item.
@@ -33,6 +34,7 @@ export async function InsightCard({ insight }: { insight: Insight }) {
               alt={image.alt}
               fill
               sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+              unoptimized={isSvgUrl(image.url)}
               className="object-cover transition-transform duration-300 motion-reduce:transition-none group-hover:scale-[1.03]"
             />
           ) : (

@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { ImageOff } from "lucide-react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { isSvgUrl } from "@/lib/is-svg-url";
 
 export type GalleryImage = { url: string; alt: string };
 
@@ -46,6 +47,7 @@ export function ProductGallery({
           fill
           priority
           sizes="(min-width: 1024px) 50vw, 100vw"
+          unoptimized={isSvgUrl(active.url)}
           className="object-cover"
         />
       </AspectRatio>
@@ -62,7 +64,14 @@ export function ProductGallery({
                 i === activeIndex ? "ring-2 ring-primary-700" : ""
               }`}
             >
-              <Image src={img.url} alt={img.alt} fill sizes="25vw" className="object-cover" />
+              <Image
+                src={img.url}
+                alt={img.alt}
+                fill
+                sizes="25vw"
+                unoptimized={isSvgUrl(img.url)}
+                className="object-cover"
+              />
             </button>
           ))}
         </div>

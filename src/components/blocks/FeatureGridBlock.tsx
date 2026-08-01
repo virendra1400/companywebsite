@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { Card } from "@/components/ui/card";
 import { RevealItem } from "@/components/motion/RevealItem";
 import { sectionBg } from "./RenderBlocks";
+import { isSvgUrl } from "@/lib/is-svg-url";
 import {
   ShieldCheck,
   RefreshCw,
@@ -73,7 +74,13 @@ export async function FeatureGridBlock({ block, index }: { block: FeatureGridDat
                     {block.variant === "photo" ? (
                       <div className="relative size-24 shrink-0 overflow-hidden rounded-full bg-neutral-100">
                         {photo?.url ? (
-                          <Image src={photo.url} alt={photo.alt} fill className="object-cover" />
+                          <Image
+                            src={photo.url}
+                            alt={photo.alt}
+                            fill
+                            unoptimized={isSvgUrl(photo.url)}
+                            className="object-cover"
+                          />
                         ) : null}
                       </div>
                     ) : (

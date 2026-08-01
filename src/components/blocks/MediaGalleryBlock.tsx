@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { RevealItem } from "@/components/motion/RevealItem";
 import { sectionBg } from "./RenderBlocks";
+import { isSvgUrl } from "@/lib/is-svg-url";
 import type { Page, Media } from "../../../payload-types";
 
 type MediaGalleryData = Extract<NonNullable<Page["layout"]>[number], { blockType: "mediaGallery" }>;
@@ -47,6 +48,7 @@ export async function MediaGalleryBlock({
                       alt={image.alt}
                       fill
                       sizes="(min-width: 768px) 33vw, 50vw"
+                      unoptimized={isSvgUrl(image.url)}
                       className="object-cover"
                     />
                   </AspectRatio>
