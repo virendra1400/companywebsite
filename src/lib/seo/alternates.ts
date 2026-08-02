@@ -9,9 +9,18 @@ const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 // every other locale gets a /<locale> prefix. "/" normalizes to the bare
 // origin (no trailing slash / empty segment).
 export function localeUrl(locale: Locale, path: string): string {
+  return `${BASE}${localePath(locale, path)}`;
+}
+
+// Same prefixing rule as localeUrl, minus the domain — for internal
+// redirect() / permanentRedirect() targets, which must stay relative. Using
+// localeUrl's BASE-prefixed absolute URL there would jump a preview/staging
+// deployment to whatever NEXT_PUBLIC_SITE_URL points at (production), not
+// stay on the current deployment.
+export function localePath(locale: Locale, path: string): string {
   const prefix = locale === routing.defaultLocale ? "" : `/${locale}`;
   const suffix = path === "/" ? "" : path;
-  return `${BASE}${prefix}${suffix}`;
+  return `${prefix}${suffix}`;
 }
 
 // SEO-02/D-08: reciprocal, self-referencing hreflang map — every translated

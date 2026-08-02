@@ -20,7 +20,10 @@ export function ProductCard({ product }: { product: Product }) {
   const fallbackSrc = pickProductFallback(product.slug || product.name, category?.slug);
 
   return (
-    <Link href={`/products/${product.slug}`} className="group block">
+    <Link
+      href={category ? `/products/${category.slug}/${product.slug}` : `/products/${product.slug}`}
+      className="group block"
+    >
       <Card className="gap-sm rounded-card border border-neutral-300 bg-white p-md shadow-card transition-transform duration-150 motion-reduce:transition-none group-hover:-translate-y-[2px] group-hover:shadow-card-hover group-focus-visible:-translate-y-[2px] group-focus-visible:shadow-card-hover group-focus-visible:ring-2 group-focus-visible:ring-accent-600 md:p-lg">
         <AspectRatio ratio={4 / 3} className="overflow-hidden rounded-md bg-neutral-100">
           {/* Real photography uploaded via Payload Media wins; until then a

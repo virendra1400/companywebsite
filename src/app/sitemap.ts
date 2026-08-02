@@ -65,6 +65,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   entries.push(...entriesForDefaultLocaleOnly("/products"));
   entries.push(...entriesForDefaultLocaleOnly("/insights"));
 
+  // T-105/MASTER_PLAN §5.2: nested URL — depth:1 populates category so its
+  // slug is available without a second query per product.
   const products = await payload.find({
     collection: "products",
     where: { published: { equals: true } },
@@ -72,9 +74,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     overrideAccess: true,
     limit: 500,
     sort: "slug",
+    depth: 1,
   });
   for (const p of products.docs) {
-    entries.push(...(await entriesFor(`/products/${p.slug}`, "products", p.slug)));
+    const categorySlug = typeof p.category === "object" ? p.category.slug : null;
+    if (!categorySlug) continue;
+    entries.push(...(await entriesFor(`/products/${categorySlug}/${p.slug}`, "products", p.slug)));
   }
 
   const articles = await payload.find({

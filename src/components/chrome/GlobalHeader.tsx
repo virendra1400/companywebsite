@@ -52,6 +52,7 @@ export async function GlobalHeader({
     .map(({ category, products }) => ({
       id: category.id,
       name: category.name,
+      slug: category.slug,
       products: products.map((p) => ({ slug: p.slug, name: p.name })),
     }));
 

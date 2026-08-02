@@ -7,6 +7,7 @@ import { Link } from "@/i18n/navigation";
 type MegaMenuCategory = {
   id: number;
   name: string;
+  slug: string;
   products: { slug: string; name: string }[];
 };
 
@@ -79,7 +80,7 @@ export function ProductsMegaMenu({
               {category.products.map((product) => (
                 <Link
                   key={product.slug}
-                  href={`/products/${product.slug}`}
+                  href={`/products/${category.slug}/${product.slug}`}
                   role="menuitem"
                   className="text-label text-neutral-600 hover:text-primary-700"
                   onClick={() => setOpen(false)}

@@ -83,7 +83,22 @@
     "breadcrumbRoot": "Products",
     "galleryThumbAria": "View image {n} of {total}",
     "notFoundHeading": "Product not found.",
-    "notFoundBody": "This product may have been removed or is no longer available."
+    "notFoundBody": "This product may have been removed or is no longer available.",
+    "specsPhysicoChemical": "Physico-Chemical",
+    "specsOrganoleptic": "Organoleptic",
+    "specsMicrobiological": "Microbiological",
+    "specsContaminants": "Contaminants",
+    "packagingLabel": "Packaging",
+    "packagingOptionsTitle": "Packaging Options",
+    "containerLoadingTitle": "Container Loading",
+    "containerUnitsLabel": "Units per 20' container",
+    "containerNetMtLabel": "Net MT per 20' container",
+    "downloadsTitle": "Downloads",
+    "faqTitle": "Frequently Asked Questions",
+    "shelfLifeLabel": "Shelf Life",
+    "storageTempLabel": "Storage Temperature",
+    "moqRangeLabel": "MOQ",
+    "applicationsLabel": "Applications"
   },
   "insights": {
     "heading": "Insights",

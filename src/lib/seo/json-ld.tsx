@@ -83,6 +83,20 @@ export function productJsonLd(product: ProductInput) {
   };
 }
 
+// T-105/SEO_PLAYBOOK §4: only emitted when a product actually has FAQ items
+// (D-01: never a placeholder question).
+export function faqJsonLd(items: { q: string; a: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: { "@type": "Answer", text: item.a },
+    })),
+  };
+}
+
 export function breadcrumbJsonLd(items: { name: string; url: string }[]) {
   return {
     "@context": "https://schema.org",
