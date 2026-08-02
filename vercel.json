@@ -1,5 +1,5 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "regions": ["fra1"],
-  "buildCommand": "CI=true npx payload generate:importmap && CI=true npx payload migrate && CI=true npx tsx scripts/populate-certifications-t106.ts && CI=true npx tsx scripts/update-certifications-page-t106.ts && npm run build"
+  "buildCommand": "CI=true npx payload generate:importmap && CI=true npx payload migrate && npm run build"
 }
