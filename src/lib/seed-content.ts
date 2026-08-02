@@ -363,21 +363,34 @@ export const PAGES_EN_SEED = [
   {
     slug: "manufacturing",
     title: "Manufacturing",
-    // UI-SPEC Page Composition "Manufacturing/process" row: Hero(compact) ->
-    // RichText(process overview) -> MediaGallery(facility photos) ->
-    // StatsBand(capacity/QC/cold-chain) -> CTABand. MediaGallery item
-    // captions below match FACILITY_PHOTOS keys in scripts/seed-pages.ts,
-    // which attaches placeholder photos post-seed (same pattern as
-    // attachLeadershipPhotos).
+    // UI-SPEC Page Composition "Manufacturing/process" row. Intro paragraph
+    // matches the honest partnership framing already live on production
+    // (D-27 — direct API edit, this seed file had drifted stale with an
+    // earlier "our own processing floor" draft that predates the honesty
+    // rewrite; corrected here so fresh local installs match reality).
+    // T-107 adds: D-14 exact IQF wording (never claim in-house IQF line),
+    // traceability detail, audit-openness statement — inserted before the
+    // MediaGallery. Gallery item captions match FACILITY_PHOTOS keys in
+    // scripts/seed-pages.ts, which attaches placeholder photos post-seed.
     layout: [
       compactHero(
         "Inside Our Processing Facilities",
         "From intake to cold-chain dispatch, every stage is documented and quality-controlled.",
       ),
       richText(
-        "Every shipment begins on our own processing floor, where incoming produce is graded, cleaned, and sorted before moving into product-specific processing lines under documented standard operating procedures.",
-        "Our quality control lab tests samples at multiple checkpoints (intake, mid-process, and pre-dispatch), so defects are caught before a batch ever reaches packing, not after a buyer receives it.",
-        "Temperature-controlled cold storage protects perishable batches between processing and dispatch, and every pallet is documented and traceable back to its intake batch for full chain-of-custody visibility.",
+        "VNP Global's frozen vegetable and fruit pulp range is manufactured at the Piyush Farms facility (piyushfarms.com), operated by Kavita Facility Management Pvt Ltd, Agro Division, in Karad, Maharashtra, a processing plant built for rapid farm-to-factory handling of fresh produce.",
+        "Quality control runs at multiple checkpoints across intake, mid-process, and pre-dispatch, so defects are caught before a batch ever reaches packing, not after a buyer receives it.",
+        "Temperature-controlled cold storage protects perishable batches between processing and dispatch, with every batch documented and traceable back to intake for full chain-of-custody visibility.",
+        "VNP Global manages the export side of this partnership: international logistics, documentation, and compliance, so the facility's output reaches buyers reliably, wherever they are.",
+      ),
+      // T-107/DECISION_LOG D-14 (LOCKED wording) — describes the PRODUCT as
+      // IQF-processed (true) without claiming an in-house IQF line.
+      richText(
+        "Our frozen products are IQF-processed. IQF freezing runs through qualified partner lines; cold storage is in-house at the facility, keeping every batch temperature-controlled from freezing through dispatch.",
+        "Every pallet carries a lot code assigned at intake, tracked through processing, packing, and cold storage — the same code links a finished carton back to its intake batch and processing date for full traceability.",
+      ),
+      richText(
+        "We welcome third-party inspection and documentation review at any stage — including buyer-nominated inspectors (SGS, Bureau Veritas, Intertek) and facility visits, in person or over video call.",
       ),
       mediaGallery(
         [
