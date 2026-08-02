@@ -84,9 +84,10 @@ Done (2026-08-02): D-14 exact IQF wording added to /manufacturing (never claims 
 Not done: MASTER_PLAN §5.2's `/manufacturing`→`/facility` rename — deliberately deferred (touches nav/sitemap/redirects site-wide, separable from content). Pick up alongside T-108 or as its own IA pass.
 Acceptance: D-14 wording verified (present, "in-house IQF" overclaim absent) — met.
 
-### T-108 About page — `TODO` · S · Medium · P-08
-Includes /company → /about consolidation + redirect; three-entity relationship explained (VNP = export company; Kavita = manufacturer; Piyush Farms = sister brand).
-Acceptance: QA §A–§D; entity explanation present; founder block (tokens OK).
+### T-108 About page — `DONE (re-scoped)` · S · Medium · P-08
+Done (2026-08-02): three-entity relationship explained on /about verbatim per CONTENT_PLAYBOOK §4 (VNP = export company; Kavita = manufacturer; Piyush Farms = sister brand). "What We Promise Buyers" de-risk section added (reused from T-104's homepage tiles). Fixed intro copy implying VNP itself processes product (D-27: it doesn't). Also found+fixed a real bug while starting this: /company had a false "operates under a valid IEC registration" claim under the pre-rebrand company name — see D-37. See DECISION_LOG D-38.
+Not done: /company → /about consolidation + redirect — this line item isn't in CONTENT_PLAYBOOK §4's actual spec (which keeps About = story/promises and Company & Compliance = leadership/registration details as two distinct pages, cross-linked); treating the more detailed CONTENT_PLAYBOOK as authoritative over this terse backlog line, same as prior re-scope calls. Founder block — despite "tokens OK", omitted rather than added as a `{{FOUNDER_NAME}}` placeholder: the (1) "why VNP exists" section is specified as FIRST-PERSON prose, and a bracketed token in first-person voice reads as broken, not as an honest placeholder (unlike a spec-sheet token like `{{PLANT_CAPACITY_MT_YEAR}}`); the (3) name/photo card would also duplicate /company's existing "Managing Director" leadership tile. Revisit once T-110 supplies a real name/story.
+Acceptance: entity explanation present — met. Founder block — deliberately omitted, not fabricated (see reasoning above).
 
 ### T-109 RFQ form & conversion flow — `TODO` · O · Medium · P-07
 Note: current form engineering is good — extend rather than rewrite (add buyer_type/products multi-select/timeline per C-18; keep rate-limiting; CAPTCHA→honeypot decision at implementation, log it).
