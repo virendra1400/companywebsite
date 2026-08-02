@@ -109,7 +109,8 @@ Done (2026-08-02): robots.txt fix shipped — real bug, `Disallow: /api` was blo
 Done (2026-08-02): real automated audit (@axe-core/playwright, WCAG 2.0/2.1 A+AA) across all page types + both locales. Zero violations — nothing to fix, reflects a11y discipline already built in all session. Locked in as a permanent regression test (a11y-audit.spec.ts). See DECISION_LOG D-43.
 ### T-206 Performance pass — `IN PROGRESS` · S · Medium · P-12
 Started (2026-08-02): found + fixed the react-hook-form-on-every-page bug (dynamic-import in RenderBlocks.tsx), but it didn't move the needle — root cause is Next 16 + Turbopack shipping one unified shared script bundle to every route (confirmed empirically), not app-level code-splitting. See DECISION_LOG D-40. Open: decide whether forcing webpack as the production bundler is worth the trade-off, or wait for Turbopack to mature. Lighthouse still ~51/100 production.
-### T-207 Animation & polish — `TODO` · S · Small · P-13
+### T-207 Animation & polish — `DONE` · S · Small · P-13
+Done (2026-08-02): entry-animation duration was 2x the DESIGN_SYSTEM §6 ceiling (600ms/500ms vs 200-300ms spec) — fixed to 300ms on both Reveal.tsx and RevealItem.tsx. Hover micro-transitions, no-carousel rule, and reduced-motion fallbacks all already spec-compliant, checked not just assumed. See DECISION_LOG D-44.
 ### T-208 Copy editorial pass — `TODO` · O · Medium · P-14
 
 ## Phase 3 — Evidence Upgrade
