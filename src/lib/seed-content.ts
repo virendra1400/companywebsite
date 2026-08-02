@@ -322,14 +322,54 @@ export const PAGES_EN_SEED = [
   {
     slug: "about",
     title: "About",
+    // T-108/CONTENT_PLAYBOOK §4 About. Founder section ((1) "why VNP
+    // exists" first-person, (3) founder photo/bio block) intentionally
+    // OMITTED — {{FOUNDER_NAME}} and the founder's own words are real
+    // business facts no one has supplied yet (T-110), and putting invented
+    // words in a real person's mouth is a materially worse fabrication than
+    // an invented stat. Omit rather than fake, same CAT-04 discipline used
+    // for certifications/product photos all through this playbook. Sections
+    // (2) group & facility and (4) de-risk promises ARE real and included.
     layout: [
       compactHero(
         "Rooted in Indian Agriculture, Built for Global Trade",
-        "VNP Global sources, processes, and prepares agricultural products for export, built from the ground up to meet the standards international buyers expect.",
+        "VNP Global sources and exports agricultural products, built from the ground up to meet the standards international buyers expect.",
       ),
       richText(
-        "VNP Global sources, grades, and processes agricultural products for export, built from day one around the standards international buyers expect. Quality control, documentation, and reliable communication.",
-        "Our mission is simple: deliver consistently graded, safely processed agricultural products to international buyers who can't afford supply-chain surprises. Leadership bios and compliance details live on our Company & Compliance page.",
+        "VNP Global sources, grades, and manages export for agricultural products, built from day one around the standards international buyers expect: quality control, documentation, and reliable communication.",
+        "Our mission is simple: get consistently graded, safely processed agricultural products to international buyers who can't afford supply-chain surprises. Leadership bios and compliance details live on our Company & Compliance page.",
+      ),
+      // (2) Group & facility — CONTENT_PLAYBOOK §4's exact honesty framing.
+      richText(
+        "VNP Global is a new export company. Our products are manufactured at the Kavita Facility Management (Agro Division) plant in Tasawade MIDC, Karad — an operating processor also behind the Piyush Farms brand.",
+      ),
+      // (4) What we promise buyers — the same de-risk tiles as the homepage
+      // (T-104), reused verbatim rather than invented a second time.
+      featureGrid(
+        "icon",
+        [
+          {
+            icon: "fileCheck",
+            title: "Open Specifications",
+            body: "Full product specifications shared on request, before you place an order — no surprises after the container ships.",
+          },
+          {
+            icon: "refreshCw",
+            title: "Sample Program",
+            body: "Pre-shipment samples available so you can verify quality before committing to a full order.",
+          },
+          {
+            icon: "shieldCheck",
+            title: "Inspection Welcome",
+            body: "Third-party inspection welcome at your nomination (SGS, Bureau Veritas, Intertek) — we have nothing to hide.",
+          },
+          {
+            icon: "clock",
+            title: "24-Hour Response",
+            body: "Every inquiry gets a reply within one business day, from a real person on our export team.",
+          },
+        ],
+        "What We Promise Buyers",
       ),
       ctaBand("Want to Know More About Our Story?"),
     ],

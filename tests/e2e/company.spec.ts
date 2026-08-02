@@ -17,9 +17,16 @@ for (const path of PATHS) {
     await expect(page.getByText("Export Operations Manager")).toBeVisible();
   });
 
-  test(`${path}: renders the compliance RichText narrative`, async ({ page }) => {
+  // D-37: production briefly had a false "operates under a valid
+  // Importer-Exporter Code (IEC) registration" claim (pre-rebrand copy,
+  // fixed via fix-company-page-false-claims.ts) — this assertion checks for
+  // the CORRECT honest "in progress" framing, not the spelled-out phrase
+  // that only ever existed in the buggy text.
+  test(`${path}: renders the compliance RichText narrative (honest "in progress" framing)`, async ({
+    page,
+  }) => {
     await page.goto(path);
-    await expect(page.getByText(/Importer-Exporter Code/i)).toBeVisible();
+    await expect(page.getByText(/IEC and APEDA registrations are in progress/i)).toBeVisible();
   });
 
   test(`${path}: Company Profile document card shows "available on request", no download link`, async ({
