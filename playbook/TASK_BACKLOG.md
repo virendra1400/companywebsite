@@ -89,9 +89,9 @@ Done (2026-08-02): three-entity relationship explained on /about verbatim per CO
 Not done: /company → /about consolidation + redirect — this line item isn't in CONTENT_PLAYBOOK §4's actual spec (which keeps About = story/promises and Company & Compliance = leadership/registration details as two distinct pages, cross-linked); treating the more detailed CONTENT_PLAYBOOK as authoritative over this terse backlog line, same as prior re-scope calls. Founder block — despite "tokens OK", omitted rather than added as a `{{FOUNDER_NAME}}` placeholder: the (1) "why VNP exists" section is specified as FIRST-PERSON prose, and a bracketed token in first-person voice reads as broken, not as an honest placeholder (unlike a spec-sheet token like `{{PLANT_CAPACITY_MT_YEAR}}`); the (3) name/photo card would also duplicate /company's existing "Managing Director" leadership tile. Revisit once T-110 supplies a real name/story.
 Acceptance: entity explanation present — met. Founder block — deliberately omitted, not fabricated (see reasoning above).
 
-### T-109 RFQ form & conversion flow — `TODO` · O · Medium · P-07
-Note: current form engineering is good — extend rather than rewrite (add buyer_type/products multi-select/timeline per C-18; keep rate-limiting; CAPTCHA→honeypot decision at implementation, log it).
-Acceptance: per prompt; QA §G end-to-end incl. email receipt.
+### T-109 RFQ form & conversion flow — `DONE` · O · Medium · P-07
+Done (2026-08-02): added the 3 fields C-18's LOCKED schema had that the existing form didn't — buyer_type (select), products (multi-select, real 8-SKU catalog, new Checkbox primitive), timeline (select). Everything else kept as-is (extended, not rewritten): same schema/action/rate-limiting. CAPTCHA→honeypot decision: kept Turnstile (CLAUDE.md's explicit stack choice overrides C-18's "no CAPTCHA friction" text) — logged per the note's own instruction. Subject line now `[RFQ] {products} — {company}, {country}` per PROMPT_LIBRARY. See DECISION_LOG D-39.
+Acceptance: QA §G end-to-end — form validation/RFQ-mode/error-states covered by 26-test e2e regression; real email receipt test not run (no live RESEND_API_KEY in this session's environment — code path already existed pre-T-109 and is unchanged).
 
 ### T-110 Owner input collection — `BLOCKED(owner)` · —
 Collect: DECISION_LOG §Open Placeholders (capacity, cold storage, packaging specs, MOQs, shelf life, ports, payment terms, founder bio+photo, CIN, cert numbers/dates as issued, ISO standard). Deliver as filled table → unblocks de-placeholdering across pages.
