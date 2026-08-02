@@ -79,8 +79,10 @@ Acceptance: old URLs redirect (not literally 301 — Next's `permanentRedirect()
 Done (2026-08-02): status board populated with the 7 real in-progress certs from PROJECT_MEMORY §3 (APEDA/FSSAI/IEC/GST/ISO 22000/HALAL/KOSHER), all "In Certification", no numbers. `Certifications.logo` made optional (was blocking — no rights to display cert-body logos pre-certification); CertCard shows a text-only status pill instead. Page also gained audit-openness statement, per-shipment documentation list, and a sample-COA document card (honest "available on request" state, no file yet). See DECISION_LOG D-35.
 Acceptance: met — structurally guarded, not just editorially: a cert can only ever show "Registered" when status="registered" AND a real number exists.
 
-### T-107 Facility & Quality page — `TODO` · S · Medium · P-06
-Acceptance: per prompt; D-14 IQF wording verified.
+### T-107 Facility & Quality page — `DONE (re-scoped)` · S · Medium · P-06
+Done (2026-08-02): D-14 exact IQF wording added to /manufacturing (never claims in-house IQF line), plus traceability (lot-code chain) and audit-openness paragraphs. Fixed stale seed-content.ts manufacturing copy ("our own processing floor") that predated D-27's honest-partnership rewrite. See DECISION_LOG D-36.
+Not done: MASTER_PLAN §5.2's `/manufacturing`→`/facility` rename — deliberately deferred (touches nav/sitemap/redirects site-wide, separable from content). Pick up alongside T-108 or as its own IA pass.
+Acceptance: D-14 wording verified (present, "in-house IQF" overclaim absent) — met.
 
 ### T-108 About page — `TODO` · S · Medium · P-08
 Includes /company → /about consolidation + redirect; three-entity relationship explained (VNP = export company; Kavita = manufacturer; Piyush Farms = sister brand).
