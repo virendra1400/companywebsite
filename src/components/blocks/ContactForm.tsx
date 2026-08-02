@@ -28,6 +28,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
 
 // UI-SPEC §9 Form column: form's first real async call. `status` replaces
 // Phase 2's boolean `submitted` flag with the full idle/loading/success/
@@ -49,6 +50,23 @@ const INCOTERMS: ReadonlyArray<readonly [code: string, name: string]> = [
   ["FOB", "Free on Board"],
   ["CFR", "Cost and Freight"],
   ["CIF", "Cost, Insurance and Freight"],
+];
+
+// T-109/COMPONENT_LIBRARY C-18: "products* multi-select (8 SKUs + Other)" —
+// the LOCKED spec names a fixed 8-SKU list, not a CMS-dynamic one, so this
+// is intentionally static rather than fetched (this is a client component;
+// wiring a live catalog query in would be real added complexity for a field
+// whose own spec already assumes a fixed set). Matches the real 8-SKU
+// catalog (D-27).
+const PRODUCT_OPTIONS: ReadonlyArray<readonly [slug: string, name: string]> = [
+  ["frozen-green-peas", "Frozen Green Peas"],
+  ["frozen-sweet-corn", "Frozen Sweet Corn"],
+  ["frozen-mixed-vegetables", "Frozen Mixed Vegetables"],
+  ["mango-pulp", "Mango Pulp"],
+  ["guava-pulp", "Guava Pulp"],
+  ["strawberry-pulp", "Strawberry Pulp"],
+  ["baby-corn", "Baby Corn"],
+  ["ginger-garlic-paste", "Ginger-Garlic Paste"],
 ];
 
 // Visual-only required-field cue. aria-hidden because the legend paragraph
@@ -96,6 +114,11 @@ export function ContactForm() {
       quantity: "",
       destinationCountry: "",
       incoterm: "",
+      buyerType: "",
+      // Pre-check the RFQ-linked product so a buyer who arrived via a
+      // specific product's "Request a Quote" doesn't have to re-select it.
+      productsInterested: product ? [product] : [],
+      timeline: "",
     },
   });
 
@@ -250,6 +273,95 @@ export function ContactForm() {
           />
         </div>
         <p className="text-label text-neutral-600">{t("contactMethodHelper")}</p>
+        {/* T-109/C-18: buyer_type, products, timeline — visible in both
+            plain-inquiry and RFQ mode (a buyer arriving via one product's
+            "Request a Quote" can still flag interest in others). */}
+        <div className="grid grid-cols-1 gap-md sm:grid-cols-2">
+          <FormField
+            control={form.control}
+            name="buyerType"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t("buyerTypeLabel")}</FormLabel>
+                <Select onValueChange={field.onChange} value={field.value} disabled={isLoading}>
+                  <FormControl>
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder={t("buyerTypeNotSure")} />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="importer-distributor">{t("buyerTypeImporterDistributor")}</SelectItem>
+                    <SelectItem value="food-processor">{t("buyerTypeFoodProcessor")}</SelectItem>
+                    <SelectItem value="retail">{t("buyerTypeRetail")}</SelectItem>
+                    <SelectItem value="other">{t("buyerTypeOther")}</SelectItem>
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="timeline"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t("timelineLabel")}</FormLabel>
+                <Select onValueChange={field.onChange} value={field.value} disabled={isLoading}>
+                  <FormControl>
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder={t("timelineNotSure")} />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="immediate">{t("timelineImmediate")}</SelectItem>
+                    <SelectItem value="1-3-months">{t("timeline1to3Months")}</SelectItem>
+                    <SelectItem value="exploring">{t("timelineExploring")}</SelectItem>
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+        <FormField
+          control={form.control}
+          name="productsInterested"
+          render={() => (
+            <FormItem>
+              <FormLabel>{t("productsInterestedLabel")}</FormLabel>
+              <div className="grid grid-cols-1 gap-sm sm:grid-cols-2">
+                {PRODUCT_OPTIONS.map(([slug, name]) => (
+                  <FormField
+                    key={slug}
+                    control={form.control}
+                    name="productsInterested"
+                    render={({ field }) => {
+                      const current = field.value ?? [];
+                      const checked = current.includes(slug);
+                      return (
+                        <FormItem className="flex flex-row items-center gap-xs">
+                          <FormControl>
+                            <Checkbox
+                              checked={checked}
+                              disabled={isLoading}
+                              onCheckedChange={(value) => {
+                                field.onChange(
+                                  value ? [...current, slug] : current.filter((s) => s !== slug),
+                                );
+                              }}
+                            />
+                          </FormControl>
+                          <FormLabel className="font-normal">{name}</FormLabel>
+                        </FormItem>
+                      );
+                    }}
+                  />
+                ))}
+              </div>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         {isRfqMode && (
           <>
             <p className="mt-sm text-label font-semibold">{t("quoteDetails")}</p>

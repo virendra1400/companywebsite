@@ -17,6 +17,10 @@ export type LeadNotificationData = {
   quantity?: string;
   destinationCountry?: string;
   incoterm?: string;
+  // T-109/C-18
+  buyerType?: string;
+  productsInterested?: string[];
+  timeline?: string;
 };
 
 export function LeadNotification(data: LeadNotificationData) {
@@ -24,6 +28,9 @@ export function LeadNotification(data: LeadNotificationData) {
   // slug in the heading when the display name wasn't supplied.
   const productLabel = data.productName ?? data.product;
   const contactLine = [data.email, data.phone].filter(Boolean).join(" · ");
+  const hasRfqDetails = Boolean(
+    data.product || data.quantity || data.destinationCountry || data.incoterm,
+  );
 
   return (
     <Html>
@@ -35,7 +42,12 @@ export function LeadNotification(data: LeadNotificationData) {
             From: {data.name} ({data.company}, {data.country})
           </Text>
           {contactLine && <Text>Contact: {contactLine}</Text>}
-          {data.product && (
+          {data.buyerType && <Text>Buyer type: {data.buyerType}</Text>}
+          {data.productsInterested && data.productsInterested.length > 0 && (
+            <Text>Products of interest: {data.productsInterested.join(", ")}</Text>
+          )}
+          {data.timeline && <Text>Timeline: {data.timeline}</Text>}
+          {hasRfqDetails && (
             <Text>
               Quantity: {data.quantity ?? "—"} · Destination: {data.destinationCountry ?? "—"} ·
               Incoterm: {data.incoterm ?? "—"}

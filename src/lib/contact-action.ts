@@ -32,6 +32,24 @@ function readHoneypot(raw: unknown): string {
   return "";
 }
 
+// T-109/PROMPT_LIBRARY P-07: `[RFQ] {products} — {company}, {country}` when
+// there's real product context (either the multi-select or a single
+// query-param-prefilled product), plain "New inquiry" otherwise.
+function buildSubject(data: {
+  product?: string;
+  productName?: string;
+  productsInterested?: string[];
+  company: string;
+  country: string;
+}): string {
+  const products =
+    data.productsInterested && data.productsInterested.length > 0
+      ? data.productsInterested.join(", ")
+      : (data.productName ?? data.product);
+  if (!products) return "New inquiry";
+  return `[RFQ] ${products} — ${data.company}, ${data.country}`;
+}
+
 // Composes the spam-defense + delivery pipeline in cheapest-reject-first
 // order: honeypot (free, synchronous) -> rate-limit (in-memory lookup) ->
 // Turnstile siteverify (external API round-trip) -> resend.emails.send ->
@@ -81,7 +99,7 @@ export async function submitContactForm(raw: unknown): Promise<SubmitResult> {
       // subject line includes user data.
       from: process.env.RESEND_FROM_ADDRESS!,
       to: process.env.SALES_INBOX_ADDRESS!,
-      subject: data.product ? `New RFQ: ${data.productName ?? data.product}` : "New inquiry",
+      subject: buildSubject(data),
       react: LeadNotification(data),
     });
   } catch {

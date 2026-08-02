@@ -33,6 +33,15 @@ export const contactSchema = z
     quantity: z.string().trim().max(200).optional(),
     destinationCountry: z.string().trim().optional(),
     incoterm: z.string().trim().optional(),
+    // T-109/COMPONENT_LIBRARY C-18 (LOCKED field schema) — buyer_type,
+    // products (multi-select), timeline. Optional at the schema level, same
+    // convention as the RFQ fields above: the UI can make `products`
+    // effectively required in practice (defaults to the prefilled product
+    // when one exists) without a hard schema constraint that would break a
+    // plain general inquiry with no product context at all.
+    buyerType: z.string().trim().optional(),
+    productsInterested: z.array(z.string()).optional(),
+    timeline: z.string().trim().optional(),
     // Honeypot decoy (LEAD-03) — real users never see or fill this field;
     // any non-empty value short-circuits the server action to a silent
     // fake-success without sending an email.
