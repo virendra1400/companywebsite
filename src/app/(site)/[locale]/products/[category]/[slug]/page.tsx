@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound, permanentRedirect } from "next/navigation";
 import { getPayload } from "payload";
 import config from "@payload-config";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { getTranslations, getFormatter, setRequestLocale } from "next-intl/server";
 import { RichText } from "@payloadcms/richtext-lexical/react";
 import { ChevronRight, ImageOff } from "lucide-react";
 import { Link } from "@/i18n/navigation";
@@ -93,6 +93,10 @@ export default async function ProductDetailPage({
 
   const t = await getTranslations("products");
   const tCerts = await getTranslations("certs");
+  const format = await getFormatter();
+  // FOUND-03: force Western (latn) digits — Intl defaults `ar` to Arabic-Indic.
+  const formatTargetDate = (value?: string | null) =>
+    value ? format.dateTime(new Date(value), "latn") : null;
 
   const { product, isTranslated } = await getProduct(slug, locale as Locale);
   const { waHref } = await getSiteBrand();
@@ -288,6 +292,10 @@ export default async function ProductDetailPage({
                     logo={logo}
                     pdf={pdf}
                     halal={Boolean(cert.halal)}
+                    status={cert.status}
+                    number={cert.number}
+                    scope={cert.scope}
+                    targetDate={formatTargetDate(cert.targetDate)}
                     t={(key) => tCerts(key)}
                   />
                 );

@@ -32,10 +32,10 @@ for (const path of PATHS) {
     const mediaGallery = page.getByRole("heading", { name: "Manufacturing Excellence" });
     await expect(mediaGallery).toBeVisible();
 
-    // CertStrip renders the honest "coming soon" empty state — the
-    // Certifications collection is intentionally empty (no fabricated cert
-    // data, see certifications.spec.ts) until real certs exist.
-    const certStrip = page.getByText("Certifications coming soon.", { exact: true });
+    // T-106: CertStrip now shows real in-progress certs (see
+    // certifications.spec.ts) — the section heading is the stable anchor
+    // regardless of how many certs are seeded.
+    const certStrip = page.getByRole("heading", { name: "Product Accreditation & Certification" });
     await expect(certStrip).toBeVisible();
 
     const exportProcess = page.getByRole("heading", {

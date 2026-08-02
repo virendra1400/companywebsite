@@ -17,7 +17,12 @@ export const Certifications: CollectionConfig = {
   fields: [
     { name: "name", type: "text", required: true, localized: true },
     { name: "issuingBody", type: "text", required: true, localized: true },
-    { name: "logo", type: "upload", relationTo: "media", required: true },
+    // T-106: optional, not required — an in-certification entry legitimately
+    // has no logo yet, and displaying a certification body's official logo
+    // before the certification is actually granted overclaims regardless of
+    // any status text next to it (D-01). CertCard renders a text-only status
+    // pill when this is empty.
+    { name: "logo", type: "upload", relationTo: "media" },
     // Optional — drives the PDF-present/PDF-absent CertCard states.
     { name: "certificatePdf", type: "upload", relationTo: "media" },
     { name: "validityNotes", type: "text", localized: true },

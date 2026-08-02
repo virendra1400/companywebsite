@@ -337,12 +337,26 @@ export const PAGES_EN_SEED = [
   {
     slug: "certifications",
     title: "Certifications",
+    // T-106/PROMPT_LIBRARY P-05: status board (certStrip grid) + per-shipment
+    // documentation list (what buyers actually receive, not a claim about
+    // certs held) + audit-openness statement + a sample-COA download slot
+    // (documentCard — no file uploaded yet, renders its existing honest
+    // "available on request" state, same pattern as the Company Profile
+    // card).
     layout: [
       compactHero(
         "Committed to Certified Quality Standards",
         "We're working toward the certifications international buyers expect. Check back as they're confirmed, or ask us directly.",
       ),
       certStrip("grid", "Our Certifications"),
+      richText(
+        "We welcome third-party inspection and documentation review at any stage, before or after certification is complete — including buyer-nominated inspectors (SGS, Bureau Veritas, Intertek) and unannounced facility visits.",
+        "Every shipment travels with a Certificate of Analysis (COA), health certificate, phytosanitary certificate, and certificate of origin (COO). A Halal certificate is included where applicable to the product.",
+      ),
+      documentCard(
+        "Sample Certificate of Analysis (COA)",
+        "A redacted example COA showing the format and parameters we report on, available on request.",
+      ),
       ctaBand("Have a Compliance Question?"),
     ],
   },

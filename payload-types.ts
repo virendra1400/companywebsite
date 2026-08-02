@@ -396,7 +396,7 @@ export interface Certification {
   id: number;
   name: string;
   issuingBody: string;
-  logo: number | Media;
+  logo?: (number | null) | Media;
   certificatePdf?: (number | null) | Media;
   validityNotes?: string | null;
   halal?: boolean | null;

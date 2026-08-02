@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { getTranslations, getLocale } from "next-intl/server";
+import { getTranslations, getLocale, getFormatter } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { getCertifications } from "@/lib/payload-fetch";
 import { isSvgUrl } from "@/lib/is-svg-url";
@@ -21,7 +21,11 @@ type CertStripData = Extract<NonNullable<Page["layout"]>[number], { blockType: "
 export async function CertStripBlock({ block, index }: { block: CertStripData; index: number }) {
   const locale = (await getLocale()) as Locale;
   const t = await getTranslations("certs");
+  const format = await getFormatter();
   const certs = await getCertifications(locale);
+  // FOUND-03: force Western (latn) digits — Intl defaults `ar` to Arabic-Indic.
+  const formatTargetDate = (value?: string | null) =>
+    value ? format.dateTime(new Date(value), "latn") : null;
 
   return (
     <section className={`${sectionBg(index)} px-md py-2xl md:px-lg md:py-3xl xl:px-xl xl:py-4xl`}>
@@ -49,7 +53,7 @@ export async function CertStripBlock({ block, index }: { block: CertStripData; i
                   key={cert.id}
                   href="/certifications"
                   aria-label={cert.name}
-                  className={`relative block h-16 w-24 shrink-0 bg-white ${
+                  className={`relative flex h-16 w-24 shrink-0 items-center justify-center bg-white ${
                     cert.halal ? "border-2 border-accent-600" : ""
                   }`}
                 >
@@ -61,7 +65,9 @@ export async function CertStripBlock({ block, index }: { block: CertStripData; i
                       unoptimized={isSvgUrl(logo.url)}
                       className="object-contain"
                     />
-                  ) : null}
+                  ) : (
+                    <span className="px-xs text-center text-label text-neutral-600">{cert.name}</span>
+                  )}
                 </Link>
               );
             })}
@@ -83,6 +89,10 @@ export async function CertStripBlock({ block, index }: { block: CertStripData; i
                   logo={logo}
                   pdf={pdf}
                   halal={Boolean(cert.halal)}
+                  status={cert.status}
+                  number={cert.number}
+                  scope={cert.scope}
+                  targetDate={formatTargetDate(cert.targetDate)}
                   t={(key) => t(key)}
                 />
               );

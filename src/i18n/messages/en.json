@@ -39,7 +39,14 @@
     "downloadPdf": "Download PDF",
     "pdfUnavailable": "Certificate available on request",
     "comingSoonHeading": "Certifications coming soon.",
-    "comingSoonBody": "We're finalizing documentation for our quality certifications. Contact us directly for current compliance status."
+    "comingSoonBody": "We're finalizing documentation for our quality certifications. Contact us directly for current compliance status.",
+    "registeredBadge": "Registered",
+    "inCertificationBadge": "In Certification",
+    "numberLabel": "No.",
+    "scopeLabel": "Scope",
+    "targetDateLabel": "Target",
+    "auditOpennessHeading": "Open to Audit",
+    "auditOpennessBody": "We welcome third-party inspection and documentation review at any stage, before or after certification is complete."
   },
   "blocks": {
     "emptyState": "This section is being updated. Check back shortly.",
