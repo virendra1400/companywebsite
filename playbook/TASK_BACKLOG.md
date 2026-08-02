@@ -75,8 +75,9 @@ Done (2026-08-02): all 8 real products now live at `/products/{category}/{produc
 Not done (deliberately re-scoped, not silently dropped): §5.2's other renames (`/manufacturing`→`/facility`, `/company`→`/about`, `/export`→`/markets/gulf-middle-east`) belong to T-107/T-108/a not-yet-built Markets page — moving the URL before the destination content exists is premature, picked up when those tasks build the real pages. §5.2's `/ar /fr /ru`→redirect-to-`/` line NOT implemented — stale instruction from the playbook's superseded English-only assumption (D-08/D-18), already overridden by D-22; the real 4-locale site is a CLAUDE.md hard requirement.
 Acceptance: old URLs redirect (not literally 301 — Next's `permanentRedirect()` emits 308, same semantic, search engines treat identically) — met. QA §A–§G — content/structure verified (populated + empty-fallback states, RTL, full e2e regression zero-regression); full formal QA checklist pass not separately run.
 
-### T-106 Certifications page — `TODO` · S · Medium · P-05
-Acceptance: per prompt; no cert rendered as held without number.
+### T-106 Certifications page — `DONE` · S · Medium · P-05
+Done (2026-08-02): status board populated with the 7 real in-progress certs from PROJECT_MEMORY §3 (APEDA/FSSAI/IEC/GST/ISO 22000/HALAL/KOSHER), all "In Certification", no numbers. `Certifications.logo` made optional (was blocking — no rights to display cert-body logos pre-certification); CertCard shows a text-only status pill instead. Page also gained audit-openness statement, per-shipment documentation list, and a sample-COA document card (honest "available on request" state, no file yet). See DECISION_LOG D-35.
+Acceptance: met — structurally guarded, not just editorially: a cert can only ever show "Registered" when status="registered" AND a real number exists.
 
 ### T-107 Facility & Quality page — `TODO` · S · Medium · P-06
 Acceptance: per prompt; D-14 IQF wording verified.
