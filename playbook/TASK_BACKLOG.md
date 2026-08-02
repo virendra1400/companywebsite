@@ -70,9 +70,10 @@ Done (2026-08-01): rebuilt to CONTENT_PLAYBOOK §4's full 9-section order (was 7
 Not done: Lighthouse mobile performance is 51/100 on production, short of the ≥90 gate. Root cause is diffuse (3.8s main-thread JS/hydration work + a first-visit-only locale-cookie redirect), not a single fixable bug — flagged as a dedicated follow-up (bundle-size/hydration audit), not silently treated as passing. Accessibility 96/best-practices 100/SEO 100.
 Acceptance: QA §A–§F content/structure — met. Lighthouse ≥90 — NOT met (51/100), open follow-up.
 
-### T-105 Product template + 8 pages + URL migration — `TODO` · O · Large · P-04
-Includes 301 map from MASTER_PLAN §5.2.
-Acceptance: per prompt; old URLs 301; QA §A–§G on 2 sample pages.
+### T-105 Product template + 8 pages + URL migration — `DONE (re-scoped)` · O · Large · P-04
+Done (2026-08-02): all 8 real products now live at `/products/{category}/{product}` (nested, matches §5.2); old flat URLs 308-redirect via live category lookup, including correct locale-prefixing under /ar. Product detail template now consumes T-103's structured schema (specs by category, packaging options, container loading, shelf life/storage/MOQ, applications, downloads, FAQ+FAQPage JSON-LD), with graceful fallback to the old flat specifications/packaging fields — every real product's spec data still lives there until T-110 migrates it, so nothing regressed. See DECISION_LOG D-34.
+Not done (deliberately re-scoped, not silently dropped): §5.2's other renames (`/manufacturing`→`/facility`, `/company`→`/about`, `/export`→`/markets/gulf-middle-east`) belong to T-107/T-108/a not-yet-built Markets page — moving the URL before the destination content exists is premature, picked up when those tasks build the real pages. §5.2's `/ar /fr /ru`→redirect-to-`/` line NOT implemented — stale instruction from the playbook's superseded English-only assumption (D-08/D-18), already overridden by D-22; the real 4-locale site is a CLAUDE.md hard requirement.
+Acceptance: old URLs redirect (not literally 301 — Next's `permanentRedirect()` emits 308, same semantic, search engines treat identically) — met. QA §A–§G — content/structure verified (populated + empty-fallback states, RTL, full e2e regression zero-regression); full formal QA checklist pass not separately run.
 
 ### T-106 Certifications page — `TODO` · S · Medium · P-05
 Acceptance: per prompt; no cert rendered as held without number.
