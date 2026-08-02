@@ -111,7 +111,8 @@ Done (2026-08-02): real automated audit (@axe-core/playwright, WCAG 2.0/2.1 A+AA
 Started (2026-08-02): found + fixed the react-hook-form-on-every-page bug (dynamic-import in RenderBlocks.tsx), but it didn't move the needle — root cause is Next 16 + Turbopack shipping one unified shared script bundle to every route (confirmed empirically), not app-level code-splitting. See DECISION_LOG D-40. Open: decide whether forcing webpack as the production bundler is worth the trade-off, or wait for Turbopack to mature. Lighthouse still ~51/100 production.
 ### T-207 Animation & polish — `DONE` · S · Small · P-13
 Done (2026-08-02): entry-animation duration was 2x the DESIGN_SYSTEM §6 ceiling (600ms/500ms vs 200-300ms spec) — fixed to 300ms on both Reveal.tsx and RevealItem.tsx. Hover micro-transitions, no-carousel rule, and reduced-motion fallbacks all already spec-compliant, checked not just assumed. See DECISION_LOG D-44.
-### T-208 Copy editorial pass — `TODO` · O · Medium · P-14
+### T-208 Copy editorial pass — `DONE` · O · Medium · P-14
+Done (2026-08-02): grep-verify pass against CONTENT_PLAYBOOK §1's banned-word/pattern list. Found and fixed 2 systemic issues: hero headline used banned "Premium" bare adjective; every CTA band heading site-wide (10 instances) used the banned rhetorical-question pattern. Banned words + exclamation marks: already clean, verified not assumed. See DECISION_LOG D-45.
 
 ## Phase 3 — Evidence Upgrade
 
