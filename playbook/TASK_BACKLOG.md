@@ -105,7 +105,8 @@ Not done: MASTER_PLAN §5.2's `/export` → dedicated `/markets/gulf` + `/market
 ### T-203 Product FAQs + FAQPage schema — `TODO` · S · Medium — 5–8 Qs/product per CONTENT_PLAYBOOK §4; answers from verified facts/tokens only; Rich Results valid
 ### T-204 Technical SEO pass — `DONE` · S · Medium · P-10 — incl. robots `/api/media` unblock (allow media path while keeping API disallowed), image filename/alt audit
 Done (2026-08-02): robots.txt fix shipped — real bug, `Disallow: /api` was blocking Google Image Search from every site image (product photos, hero, logos). New regression test. Alt text audited: zero missing site-wide, no action needed. JSON-LD audited: valid on home/product/certifications/about. Filenames messy but not fixed (would need re-upload, alt text already covers the stronger signal). See DECISION_LOG D-42.
-### T-205 Accessibility audit — `TODO` · S · Medium · P-11
+### T-205 Accessibility audit — `DONE` · S · Medium · P-11
+Done (2026-08-02): real automated audit (@axe-core/playwright, WCAG 2.0/2.1 A+AA) across all page types + both locales. Zero violations — nothing to fix, reflects a11y discipline already built in all session. Locked in as a permanent regression test (a11y-audit.spec.ts). See DECISION_LOG D-43.
 ### T-206 Performance pass — `IN PROGRESS` · S · Medium · P-12
 Started (2026-08-02): found + fixed the react-hook-form-on-every-page bug (dynamic-import in RenderBlocks.tsx), but it didn't move the needle — root cause is Next 16 + Turbopack shipping one unified shared script bundle to every route (confirmed empirically), not app-level code-splitting. See DECISION_LOG D-40. Open: decide whether forcing webpack as the production bundler is worth the trade-off, or wait for Turbopack to mature. Lighthouse still ~51/100 production.
 ### T-207 Animation & polish — `TODO` · S · Small · P-13
