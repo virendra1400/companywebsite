@@ -18,6 +18,11 @@ for (const { name, home, prefix } of CASES) {
     test(`${name}: all ${region} nav links resolve to a real 200 route (no # / no 404)`, async ({
       page,
     }) => {
+      // Footer nav has 9 unique hrefs, each navigated in full sequentially —
+      // legitimately more work than the default 30s single-navigation budget
+      // covers, not a hung test. 90s matches the observed worst case with
+      // margin.
+      test.setTimeout(90000);
       await page.goto(home);
 
       const nav = page.locator(`nav[aria-label="${region}"]`);

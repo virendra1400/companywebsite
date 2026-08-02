@@ -101,6 +101,12 @@ test("Turnstile script failing to load keeps submit disabled and explains the fa
   await fillValidForm(page);
 
   const submitButton = page.getByRole("button", { name: /send inquiry/i });
-  await expect(page.getByText(/something went wrong sending your message/i)).toBeVisible();
+  // Distinct from the server-failure banner above (line 58) — this is the
+  // captcha-couldn't-load case, ContactForm.tsx's `captchaErrorBanner` copy,
+  // not a submission failure (the form was never submitted; captcha never
+  // loaded).
+  await expect(
+    page.getByText(/couldn't load the security check.*whatsapp or by email/i),
+  ).toBeVisible();
   await expect(submitButton).toBeDisabled();
 });

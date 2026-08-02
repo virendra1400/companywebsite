@@ -163,12 +163,23 @@ export function ContactForm() {
           name="name"
           render={({ field }) => (
             <FormItem>
+              {/* aria-label on the INPUT (not the <label>): some browsers
+                  include aria-hidden descendant text (the "*") in the
+                  content-derived accessible name for a label-associated
+                  control despite aria-hidden, which would announce "Name
+                  star" to screen readers and break exact-match `getByLabel`
+                  queries. aria-label takes precedence over label-association
+                  in accessible-name computation, so this cleanly overrides
+                  without touching the <label> element itself — putting it on
+                  the label instead makes the label its own separately-
+                  matchable accessible-name target, colliding with the
+                  input's computed name. */}
               <FormLabel>
                 {t("nameLabel")}
                 <RequiredMark />
               </FormLabel>
               <FormControl>
-                <Input {...field} readOnly={isLoading} />
+                <Input {...field} aria-label={t("nameLabel")} readOnly={isLoading} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -184,7 +195,7 @@ export function ContactForm() {
                 <RequiredMark />
               </FormLabel>
               <FormControl>
-                <Input {...field} readOnly={isLoading} />
+                <Input {...field} aria-label={t("companyLabel")} readOnly={isLoading} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -200,7 +211,7 @@ export function ContactForm() {
                 <RequiredMark />
               </FormLabel>
               <FormControl>
-                <Input {...field} readOnly={isLoading} />
+                <Input {...field} aria-label={t("countryLabel")} readOnly={isLoading} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -325,7 +336,7 @@ export function ContactForm() {
                 <RequiredMark />
               </FormLabel>
               <FormControl>
-                <Textarea rows={5} {...field} readOnly={isLoading} />
+                <Textarea rows={5} {...field} aria-label={t("messageLabel")} readOnly={isLoading} />
               </FormControl>
               <FormMessage />
             </FormItem>
