@@ -98,7 +98,9 @@ Collect: DECISION_LOG §Open Placeholders (capacity, cold storage, packaging spe
 
 ## Phase 2 — Depth & Polish
 
-### T-201 Markets pages — `TODO` · S · Medium · P-08 (markets scope) — acceptance per prompt
+### T-201 Markets pages — `DONE (export only)` · S · Medium · P-08 (markets scope) — acceptance per prompt
+Done (2026-08-02): /export rebuilt to CONTENT_PLAYBOOK §4's Gulf-first structure (was a broad 16-country map + fabricated-feeling stat tile — same over-claiming pattern D-31 already fixed on the homepage). See DECISION_LOG D-41.
+Not done: MASTER_PLAN §5.2's `/export` → dedicated `/markets/gulf` + `/markets/sea` page split + redirect — this pass fixed the honesty issue on the EXISTING single page rather than also doing the URL restructure, same "content now, URL rename separately" split used for T-107/T-108. SEA section is thin (Singapore-only highlight, no dedicated deep content) pending real SEA business specifics.
 ### T-202 Resources hub + PDF pipeline — `TODO` · S · Medium · P-09 — acceptance per prompt
 ### T-203 Product FAQs + FAQPage schema — `TODO` · S · Medium — 5–8 Qs/product per CONTENT_PLAYBOOK §4; answers from verified facts/tokens only; Rich Results valid
 ### T-204 Technical SEO pass — `TODO` · S · Medium · P-10 — incl. robots `/api/media` unblock (allow media path while keeping API disallowed), image filename/alt audit
