@@ -20,12 +20,15 @@ for (const path of EXPORT_PATHS) {
     expect(label).toMatch(/\d+/); // summarizes a country count
   });
 
+  // T-201: /export now has two ExportMap instances (Gulf + Southeast Asia,
+  // CONTENT_PLAYBOOK §4's Gulf-first structure) instead of one broad
+  // 16-country map — assert one chip from each.
   test(`${path}: visible country-name chip list renders served countries (not just the SVG)`, async ({
     page,
   }) => {
     await page.goto(path);
     await expect(page.getByText("United Arab Emirates", { exact: true })).toBeVisible();
-    await expect(page.getByText("Germany", { exact: true })).toBeVisible();
+    await expect(page.getByText("Singapore", { exact: true })).toBeVisible();
   });
 
   test(`${path}: StatsBand (incoterms) renders`, async ({ page }) => {

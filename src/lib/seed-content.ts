@@ -447,20 +447,36 @@ export const PAGES_EN_SEED = [
   {
     slug: "export",
     title: "Global Markets",
-    // Reframed from a claimed track record (years/shipments/countries
-    // "served") to honest forward-looking positioning — this is a new
-    // exporter with no direct shipment history yet. No fabricated
-    // years/volume figures; the map lists target markets, not past activity.
+    // T-201/CONTENT_PLAYBOOK §4 Global Markets: Gulf/Middle East section
+    // FIRST (reefer logistics, Halal, Arabic labeling, GSO awareness), then
+    // Southeast Asia, then "other markets on request" — explicitly NOT a
+    // broad highlighted-country map with a market-count stat tile (that was
+    // this page's previous shape: 16 countries + "16+ Target Export
+    // Markets", the exact over-claiming pattern D-31 already fixed on the
+    // homepage — a new exporter with zero shipment history showing a wide
+    // "countries we're in" map reads as a track-record claim it doesn't
+    // have). Two narrow, honestly-scoped ExportMap instances instead of one
+    // broad one, zero stat tiles.
     layout: [
       compactHero(
         "Markets We're Built to Serve",
-        "We're positioned to export to the Gulf, Europe, and other international markets. Reach out to discuss your destination and requirements.",
+        "We're positioned to export to the Gulf, Southeast Asia, and other international markets. Reach out to discuss your destination and requirements.",
       ),
       statsBand([{ value: "FOB / CIF / CFR", label: "Incoterms We Work With" }]),
-      exportMap(
-        "full",
-        [{ value: `${SERVED_COUNTRY_CODES.length}+`, label: "Target Export Markets" }],
-        "Where We're Ready to Export",
+      {
+        ...exportMap("full", [], "Gulf & Middle East — Our Primary Focus"),
+        highlightedCountryCodes: ["AE", "SA", "QA", "KW", "BH", "OM"],
+        intro:
+          "Reefer-ready logistics to ports including Jebel Ali and Dammam, Halal-compliant processing, Arabic labeling capability, and GSO-standard awareness — built for Gulf buyers from day one.",
+      },
+      {
+        ...exportMap("compact", [], "Southeast Asia"),
+        highlightedCountryCodes: ["SG"],
+        intro:
+          "Singapore-anchored logistics as our entry point into Southeast Asia, with capacity to extend into Malaysia, Indonesia, and Vietnam as demand grows.",
+      },
+      richText(
+        "Interested in a market outside the Gulf or Southeast Asia? We take on new destinations on request — reach out to discuss logistics, documentation, and lead time for your specific country.",
       ),
       ctaBand("Ready to Discuss Your Order Volume?"),
     ],
