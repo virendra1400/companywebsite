@@ -128,7 +128,8 @@ export default async function ProductsPage({
         <CTABandBlock
           block={{
             blockType: "ctaBand",
-            heading: "Ready to Source These Products?",
+            // T-208/CONTENT_PLAYBOOK §1: banned rhetorical-question heading pattern.
+            heading: "Source These Products",
             primaryCta: REQUEST_QUOTE_CTA,
             secondaryCta: { label: "Chat on WhatsApp", href: waHref },
           }}

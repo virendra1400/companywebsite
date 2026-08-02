@@ -11,7 +11,10 @@ const WHATSAPP_CTA = { label: "Chat on WhatsApp", href: WHATSAPP_PLACEHOLDER_LIN
 const homeHero = {
   blockType: "hero" as const,
   variant: "full" as const,
-  headline: "Premium Agricultural Exports, Direct From India",
+  // T-208/CONTENT_PLAYBOOK §1: "premium" is a banned bare adjective — was
+  // "Premium Agricultural Exports...". Pulls the honest quality-positioning
+  // language already in the subhead ("export-ready processing") instead.
+  headline: "Export-Ready Agricultural Products, Direct From India",
   subhead:
     "Direct sourcing from Indian growers, careful quality control, and export-ready processing, built to serve importers across the Gulf, Europe, and beyond.",
   primaryCta: REQUEST_QUOTE_CTA,
@@ -316,7 +319,7 @@ export const PAGES_EN_SEED = [
         intro:
           "Gulf and Middle East buyers first: reefer-ready logistics to ports including Jebel Ali and Dammam, Halal-compliant processing, and Arabic labeling capability. Southeast Asia and other markets available on request.",
       },
-      ctaBand("Ready to Source With Confidence?"),
+      ctaBand("Source With Confidence"),
     ],
   },
   {
@@ -371,7 +374,7 @@ export const PAGES_EN_SEED = [
         ],
         "What We Promise Buyers",
       ),
-      ctaBand("Want to Know More About Our Story?"),
+      ctaBand("Learn More About Our Story"),
     ],
   },
   {
@@ -397,7 +400,7 @@ export const PAGES_EN_SEED = [
         "Sample Certificate of Analysis (COA)",
         "A redacted example COA showing the format and parameters we report on, available on request.",
       ),
-      ctaBand("Have a Compliance Question?"),
+      ctaBand("Get Your Compliance Questions Answered"),
     ],
   },
   {
@@ -441,7 +444,7 @@ export const PAGES_EN_SEED = [
         ],
         "Inside Our Facilities",
       ),
-      ctaBand("Want a Facility Walkthrough?"),
+      ctaBand("Request a Facility Walkthrough"),
     ],
   },
   {
@@ -478,7 +481,7 @@ export const PAGES_EN_SEED = [
       richText(
         "Interested in a market outside the Gulf or Southeast Asia? We take on new destinations on request — reach out to discuss logistics, documentation, and lead time for your specific country.",
       ),
-      ctaBand("Ready to Discuss Your Order Volume?"),
+      ctaBand("Discuss Your Order Volume"),
     ],
   },
   {
@@ -525,7 +528,7 @@ export const PAGES_EN_SEED = [
         "Company Profile",
         "A concise overview of our facilities, certifications, and export capabilities.",
       ),
-      ctaBand("Need Our Company Profile?"),
+      ctaBand("Request Our Company Profile"),
     ],
   },
   {

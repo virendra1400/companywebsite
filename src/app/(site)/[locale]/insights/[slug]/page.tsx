@@ -187,7 +187,8 @@ export default async function InsightArticlePage({
       <CTABandBlock
         block={{
           blockType: "ctaBand",
-          heading: "Ready to Source With Confidence?",
+          // T-208/CONTENT_PLAYBOOK §1: banned rhetorical-question heading pattern.
+          heading: "Source With Confidence",
           primaryCta: REQUEST_QUOTE_CTA,
           secondaryCta: { label: "Chat on WhatsApp", href: waHref },
         }}

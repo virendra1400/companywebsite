@@ -26,7 +26,7 @@ test("en: /insights/<slug> returns 200, has an h1 with the article title, a brea
   ).toBeVisible();
   await expect(page.getByRole("navigation", { name: /breadcrumb/i })).toBeVisible();
   await expect(
-    page.getByRole("heading", { name: "Ready to Source With Confidence?" }),
+    page.getByRole("heading", { name: "Source With Confidence" }),
   ).toBeVisible();
 });
 

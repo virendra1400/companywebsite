@@ -48,7 +48,7 @@ for (const path of PATHS) {
 
     // CTABand closing action band — seeded homepage heading.
     const ctaBand = page.getByRole("heading", {
-      name: "Ready to Source With Confidence?",
+      name: "Source With Confidence",
     });
     await expect(ctaBand).toBeVisible();
 
