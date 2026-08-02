@@ -103,7 +103,8 @@ Collect: DECISION_LOG §Open Placeholders (capacity, cold storage, packaging spe
 ### T-203 Product FAQs + FAQPage schema — `TODO` · S · Medium — 5–8 Qs/product per CONTENT_PLAYBOOK §4; answers from verified facts/tokens only; Rich Results valid
 ### T-204 Technical SEO pass — `TODO` · S · Medium · P-10 — incl. robots `/api/media` unblock (allow media path while keeping API disallowed), image filename/alt audit
 ### T-205 Accessibility audit — `TODO` · S · Medium · P-11
-### T-206 Performance pass — `TODO` · S · Medium · P-12
+### T-206 Performance pass — `IN PROGRESS` · S · Medium · P-12
+Started (2026-08-02): found + fixed the react-hook-form-on-every-page bug (dynamic-import in RenderBlocks.tsx), but it didn't move the needle — root cause is Next 16 + Turbopack shipping one unified shared script bundle to every route (confirmed empirically), not app-level code-splitting. See DECISION_LOG D-40. Open: decide whether forcing webpack as the production bundler is worth the trade-off, or wait for Turbopack to mature. Lighthouse still ~51/100 production.
 ### T-207 Animation & polish — `TODO` · S · Small · P-13
 ### T-208 Copy editorial pass — `TODO` · O · Medium · P-14
 
