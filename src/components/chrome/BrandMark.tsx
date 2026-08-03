@@ -29,10 +29,12 @@ export function BrandMark({ siteName, logoUrl, logoWidth, logoHeight, variant = 
         width={logoWidth}
         height={logoHeight}
         unoptimized={isSvgUrl(logoUrl)}
+        // T-209/DESIGN_SYSTEM §7: subtle hover micro-transition, same
+        // 150ms timing as every other interactive element site-wide.
         className={
           variant === "dark"
-            ? "h-14 w-auto brightness-0 invert lg:h-16"
-            : "h-14 w-auto lg:h-16"
+            ? "h-14 w-auto brightness-0 invert transition-transform duration-150 hover:scale-105 motion-reduce:hover:scale-100 lg:h-16"
+            : "h-14 w-auto transition-transform duration-150 hover:scale-105 motion-reduce:hover:scale-100 lg:h-16"
         }
       />
     );
@@ -48,8 +50,8 @@ export function BrandMark({ siteName, logoUrl, logoWidth, logoHeight, variant = 
         alt={siteName}
         className={
           variant === "dark"
-            ? "h-14 w-auto brightness-0 invert lg:h-16"
-            : "h-14 w-auto lg:h-16"
+            ? "h-14 w-auto brightness-0 invert transition-transform duration-150 hover:scale-105 motion-reduce:hover:scale-100 lg:h-16"
+            : "h-14 w-auto transition-transform duration-150 hover:scale-105 motion-reduce:hover:scale-100 lg:h-16"
         }
       />
     );

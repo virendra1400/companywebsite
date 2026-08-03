@@ -71,7 +71,21 @@ export function ProductsMegaMenu({
         <div
           role="menu"
           aria-label={label}
-          className="absolute top-full start-0 z-50 mt-sm grid grid-cols-2 gap-lg rounded-md border border-neutral-300 bg-white p-lg shadow-card-hover md:grid-cols-3"
+          // T-209: was `mt-sm` (margin) — that leaves a real, unrendered gap
+          // between the trigger and the panel. Moving the mouse from the
+          // button toward a product link crosses that gap; the cursor is
+          // briefly over the page background (not a rootRef descendant),
+          // firing onMouseLeave and unmounting the panel (`{open ? ... :
+          // null}`) mid-click — the click then lands on whatever's now
+          // behind it instead of the link, so nothing navigates and the
+          // menu just "disappears." Padding-top (32px = the old --spacing-sm
+          // 8px gap + the panel's own --spacing-lg 24px top padding) keeps
+          // the exact same visual distance to the category labels, but the
+          // panel's own hit-box now starts flush against the trigger,
+          // closing the gap entirely. Split into px/pb/pt (no `p-lg`
+          // shorthand) so there's no shorthand-vs-specific-utility cascade
+          // ambiguity over which padding-top wins.
+          className="absolute top-full start-0 z-50 grid grid-cols-2 gap-lg rounded-md border border-neutral-300 bg-white px-lg pb-lg pt-[32px] shadow-card-hover md:grid-cols-3"
           style={{ minWidth: "36rem" }}
         >
           {categories.map((category) => (

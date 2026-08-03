@@ -98,11 +98,16 @@ export async function GlobalHeader({
 
         <div className="flex items-center gap-sm">
           <LanguageSwitcher />
+          {/* T-209: was size-11 (44px), visibly taller than the adjacent
+              size="sm" (32px) "Request a Quote" button — dropped the
+              override so the component's own built-in icon-button size
+              (size-9, the same size Button's "icon" variant uses
+              everywhere else) applies instead. */}
           <WhatsAppCta
             iconOnly
             href={waHref}
             ariaLabel={tContact("whatsappAria")}
-            className="hidden size-11 border-primary-700 text-primary-700 hover:bg-primary-100 sm:inline-flex"
+            className="hidden border-primary-700 text-primary-700 hover:bg-primary-100 sm:inline-flex"
           />
           {/* 08-UI-SPEC Contract §4: brand hover + accent ring now inherited from the Button primitive */}
           <Button asChild size="sm" className="hidden sm:inline-flex">

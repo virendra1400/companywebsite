@@ -10,17 +10,25 @@ type Stat = { value: string; label: string };
 // src/app/globals.css --color-primary-500 — served countries take the
 // primary brand color, NOT gold (UI-SPEC: "a flood-filled map... takes the
 // primary brand color", accent is reserved for trim/badges/dividers only).
-const PRIMARY_500 = "#3D8266";
+// T-209: was #3D8266, drifted from the current token value below.
+const PRIMARY_500 = "#1E7A38";
 
 // Fills each world-map-svg.ts tile whose `id="<ISO_CODE>"` is in the served
 // set. Plain string replace against our own self-authored, known-shape SVG
-// (T-02-13) — not a map library, no interactivity/JS.
+// (T-02-13) — not a map library, no interactivity/JS. Also flips that
+// country's label (id="<ISO_CODE>-label", if present) to white — the default
+// dark label text drops below WCAG AA contrast on the primary-500 fill.
 function highlightSvg(svg: string, codes: string[]): string {
-  return codes.reduce(
-    (acc, code) =>
-      acc.replace(new RegExp(`(id="${code}"[^>]*fill=")[^"]*(")`), `$1${PRIMARY_500}$2`),
-    svg,
-  );
+  return codes.reduce((acc, code) => {
+    const filled = acc.replace(
+      new RegExp(`(id="${code}"[^>]*fill=")[^"]*(")`),
+      `$1${PRIMARY_500}$2`,
+    );
+    return filled.replace(
+      new RegExp(`(id="${code}-label"[^>]*fill=")[^"]*(")`),
+      "$1#FFFFFF$2",
+    );
+  }, svg);
 }
 
 function StatTiles({ stats, className }: { stats: Stat[]; className: string }) {
