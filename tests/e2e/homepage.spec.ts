@@ -100,11 +100,25 @@ for (const path of PATHS) {
     }
   });
 
-  test(`${path}: Markets section highlights Gulf countries only, no fabricated stats`, async ({ page }) => {
+  // T-209/D-46: matches /export's combined "Our Primary Focus" set (Gulf +
+  // Southeast Asia + Maldives, every code owner-confirmed as served) — was
+  // Gulf-only until homepage and /export drifted into contradicting claims.
+  test(`${path}: Markets section highlights the real served-country set, no fabricated stats`, async ({ page }) => {
     await page.goto(path);
     const chips = page.getByTestId("export-map-chips");
     await expect(chips).toBeVisible();
-    for (const country of ["United Arab Emirates", "Saudi Arabia", "Qatar", "Kuwait", "Bahrain", "Oman"]) {
+    for (const country of [
+      "United Arab Emirates",
+      "Saudi Arabia",
+      "Qatar",
+      "Kuwait",
+      "Bahrain",
+      "Oman",
+      "Singapore",
+      "Vietnam",
+      "Indonesia",
+      "Maldives",
+    ]) {
       await expect(chips.getByText(country, { exact: true })).toBeVisible();
     }
     // Explicitly NOT a "we export to N countries" claim — no stat tiles.

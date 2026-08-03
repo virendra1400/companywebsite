@@ -87,8 +87,8 @@ function faq(sectionTitle: string, items: { question: string; answer: string }[]
 }
 
 // TRUST-04 — realistic served-country set (GCC + Europe + a few others),
-// every code present in src/lib/country-names.ts and drawn as a tile in
-// src/lib/world-map-svg.ts. D-06: static SVG, no map library.
+// every code present in src/lib/country-names.ts and src/lib/country-iso-numeric.ts,
+// rendered with real geometry via src/lib/world-map-geo.ts (T-209/D-46).
 const SERVED_COUNTRY_CODES = [
   "AE",
   "SA",
@@ -309,15 +309,17 @@ export const PAGES_EN_SEED = [
           body: "Your shipment is tracked in transit to your port, with cold-chain and handling standards maintained until arrival.",
         },
       ]),
-      // T-104/D-31: Gulf-first only, zero stats — capability framing, not a
-      // shipped-to claim (D-01: new company, no export history yet). See
-      // exportMap()'s own doc comment above for the general shape; this call
-      // intentionally overrides the broader SERVED_COUNTRY_CODES default.
+      // T-104/D-31/D-46: zero stats — capability framing, not a shipped-to
+      // history claim (D-01: new company, no export history yet). Matches
+      // /export's combined "Our Primary Focus" set (D-46) — every
+      // highlighted country is a real, owner-confirmed served market, kept
+      // in sync across both pages rather than a narrower homepage teaser
+      // that could read as contradicting the fuller /export page.
       {
         ...exportMap("full", [], "Markets We're Built to Serve"),
-        highlightedCountryCodes: ["AE", "SA", "QA", "KW", "BH", "OM"],
+        highlightedCountryCodes: ["AE", "SA", "QA", "KW", "BH", "OM", "SG", "VN", "ID", "MV"],
         intro:
-          "Gulf and Middle East buyers first: reefer-ready logistics to ports including Jebel Ali and Dammam, Halal-compliant processing, and Arabic labeling capability. Southeast Asia and other markets available on request.",
+          "Gulf and Middle East buyers first: reefer-ready logistics to ports including Jebel Ali and Dammam, Halal-compliant processing, and Arabic labeling capability. Singapore-anchored logistics extend this reach into Vietnam, Indonesia, and the Maldives.",
       },
       ctaBand("Source With Confidence"),
     ],
@@ -450,16 +452,14 @@ export const PAGES_EN_SEED = [
   {
     slug: "export",
     title: "Global Markets",
-    // T-201/CONTENT_PLAYBOOK §4 Global Markets: Gulf/Middle East section
-    // FIRST (reefer logistics, Halal, Arabic labeling, GSO awareness), then
-    // Southeast Asia, then "other markets on request" — explicitly NOT a
-    // broad highlighted-country map with a market-count stat tile (that was
-    // this page's previous shape: 16 countries + "16+ Target Export
-    // Markets", the exact over-claiming pattern D-31 already fixed on the
-    // homepage — a new exporter with zero shipment history showing a wide
-    // "countries we're in" map reads as a track-record claim it doesn't
-    // have). Two narrow, honestly-scoped ExportMap instances instead of one
-    // broad one, zero stat tiles.
+    // T-201/D-46/CONTENT_PLAYBOOK §4 Global Markets: one combined map (real
+    // country geometry, not a broad market-count stat tile — explicitly NOT
+    // this page's old shape: 16 countries + "16+ Target Export Markets", the
+    // exact over-claiming pattern D-31 already fixed on the homepage). Every
+    // highlighted country here is a real, owner-confirmed served market
+    // (D-46) — Gulf/Middle East plus Southeast Asia + Maldives, one intro
+    // that keeps each region's specific operational detail rather than
+    // collapsing to a generic blurb.
     layout: [
       compactHero(
         "Markets We're Built to Serve",
@@ -467,16 +467,10 @@ export const PAGES_EN_SEED = [
       ),
       statsBand([{ value: "FOB / CIF / CFR", label: "Incoterms We Work With" }]),
       {
-        ...exportMap("full", [], "Gulf & Middle East — Our Primary Focus"),
-        highlightedCountryCodes: ["AE", "SA", "QA", "KW", "BH", "OM"],
+        ...exportMap("full", [], "Our Primary Focus"),
+        highlightedCountryCodes: ["AE", "SA", "QA", "KW", "BH", "OM", "SG", "VN", "ID", "MV"],
         intro:
-          "Reefer-ready logistics to ports including Jebel Ali and Dammam, Halal-compliant processing, Arabic labeling capability, and GSO-standard awareness — built for Gulf buyers from day one.",
-      },
-      {
-        ...exportMap("compact", [], "Southeast Asia"),
-        highlightedCountryCodes: ["SG"],
-        intro:
-          "Singapore-anchored logistics as our entry point into Southeast Asia, with capacity to extend into Malaysia, Indonesia, and Vietnam as demand grows.",
+          "Gulf & Middle East: reefer-ready logistics to ports including Jebel Ali and Dammam, Halal-compliant processing, Arabic labeling capability, and GSO-standard awareness. Singapore-anchored logistics extend this reach into Vietnam, Indonesia, and the Maldives, with capacity to add Malaysia as demand grows.",
       },
       richText(
         "Interested in a market outside the Gulf or Southeast Asia? We take on new destinations on request — reach out to discuss logistics, documentation, and lead time for your specific country.",

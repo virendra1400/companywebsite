@@ -1,35 +1,13 @@
 import { getTranslations } from "next-intl/server";
 import { sectionBg } from "./RenderBlocks";
-import { WORLD_MAP_SVG } from "@/lib/world-map-svg";
+import { getWorldCountryPaths, WORLD_MAP_VIEWBOX } from "@/lib/world-map-geo";
 import { COUNTRY_NAMES } from "@/lib/country-names";
+import { COUNTRY_ISO_NUMERIC } from "@/lib/country-iso-numeric";
+import { WorldMapInteractive } from "./WorldMapInteractive";
 import type { Page } from "../../../payload-types";
 
 type ExportMapData = Extract<NonNullable<Page["layout"]>[number], { blockType: "exportMap" }>;
 type Stat = { value: string; label: string };
-
-// src/app/globals.css --color-primary-500 — served countries take the
-// primary brand color, NOT gold (UI-SPEC: "a flood-filled map... takes the
-// primary brand color", accent is reserved for trim/badges/dividers only).
-// T-209: was #3D8266, drifted from the current token value below.
-const PRIMARY_500 = "#1E7A38";
-
-// Fills each world-map-svg.ts tile whose `id="<ISO_CODE>"` is in the served
-// set. Plain string replace against our own self-authored, known-shape SVG
-// (T-02-13) — not a map library, no interactivity/JS. Also flips that
-// country's label (id="<ISO_CODE>-label", if present) to white — the default
-// dark label text drops below WCAG AA contrast on the primary-500 fill.
-function highlightSvg(svg: string, codes: string[]): string {
-  return codes.reduce((acc, code) => {
-    const filled = acc.replace(
-      new RegExp(`(id="${code}"[^>]*fill=")[^"]*(")`),
-      `$1${PRIMARY_500}$2`,
-    );
-    return filled.replace(
-      new RegExp(`(id="${code}-label"[^>]*fill=")[^"]*(")`),
-      "$1#FFFFFF$2",
-    );
-  }, svg);
-}
 
 function StatTiles({ stats, className }: { stats: Stat[]; className: string }) {
   return (
@@ -59,17 +37,27 @@ export async function ExportMapBlock({ block, index }: { block: ExportMapData; i
     .sort((a, b) => a.localeCompare(b));
   const stats: Stat[] = block.stats ?? [];
   const isCompact = block.variant === "compact";
-  const svgMarkup = highlightSvg(WORLD_MAP_SVG, codes);
   const ariaLabel = t("exportMapAriaLabel", { count: codes.length });
+
+  const highlightedIdList = codes.map((c) => COUNTRY_ISO_NUMERIC[c]).filter(Boolean);
+  // Compact variant (regional maps like Southeast Asia) zooms to the
+  // highlighted countries' own extent instead of the whole world — see
+  // world-map-geo.ts's getWorldCountryPaths doc comment.
+  const paths = getWorldCountryPaths(isCompact ? highlightedIdList : undefined);
+  const highlightedIds = new Set(highlightedIdList);
+  const namesById = Object.fromEntries(
+    Object.entries(COUNTRY_ISO_NUMERIC).map(([alpha2, numeric]) => [
+      numeric,
+      COUNTRY_NAMES[alpha2] ?? alpha2,
+    ]),
+  );
 
   const map = (
     <div
-      role="img"
-      aria-label={ariaLabel}
-      // w-full + a fixed 2:1 aspect (matches the SVG's 1000x500 viewBox)
-      // gives this div a definite, non-zero box in every parent layout
-      // context (block, CSS grid item, flex item) — a bare inline <svg>
-      // with no width/height otherwise resolves to a 0x0 box inside a
+      // w-full + a fixed 2:1 aspect (matches world-map-geo.ts's 1000x500
+      // viewBox) gives this div a definite, non-zero box in every parent
+      // layout context (block, CSS grid item, flex item) — a bare inline
+      // <svg> with no width/height otherwise resolves to a 0x0 box inside a
       // shrink-to-fit grid item.
       className={
         isCompact
@@ -77,7 +65,13 @@ export async function ExportMapBlock({ block, index }: { block: ExportMapData; i
           : "mx-auto aspect-[2/1] w-full max-w-[900px]"
       }
     >
-      <div aria-hidden="true" className="h-full w-full" dangerouslySetInnerHTML={{ __html: svgMarkup }} />
+      <WorldMapInteractive
+        paths={paths}
+        highlightedIds={highlightedIds}
+        namesById={namesById}
+        viewBox={WORLD_MAP_VIEWBOX}
+        ariaLabel={ariaLabel}
+      />
     </div>
   );
 

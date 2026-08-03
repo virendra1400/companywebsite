@@ -21,7 +21,7 @@ export const ExportMap: Block = {
       required: true,
     },
     // Plain ISO alpha-2 code strings — not a Media/relation, just data
-    // driving which world-map-svg.ts tile gets the primary-500 fill.
+    // driving which world-map-geo.ts country geometry gets the primary-500 fill.
     { name: "highlightedCountryCodes", type: "text", hasMany: true },
     {
       name: "stats",

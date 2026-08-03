@@ -20,15 +20,20 @@ for (const path of EXPORT_PATHS) {
     expect(label).toMatch(/\d+/); // summarizes a country count
   });
 
-  // T-201: /export now has two ExportMap instances (Gulf + Southeast Asia,
-  // CONTENT_PLAYBOOK §4's Gulf-first structure) instead of one broad
-  // 16-country map — assert one chip from each.
+  // T-209/D-46: /export uses one combined ExportMap (Gulf + Southeast Asia
+  // + Maldives, all owner-confirmed served markets) — assert a chip from
+  // each region.
   test(`${path}: visible country-name chip list renders served countries (not just the SVG)`, async ({
     page,
   }) => {
     await page.goto(path);
-    await expect(page.getByText("United Arab Emirates", { exact: true })).toBeVisible();
-    await expect(page.getByText("Singapore", { exact: true })).toBeVisible();
+    // T-209/D-46: the map itself now also carries a <title> per country (a
+    // native hover tooltip on the real geometry) — scope to the chip list
+    // specifically so this stays a check on the always-visible text, not an
+    // accidental match against the SVG's own tooltip text.
+    const chips = page.getByTestId("export-map-chips");
+    await expect(chips.getByText("United Arab Emirates", { exact: true })).toBeVisible();
+    await expect(chips.getByText("Singapore", { exact: true })).toBeVisible();
   });
 
   test(`${path}: StatsBand (incoterms) renders`, async ({ page }) => {
@@ -46,7 +51,3 @@ for (const path of EXPORT_PATHS) {
     expect(svgTransform).toBe("none");
   });
 }
-
-// ExportMap was removed from the homepage (unverified "countries served"
-// claim for a company with no direct export history yet) — it now lives
-// only on /export, covered by the EXPORT_PATHS suite above.
