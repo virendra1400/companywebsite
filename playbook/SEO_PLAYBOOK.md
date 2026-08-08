@@ -76,4 +76,35 @@ Internal links: each post → its product page + resources page; product pages �
 
 ## 9. Measurement
 
-- GA4 (or privacy-light alternative e.g. Plausible) + Search Console from day one; events: rfq_submit, sample_request, whatsapp_click, spec_download, tour_request. UTM discipline for outbound campaigns. Baseline CWV via PageSpeed Insights monthly.
+- **Plausible chosen** (ANALY-01, checkpoint 04-05 — not still open): cookieless, no consent-banner engineering cost, minimal script weight given T-206's Lighthouse gap. Script mounted site-wide in `src/app/(site)/[locale]/layout.tsx`, guarded by `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` (no-ops when unset). `trackEvent` (`src/lib/analytics.ts`) dispatches `rfq_submit`, `inquiry_submit`, `whatsapp_click` today — `sample_request`, `spec_download`, `tour_request` are not wired yet, add when those flows exist (T-202 Resources hub is the natural place for `spec_download`). **Remaining action is not code**: create a Plausible site for the production domain and set `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` in Vercel's project env vars — data won't flow until that's done.
+- Search Console + Bing Webmaster Tools from day one once the site is public. UTM discipline for outbound campaigns. Baseline CWV via PageSpeed Insights monthly.
+
+## 10. Keyword Research Framework
+
+Track every target keyword in one table before writing content against it — prevents scattergun pages and makes priority visible.
+
+| Keyword | Search Intent | Product | Market | Priority | Target URL | Existing/New | Conversion Value | Current Ranking | Notes |
+|---|---|---|---|---|---|---|---|---|---|
+| mango pulp exporter india | commercial | Mango pulp | — | P0 | /products/fruit-pulps/mango-pulp | Existing | High | unranked (new domain) | needs validation |
+| aseptic mango pulp 215kg drum | commercial/long-tail | Mango pulp | — | P0 | /products/fruit-pulps/mango-pulp | Existing | High | unranked | spec long-tail, our open lane |
+| iqf green peas exporter india | commercial | Frozen green peas | — | P0 | /products/frozen-vegetables/green-peas | Existing | High | unranked | needs validation |
+| frozen sweet corn supplier india | commercial | Frozen sweet corn | — | P0 | /products/frozen-vegetables/sweet-corn | Existing | High | unranked | needs validation |
+| mango pulp supplier uae | commercial, Gulf-modified | Mango pulp | Gulf | P1 | /markets/gulf-middle-east + product page | Existing | High | unranked | needs validation |
+| halal frozen vegetables supplier | commercial, Gulf-modified | Frozen vegetables | Gulf | P1 | /markets/gulf-middle-east | Existing | Medium | unranked | needs validation |
+| how to import frozen vegetables from india | informational | — | — | P2 | /insights (deferred, T-401) | New | Medium | unranked | blog cluster seed, §6 |
+
+Every row here is a hypothesis from §1's priority clusters, not a measured result — **do not fill "Current Ranking" or invent search volume without real Search Console/keyword-tool data.** Populate and re-prioritize monthly once Search Console has baseline data (§9).
+
+## 11. Off-Page / Entity Consistency
+
+Goal: search engines and AI answer systems resolve "VNP Global" to one unambiguous entity — same facts everywhere, not just on the website.
+
+Keep identical across every surface: LinkedIn company page, Google Business Profile (Pune office), APEDA exporter directory, FSSAI license lookup, GST records, any trade-association or exhibition profile:
+- Company legal name (exact match, no abbreviation drift)
+- Logo (current version, not an old crop)
+- Website URL
+- Company description (one canonical paragraph, don't rewrite per-platform)
+- Contact details (phone, email — same NAP everywhere)
+- Business category/classification
+
+**Do not**: buy directory-listing packages, mass-submit to low-quality business directories, or pursue backlinks purely for link count — matches this project's existing anti-fabrication stance (§8, DECISION_LOG pattern of rejecting unverifiable claims). Quality and consistency compound; volume of low-quality listings does not.
