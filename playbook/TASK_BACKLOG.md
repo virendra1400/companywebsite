@@ -50,7 +50,8 @@ Acceptance: `grep -n "valid Importer-Exporter\|decades of trade experience" src`
 
 ## Phase 1 — Trust Core
 
-### T-101 Design tokens & global styles — `TODO` · S · Small · P-01
+### T-101 Design tokens & global styles — `DONE` · S · Small · P-01
+Done: card was never flipped after the work landed — token layer already implemented in `src/app/globals.css`'s `@theme` block (colors §2, type scale, spacing/radius/shadow §4, motion durations §6), comment-tagged "(T-101)" in the source. Folded into earlier styling work rather than run as its own dedicated pass.
 Acceptance: per prompt; QA §B sample-page pass.
 
 ### T-102 Header/mega-menu/footer — `DONE` (re-scoped) · S · Medium · P-02
