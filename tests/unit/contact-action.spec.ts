@@ -137,7 +137,13 @@ describe("submitContactForm", () => {
     expect(sendMock).toHaveBeenCalledTimes(1);
     const sentPayload = sendMock.mock.calls[0][0];
     expect(sentPayload.to).toBe("sales@example.com");
-    expect(sentPayload.subject).toBe("New RFQ: Basmati Rice");
+    // D-54: buildSubject (contact-action.ts) has always built
+    // "[RFQ] {products} — {company}, {country}" — richer than this
+    // assertion's stale expectation, which predates that format and was
+    // never updated. Not a regression; the real behavior is the better one
+    // (product + buyer identity in the subject line, useful for sales
+    // triage) — fixing the test to match reality, not changing the code.
+    expect(sentPayload.subject).toBe("[RFQ] Basmati Rice — Acme Foods, United Arab Emirates");
     // Proves the RFQ fields actually reach the rendered email, not just the
     // Resend envelope (LEAD-02).
     expect(leadNotificationMock).toHaveBeenCalledWith(

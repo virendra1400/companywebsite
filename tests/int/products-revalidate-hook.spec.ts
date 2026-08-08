@@ -63,7 +63,16 @@ describe("revalidateCatalog afterChange hooks", () => {
     expect(revalidatePath).toHaveBeenCalledTimes(4);
   });
 
-  it("revalidateProduct revalidates the 4 index paths AND the 4 detail paths", async () => {
+  // D-54: was asserting 8 calls (4 index + 4 old-flat-path), predating
+  // T-105's nested-URL migration. revalidateCatalog.ts's revalidateProduct
+  // also revalidates the NEW nested `/products/{category}/{slug}` path (the
+  // comment there explains why: the old flat path stays as a 301-redirect
+  // shim that needs to keep working, so both old and new paths get
+  // revalidated) — 3 revalidateAllLocales calls × 4 locales = 12 total, not
+  // 8. Confirmed against the real hook code, not just the test count —
+  // this 12-call-per-save behavior is what D-48 found stacking up ISR
+  // writes, and it's intentional, not a bug to reduce.
+  it("revalidateProduct revalidates the 4 index paths, 4 old-flat-path, AND 4 new-nested-path (12 total)", async () => {
     revalidatePath.mockClear();
 
     await payload.update({
@@ -81,7 +90,11 @@ describe("revalidateCatalog afterChange hooks", () => {
     expect(revalidatePath).toHaveBeenCalledWith("/ar/products/revalidate-test-product");
     expect(revalidatePath).toHaveBeenCalledWith("/fr/products/revalidate-test-product");
     expect(revalidatePath).toHaveBeenCalledWith("/ru/products/revalidate-test-product");
-    expect(revalidatePath).toHaveBeenCalledTimes(8);
+    expect(revalidatePath).toHaveBeenCalledWith("/products/revalidate-test-category/revalidate-test-product");
+    expect(revalidatePath).toHaveBeenCalledWith("/ar/products/revalidate-test-category/revalidate-test-product");
+    expect(revalidatePath).toHaveBeenCalledWith("/fr/products/revalidate-test-category/revalidate-test-product");
+    expect(revalidatePath).toHaveBeenCalledWith("/ru/products/revalidate-test-category/revalidate-test-product");
+    expect(revalidatePath).toHaveBeenCalledTimes(12);
   });
 
   it("skips revalidation entirely when context.disableRevalidate is set", async () => {
