@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { getTranslations } from "next-intl/server";
 import { MapPin, Phone, Mail } from "lucide-react";
-import { ContactForm } from "./ContactForm";
+import { ContactFormLazy as ContactForm } from "./ContactFormLazy";
 import { sectionBg } from "./RenderBlocks";
 import { getSiteBrand } from "@/lib/payload-fetch";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";

@@ -1,5 +1,4 @@
 import type { ComponentType } from "react";
-import dynamic from "next/dynamic";
 import type { Page } from "../../../payload-types";
 import { Reveal } from "@/components/motion/Reveal";
 import { HeroBlock } from "./HeroBlock";
@@ -11,24 +10,25 @@ import { StatsBandBlock } from "./StatsBandBlock";
 import { DocumentCardBlock } from "./DocumentCardBlock";
 import { MediaGalleryBlock } from "./MediaGalleryBlock";
 import { ExportMapBlock } from "./ExportMapBlock";
+import { ContactBlockView } from "./ContactBlockView";
 import { TrustBarBlock } from "./TrustBarBlock";
 import { ExportProcessBlock } from "./ExportProcessBlock";
 import { TestimonialsBlock } from "./TestimonialsBlock";
 import { FaqBlock } from "./FaqBlock";
 
-// T-206/PERF: dynamic (not static) import. ContactBlockView pulls in
-// ContactForm -> react-hook-form + zod + the Turnstile widget (~90KB, the
-// single largest JS chunk site-wide). A static import here made that whole
-// tree part of RenderBlocks' own module — and RenderBlocks is imported by
-// every Pages-collection route (home, about, manufacturing, certifications,
-// company...), so the bundler hoisted it into a chunk loaded on EVERY page,
-// including ones with no contact block at all (confirmed via production
-// Lighthouse: the react-hook-form chunk was loading on `/`). Dynamic import
-// scopes it to only the routes that actually render a contactBlock — in
-// practice just /contact.
-const ContactBlockView = dynamic(() =>
-  import("./ContactBlockView").then((m) => m.ContactBlockView),
-);
+// T-206/PERF (D-57): ContactBlockView is back to a plain static import.
+// The dynamic() call used to live here, wrapping ContactBlockView itself —
+// looked correct but never actually code-split anything: next/dynamic()
+// only splits when the call site is a Client Component, and RenderBlocks
+// is a Server Component (vercel/next.js#54935). ContactBlockView must also
+// stay a Server Component (it uses next-intl/server's getTranslations), so
+// it can't itself be the dynamic boundary either. The real fix moved one
+// level deeper — see ContactFormLazy.tsx, which wraps just ContactForm
+// (the actual react-hook-form/zod/Turnstile tree) in a dynamic() call
+// inside a "use client" file. ContactBlockView is lightweight now that its
+// own heavy child is behind that boundary, so importing it statically here
+// is correct and no longer pulls the form's dependencies along.
+
 
 type LayoutBlock = NonNullable<Page["layout"]>[number];
 
