@@ -25,8 +25,11 @@ async function entriesFor(
   // generateMetadata's alternates stay byte-identical (Pitfall 1) — the
   // sitemap-file type only wants { languages }, no canonical field, and
   // narrows every value to `string` (buildAlternates always produces plain
-  // string URLs, so this cast is safe).
-  const { languages } = buildAlternates(translatedLocales, path);
+  // string URLs, so this cast is safe). One shared languages map is reused
+  // across every locale's <url> entry for this path (SEO-02), so the
+  // currentLocale arg (D-50) is irrelevant here — canonical is discarded
+  // below, defaultLocale is just an arbitrary valid value to satisfy it.
+  const { languages } = buildAlternates(translatedLocales, path, routing.defaultLocale);
   const alternates = { languages: languages as Record<string, string> };
 
   // Fixed iteration order (routing.locales), not the ad-hoc order

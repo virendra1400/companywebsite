@@ -22,13 +22,19 @@ import type { Media } from "../../../../../payload-types";
 // generateStaticParams regardless of catalog content. Static title/
 // description describing the page's real function (catalog listing), same
 // category as the product-detail page's own copy, not a new company claim.
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
   return buildMetadata({
     title: "Our Products | VNP Global",
     description:
       "Browse VNP Global's export catalog — frozen vegetables, fruit pulp, and value-added agricultural products from India, with full specifications on every product page.",
     translatedLocales: [...routing.locales],
     path: "/products",
+    locale: locale as Locale,
   });
 }
 

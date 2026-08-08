@@ -17,13 +17,19 @@ import type { Insight, Media } from "../../../../../payload-types";
 
 // T-204 follow-up (D-50): same gap/fix as products/page.tsx — no CMS Pages
 // doc backs `/insights`, route is structurally available in every locale.
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
   return buildMetadata({
     title: "Insights | VNP Global",
     description:
       "Export guidance, industry updates, and buyer resources from VNP Global — an India-based agricultural and food products exporter.",
     translatedLocales: [...routing.locales],
     path: "/insights",
+    locale: locale as Locale,
   });
 }
 

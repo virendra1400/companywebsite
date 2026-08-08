@@ -40,6 +40,7 @@ export async function generateMetadata({
     imageUrl: seoImage?.url,
     translatedLocales,
     path: "/",
+    locale: locale as Locale,
   });
 }
 

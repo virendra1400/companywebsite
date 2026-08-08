@@ -90,6 +90,7 @@ export async function generateMetadata({
     imageUrl: seoImage?.url,
     translatedLocales,
     path: `/${slug}`,
+    locale: locale as Locale,
   });
 }
 

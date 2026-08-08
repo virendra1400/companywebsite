@@ -84,6 +84,7 @@ export async function generateMetadata({
     imageUrl: seoImage?.url || images[0]?.url,
     translatedLocales,
     path: `/products/${category?.slug ?? "product"}/${slug}`,
+    locale: locale as Locale,
   });
 }
 

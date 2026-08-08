@@ -97,6 +97,7 @@ export async function generateMetadata({
     imageUrl: cover?.url,
     translatedLocales,
     path: `/insights/${slug}`,
+    locale: locale as Locale,
   });
 }
 
