@@ -12,9 +12,13 @@ import { getProductsByCategory, getSiteBrand } from "@/lib/payload-fetch";
 import type { Locale } from "@/i18n/routing";
 import type { Media } from "../../../../../payload-types";
 
-// ISR: CMS edits (Pages/Products/SiteSettings) appear within 60s without a redeploy.
-// Complements the on-demand revalidate hooks (instant when they fire).
-export const revalidate = 60;
+// ISR: 1hr staleness fallback, not the freshness mechanism — CMS edits
+// (Pages/Products/SiteSettings) appear instantly via the on-demand revalidate
+// hooks that fire on save. This timer only catches pages that never got an
+// explicit revalidatePath call. D-48: was 60s, which turned every ordinary
+// page visit + redeploy during active dev into a fresh ISR write and burned
+// the Vercel free-tier 200k/mo quota pre-launch.
+export const revalidate = 3600;
 
 // CAT-01/CAT-04 — CatalogIndex (RESEARCH Pitfall 2: a NEW sibling `products`
 // folder, never a special case inside `[slug]/page.tsx`; Next resolves

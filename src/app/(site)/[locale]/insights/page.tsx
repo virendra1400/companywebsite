@@ -12,9 +12,13 @@ import { getSiteBrand } from "@/lib/payload-fetch";
 import type { Locale } from "@/i18n/routing";
 import type { Insight, Media } from "../../../../../payload-types";
 
-// ISR: CMS edits (Insights/SiteSettings) appear within 60s without a
-// redeploy. Complements the on-demand revalidateInsight hook.
-export const revalidate = 60;
+// ISR: 1hr staleness fallback, not the freshness mechanism — CMS edits
+// (Insights/SiteSettings) appear instantly via the on-demand revalidateInsight
+// hook that fires on save. This timer only catches pages that never got an
+// explicit revalidatePath call. D-48: was 60s, which turned every ordinary
+// page visit + redeploy during active dev into a fresh ISR write and burned
+// the Vercel free-tier 200k/mo quota pre-launch.
+export const revalidate = 3600;
 
 const REQUEST_QUOTE_CTA = { label: "Request a Quote", href: "/contact" };
 

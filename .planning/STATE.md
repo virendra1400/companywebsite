@@ -119,6 +119,7 @@ None yet.
 | 12 | fix: exclude vendored .claude/ and .agents/ tooling from eslint scope (571 false-positive errors -> 5 real) | 2026-07-28 | 32227f2 | — |
 | 260808-gag | Flip T-101 (design tokens) TODO -> DONE in TASK_BACKLOG.md — tokens already implemented in globals.css @theme, card just never flipped | 2026-08-08 | 846375e | [260808-gag-flip-t101-done](./quick/260808-gag-flip-t101-done/) |
 | 260808-geu | Correct 2 stale TASK_BACKLOG.md cards found via direct production/code check: T-209 followup map confirmed live on vnpglobal.in (not "awaiting deploy"); T-203 product FAQs infra fully built, only content missing | 2026-08-08 | 322106f | [260808-geu-t209-t203-status-fix](./quick/260808-geu-t209-t203-status-fix/) |
+| 260808-gvl | Fix Vercel ISR-write quota exhaustion (200k/mo free tier hit 100%, pre-launch): `revalidate = 60` on all 6 route files was redundant with on-demand hooks and, combined with ~40+ dev-cycle redeploys, caused a write storm — bumped to `revalidate = 3600` | 2026-08-08 | PENDING | [260808-gvl-isr-write-fix](./quick/260808-gvl-isr-write-fix/) |
 
 ## Deferred Items
 
