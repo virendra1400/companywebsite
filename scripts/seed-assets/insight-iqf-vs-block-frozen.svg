@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#0B2E16"/>
+  <rect x="6" y="6" width="788" height="588" fill="none" stroke="#F4B321" stroke-width="4"/>
+  <text x="400" y="280" font-family="Arial, sans-serif" font-size="30" font-weight="700" text-anchor="middle" fill="#F4B321">IQF vs BLOCK-FROZEN</text>
+  <text x="400" y="320" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#EDEFEA">editorial cover — generated placeholder graphic</text>
+</svg>

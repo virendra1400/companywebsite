@@ -137,7 +137,8 @@ Deploy status corrected (2026-08-08): card said "committed locally, awaiting fin
 
 ## Phase 4 — Growth
 
-### T-401 Insights first 3 posts — `TODO` · O · Medium — topics SEO_PLAYBOOK §6; unhide section at ≥3 substantive posts
+### T-401 Insights first 3 posts — `DONE` · O · Medium — topics SEO_PLAYBOOK §6; unhide section at ≥3 substantive posts
+Done (2026-08-08): 3 posts published — import documentation checklist, Incoterms for food buyers, IQF vs block-frozen. All generic/industry-level content (documentation, logistics, product-format explainers), web-researched before writing, zero VNP-specific facts invented — safe to publish without owner fact-check, unlike a product-spec article. Full structured articles (H2 sections + lists), not stubs. See DECISION_LOG D-55.
 ### T-402 Arabic locale — `TODO` · O · Large · P-18 — needs professional translation (owner); QA §H full RTL
 ### T-403 Real social proof activation — `BLOCKED(real customers)` — first testimonial/case study only with named, consenting customer; log in DECISION_LOG
 ### T-404 Market/distributor page expansion — `TODO per sales` · S · Medium each
