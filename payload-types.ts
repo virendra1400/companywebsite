@@ -1357,6 +1357,17 @@ export interface SiteSetting {
         id?: string | null;
       }[]
     | null;
+  /**
+   * T-202/COMPONENT_LIBRARY C-16: site-wide (not per-product/per-cert) documents shown on /resources — company profile, sample COA, export documentation checklist, etc. Per-product spec sheets (Products.downloads) and certificate PDFs (Certifications.certificatePdf) are pulled in automatically, not listed here. Leave file empty to show the honest 'available on request' state instead of a placeholder-dash wall.
+   */
+  resourceDocuments?:
+    | {
+        title: string;
+        description?: string | null;
+        file?: (number | null) | Media;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1413,6 +1424,14 @@ export interface SiteSettingsSelect<T extends boolean = true> {
     | T
     | {
         url?: T;
+        id?: T;
+      };
+  resourceDocuments?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        file?: T;
         id?: T;
       };
   updatedAt?: T;

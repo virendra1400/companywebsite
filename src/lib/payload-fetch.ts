@@ -2,7 +2,7 @@ import { cache } from "react";
 import { getPayload } from "payload";
 import config from "@payload-config";
 import type { Locale } from "@/i18n/routing";
-import type { Page, Certification, Category, Product } from "../../payload-types";
+import type { Page, Certification, Category, Product, Media } from "../../payload-types";
 
 // Site-wide brand + contact from the SiteSettings global (CMS-editable, single
 // source for name/logo/email/phone/whatsapp). Not localized. Media relation
@@ -246,4 +246,81 @@ export async function getProduct(
   const isTranslated = locale === "en" || Boolean(nativeCheck.docs[0]?.name);
 
   return { product, isTranslated };
+}
+
+export type ResourceDocument = {
+  title: string;
+  description?: string | null;
+  url: string | null;
+  // C-16: "icon, title, type+size" row shape — mimeType/filesize come
+  // straight off Payload's standard upload metadata, no extra derivation.
+  mimeType?: string | null;
+  filesize?: number | null;
+};
+
+function toResourceDocument(file: Media | null, title: string, description?: string | null): ResourceDocument {
+  return {
+    title,
+    description,
+    url: file?.url ?? null,
+    mimeType: file?.mimeType ?? null,
+    filesize: file?.filesize ?? null,
+  };
+}
+
+// T-202/COMPONENT_LIBRARY C-16: /resources hub aggregates 3 existing sources
+// rather than duplicating data — site-level docs (SiteSettings.resourceDocuments:
+// company profile, sample COA, export checklist), per-cert PDFs
+// (Certifications.certificatePdf), and per-product spec sheets
+// (Products.downloads, already built for the product-detail page's
+// ProductDownloads component, T-103). url stays null (never a placeholder
+// link) when a file hasn't been uploaded yet — same honest-placeholder
+// discipline as DocumentCardBlock/CertCard.
+export async function getResourceDocuments(locale: Locale): Promise<{
+  siteDocuments: ResourceDocument[];
+  certificateDocuments: ResourceDocument[];
+  productDocuments: ResourceDocument[];
+}> {
+  const payload = await getPayload({ config });
+  const fallbackLocale = locale === "en" ? undefined : "en";
+
+  const [settings, certifications, products] = await Promise.all([
+    payload.findGlobal({ slug: "site-settings", locale, fallbackLocale, overrideAccess: true }),
+    payload.find({
+      collection: "certifications",
+      sort: "displayOrder",
+      locale,
+      fallbackLocale,
+      overrideAccess: true,
+      limit: 100,
+    }),
+    payload.find({
+      collection: "products",
+      where: { published: { equals: true } },
+      sort: "displayOrder",
+      locale,
+      fallbackLocale,
+      overrideAccess: true,
+      limit: 500,
+    }),
+  ]);
+
+  const siteDocuments: ResourceDocument[] = (settings?.resourceDocuments ?? []).map((doc) => {
+    const file = doc.file && typeof doc.file === "object" ? (doc.file as Media) : null;
+    return toResourceDocument(file, doc.title, doc.description);
+  });
+
+  const certificateDocuments: ResourceDocument[] = certifications.docs.map((cert) => {
+    const file = cert.certificatePdf && typeof cert.certificatePdf === "object" ? (cert.certificatePdf as Media) : null;
+    return toResourceDocument(file, cert.name);
+  });
+
+  const productDocuments: ResourceDocument[] = products.docs.flatMap((product) =>
+    (product.downloads ?? []).map((d) => {
+      const file = d.file && typeof d.file === "object" ? (d.file as Media) : null;
+      return toResourceDocument(file, `${product.name} — ${d.label ?? ""}`);
+    }),
+  );
+
+  return { siteDocuments, certificateDocuments, productDocuments };
 }

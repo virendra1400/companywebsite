@@ -168,5 +168,19 @@ export const SiteSettings: GlobalConfig = {
       },
       fields: [{ name: "url", type: "text", required: true }],
     },
+    {
+      name: "resourceDocuments",
+      type: "array",
+      label: "Resource hub documents",
+      admin: {
+        description:
+          "T-202/COMPONENT_LIBRARY C-16: site-wide (not per-product/per-cert) documents shown on /resources — company profile, sample COA, export documentation checklist, etc. Per-product spec sheets (Products.downloads) and certificate PDFs (Certifications.certificatePdf) are pulled in automatically, not listed here. Leave file empty to show the honest 'available on request' state instead of a placeholder-dash wall.",
+      },
+      fields: [
+        { name: "title", type: "text", required: true, localized: true },
+        { name: "description", type: "textarea", localized: true },
+        { name: "file", type: "upload", relationTo: "media" },
+      ],
+    },
   ],
 };

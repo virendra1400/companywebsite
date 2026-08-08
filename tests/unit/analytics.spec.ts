@@ -40,4 +40,14 @@ describe("trackEvent", () => {
     expect(push).toHaveBeenCalledWith({ event: "inquiry_submit", location: "mobile-nav" });
     expect(push).toHaveBeenCalledTimes(1);
   });
+
+  // T-202: spec_download added for the /resources hub's document rows.
+  it("dispatches the spec_download event same as any other EventName", () => {
+    const plausible = vi.fn();
+    vi.stubGlobal("window", { plausible });
+
+    trackEvent("spec_download", { title: "Company Profile" });
+
+    expect(plausible).toHaveBeenCalledWith("spec_download", { props: { title: "Company Profile" } });
+  });
 });

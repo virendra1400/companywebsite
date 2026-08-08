@@ -8,7 +8,8 @@
     "export": "Export",
     "company": "Company",
     "insights": "Insights",
-    "contact": "Контакты"
+    "contact": "Контакты",
+    "resources": "Resources"
   },
   "footer": {
     "usefulLinks": "Useful Links",
@@ -128,5 +129,16 @@
     "byline": "By {author} · {date}",
     "notFoundHeading": "Article not found.",
     "notFoundBody": "This article may have been removed or is no longer available. Browse all insights."
+  },
+  "resources": {
+    "heading": "Resources & Documentation",
+    "intro": "Spec sheets, certifications, and company documentation — all in one place.",
+    "breadcrumbRoot": "Resources",
+    "emptyHeading": "Our resource library is being prepared.",
+    "emptyBody": "Check back shortly, or contact us directly for specific documents.",
+    "companyDocsHeading": "Company & Certification Documents",
+    "productDocsHeading": "Product Specification Sheets",
+    "unavailable": "Available on request",
+    "download": "Download"
   }
 }
