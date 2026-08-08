@@ -96,7 +96,9 @@ export default async function LocaleLayout({
         {/* SEO-04: Organization JSON-LD once per page (not per product) — the
             single shared <JsonLd> escaper applies the mandatory XSS escaping
             (T-05-03). */}
-        <JsonLd data={organizationJsonLd({ siteName, url: siteUrl, logoUrl, address, sameAs })} />
+        <JsonLd
+          data={organizationJsonLd({ siteName, url: siteUrl, logoUrl, address, sameAs, email, phone })}
+        />
         {plausibleDomain ? (
           <Script
             defer

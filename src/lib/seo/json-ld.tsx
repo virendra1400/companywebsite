@@ -32,6 +32,13 @@ interface OrganizationInput {
     country?: string;
   };
   sameAs?: string[];
+  // D-51 follow-up: SEO_PLAYBOOK §4 has always specified
+  // "contactPoint (tel, email, availableLanguage)" — email/phone were
+  // already fetched by every caller (getSiteBrand) but never passed
+  // through to this builder. Optional so a blank/placeholder value doesn't
+  // force a phone number that reads as a real support line.
+  email?: string;
+  phone?: string;
 }
 
 export function organizationJsonLd(settings: OrganizationInput) {
@@ -52,6 +59,28 @@ export function organizationJsonLd(settings: OrganizationInput) {
       },
     }),
     ...(settings.sameAs?.length && { sameAs: settings.sameAs }),
+    ...((settings.email || settings.phone) && {
+      contactPoint: {
+        "@type": "ContactPoint",
+        contactType: "sales",
+        ...(settings.phone && { telephone: settings.phone }),
+        ...(settings.email && { email: settings.email }),
+        availableLanguage: ["English", "Arabic", "French", "Russian"],
+      },
+    }),
+  };
+}
+
+// D-51 follow-up: SEO_PLAYBOOK §4 also requires "WebSite on home" — never
+// implemented. Rendered only on the homepage (JsonLd's file-level rule is
+// "one component," not "one call site" — this is a distinct schema type
+// from Organization, not a duplicate).
+export function websiteJsonLd(settings: { siteName: string; url: string }) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: settings.siteName,
+    url: settings.url,
   };
 }
 

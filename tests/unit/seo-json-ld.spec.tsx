@@ -1,7 +1,7 @@
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 
-import { JsonLd, breadcrumbJsonLd, organizationJsonLd, productJsonLd } from "@/lib/seo/json-ld";
+import { JsonLd, breadcrumbJsonLd, organizationJsonLd, productJsonLd, websiteJsonLd } from "@/lib/seo/json-ld";
 
 describe("organizationJsonLd", () => {
   it("emits Organization with name/url/logo/address/sameAs when all present", () => {
@@ -33,6 +33,38 @@ describe("organizationJsonLd", () => {
     expect(result).not.toHaveProperty("logo");
     expect(result).not.toHaveProperty("address");
     expect(result).not.toHaveProperty("sameAs");
+  });
+
+  // D-51 follow-up: SEO_PLAYBOOK §4 has always specified contactPoint
+  // (tel/email/availableLanguage) — was never implemented despite the data
+  // being available at every call site.
+  it("emits contactPoint with telephone/email/availableLanguage when either is present", () => {
+    const result = organizationJsonLd({
+      siteName: "Star",
+      url: "https://example.test",
+      email: "sales@example.com",
+      phone: "+91 00000 00000",
+    });
+
+    const contactPoint = result.contactPoint as Record<string, unknown>;
+    expect(contactPoint["@type"]).toBe("ContactPoint");
+    expect(contactPoint.telephone).toBe("+91 00000 00000");
+    expect(contactPoint.email).toBe("sales@example.com");
+    expect(contactPoint.availableLanguage).toEqual(["English", "Arabic", "French", "Russian"]);
+  });
+
+  it("omits contactPoint entirely when neither email nor phone is present", () => {
+    const result = organizationJsonLd({ siteName: "Star", url: "https://example.test" });
+    expect(result).not.toHaveProperty("contactPoint");
+  });
+});
+
+describe("websiteJsonLd", () => {
+  it("emits WebSite with name/url", () => {
+    const result = websiteJsonLd({ siteName: "Star", url: "https://example.test" });
+    expect(result["@type"]).toBe("WebSite");
+    expect(result.name).toBe("Star");
+    expect(result.url).toBe("https://example.test");
   });
 });
 

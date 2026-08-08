@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
-import { getPageContent } from "@/lib/payload-fetch";
+import { getPageContent, getSiteBrand } from "@/lib/payload-fetch";
 import { RenderBlocks } from "@/components/blocks/RenderBlocks";
 import { LocaleFallbackNotice } from "@/components/chrome/LocaleFallbackNotice";
 import { getTranslatedLocales } from "@/lib/seo/translated-locales";
 import { buildMetadata } from "@/lib/seo/metadata";
+import { localeUrl } from "@/lib/seo/alternates";
+import { JsonLd, websiteJsonLd } from "@/lib/seo/json-ld";
 import type { Media } from "../../../../payload-types";
 import type { Locale } from "@/i18n/routing";
 
@@ -53,9 +55,14 @@ export default async function HomePage({
   setRequestLocale(locale);
 
   const { page, isTranslated } = await getPageContent("home", locale as Locale);
+  const { siteName } = await getSiteBrand();
 
   return (
     <main>
+      {/* D-51 follow-up: SEO_PLAYBOOK §4's WebSite schema, never
+          implemented — Organization JSON-LD is site-wide (layout.tsx),
+          this one is home-only per the same spec line. */}
+      <JsonLd data={websiteJsonLd({ siteName, url: localeUrl(locale as Locale, "/") })} />
       {!isTranslated ? <LocaleFallbackNotice locale={locale as Locale} /> : null}
       <RenderBlocks blocks={page?.layout ?? []} />
     </main>
