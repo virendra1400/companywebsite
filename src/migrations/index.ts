@@ -14,6 +14,7 @@ import * as migration_20260801_154416_t104_export_map_intro from './20260801_154
 import * as migration_20260802_030931_t106_cert_logo_optional from './20260802_030931_t106_cert_logo_optional';
 import * as migration_20260808_t204_pages_seo_overrides from './20260808_t204_pages_seo_overrides';
 import * as migration_20260808_t202_site_settings_resource_documents from './20260808_t202_site_settings_resource_documents';
+import * as migration_20260808_t202b_fix_resource_documents_locales from './20260808_t202b_fix_resource_documents_locales';
 
 export const migrations = [
   {
@@ -95,5 +96,10 @@ export const migrations = [
     up: migration_20260808_t202_site_settings_resource_documents.up,
     down: migration_20260808_t202_site_settings_resource_documents.down,
     name: '20260808_t202_site_settings_resource_documents'
+  },
+  {
+    up: migration_20260808_t202b_fix_resource_documents_locales.up,
+    down: migration_20260808_t202b_fix_resource_documents_locales.down,
+    name: '20260808_t202b_fix_resource_documents_locales'
   },
 ];

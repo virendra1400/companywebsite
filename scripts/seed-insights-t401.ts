@@ -264,3 +264,9 @@ for (const insight of INSIGHTS_T401) {
 }
 
 await payload.destroy();
+// payload.destroy() alone left the Postgres pool (or some other handle) open
+// for ~11 minutes in the actual Vercel build before the process finally
+// exited on its own — burning most of that deploy's build time for no
+// reason, all 3 inserts had already completed and logged. Hard-exit once
+// destroy() resolves; nothing async happens after this point.
+process.exit(0);
