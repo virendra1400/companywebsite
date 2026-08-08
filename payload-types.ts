@@ -385,6 +385,14 @@ export interface Page {
           }
       )[]
     | null;
+  /**
+   * Optional per-page overrides. Leave blank to fall back to title / a derived summary (buildMetadata's existing default).
+   */
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+    ogImage?: (number | null) | Media;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -1018,6 +1026,13 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+      };
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        ogImage?: T;
       };
   updatedAt?: T;
   createdAt?: T;

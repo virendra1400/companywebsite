@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { Badge } from "@/components/ui/badge";
@@ -9,8 +10,27 @@ import { LocaleFallbackNotice } from "@/components/chrome/LocaleFallbackNotice";
 import { Reveal } from "@/components/motion/Reveal";
 import { RevealItem } from "@/components/motion/RevealItem";
 import { getProductsByCategory, getSiteBrand } from "@/lib/payload-fetch";
+import { buildMetadata } from "@/lib/seo/metadata";
+import { routing } from "@/i18n/routing";
 import type { Locale } from "@/i18n/routing";
 import type { Media } from "../../../../../payload-types";
+
+// T-204 follow-up (D-50): this route renders directly from i18n messages +
+// live catalog data, not a CMS Pages doc — no `seo` override to read, and no
+// per-locale translation gate (unlike Pages/Products/Insights docs), since
+// the route itself is structurally available in every locale via
+// generateStaticParams regardless of catalog content. Static title/
+// description describing the page's real function (catalog listing), same
+// category as the product-detail page's own copy, not a new company claim.
+export async function generateMetadata(): Promise<Metadata> {
+  return buildMetadata({
+    title: "Our Products | VNP Global",
+    description:
+      "Browse VNP Global's export catalog — frozen vegetables, fruit pulp, and value-added agricultural products from India, with full specifications on every product page.",
+    translatedLocales: [...routing.locales],
+    path: "/products",
+  });
+}
 
 // ISR: 1hr staleness fallback, not the freshness mechanism — CMS edits
 // (Pages/Products/SiteSettings) appear instantly via the on-demand revalidate

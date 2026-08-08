@@ -1,5 +1,6 @@
 import { getPayload } from "payload";
 import config from "@payload-config";
+import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { HeroBlock } from "@/components/blocks/HeroBlock";
@@ -9,8 +10,22 @@ import { LocaleFallbackNotice } from "@/components/chrome/LocaleFallbackNotice";
 import { Reveal } from "@/components/motion/Reveal";
 import { RevealItem } from "@/components/motion/RevealItem";
 import { getSiteBrand } from "@/lib/payload-fetch";
+import { buildMetadata } from "@/lib/seo/metadata";
+import { routing } from "@/i18n/routing";
 import type { Locale } from "@/i18n/routing";
 import type { Insight, Media } from "../../../../../payload-types";
+
+// T-204 follow-up (D-50): same gap/fix as products/page.tsx — no CMS Pages
+// doc backs `/insights`, route is structurally available in every locale.
+export async function generateMetadata(): Promise<Metadata> {
+  return buildMetadata({
+    title: "Insights | VNP Global",
+    description:
+      "Export guidance, industry updates, and buyer resources from VNP Global — an India-based agricultural and food products exporter.",
+    translatedLocales: [...routing.locales],
+    path: "/insights",
+  });
+}
 
 // ISR: 1hr staleness fallback, not the freshness mechanism — CMS edits
 // (Insights/SiteSettings) appear instantly via the on-demand revalidateInsight

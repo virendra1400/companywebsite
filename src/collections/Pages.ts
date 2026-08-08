@@ -59,6 +59,24 @@ export const Pages: CollectionConfig = {
         Faq,
       ],
     },
+    // T-204 follow-up (D-50): same shape as Products.seo — home + the 6
+    // interior pages had zero per-page metadata, silently inheriting the
+    // root layout's generic title/description on every page. Optional
+    // overrides; buildMetadata's callers fall back to page.title / a
+    // derived summary when blank.
+    {
+      type: "group",
+      name: "seo",
+      label: "SEO overrides",
+      admin: {
+        description: "Optional per-page overrides. Leave blank to fall back to title / a derived summary (buildMetadata's existing default).",
+      },
+      fields: [
+        { name: "title", type: "text", localized: true },
+        { name: "description", type: "textarea", localized: true },
+        { name: "ogImage", type: "upload", relationTo: "media" },
+      ],
+    },
   ],
   hooks: { afterChange: [revalidatePage] },
 };
