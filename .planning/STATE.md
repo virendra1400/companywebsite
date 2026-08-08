@@ -117,7 +117,7 @@ None yet.
 | 10 | docs: fill CLAUDE.md Conventions/Architecture sections from codebase inspection | 2026-07-28 | 7609546 | — |
 | 11 | chore: add typecheck script (tsc --noEmit) | 2026-07-28 | 6804109 | — |
 | 12 | fix: exclude vendored .claude/ and .agents/ tooling from eslint scope (571 false-positive errors -> 5 real) | 2026-07-28 | 32227f2 | — |
-| 260808-gag | Flip T-101 (design tokens) TODO -> DONE in TASK_BACKLOG.md — tokens already implemented in globals.css @theme, card just never flipped | 2026-08-08 | PENDING | [260808-gag-flip-t101-done](./quick/260808-gag-flip-t101-done/) |
+| 260808-gag | Flip T-101 (design tokens) TODO -> DONE in TASK_BACKLOG.md — tokens already implemented in globals.css @theme, card just never flipped | 2026-08-08 | 846375e | [260808-gag-flip-t101-done](./quick/260808-gag-flip-t101-done/) |
 
 ## Deferred Items
 
