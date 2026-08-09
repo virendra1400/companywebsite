@@ -20,8 +20,13 @@ import "../../globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
   title: { template: "%s · VNP Global", default: "VNP Global" },
+  // T-208 follow-up: this default description escaped the original banned-word
+  // sweep because it lives in metadata, not page copy. It carried both
+  // "premium" (CONTENT_PLAYBOOK §1 banned bare adjective, the exact word
+  // removed from the hero) and "trusted", an unearned claim for a company with
+  // no shipment history yet (D-01). Replaced with the concrete product list.
   description:
-    "VNP Global — a trusted India-based manufacturer and exporter of premium agricultural and food products, serving importers and distributors worldwide.",
+    "VNP Global is an India-based manufacturer and exporter of frozen vegetables, fruit pulp, and value-added agricultural products, serving importers and distributors worldwide.",
 };
 
 // Per-script fonts — only the needed subset ships per locale (FOUND-03 / UI-SPEC).

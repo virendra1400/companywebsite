@@ -41,7 +41,7 @@ export function generateStaticParams() {
 // content — overridden by the CMS seo group once an editor sets one.
 const FALLBACK_SEO: Record<(typeof INTERIOR_SLUGS)[number], { title: string; description: string }> = {
   about: {
-    title: "About VNP Global — India-Based Agricultural Exporter",
+    title: "About VNP Global | India-Based Agricultural Exporter",
     description:
       "VNP Global sources and exports agricultural products, built from the ground up to meet the standards international buyers expect.",
   },
@@ -65,8 +65,8 @@ const FALLBACK_SEO: Record<(typeof INTERIOR_SLUGS)[number], { title: string; des
     description: "IEC and APEDA registration in progress, with full export documentation support on every order.",
   },
   contact: {
-    title: "Contact VNP Global — Export Inquiries",
-    description: "Reach VNP Global's export team — we respond to every inquiry within one business day.",
+    title: "Contact VNP Global | Export Inquiries",
+    description: "Reach VNP Global's export team. We respond to every inquiry within one business day.",
   },
 };
 

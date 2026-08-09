@@ -35,10 +35,10 @@ export async function generateMetadata({
 
   const translatedLocales = await getTranslatedLocales("pages", "home");
   return buildMetadata({
-    title: page?.seo?.title || "VNP Global — Frozen Vegetables & Fruit Pulp Exporter, India",
+    title: page?.seo?.title || "VNP Global | Frozen Vegetables & Fruit Pulp Exporter, India",
     description:
       page?.seo?.description ||
-      "VNP Global sources and exports agricultural products from India — quality control, documentation, and reliable communication built in from day one.",
+      "VNP Global sources and exports agricultural products from India: quality control, documentation, and reliable communication built in from day one.",
     imageUrl: seoImage?.url,
     translatedLocales,
     path: "/",

@@ -31,7 +31,7 @@ export async function generateMetadata({
   return buildMetadata({
     title: "Our Products | VNP Global",
     description:
-      "Browse VNP Global's export catalog — frozen vegetables, fruit pulp, and value-added agricultural products from India, with full specifications on every product page.",
+      "Browse VNP Global's export catalog: frozen vegetables, fruit pulp, and value-added agricultural products from India, with full specifications on every product page.",
     translatedLocales: [...routing.locales],
     path: "/products",
     locale: locale as Locale,

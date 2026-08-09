@@ -318,7 +318,7 @@ export async function getResourceDocuments(locale: Locale): Promise<{
   const productDocuments: ResourceDocument[] = products.docs.flatMap((product) =>
     (product.downloads ?? []).map((d) => {
       const file = d.file && typeof d.file === "object" ? (d.file as Media) : null;
-      return toResourceDocument(file, `${product.name} — ${d.label ?? ""}`);
+      return toResourceDocument(file, `${product.name}: ${d.label ?? ""}`);
     }),
   );
 

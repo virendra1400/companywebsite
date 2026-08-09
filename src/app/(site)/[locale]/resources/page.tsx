@@ -22,7 +22,7 @@ export async function generateMetadata({
   return buildMetadata({
     title: "Resources & Documentation | VNP Global",
     description:
-      "Spec sheets, certifications, and company documentation from VNP Global — every download ungated, no signup required.",
+      "Spec sheets, certifications, and company documentation from VNP Global. Every download is ungated, no signup required.",
     translatedLocales: [...routing.locales],
     path: "/resources",
     locale: locale as Locale,

@@ -26,7 +26,7 @@ export async function generateMetadata({
   return buildMetadata({
     title: "Insights | VNP Global",
     description:
-      "Export guidance, industry updates, and buyer resources from VNP Global — an India-based agricultural and food products exporter.",
+      "Export guidance, industry updates, and buyer resources from VNP Global, an India-based agricultural and food products exporter.",
     translatedLocales: [...routing.locales],
     path: "/insights",
     locale: locale as Locale,
