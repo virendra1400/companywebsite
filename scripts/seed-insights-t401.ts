@@ -127,9 +127,9 @@ const INSIGHTS_T401: InsightSeed[] = [
       },
       {
         ul: [
-          "IEC (Importer-Exporter Code) — issued by India's Directorate General of Foreign Trade, required for any company to legally export from India.",
-          "FSSAI license — India's Food Safety and Standards Authority registration, required for any food business, export or domestic.",
-          "APEDA registration — the Agricultural and Processed Food Products Export Development Authority registration, specific to agricultural and processed food exports and often required for the phytosanitary/health certificates below.",
+          "IEC (Importer-Exporter Code): issued by India's Directorate General of Foreign Trade, required for any company to legally export from India.",
+          "FSSAI license: India's Food Safety and Standards Authority registration, required for any food business, export or domestic.",
+          "APEDA registration: the Agricultural and Processed Food Products Export Development Authority registration, specific to agricultural and processed food exports and often required for the phytosanitary/health certificates below.",
         ],
       },
       {
@@ -141,10 +141,10 @@ const INSIGHTS_T401: InsightSeed[] = [
       },
       {
         ul: [
-          "Phytosanitary Certificate — confirms the shipment is free of regulated pests and plant diseases, issued by India's Plant Quarantine authority shortly before dispatch.",
-          "Certificate of Origin (COO) — confirms where the goods were grown or processed, often required for preferential tariff treatment under trade agreements.",
-          "Health or Quality Certificate — confirms the shipment meets the destination country's food safety requirements at time of dispatch.",
-          "Certificate of Analysis (COA) — batch-level lab results for the specific shipment (moisture, microbiological parameters, and other product-specific values), distinct from the exporter's general food safety registration.",
+          "Phytosanitary Certificate: confirms the shipment is free of regulated pests and plant diseases, issued by India's Plant Quarantine authority shortly before dispatch.",
+          "Certificate of Origin (COO): confirms where the goods were grown or processed, often required for preferential tariff treatment under trade agreements.",
+          "Health or Quality Certificate: confirms the shipment meets the destination country's food safety requirements at time of dispatch.",
+          "Certificate of Analysis (COA): batch-level lab results for the specific shipment (moisture, microbiological parameters, and other product-specific values), distinct from the exporter's general food safety registration.",
         ],
       },
       { h2: "Customs classification" },
@@ -161,7 +161,7 @@ const INSIGHTS_T401: InsightSeed[] = [
     title: "Incoterms for Food Buyers: FOB, CIF, and CFR Explained",
     slug: "incoterms-for-food-buyers-fob-cif-cfr-explained",
     excerpt:
-      "What FOB, CFR, and CIF actually mean for a frozen food or fruit pulp shipment — where cost, risk, and control change hands, and how to choose.",
+      "What FOB, CFR, and CIF actually mean for a frozen food or fruit pulp shipment: where cost, risk, and control change hands, and how to choose.",
     coverAlt: "Incoterms for food buyers cover",
     coverPath: "scripts/seed-assets/insight-incoterms.svg",
     publishedDate: "2026-08-08",
@@ -171,11 +171,11 @@ const INSIGHTS_T401: InsightSeed[] = [
       },
       { h2: "FOB (Free on Board)" },
       {
-        p: "The seller's responsibility ends once the goods are loaded onto the vessel at the port of origin. From that point, the buyer arranges and pays for ocean freight, insurance, and everything downstream. FOB gives the buyer the most control over the shipping leg — and the most responsibility for it. It suits buyers with an established freight forwarder relationship and enough shipping volume to negotiate good rates directly.",
+        p: "The seller's responsibility ends once the goods are loaded onto the vessel at the port of origin. From that point, the buyer arranges and pays for ocean freight, insurance, and everything downstream. FOB gives the buyer the most control over the shipping leg, and the most responsibility for it. It suits buyers with an established freight forwarder relationship and enough shipping volume to negotiate good rates directly.",
       },
       { h2: "CFR (Cost and Freight)" },
       {
-        p: "The seller pays for freight to the destination port, but risk of loss or damage still transfers to the buyer once the goods are loaded on board at origin — same risk point as FOB, different cost split. Under CFR, the buyer must arrange their own cargo insurance, since the seller's obligation is freight only, not insurance.",
+        p: "The seller pays for freight to the destination port, but risk of loss or damage still transfers to the buyer once the goods are loaded on board at origin, same risk point as FOB, different cost split. Under CFR, the buyer must arrange their own cargo insurance, since the seller's obligation is freight only, not insurance.",
       },
       { h2: "CIF (Cost, Insurance, and Freight)" },
       {
@@ -183,10 +183,10 @@ const INSIGHTS_T401: InsightSeed[] = [
       },
       { h2: "Which one to choose" },
       {
-        p: "For a buyer's first order with a new supplier, CIF is generally the easier entry point — fewer moving parts, one point of contact if something goes wrong in transit. Buyers with existing freight-forwarder relationships and higher shipping volumes often move to FOB over time, since it gives more control over routing and cost.",
+        p: "For a buyer's first order with a new supplier, CIF is generally the easier entry point: fewer moving parts, one point of contact if something goes wrong in transit. Buyers with existing freight-forwarder relationships and higher shipping volumes often move to FOB over time, since it gives more control over routing and cost.",
       },
       {
-        p: "For frozen and perishable cargo specifically, confirm cold-chain responsibility explicitly regardless of which Incoterm is used — Incoterms define cost and risk transfer, not temperature-control obligations, so reefer container handling and any temperature-logging requirements should be agreed in writing separately from the Incoterm itself.",
+        p: "For frozen and perishable cargo specifically, confirm cold-chain responsibility explicitly regardless of which Incoterm is used. Incoterms define cost and risk transfer, not temperature-control obligations, so reefer container handling and any temperature-logging requirements should be agreed in writing separately from the Incoterm itself.",
       },
     ],
   },
@@ -204,24 +204,24 @@ const INSIGHTS_T401: InsightSeed[] = [
       },
       { h2: "How each process works" },
       {
-        p: "IQF freezes each piece separately, in minutes, using high-velocity cold air or a cryogenic tunnel — each pea or corn kernel freezes as an individual unit, never fused to its neighbors. Block freezing packs product together and freezes it as one mass, over a longer period. The equipment and time investment differ accordingly, and that shows up in the price.",
+        p: "IQF freezes each piece separately, in minutes, using high-velocity cold air or a cryogenic tunnel. Each pea or corn kernel freezes as an individual unit, never fused to its neighbors. Block freezing packs product together and freezes it as one mass, over a longer period. The equipment and time investment differ accordingly, and that shows up in the price.",
       },
       { h2: "Why freezing speed matters" },
       {
-        p: "Fast, individual freezing forms smaller ice crystals inside each piece. Smaller ice crystals do less damage to the plant cell structure. Slower block freezing forms larger crystals, which rupture more cell walls — the practical result is more moisture loss, softer texture, and reduced color/flavor retention after thawing.",
+        p: "Fast, individual freezing forms smaller ice crystals inside each piece. Smaller ice crystals do less damage to the plant cell structure. Slower block freezing forms larger crystals, which rupture more cell walls. The practical result is more moisture loss, softer texture, and reduced color/flavor retention after thawing.",
       },
       { h2: "What this means in practice" },
       {
         ul: [
-          "Portion control — IQF lets a kitchen or processing line pull exactly the quantity needed and reseal the rest; a block must be fully or partially thawed to access any of it.",
-          "Thaw time and evenness — individual pieces thaw faster and more evenly than a solid block, reducing the risk of overcooked edges around a still-frozen center.",
-          "Shelf appearance and yield — IQF generally holds shape, color, and texture better through the freeze-thaw cycle, which matters for retail packaging and food-service plating.",
-          "Cost — block-frozen is typically the lower-cost format, and remains a reasonable choice where the end use involves full thawing and reprocessing anyway (purees, soups, sauces) rather than direct plating.",
+          "Portion control: IQF lets a kitchen or processing line pull exactly the quantity needed and reseal the rest; a block must be fully or partially thawed to access any of it.",
+          "Thaw time and evenness: individual pieces thaw faster and more evenly than a solid block, reducing the risk of overcooked edges around a still-frozen center.",
+          "Shelf appearance and yield: IQF generally holds shape, color, and texture better through the freeze-thaw cycle, which matters for retail packaging and food-service plating.",
+          "Cost: block-frozen is typically the lower-cost format, and remains a reasonable choice where the end use involves full thawing and reprocessing anyway (purees, soups, sauces) rather than direct plating.",
         ],
       },
       { h2: "Questions worth asking a supplier" },
       {
-        p: "Ask what freezing method is used, and whether it's individual (air-blast IQF, cryogenic IQF) or block. Ask about typical moisture loss on thaw for the specific vegetable you're sourcing — this varies by product, not just by freezing method. And ask how the format affects container loading and cold-chain handling, since IQF's free-flowing texture and block-frozen's solid mass load and travel differently.",
+        p: "Ask what freezing method is used, and whether it's individual (air-blast IQF, cryogenic IQF) or block. Ask about typical moisture loss on thaw for the specific vegetable you're sourcing. This varies by product, not just by freezing method. And ask how the format affects container loading and cold-chain handling, since IQF's free-flowing texture and block-frozen's solid mass load and travel differently.",
       },
     ],
   },

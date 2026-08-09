@@ -264,6 +264,10 @@ export interface Page {
                   photo?: (number | null) | Media;
                   title: string;
                   body: string;
+                  /**
+                   * Optional URL, e.g. LinkedIn profile (photo variant tiles).
+                   */
+                  link?: string | null;
                   id?: string | null;
                 }[]
               | null;
@@ -900,6 +904,7 @@ export interface PagesSelect<T extends boolean = true> {
                     photo?: T;
                     title?: T;
                     body?: T;
+                    link?: T;
                     id?: T;
                   };
               id?: T;

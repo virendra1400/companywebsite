@@ -2,18 +2,19 @@
 
 > **Read this file first in every session.** It is the single source of truth for business facts, constraints, and non-negotiables. If any other document conflicts with this one, this one wins. Never invent facts not listed here — ask the owner or use the placeholder convention below.
 
-## 1. Company Facts (verified with owner, 2026-07)
+## 1. Company Facts (verified with owner, 2026-07; founders + exact address confirmed 2026-08-09, see DECISION_LOG D-61)
 
 | Fact | Value |
 |---|---|
 | Legal name | VNP Global Private Limited |
 | Type | **New company** — incorporated recently, **zero customers yet**, no shipment track record |
 | Business | Export of processed agricultural products from India |
-| Registered office | Pune, Maharashtra 411035, India |
+| Founders | Virendra Patil (strategy, buyer relationships, compliance/documentation) · Piyush Chavan (runs Piyush Farms/Kavita, production/QC/sourcing/cold storage/traceability/packaging) · Nilesh Kalbhor (farmer relationships/contract farming, harvest planning, export freight) |
+| Registered office | SR. No. 45/2A, CTS No. 4224, Millenia Tower, Haveli, Chinchwad East, Pune City, Pune 411019, Maharashtra, India (per Registrar of Companies record — corrects this doc's earlier "411035," which was wrong) |
 | Manufacturing | Contracted to **Kavita Facility Management Pvt Ltd (Agro Division)**, Tasawade MIDC, Karad, Dist. Satara, Maharashtra 415109 |
 | Relationship | VNP Global is an **independent company** using Kavita as processor (not a trading arm of Kavita) |
 | Sister brand | **Piyush Farms** (piyushfarms.com) — Kavita's consumer/manufacturing brand, founded 2024, same Karad plant |
-| Contact | info@vnpglobal.in · +91 84088 07241 · WhatsApp · LinkedIn · Instagram |
+| Contact | info@vnpglobal.in · +91 84088 07241 · WhatsApp · LinkedIn · Instagram — confirmed live in prod 2026-08-09 (was showing a fake `sales@example.com`/all-zeros placeholder in SiteSettings/Contact page until that fix, this doc had the real values all along) |
 
 ## 2. Products (current catalog — 8 SKUs, moderate expansion planned)
 
@@ -26,10 +27,10 @@
 - Capacity: **UNKNOWN — use placeholder** `{{PLANT_CAPACITY_MT_YEAR}}` until owner supplies.
 - Piyush Farms catalog is wider (okra, sapota, custard-apple pulp, corn cobs, organic fresh) — future VNP expansion candidates.
 
-## 3. Certifications (all IN PROGRESS as of 2026-07 — placeholders, not live claims)
+## 3. Certifications (status as of 2026-08-09, see DECISION_LOG D-61)
 
-APEDA, FSSAI, IEC, GST, ISO (22000 assumed — confirm number), HALAL, KOSHER.
-Site not yet shared publicly, so placeholder display is acceptable NOW, but every certification block must use the pattern: name + status badge ("In certification" / "Registered") + `{{CERT_NUMBER_*}}` placeholder — swap to real numbers before launch/outreach. **Never render a certification as "held" until the owner confirms the number.**
+APEDA, IEC, GST, and CIN are **confirmed registered** by the owner (numbers pending, `{{CERT_NUMBER_*}}` placeholders in place on the Company page + SiteSettings.legalIdentity, Certifications collection status board flipped to "Registered" for APEDA/IEC). FSSAI, ISO (22000 assumed — confirm number), HALAL, and KOSHER are still genuinely IN PROGRESS, not yet real.
+Every certification block must use the pattern: name + status badge ("In certification" / "Registered") + `{{CERT_NUMBER_*}}` placeholder — swap to real numbers before launch/outreach. **Never render a certification as "held" until the owner confirms the number**; a status of "Registered" without the number is fine once the owner has confirmed the registration itself is real (as with APEDA/IEC/GST/CIN above), that's different from claiming a number that doesn't exist.
 
 ## 4. Target Market & Buyers (priority order)
 

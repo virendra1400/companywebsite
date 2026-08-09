@@ -1,12 +1,12 @@
 // Single source of truth for the local-dev + prod-bootstrap English Pages
 // seed content, shared by scripts/seed-pages.ts and the e2e fallback-notice
-// assertion so the two never drift out of sync. Realistic-shaped placeholder
-// copy per D-03 — no lorem ipsum, no fabricated certificate/registration
-// numbers or named clients (Pitfall 5). The `wa.me` numbers below are an
-// obvious all-zeros placeholder pending the real business WhatsApp number.
-const WHATSAPP_PLACEHOLDER_LINK = "https://wa.me/910000000000";
+// assertion so the two never drift out of sync. No lorem ipsum, no
+// fabricated certificate/registration numbers or named clients (Pitfall 5).
+// The `wa.me` number is the real business WhatsApp (owner-confirmed
+// 2026-08-09), same number as SiteSettings.contact.whatsapp.
+const WHATSAPP_LINK = "https://wa.me/918408807241";
 const REQUEST_QUOTE_CTA = { label: "Request a Quote", href: "/contact" };
-const WHATSAPP_CTA = { label: "Chat on WhatsApp", href: WHATSAPP_PLACEHOLDER_LINK };
+const WHATSAPP_CTA = { label: "Chat on WhatsApp", href: WHATSAPP_LINK };
 
 const homeHero = {
   blockType: "hero" as const,
@@ -147,11 +147,12 @@ function documentCard(title: string, description?: string) {
   return { blockType: "documentCard" as const, title, description };
 }
 
-// UI-SPEC §9 — realistic placeholder contact details. WhatsApp reuses the
-// existing all-zeros placeholder number (matches WHATSAPP_CTA's wa.me link
-// above — same pending-real-number caveat, not a new placeholder pattern).
-// Address is a clearly placeholder company address (Pitfall 5/9: no
-// fabricated registration/IEC numbers anywhere in this block).
+// UI-SPEC §9 — real contact details (owner-confirmed 2026-08-09). Address is
+// the registered office per Registrar of Companies records, not the Karad
+// factory (see factoryAddress in SiteSettings / the manufacturing page for
+// that). No fabricated registration/IEC numbers anywhere in this block
+// (Pitfall 5/9) — CIN/GST/IEC live as {{TOKEN}} placeholders on Company/
+// SiteSettings until the owner supplies the real numbers.
 function contactBlock() {
   // email/phone/WhatsApp now come from the SiteSettings global (single source);
   // this block only carries intro + address.
@@ -159,7 +160,8 @@ function contactBlock() {
     blockType: "contactBlock" as const,
     intro:
       "Reach out directly, or send an inquiry below. Our export team responds to every message within one business day.",
-    address: "Plot 14, MIDC Industrial Area, Nashik, Maharashtra 422010, India",
+    address:
+      "SR. No. 45/2A, CTS No. 4224, Millenia Tower, Haveli, Chinchwad East, Pune City, Pune 411019, Maharashtra, India",
   };
 }
 
@@ -250,7 +252,7 @@ export const PAGES_EN_SEED = [
           {
             icon: "fileCheck",
             title: "Open Specifications",
-            body: "Full product specifications shared on request, before you place an order — no surprises after the container ships.",
+            body: "Full product specifications shared on request, before you place an order. No surprises after the container ships.",
           },
           {
             icon: "refreshCw",
@@ -260,7 +262,7 @@ export const PAGES_EN_SEED = [
           {
             icon: "shieldCheck",
             title: "Inspection Welcome",
-            body: "Third-party inspection welcome at your nomination (SGS, Bureau Veritas, Intertek) — we have nothing to hide.",
+            body: "Third-party inspection welcome at your nomination (SGS, Bureau Veritas, Intertek). We have nothing to hide.",
           },
           {
             icon: "clock",
@@ -346,7 +348,7 @@ export const PAGES_EN_SEED = [
       ),
       // (2) Group & facility — CONTENT_PLAYBOOK §4's exact honesty framing.
       richText(
-        "VNP Global is a new export company. Our products are manufactured at the Kavita Facility Management (Agro Division) plant in Tasawade MIDC, Karad — an operating processor also behind the Piyush Farms brand.",
+        "VNP Global is a new export company. Our products are manufactured at the Kavita Facility Management (Agro Division) plant in Tasawade MIDC, Karad, an operating processor also behind the Piyush Farms brand.",
       ),
       // (4) What we promise buyers — the same de-risk tiles as the homepage
       // (T-104), reused verbatim rather than invented a second time.
@@ -356,7 +358,7 @@ export const PAGES_EN_SEED = [
           {
             icon: "fileCheck",
             title: "Open Specifications",
-            body: "Full product specifications shared on request, before you place an order — no surprises after the container ships.",
+            body: "Full product specifications shared on request, before you place an order. No surprises after the container ships.",
           },
           {
             icon: "refreshCw",
@@ -366,7 +368,7 @@ export const PAGES_EN_SEED = [
           {
             icon: "shieldCheck",
             title: "Inspection Welcome",
-            body: "Third-party inspection welcome at your nomination (SGS, Bureau Veritas, Intertek) — we have nothing to hide.",
+            body: "Third-party inspection welcome at your nomination (SGS, Bureau Veritas, Intertek). We have nothing to hide.",
           },
           {
             icon: "clock",
@@ -395,7 +397,7 @@ export const PAGES_EN_SEED = [
       ),
       certStrip("grid", "Our Certifications"),
       richText(
-        "We welcome third-party inspection and documentation review at any stage, before or after certification is complete — including buyer-nominated inspectors (SGS, Bureau Veritas, Intertek) and unannounced facility visits.",
+        "We welcome third-party inspection and documentation review at any stage, before or after certification is complete, including buyer-nominated inspectors (SGS, Bureau Veritas, Intertek) and unannounced facility visits.",
         "Every shipment travels with a Certificate of Analysis (COA), health certificate, phytosanitary certificate, and certificate of origin (COO). A Halal certificate is included where applicable to the product.",
       ),
       documentCard(
@@ -432,10 +434,10 @@ export const PAGES_EN_SEED = [
       // IQF-processed (true) without claiming an in-house IQF line.
       richText(
         "Our frozen products are IQF-processed. IQF freezing runs through qualified partner lines; cold storage is in-house at the facility, keeping every batch temperature-controlled from freezing through dispatch.",
-        "Every pallet carries a lot code assigned at intake, tracked through processing, packing, and cold storage — the same code links a finished carton back to its intake batch and processing date for full traceability.",
+        "Every pallet carries a lot code assigned at intake, tracked through processing, packing, and cold storage. The same code links a finished carton back to its intake batch and processing date for full traceability.",
       ),
       richText(
-        "We welcome third-party inspection and documentation review at any stage — including buyer-nominated inspectors (SGS, Bureau Veritas, Intertek) and facility visits, in person or over video call.",
+        "We welcome third-party inspection and documentation review at any stage, including buyer-nominated inspectors (SGS, Bureau Veritas, Intertek) and facility visits, in person or over video call.",
       ),
       mediaGallery(
         [
@@ -473,7 +475,7 @@ export const PAGES_EN_SEED = [
           "Gulf & Middle East: reefer-ready logistics to ports including Jebel Ali and Dammam, Halal-compliant processing, Arabic labeling capability, and GSO-standard awareness. Singapore-anchored logistics extend this reach into Vietnam, Indonesia, and the Maldives, with capacity to add Malaysia as demand grows.",
       },
       richText(
-        "Interested in a market outside the Gulf or Southeast Asia? We take on new destinations on request — reach out to discuss logistics, documentation, and lead time for your specific country.",
+        "Interested in a market outside the Gulf or Southeast Asia? We take on new destinations on request. Reach out to discuss logistics, documentation, and lead time for your specific country.",
       ),
       ctaBand("Discuss Your Order Volume"),
     ],
