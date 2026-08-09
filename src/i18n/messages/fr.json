@@ -17,7 +17,8 @@
     "corporateOffice": "Registered Office",
     "factory": "Factory",
     "email": "Email",
-    "phone": "Phone"
+    "phone": "Phone",
+    "viewOnMap": "{label} location on Google Maps (opens in a new tab)"
   },
   "switcher": {
     "ariaLabel": "Changer de langue (actuelle : {current})"
@@ -70,6 +71,7 @@
     "contactMethodHelper": "Provide at least one so we can reach you: email or phone.",
     "captchaVerifying": "Running a quick security check. This only takes a moment.",
     "captchaErrorBanner": "We couldn't load the security check, so the form can't be submitted right now. Please reach us directly on WhatsApp or by email instead.",
+    "viewOnMap": "View this address on Google Maps (opens in a new tab)",
     "whatsappLabel": "Chat on WhatsApp",
     "whatsappAria": "Chat on WhatsApp",
     "successMessage": "Thank you. We've received your inquiry and our export team will respond within one business day. You can also reach us on WhatsApp or by email in the meantime.",

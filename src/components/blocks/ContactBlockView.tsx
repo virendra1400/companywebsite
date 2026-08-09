@@ -6,6 +6,7 @@ import { sectionBg } from "./RenderBlocks";
 import { getSiteBrand } from "@/lib/payload-fetch";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { WhatsAppTrackedLink } from "@/components/chrome/WhatsAppTrackedLink";
+import { googleMapsSearchUrl } from "@/lib/maps-url";
 import type { Page } from "../../../payload-types";
 
 type ContactBlockData = Extract<NonNullable<Page["layout"]>[number], { blockType: "contactBlock" }>;
@@ -17,6 +18,7 @@ type ContactBlockData = Extract<NonNullable<Page["layout"]>[number], { blockType
 export async function ContactBlockView({ block, index }: { block: ContactBlockData; index: number }) {
   const t = await getTranslations("contact");
   const { email, phone, whatsapp } = await getSiteBrand();
+  const mapUrl = googleMapsSearchUrl(block.address);
   const waHref = `https://wa.me/${whatsapp}?text=${encodeURIComponent(
     "Hi, I'd like to enquire about your products.",
   )}`;
@@ -28,7 +30,19 @@ export async function ContactBlockView({ block, index }: { block: ContactBlockDa
           {block.intro ? <p className="text-body">{block.intro}</p> : null}
           <p className="flex items-start gap-xs text-body">
             <MapPin aria-hidden="true" className="mt-1 size-4 shrink-0" />
-            <span>{block.address}</span>
+            {mapUrl ? (
+              <a
+                href={mapUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={t("viewOnMap")}
+                className="hover:text-primary-700 hover:underline"
+              >
+                {block.address}
+              </a>
+            ) : (
+              <span>{block.address}</span>
+            )}
           </p>
           {/* WhatsApp: NOT icon-only — visible text label + value beside the
               icon, plus aria-label (UI-SPEC §9 explicit requirement). */}

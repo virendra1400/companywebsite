@@ -6,6 +6,7 @@ import { BrandMark } from "@/components/chrome/BrandMark";
 import { resolveSocialLinks } from "@/components/chrome/social-links";
 import { InstagramIcon } from "@/components/icons/InstagramIcon";
 import { LinkedInIcon } from "@/components/icons/LinkedInIcon";
+import { googleMapsSearchUrl } from "@/lib/maps-url";
 
 // UI-SPEC Component Inventory — GlobalFooter: primary-900 surface, white/
 // neutral-100 text, gold hover-underline links. 3-column layout (brand /
@@ -100,6 +101,13 @@ export async function GlobalFooter({
   const socials = resolveSocialLinks(sameAs);
   const formattedAddress = formatAddress(address);
   const formattedFactoryAddress = formatAddress(factoryAddress);
+  // Factory query leads with the facility name — a named industrial unit
+  // resolves far more reliably on Maps than a bare MIDC plot number.
+  const officeMapUrl = googleMapsSearchUrl(formattedAddress);
+  const factoryMapUrl = googleMapsSearchUrl(
+    factoryAddress?.facilityName,
+    formattedFactoryAddress,
+  );
   const formattedLegalIdentity = formatLegalIdentity(legalIdentity);
 
   return (
@@ -160,7 +168,19 @@ export async function GlobalFooter({
                 <MapPin aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-accent-600" />
                 <span>
                   <span className="block font-semibold text-white">{tf("corporateOffice")}</span>
-                  {formattedAddress}
+                  {officeMapUrl ? (
+                    <a
+                      href={officeMapUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={tf("viewOnMap", { label: tf("corporateOffice") })}
+                      className="hover:text-accent-600 hover:underline"
+                    >
+                      {formattedAddress}
+                    </a>
+                  ) : (
+                    formattedAddress
+                  )}
                 </span>
               </li>
             ) : null}
@@ -169,8 +189,23 @@ export async function GlobalFooter({
                 <MapPin aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-accent-600" />
                 <span>
                   <span className="block font-semibold text-white">{tf("factory")}</span>
-                  {factoryAddress?.facilityName ? `${factoryAddress.facilityName}, ` : ""}
-                  {formattedFactoryAddress}
+                  {factoryMapUrl ? (
+                    <a
+                      href={factoryMapUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={tf("viewOnMap", { label: tf("factory") })}
+                      className="hover:text-accent-600 hover:underline"
+                    >
+                      {factoryAddress?.facilityName ? `${factoryAddress.facilityName}, ` : ""}
+                      {formattedFactoryAddress}
+                    </a>
+                  ) : (
+                    <>
+                      {factoryAddress?.facilityName ? `${factoryAddress.facilityName}, ` : ""}
+                      {formattedFactoryAddress}
+                    </>
+                  )}
                 </span>
               </li>
             ) : null}
