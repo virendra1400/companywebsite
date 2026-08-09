@@ -133,9 +133,12 @@ Deploy status corrected (2026-08-08): card said "committed locally, awaiting fin
 
 ### T-301 Facility shoot — `BLOCKED(owner)` — shot list MASTER_PLAN §8.2
 ### T-302 Replace interim imagery — `TODO after T-301` · S · Medium — swap by CMS `source: ai-interim` flag; QA §I image items
-### T-303 Publish cert numbers/PDFs — `BLOCKED(owner)` · S · Small per cert — flip status board entries; QA §A cert rule
-### T-304 Real COA + doc checklist PDFs — `BLOCKED(owner)` · S · Small
+### T-303 Publish cert numbers/PDFs — `IN PROGRESS` · S · Small per cert — flip status board entries; QA §A cert rule
+Partial (2026-08-09): IEC + APEDA confirmed registered by owner, status board entries flipped to `registered`, Company page copy updated. Numbers themselves still pending (owner adding via CMS) — `{{CERT_NUMBER_IEC}}`/`{{CERT_NUMBER_APEDA}}` tokens (DECISION_LOG's established naming) on Company page + SiteSettings.legalIdentity mark exactly where. CIN/GST also owner-confirmed-issued, same token pattern (`{{CERT_NUMBER_CIN}}`/`{{CERT_NUMBER_GST}}`), same pending state. Remaining 5 certs (FSSAI, ISO 22000, Halal, Kosher, GST-as-cert-entry) still `in-certification`, untouched. See DECISION_LOG D-61.
+### T-304 Real COA + doc checklist PDFs — `BLOCKED(owner)` · S · Small — owner confirmed files are ready, needs to upload via CMS admin (documentCard blocks on Company + Certifications pages)
 ### T-305 Product photography — `BLOCKED(owner)` · S · Small
+### T-306a Real business contact info — `DONE` · S · Small
+Done (2026-08-09): SiteSettings + Contact page were serving fake placeholder contact info live (`sales@example.com`, all-zeros phone/WhatsApp, wrong "Nashik" address) — found while auditing for staleness, not owner-reported. Replaced with real owner-confirmed values across SiteSettings (contact/address/factoryAddress) and the Contact page. See DECISION_LOG D-61.
 ### T-306 Pre-launch gate — `TODO last` · O · Large · P-16 — QA §I full; produces launch-blocker list; **site not shared with buyers until this passes**
 
 ## Phase 4 — Growth

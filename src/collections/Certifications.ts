@@ -1,4 +1,5 @@
 import type { CollectionConfig } from "payload";
+import { revalidateCertifications } from "@/hooks/revalidateCertifications";
 
 // RESEARCH D-04/D-05: dedicated collection so editors add/remove certs freely.
 // `halal` drives CertCard's elevated/spanning treatment (TRUST-02) — the block
@@ -53,4 +54,5 @@ export const Certifications: CollectionConfig = {
     // Editor-controlled sort order, avoids hard-coding order in the query.
     { name: "displayOrder", type: "number", defaultValue: 0 },
   ],
+  hooks: { afterChange: [revalidateCertifications] },
 };
