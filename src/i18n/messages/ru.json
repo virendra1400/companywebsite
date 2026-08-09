@@ -52,7 +52,8 @@
   "blocks": {
     "emptyState": "This section is being updated. Check back shortly.",
     "watchVideo": "Watch video",
-    "exportMapAriaLabel": "World map highlighting {count} countries we export to"
+    "exportMapAriaLabel": "World map highlighting {count} countries we export to",
+    "linkedinProfile": "LinkedIn profile"
   },
   "contact": {
     "nameLabel": "Full Name",

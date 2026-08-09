@@ -16,6 +16,7 @@ import {
   Clock,
   type LucideIcon,
 } from "lucide-react";
+import { LinkedInIcon } from "@/components/icons/LinkedInIcon";
 import type { Page, Media } from "../../../payload-types";
 
 type FeatureGridData = Extract<NonNullable<Page["layout"]>[number], { blockType: "featureGrid" }>;
@@ -86,7 +87,20 @@ export async function FeatureGridBlock({ block, index }: { block: FeatureGridDat
                     ) : (
                       <Icon aria-hidden="true" className="size-8 text-primary-700" />
                     )}
-                    <p className="mt-md text-body font-semibold">{item.title}</p>
+                    <div className="mt-md flex items-center gap-xs">
+                      <p className="text-body font-semibold">{item.title}</p>
+                      {block.variant === "photo" && item.link ? (
+                        <a
+                          href={item.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={t("linkedinProfile")}
+                          className="text-neutral-500 transition-colors hover:text-primary-700"
+                        >
+                          <LinkedInIcon className="size-4" />
+                        </a>
+                      ) : null}
+                    </div>
                     <p className="text-body text-neutral-600">{item.body}</p>
                   </Card>
                 </RevealItem>

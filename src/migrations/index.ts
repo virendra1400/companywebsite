@@ -15,6 +15,7 @@ import * as migration_20260802_030931_t106_cert_logo_optional from './20260802_0
 import * as migration_20260808_t204_pages_seo_overrides from './20260808_t204_pages_seo_overrides';
 import * as migration_20260808_t202_site_settings_resource_documents from './20260808_t202_site_settings_resource_documents';
 import * as migration_20260808_t202b_fix_resource_documents_locales from './20260808_t202b_fix_resource_documents_locales';
+import * as migration_20260809_t108_feature_grid_item_link from './20260809_t108_feature_grid_item_link';
 
 export const migrations = [
   {
@@ -101,5 +102,10 @@ export const migrations = [
     up: migration_20260808_t202b_fix_resource_documents_locales.up,
     down: migration_20260808_t202b_fix_resource_documents_locales.down,
     name: '20260808_t202b_fix_resource_documents_locales'
+  },
+  {
+    up: migration_20260809_t108_feature_grid_item_link.up,
+    down: migration_20260809_t108_feature_grid_item_link.down,
+    name: '20260809_t108_feature_grid_item_link'
   },
 ];

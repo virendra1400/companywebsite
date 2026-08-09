@@ -29,6 +29,10 @@ export const FeatureGrid: Block = {
         { name: "photo", type: "upload", relationTo: "media" },
         { name: "title", type: "text", required: true },
         { name: "body", type: "textarea", required: true },
+        // Optional — photo variant only (leadership tiles). LinkedIn profile
+        // URL per founder; renders a small icon link when set, no link shown
+        // when empty (T-XXX, owner-requested 2026-08-09).
+        { name: "link", type: "text", admin: { description: "Optional URL, e.g. LinkedIn profile (photo variant tiles)." } },
       ],
     },
   ],
