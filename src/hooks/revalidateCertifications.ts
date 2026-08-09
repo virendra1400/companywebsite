@@ -16,6 +16,11 @@ export const revalidateCertifications: CollectionAfterChangeHook = ({ doc, req: 
   if (!context.disableRevalidate) {
     revalidateAllLocales("/certifications");
     revalidateAllLocales("/");
+    // /resources aggregates Certifications.certificatePdf (see
+    // getResourceDocuments in payload-fetch.ts), so uploading a certificate
+    // PDF changes that page too — without this it kept serving the "available
+    // on request" state for up to an hour after the file went live.
+    revalidateAllLocales("/resources");
   }
   return doc;
 };

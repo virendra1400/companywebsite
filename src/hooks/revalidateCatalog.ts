@@ -27,6 +27,10 @@ export const revalidateProduct: CollectionAfterChangeHook = async ({ doc, req })
   if (!req.context.disableRevalidate) {
     revalidateAllLocales("/products");
     revalidateAllLocales(`/products/${doc.slug}`);
+    // /resources aggregates Products.downloads (spec sheets) alongside cert
+    // PDFs and SiteSettings docs — see getResourceDocuments in
+    // payload-fetch.ts. Uploading a spec sheet has to refresh that page too.
+    revalidateAllLocales("/resources");
 
     const categoryId = typeof doc.category === "object" ? doc.category?.id : doc.category;
     if (categoryId) {
