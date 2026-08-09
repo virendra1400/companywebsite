@@ -236,7 +236,7 @@ export default async function ProductDetailPage({
           <div>
             <p className="text-body font-semibold text-neutral-900">{product.shortDescription}</p>
             {product.description ? (
-              <div className="mt-md max-w-[720px] text-body text-neutral-900">
+              <div className="cms-richtext mt-md max-w-[720px] text-body text-neutral-900">
                 <RichText data={product.description} />
               </div>
             ) : null}

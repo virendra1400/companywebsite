@@ -184,7 +184,7 @@ export default async function InsightArticlePage({
       </section>
 
       <section className="bg-white px-md py-lg md:px-lg md:py-xl xl:px-xl">
-        <div className="mx-auto max-w-[720px] text-body text-neutral-900">
+        <div className="cms-richtext mx-auto max-w-[720px] text-body text-neutral-900">
           <RichText data={article.body} />
         </div>
       </section>

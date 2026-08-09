@@ -11,7 +11,7 @@ export function RichTextBlock({ block, index }: { block: RichTextData; index: nu
 
   return (
     <section className={`${sectionBg(index)} px-md py-2xl md:px-lg md:py-3xl xl:px-xl xl:py-4xl`}>
-      <div className="mx-auto max-w-[720px] text-body">
+      <div className="cms-richtext mx-auto max-w-[720px] text-body">
         <RichText data={block.content} />
       </div>
     </section>

@@ -206,3 +206,67 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans);
 }
+
+/* CMS rich-text prose treatment (D-59) — RichTextBlock.tsx, the product
+   description, and the Insights article body all render Payload's Lexical
+   output via @payloadcms/richtext-lexical/react's <RichText> with only a
+   bare max-w wrapper and no styling for the elements it emits — every h2/p/
+   ul/li rendered with zero CSS, falling back to the browser default
+   stylesheet (default bold/size headings, no paragraph rhythm, default
+   disc-marker lists). DESIGN_SYSTEM §3's "Section H2s in Fraunces; H3 and
+   below in Archivo 600" and §4's spacing scale were never actually wired to
+   CMS-authored content, only to hand-built component markup. One shared
+   class, all 3 call sites — logical properties throughout (RTL, no
+   direction-flip needed since this is prose rhythm, not layout direction).
+   `:where()` keeps every selector at 0 specificity so per-page utility
+   classes can still override without `!important`. */
+.cms-richtext :where(p) {
+  margin-block-end: var(--spacing-md);
+}
+.cms-richtext :where(p:last-child) {
+  margin-block-end: 0;
+}
+.cms-richtext :where(h2) {
+  font-family: var(--font-display);
+  font-size: var(--text-heading);
+  line-height: var(--text-heading--line-height);
+  font-weight: var(--text-heading--font-weight);
+  color: var(--color-neutral-950);
+  margin-block-start: var(--spacing-xl);
+  margin-block-end: var(--spacing-sm);
+}
+.cms-richtext :where(h2:first-child) {
+  margin-block-start: 0;
+}
+.cms-richtext :where(h3) {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: var(--text-body);
+  color: var(--color-neutral-950);
+  margin-block-start: var(--spacing-lg);
+  margin-block-end: var(--spacing-xs);
+}
+.cms-richtext :where(ul, ol) {
+  padding-inline-start: var(--spacing-lg);
+  margin-block-end: var(--spacing-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+.cms-richtext :where(ul) {
+  list-style-type: disc;
+}
+.cms-richtext :where(ol) {
+  list-style-type: decimal;
+}
+.cms-richtext :where(li) {
+  margin-inline-start: var(--spacing-xs);
+}
+.cms-richtext :where(a) {
+  color: var(--color-primary-700);
+  text-decoration-line: underline;
+  text-underline-offset: 2px;
+}
+.cms-richtext :where(strong) {
+  font-weight: 600;
+}
