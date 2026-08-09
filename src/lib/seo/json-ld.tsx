@@ -41,11 +41,25 @@ interface OrganizationInput {
   phone?: string;
 }
 
+// The trading/brand name as it appears in the logo wordmark and page copy,
+// as distinct from the registered name in SiteSettings.siteName.
+const BRAND_SHORT_NAME = "VNP Global";
+
 export function organizationJsonLd(settings: OrganizationInput) {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: settings.siteName,
+    // SEO_PLAYBOOK §11 entity consistency: `siteName` is the registered name
+    // ("VNP Global Private Limited") and matches the Google Business Profile,
+    // MCA record and directory listings — but the logo wordmark, page copy and
+    // most inbound links say "VNP Global". Without an explicit alternateName,
+    // Google has no signal that the brand and the legal entity are the same
+    // thing, so brand-name searches and links don't consolidate onto the
+    // entity. legalName states the registered name unambiguously; the
+    // alternateName is only emitted when the two genuinely differ.
+    legalName: settings.siteName,
+    ...(settings.siteName !== BRAND_SHORT_NAME && { alternateName: BRAND_SHORT_NAME }),
     url: settings.url,
     ...(settings.logoUrl && { logo: settings.logoUrl }),
     ...(settings.address && {

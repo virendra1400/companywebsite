@@ -156,6 +156,15 @@ export default async function ProductDetailPage({
     value: row.value,
   }));
 
+  // Drives the typical-values caveat below: true when this page actually
+  // publishes a number a buyer could hold us to.
+  const hasSpecData =
+    specCategories.some((c) => (c.rows?.length ?? 0) > 0) ||
+    legacyRows.length > 0 ||
+    (product.packagingOptions?.length ?? 0) > 0 ||
+    Boolean(product.containerLoading?.teu20Units || product.containerLoading?.teu20NetMT) ||
+    Boolean(product.shelfLife || product.storageTemp || product.moqRange);
+
   // Quick facts (shelf life / storage / MOQ) — new T-103 fields, independent
   // of the old flat specifications, so shown whenever any is filled in.
   const quickFacts: SpecRow[] = [
@@ -274,6 +283,17 @@ export default async function ProductDetailPage({
             title={t("containerLoadingTitle")}
           />
           <ProductDownloads downloads={product.downloads ?? []} title={t("downloadsTitle")} />
+          {/* Typical-values caveat. Published spec numbers otherwise read as a
+              contractual guarantee — a buyer whose shipment tests outside a
+              figure printed here can cite this page in a claim. Industry
+              practice (and the reason a COA exists) is that the website states
+              typical values while the COA accompanying each shipment carries
+              the agreed contractual spec. Rendered only when there is actual
+              spec data to qualify, so an empty product page never shows a
+              disclaimer about nothing. */}
+          {hasSpecData ? (
+            <p className="max-w-[720px] text-label text-neutral-600">{t("specsDisclaimer")}</p>
+          ) : null}
         </div>
       </section>
 

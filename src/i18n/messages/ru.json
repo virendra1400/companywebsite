@@ -121,6 +121,7 @@
     "shelfLifeLabel": "Shelf Life",
     "storageTempLabel": "Storage Temperature",
     "moqRangeLabel": "MOQ",
+    "specsDisclaimer": "Values shown are typical and indicative, not a contractual guarantee. The specification for your order is agreed in writing before dispatch and confirmed on the Certificate of Analysis accompanying each shipment.",
     "applicationsLabel": "Applications"
   },
   "insights": {
