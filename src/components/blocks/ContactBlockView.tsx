@@ -30,18 +30,22 @@ export async function ContactBlockView({ block, index }: { block: ContactBlockDa
           {block.intro ? <p className="text-body">{block.intro}</p> : null}
           <p className="flex items-start gap-xs text-body">
             <MapPin aria-hidden="true" className="mt-1 size-4 shrink-0" />
+            {/* whitespace-pre-line: editors type the address across several
+                lines in the CMS textarea (company name, then street, then
+                city/PIN). Without this, HTML collapses every newline into a
+                space and the whole thing renders as one run-on line. */}
             {mapUrl ? (
               <a
                 href={mapUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={t("viewOnMap")}
-                className="hover:text-primary-700 hover:underline"
+                className="whitespace-pre-line hover:text-primary-700 hover:underline"
               >
                 {block.address}
               </a>
             ) : (
-              <span>{block.address}</span>
+              <span className="whitespace-pre-line">{block.address}</span>
             )}
           </p>
           {/* WhatsApp: NOT icon-only — visible text label + value beside the

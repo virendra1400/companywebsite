@@ -8,8 +8,20 @@
 // GBP exists, since Google resolves a matching listing for the query itself.
 export function googleMapsSearchUrl(...parts: (string | null | undefined)[]): string | null {
   const query = parts
-    .map((p) => p?.trim())
-    .filter((p): p is string => Boolean(p))
+    .map((p) =>
+      // Addresses are authored in CMS textareas and legitimately contain
+      // newlines (company name / street / city on separate lines). Left as-is
+      // they encode to %0A in the query string; collapse all whitespace runs
+      // to single spaces, and turn line breaks into comma separators so the
+      // query still reads as a normal one-line address to Google.
+      (p ?? "")
+        .replace(/\s*\n+\s*/g, ", ")
+        .replace(/[ \t]+/g, " ")
+        // Strip separator-only leftovers, so a blank/whitespace-only field
+        // can't survive as a bare "," and build a junk ?query=%2C link.
+        .replace(/(^[\s,]+)|([\s,]+$)/g, ""),
+    )
+    .filter((p) => p.length > 0)
     .join(", ");
   if (!query) return null;
   return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
