@@ -160,8 +160,12 @@ function contactBlock() {
     blockType: "contactBlock" as const,
     intro:
       "Reach out directly, or send an inquiry below. Our export team responds to every message within one business day.",
+    // Component order matches GlobalFooter.formatAddress (street, city, state,
+    // postal, country) and the JSON-LD PostalAddress, so the same address never
+    // renders two different ways across the site. NAP consistency (SEO_PLAYBOOK
+    // §11) is judged on components, not formatting, but a buyer reads both.
     address:
-      "SR. No. 45/2A, CTS No. 4224, Millenia Tower, Haveli, Chinchwad East, Pune City, Pune 411019, Maharashtra, India",
+      "SR. No. 45/2A, CTS No. 4224, Millenia Tower, Haveli, Chinchwad East, Pune City, Maharashtra, 411019, India",
   };
 }
 
