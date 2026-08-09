@@ -53,7 +53,10 @@ export async function CertStripBlock({ block, index }: { block: CertStripData; i
                   key={cert.id}
                   href="/certifications"
                   aria-label={cert.name}
-                  className={`relative flex h-16 w-24 shrink-0 items-center justify-center bg-white ${
+                  // No bg-white: logos are transparent PNGs, and this strip
+                  // renders on alternating section backgrounds — the fill
+                  // showed as a hard white tile on every tinted section.
+                  className={`relative flex h-16 w-24 shrink-0 items-center justify-center ${
                     cert.halal ? "border-2 border-accent-600" : ""
                   }`}
                 >

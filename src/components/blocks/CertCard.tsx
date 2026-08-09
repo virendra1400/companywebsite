@@ -66,7 +66,10 @@ export function CertCard({
           ) : null}
         </div>
       ) : null}
-      <div className="relative aspect-[3/2] w-full bg-white">
+      {/* No bg-white: the cert logos are transparent PNGs and the Card behind
+          them is already white, so the fill only ever showed as a hard white
+          rectangle wherever the card sat on a tinted section. */}
+      <div className="relative aspect-[3/2] w-full">
         {logo?.url ? (
           <Image
             src={logo.url}
