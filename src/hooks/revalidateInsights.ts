@@ -1,20 +1,12 @@
 import type { CollectionAfterChangeHook } from "payload";
-import { revalidatePath } from "next/cache";
+import { revalidateLocalizedPath } from "./revalidate-paths";
 
-// BLOG-02: adapts revalidateCatalog.ts's exact per-locale revalidatePath
-// mechanics to the new Insights collection. An article change affects BOTH
-// the index ('/insights') AND its own detail path ('/insights/<slug>').
-function revalidateAllLocales(path: string) {
-  revalidatePath(path);
-  revalidatePath(`/ar${path}`);
-  revalidatePath(`/fr${path}`);
-  revalidatePath(`/ru${path}`);
-}
-
+// BLOG-02: an article change affects BOTH the index ('/insights') AND its own
+// detail path ('/insights/<slug>').
 export const revalidateInsight: CollectionAfterChangeHook = ({ doc, req: { context } }) => {
   if (!context.disableRevalidate) {
-    revalidateAllLocales("/insights");
-    revalidateAllLocales(`/insights/${doc.slug}`);
+    revalidateLocalizedPath("/insights");
+    revalidateLocalizedPath(`/insights/${doc.slug}`);
   }
   return doc;
 };
