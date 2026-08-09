@@ -43,7 +43,14 @@ export async function ExportMapBlock({ block, index }: { block: ExportMapData; i
   // Compact variant (regional maps like Southeast Asia) zooms to the
   // highlighted countries' own extent instead of the whole world — see
   // world-map-geo.ts's getWorldCountryPaths doc comment.
-  const paths = getWorldCountryPaths(isCompact ? highlightedIdList : undefined);
+  // T-206/D-63: second arg is the 50m-detail set — always the highlighted
+  // countries, independent of whether this variant also *zooms* to them.
+  // Everything else renders from 110m, which is visually identical at this
+  // viewBox and ~89% smaller.
+  const paths = getWorldCountryPaths(
+    isCompact ? highlightedIdList : undefined,
+    highlightedIdList,
+  );
   const highlightedIds = new Set(highlightedIdList);
   const namesById = Object.fromEntries(
     Object.entries(COUNTRY_ISO_NUMERIC).map(([alpha2, numeric]) => [
