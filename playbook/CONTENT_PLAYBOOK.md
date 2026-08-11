@@ -68,7 +68,7 @@ Every page answers, in order: *what can I buy → why should I trust you → wha
 ## 5. Microcopy & Forms
 
 - Form labels above fields; helper text for quantity ("e.g. 1×20 ft FCL or 5 MT"); error messages specific ("Enter a phone number with country code, e.g. +971…").
-- Success message: "Thanks — we've received your inquiry and will reply within 24 hours. Need it faster? WhatsApp us: +91 84088 07241."
+- Success message: "Thanks — we've received your inquiry and will reply within 24 hours. Need it faster? WhatsApp us: +91 94207 48412."
 - Footer legal line: "VNP Global Private Limited · CIN {{CIN}} · IEC {{CERT_NUMBER_IEC}} · FSSAI {{CERT_NUMBER_FSSAI}}".
 
 ## 6. Editing Rules for Implementation Sessions

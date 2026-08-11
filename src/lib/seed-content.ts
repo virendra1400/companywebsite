@@ -2,11 +2,18 @@
 // seed content, shared by scripts/seed-pages.ts and the e2e fallback-notice
 // assertion so the two never drift out of sync. No lorem ipsum, no
 // fabricated certificate/registration numbers or named clients (Pitfall 5).
-// The `wa.me` number is the real business WhatsApp (owner-confirmed
-// 2026-08-09), same number as SiteSettings.contact.whatsapp.
-const WHATSAPP_LINK = "https://wa.me/918408807241";
 const REQUEST_QUOTE_CTA = { label: "Request a Quote", href: "/contact" };
-const WHATSAPP_CTA = { label: "Chat on WhatsApp", href: WHATSAPP_LINK };
+// Label only, deliberately no href. HeroBlock and CTABandBlock both ignore a
+// stored WhatsApp href and read the live number from getSiteBrand() / the
+// SiteSettings global (D-60), and CTABandBlock gates the button on `label`,
+// not `href` — so a seeded href is dead data that only ever goes stale.
+// It did: seeding one baked the number into every page at seed time, and when
+// the business number changed on 2026-08-10 the admin was left showing editors
+// two different wrong numbers (the original all-zeros placeholder on four
+// pages, the superseded real number on two others) in a field with no effect.
+// Cleared from production and not re-seeded. WhatsApp number lives in exactly
+// one place now: SiteSettings.contact.whatsapp.
+const WHATSAPP_CTA = { label: "Chat on WhatsApp" };
 
 const homeHero = {
   blockType: "hero" as const,

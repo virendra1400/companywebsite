@@ -67,7 +67,7 @@ Order: breadcrumb → H1 + category → gallery (pack + macro) → summary parag
 ## Conversion Components
 
 ### C-17 Inquiry CTA Band
-- `--green-950` band: H3 "Get a quote within 24 hours", subline (spec sheet + indicative FOB within 48h — the SLA), primary gold button → /contact form (product pre-selected via query param), secondary WhatsApp deep link `https://wa.me/918408807241?text=...` (pre-filled product name).
+- `--green-950` band: H3 "Get a quote within 24 hours", subline (spec sheet + indicative FOB within 48h — the SLA), primary gold button → /contact form (product pre-selected via query param), secondary WhatsApp deep link `https://wa.me/<SiteSettings.contact.whatsapp>?text=...` (never hardcode the number, see D-60) (pre-filled product name).
 
 ### C-18 RFQ Form (the ONE form, site-wide)
 Fields (CRM-ready payload schema — LOCKED per E-05):

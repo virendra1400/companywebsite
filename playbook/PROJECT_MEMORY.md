@@ -14,7 +14,7 @@
 | Manufacturing | Contracted to **Kavita Facility Management Pvt Ltd (Agro Division)**, Tasawade MIDC, Karad, Dist. Satara, Maharashtra 415109 |
 | Relationship | VNP Global is an **independent company** using Kavita as processor (not a trading arm of Kavita) |
 | Sister brand | **Piyush Farms** (piyushfarms.com) — Kavita's consumer/manufacturing brand, founded 2024, same Karad plant |
-| Contact | info@vnpglobal.in · +91 84088 07241 · WhatsApp · LinkedIn · Instagram — confirmed live in prod 2026-08-09 (was showing a fake `sales@example.com`/all-zeros placeholder in SiteSettings/Contact page until that fix, this doc had the real values all along) |
+| Contact | info@vnpglobal.in · +91 94207 48412 · WhatsApp · LinkedIn · Instagram — confirmed live in prod 2026-08-09 (was showing a fake `sales@example.com`/all-zeros placeholder in SiteSettings/Contact page until that fix, this doc had the real values all along) |
 
 ## 2. Products (current catalog — 8 SKUs, moderate expansion planned)
 
